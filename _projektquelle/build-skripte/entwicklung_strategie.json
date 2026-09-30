@@ -254,14 +254,90 @@
       "wer": ""
     },
     {
-      "id": "sa-1",
+      "id": "sa-1-team",
       "strang": "sa",
       "meilenstein": "m1",
       "aufwand": "",
-      "titel": "SA · Stufe 1",
-      "ergebnis": "Platzhalter – Details folgen.",
+      "titel": "Team abholen",
+      "ergebnis": "",
       "status": "offen",
       "braucht": [],
+      "details": [],
+      "offen": [],
+      "wer": ""
+    },
+    {
+      "id": "sa-1-hal",
+      "strang": "sa",
+      "meilenstein": "m1",
+      "aufwand": "",
+      "titel": "Abstimmung HAL M.S.",
+      "ergebnis": "",
+      "status": "offen",
+      "braucht": [
+        "sa-1-team"
+      ],
+      "details": [],
+      "offen": [],
+      "wer": ""
+    },
+    {
+      "id": "sa-1-pw7",
+      "strang": "sa",
+      "meilenstein": "m1",
+      "aufwand": "",
+      "titel": "PW7-Radio",
+      "ergebnis": "",
+      "status": "offen",
+      "braucht": [
+        "sa-1-hal"
+      ],
+      "details": [],
+      "offen": [],
+      "wer": ""
+    },
+    {
+      "id": "sa-1-puls",
+      "strang": "sa",
+      "meilenstein": "m1",
+      "aufwand": "",
+      "titel": "SV-Pulskanal",
+      "ergebnis": "",
+      "status": "offen",
+      "braucht": [
+        "sa-1-hal"
+      ],
+      "details": [],
+      "offen": [],
+      "wer": ""
+    },
+    {
+      "id": "sa-1-abteilung",
+      "strang": "sa",
+      "meilenstein": "m1",
+      "aufwand": "",
+      "titel": "Abteilungsbesprechung 11/2026",
+      "ergebnis": "",
+      "status": "offen",
+      "braucht": [
+        "sa-1-pw7",
+        "sa-1-puls"
+      ],
+      "details": [],
+      "offen": [],
+      "wer": ""
+    },
+    {
+      "id": "sa-1-golive",
+      "strang": "sa",
+      "meilenstein": "m1",
+      "aufwand": "",
+      "titel": "GoLive",
+      "ergebnis": "",
+      "status": "offen",
+      "braucht": [
+        "sa-1-abteilung"
+      ],
       "details": [],
       "offen": [],
       "wer": ""
@@ -275,7 +351,7 @@
       "ergebnis": "Platzhalter – Details folgen.",
       "status": "offen",
       "braucht": [
-        "sa-1"
+        "sa-1-golive"
       ],
       "details": [],
       "offen": [],

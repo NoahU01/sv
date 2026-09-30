@@ -111,19 +111,29 @@ def berechne(pfad=os.path.join(WORKDIR, "entwicklung_strategie.json")):
     # SV: "oben" von 168 auf 232 – Platz für Ergebnisse als Punkteliste
     M = {"halt": 176, "station": 128, "spurLuft": 122, "oben": 232, "links": 92, "rechts": 92}
 
+    # SV: Schritte eines Strangs mit gleichem Rang laufen parallel. Sie teilen
+    # sich eine Spalte und liegen untereinander; die Linie verzweigt sich
+    # davor und läuft danach wieder zusammen.
+    M["ast"] = 44  # senkrechter Abstand paralleler Halte
+
     metro_halte = []
     metro_stationen = []
     x = M["links"]
     for m in meilensteine:
-        pro_strang = [sorted([s for s in m["schritte"] if s["strang"] == st["id"]], key=lambda s: s["rang"])
-                      for st in straenge]
-        breiteste = max([1] + [len(l) for l in pro_strang])
-        for spur, liste in enumerate(pro_strang):
+        pro_strang = []
+        for st in straenge:
+            eigene = [s for s in m["schritte"] if s["strang"] == st["id"]]
+            raenge = sorted(set(s["rang"] for s in eigene))
+            pro_strang.append([[s for s in eigene if s["rang"] == r] for r in raenge])
+        breiteste = max([1] + [len(spalten) for spalten in pro_strang])
+        for spur, spalten in enumerate(pro_strang):
             # Halte mittig im Abschnitt verteilen, damit kurze Stränge nicht kleben
-            versatz = (breiteste - len(liste)) / 2
-            for i, s in enumerate(liste):
-                metro_halte.append({"id": s["id"], "x": x + (versatz + i + 0.5) * M["halt"],
-                                    "y": M["oben"] + spur * M["spurLuft"]})
+            versatz = (breiteste - len(spalten)) / 2
+            for i, gruppe in enumerate(spalten):
+                for j, s in enumerate(gruppe):
+                    ast = (j - (len(gruppe) - 1) / 2) * 2 * M["ast"] if len(gruppe) > 1 else 0
+                    metro_halte.append({"id": s["id"], "x": x + (versatz + i + 0.5) * M["halt"],
+                                        "y": M["oben"] + spur * M["spurLuft"] + ast})
         x += breiteste * M["halt"]
         metro_stationen.append({"id": m["id"], "nr": m["nr"], "titel": m["titel"], "ergebnis": m["ergebnis"],
                                 "erreicht": m["erreicht"], "fortschritt": m["fortschritt"], "x": x + M["station"] / 2})
@@ -136,30 +146,45 @@ def berechne(pfad=os.path.join(WORKDIR, "entwicklung_strategie.json")):
 
     # Auf einer Linie fährt man durch alle früheren Halte. Sie sind damit
     # stillschweigend Voraussetzung, auch ohne in "braucht" zu stehen.
+    # Parallele Halte (gleiches x) setzen einander nicht voraus.
     for st in straenge:
-        sortiert = sorted(st["schritte"], key=lambda s: metro_pos[s["id"]]["x"])
-        for i, s in enumerate(sortiert):
-            s["metroVorher"] = [v["id"] for v in sortiert[:i]]
+        for s in st["schritte"]:
+            s["metroVorher"] = [v["id"] for v in st["schritte"] if metro_pos[v["id"]]["x"] < metro_pos[s["id"]]["x"]]
 
     metro_breite = x + M["rechts"]
     metro_hoehe = M["oben"] + (len(straenge) - 1) * M["spurLuft"] + 96
+
+    def strecke(x1, y1, x2, y2):
+        if y1 == y2:
+            return "M %s %s L %s %s" % (x1, y1, x2, y2)
+        xm = (x1 + x2) / 2
+        return "M %s %s C %s %s, %s %s, %s %s" % (x1, y1, xm, y1, xm, y2, x2, y2)
 
     metro_linien = []
     for spur, st in enumerate(straenge):
         y = M["oben"] + spur * M["spurLuft"]
         # Jeder Abschnitt gehört zu dem Halt, auf den er zuläuft: Ist dieser Halt
         # erledigt oder gerade dran, wird der Abschnitt davor dick gezeichnet.
-        halte = sorted([(s, metro_pos[s["id"]]) for s in st["schritte"]], key=lambda h: h[1]["x"])
+        spalten_x = sorted(set(metro_pos[s["id"]]["x"] for s in st["schritte"]))
+        spalten = [[s for s in st["schritte"] if metro_pos[s["id"]]["x"] == sx] for sx in spalten_x]
         start_x = M["links"] / 2
         ende_x = metro_breite - M["rechts"] / 2
         abschnitte = []
-        cursor = start_x
-        for s, p in halte:
-            abschnitte.append({"pfad": "M %s %s L %s %s" % (cursor, y, p["x"], y),
-                               "dick": s["status"] == "erreicht" or s["dran"], "bis": s["id"]})
-            cursor = p["x"]
+        vorige = []
+        for gruppe in spalten:
+            for s in gruppe:
+                p = metro_pos[s["id"]]
+                # Zulauf: von den Vorgängern im selben Strang, sonst von der ganzen Vorspalte
+                quellen = [v for v in vorige if v["id"] in s["braucht"]] or vorige
+                punkte = [(metro_pos[v["id"]]["x"], metro_pos[v["id"]]["y"]) for v in quellen] or [(start_x, y)]
+                for qx, qy in punkte:
+                    abschnitte.append({"pfad": strecke(qx, qy, p["x"], p["y"]),
+                                       "dick": s["status"] == "erreicht" or s["dran"], "bis": s["id"]})
+            vorige = gruppe
         # Hinter dem letzten Halt liegt kein erreichter Punkt mehr
-        abschnitte.append({"pfad": "M %s %s L %s %s" % (cursor, y, ende_x, y), "dick": False, "bis": None})
+        for v in vorige or [None]:
+            qx, qy = (metro_pos[v["id"]]["x"], metro_pos[v["id"]]["y"]) if v else (start_x, y)
+            abschnitte.append({"pfad": strecke(qx, qy, ende_x, y), "dick": False, "bis": None})
         metro_linien.append({"id": st["id"], "label": st["label"], "kurz": st["kurz"], "frage": st["frage"],
                              "verantwortung": st.get("verantwortung", ""),
                              "farbe": st["farbe"], "y": y, "fortschritt": st["fortschritt"], "abschnitte": abschnitte})

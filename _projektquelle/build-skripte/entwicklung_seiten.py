@@ -262,7 +262,8 @@ def konzept_huelle(konzept, inhalt):
                      '<p class="k-detail__verantwortung">%s</p>' % e(s["verantwortung"]) if s["verantwortung"] else "")]
         if s["details"]:
             teile.append('<div class="k-detail__block"><h3>Inhalte</h3><ul>%s</ul></div>' % "".join("<li>%s</li>" % e(d) for d in s["details"]))
-        teile.append('<div class="k-detail__block"><h3>Ergebnis</h3><p>%s</p></div>' % e(s["ergebnis"]))
+        if s["ergebnis"]:
+            teile.append('<div class="k-detail__block"><h3>Ergebnis</h3><p>%s</p></div>' % e(s["ergebnis"]))
         if s["offen"]:
             teile.append('<div class="k-detail__block"><h3>Offen</h3><ul class="k-detail__offen">%s</ul></div>' % "".join("<li>%s</li>" % e(o) for o in s["offen"]))
         teile.append("</article>")
