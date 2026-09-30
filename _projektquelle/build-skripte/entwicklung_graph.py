@@ -18,6 +18,21 @@ def _runde(x):
     return int(math.floor(x + 0.5))
 
 
+def knick(x1, y1, x2, y2, achse, laenge):
+    """Verbindung zweier Punkte eines Strangs: gerade auf der Hauptlinie, der
+    Bogen nur kurz vor einem abzweigenden bzw. kurz nach einem wieder
+    einmündenden Punkt – statt schräg über die ganze Strecke."""
+    if y1 == y2:
+        return "M %s %s L %s %s" % (x1, y1, x2, y2)
+    if y2 != achse:
+        xs = max(x1, x2 - laenge)
+        xm = (xs + x2) / 2
+        return "M %s %s L %s %s C %s %s, %s %s, %s %s" % (x1, y1, xs, y1, xm, y1, xm, y2, x2, y2)
+    xe = min(x2, x1 + laenge)
+    xm = (x1 + xe) / 2
+    return "M %s %s C %s %s, %s %s, %s %s L %s %s" % (x1, y1, xm, y1, xm, y2, xe, y2, x2, y2)
+
+
 def berechne(pfad=os.path.join(WORKDIR, "entwicklung_strategie.json")):
     with open(pfad, encoding="utf-8") as f:
         roh = json.load(f)
@@ -132,7 +147,8 @@ def berechne(pfad=os.path.join(WORKDIR, "entwicklung_strategie.json")):
     # SV: Schritte eines Strangs mit gleichem Rang laufen parallel. Sie teilen
     # sich eine Spalte und liegen untereinander; die Linie verzweigt sich
     # davor und läuft danach wieder zusammen.
-    M["ast"] = 34  # halber senkrechter Abstand paralleler Halte
+    M["ast"] = 34     # halber senkrechter Abstand paralleler Halte
+    M["knick"] = 110  # Länge des Bogens beim Abzweigen und Zusammenlaufen
 
     # SV: Spalte = Abhängigkeitstiefe innerhalb der Stufe (wie im Graph), damit
     # Querverbindungen zwischen den Strängen immer nach rechts laufen.
@@ -160,6 +176,8 @@ def berechne(pfad=os.path.join(WORKDIR, "entwicklung_strategie.json")):
                     ast = (j - (len(gruppe) - 1) / 2) * 2 * M["ast"]
                     metro_halte.append({"id": s["id"], "x": x + (versatz + i + 0.5) * M["halt"],
                                         "y": spur_y[spur] + ast})
+                    # oberer Ast: Beschriftung über den Punkt, sonst liegt sie zwischen den Ästen
+                    s["mOben"] = ast < 0
         x += breiteste * M["halt"]
         metro_stationen.append({"id": m["id"], "nr": m["nr"], "titel": m["titel"], "ergebnis": m["ergebnis"],
                                 "erreicht": m["erreicht"], "fortschritt": m["fortschritt"], "x": x + M["station"] / 2})
@@ -180,11 +198,8 @@ def berechne(pfad=os.path.join(WORKDIR, "entwicklung_strategie.json")):
     metro_breite = x + M["rechts"]
     metro_hoehe = spur_y[-1] + halbe[-1] + 96
 
-    def strecke(x1, y1, x2, y2):
-        if y1 == y2:
-            return "M %s %s L %s %s" % (x1, y1, x2, y2)
-        xm = (x1 + x2) / 2
-        return "M %s %s C %s %s, %s %s, %s %s" % (x1, y1, xm, y1, xm, y2, x2, y2)
+    def strecke(x1, y1, x2, y2, achse):
+        return knick(x1, y1, x2, y2, achse, M["knick"])
 
     metro_linien = []
     for spur, st in enumerate(straenge):
@@ -204,13 +219,13 @@ def berechne(pfad=os.path.join(WORKDIR, "entwicklung_strategie.json")):
                 quellen = [v for v in vorige if v["id"] in s["braucht"]] or vorige
                 punkte = [(metro_pos[v["id"]]["x"], metro_pos[v["id"]]["y"]) for v in quellen] or [(start_x, y)]
                 for qx, qy in punkte:
-                    abschnitte.append({"pfad": strecke(qx, qy, p["x"], p["y"]),
+                    abschnitte.append({"pfad": strecke(qx, qy, p["x"], p["y"], y),
                                        "dick": s["status"] == "erreicht" or s["dran"], "bis": s["id"]})
             vorige = gruppe
         # Hinter dem letzten Halt liegt kein erreichter Punkt mehr
         for v in vorige or [None]:
             qx, qy = (metro_pos[v["id"]]["x"], metro_pos[v["id"]]["y"]) if v else (start_x, y)
-            abschnitte.append({"pfad": strecke(qx, qy, ende_x, y), "dick": False, "bis": None})
+            abschnitte.append({"pfad": strecke(qx, qy, ende_x, y, y), "dick": False, "bis": None})
         metro_linien.append({"id": st["id"], "label": st["label"], "kurz": st["kurz"], "frage": st["frage"],
                              "verantwortung": st.get("verantwortung", ""),
                              "farbe": st["farbe"], "y": y, "fortschritt": st["fortschritt"], "abschnitte": abschnitte})
@@ -275,8 +290,17 @@ def berechne(pfad=os.path.join(WORKDIR, "entwicklung_strategie.json")):
         dx = max(30, (x2 - x1) / 2)
         return "M %s %s C %s %s, %s %s, %s %s" % (x1, y1, x1 + dx, y1, x2 - dx, y2, x2, y2)
 
+    def pfeil2(a, b):
+        # Innerhalb eines Strangs wie im Liniennetz: Bogen nur in der Lücke
+        # vor bzw. nach dem abzweigenden Punkt. Querverbindungen bleiben weich.
+        if a["strang"] != b["strang"]:
+            return bogen2(a, b)
+        achse = g2_spur_y[b["spur"]] + G2["hoehe"] / 2
+        return knick(a["g2x"] + G2["breite"], a["g2y"] + G2["hoehe"] / 2,
+                     b["g2x"], b["g2y"] + G2["hoehe"] / 2, achse, G2["spaltenLuft"])
+
     g2_kanten = [{"von": b, "nach": s["id"], "quer": nach_id[b]["strang"] != s["strang"],
-                  "pfad": bogen2(schritt_nach_id[b], s)} for s in schritte for b in s["braucht"]]
+                  "pfad": pfeil2(schritt_nach_id[b], s)} for s in schritte for b in s["braucht"]]
 
     graph2 = {
         "breite": gx - G2["spaltenLuft"],

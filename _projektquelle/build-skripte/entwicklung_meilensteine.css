@@ -1017,3 +1017,10 @@
 .me__station { width: 13rem; margin-left: -6.5rem; }
 .g2__station { width: 15rem; margin-left: -7.5rem; }
 .g2 { --kopfhoehe: 14rem; }
+/* Offene Abschnitte deckend statt halbtransparent: bei Verzweigungen liegen
+   Abschnitte übereinander und würden sonst dunkler und abgesetzt wirken. */
+.me__linie--offen { opacity: 1; stroke: color-mix(in srgb, var(--f) 55%, #f5f5f5); }
+/* Oberer Ast einer Verzweigung: Beschriftung über dem Punkt */
+.me__halt--oben { flex-direction: column-reverse; transform: translateY(calc(-100% + 1.2rem)); }
+.me__halt--oben .me__halt-label { margin-top: 0; margin-bottom: 0.5rem; }
+.me__halt--oben .me__halt-wer { margin-top: 0; margin-bottom: 0.25rem; }

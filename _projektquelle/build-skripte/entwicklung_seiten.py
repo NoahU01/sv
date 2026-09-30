@@ -167,12 +167,13 @@ def metro_plan():
             " is-erreicht" if s["erreicht"] else "", s["x"], s["nr"], e(s["titel"]), _ergebnis(s, "me__station-text"), s["fortschritt"])
         for s in m["stationen"])
     halte = "".join(
-        '<button class="me__halt me__halt--{0}{1}" type="button" data-schritt="{2}" data-halt="{2}" data-knoten="{2}"'
+        '<button class="me__halt me__halt--{0}{1}{11}" type="button" data-schritt="{2}" data-halt="{2}" data-knoten="{2}"'
         ' data-braucht="{3}" data-nachfolger="{4}" data-vorher="{5}" style="left: {6}px; top: {7}px; --f: {8}">'
         '<span class="me__halt-punkt"></span><span class="me__halt-label">{9}</span>{10}</button>'.format(
             s["status"], " is-machbar" if s["dran"] else "", s["id"], _liste(s["braucht"]), _liste(s["nachfolger"]),
             _liste(s["metroVorher"]), s["mx"], s["my"], s["farbe"], e(s["titel"]),
-            '<span class="me__halt-wer">%s</span>' % e(s["wer"]) if s["wer"] else "")
+            '<span class="me__halt-wer">%s</span>' % e(s["wer"]) if s["wer"] else "",
+            " me__halt--oben" if s.get("mOben") else "")
         for s in g["schritte"])
     return '''
 <div class="me me--v2">
