@@ -147,7 +147,7 @@
       "ergebnis": "",
       "status": "offen",
       "braucht": [
-        "t1-1-webseite"
+        "t1-2-mak"
       ],
       "details": [
         "Konzeption unseres zukünftigen zentralen Systems"
@@ -164,7 +164,7 @@
       "ergebnis": "",
       "status": "offen",
       "braucht": [
-        "t1-1-webseite"
+        "t1-2-leos"
       ],
       "details": [],
       "offen": [],
@@ -179,8 +179,6 @@
       "ergebnis": "Platzhalter – Details folgen.",
       "status": "offen",
       "braucht": [
-        "t1-2-mak",
-        "t1-2-leos",
         "t1-2-auftrag"
       ],
       "details": [],
