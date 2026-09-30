@@ -419,17 +419,21 @@
       "wer": ""
     },
     {
-      "id": "sa-2",
+      "id": "sa-2-kommunikation",
       "strang": "sa",
       "meilenstein": "m2",
       "aufwand": "",
-      "titel": "SA · Stufe 2",
-      "ergebnis": "Platzhalter – Details folgen.",
+      "titel": "Kommunikationskonzept 2.0",
+      "ergebnis": "",
       "status": "offen",
       "braucht": [
         "sa-1-golive"
       ],
-      "details": [],
+      "details": [
+        "Festlegung und Analyse von Zielgruppen",
+        "Kanäle, die wir nutzen wollen",
+        "Community-Formate"
+      ],
       "offen": [],
       "wer": ""
     },
@@ -442,7 +446,7 @@
       "ergebnis": "Platzhalter – Details folgen.",
       "status": "offen",
       "braucht": [
-        "sa-2"
+        "sa-2-kommunikation"
       ],
       "details": [],
       "offen": [],
