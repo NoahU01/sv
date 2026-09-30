@@ -224,7 +224,7 @@ def graph_abschnitte(konzept, variante):
             s["status"], " is-machbar" if s["dran"] else "", s["id"], _liste(s["braucht"]), _liste(s["nachfolger"]),
             s["g2x"], s["g2y"], G["knotenBreite"], G["knotenHoehe"], s["farbe"], e(s["titel"]),
             '<span class="g2__wer" title="%s">%s</span>' % (e(s["werName"]), e(s["wer"])) if s["wer"] else "",
-            e(s["ergebnis"])) for s in g["schritte"])
+            e(s["ergebnis"] or " · ".join(s["details"]))) for s in g["schritte"])
     return '''
 <div class="g2 g2--{0}" data-g2>
 ''' .format(variante) + kopf(konzept) + '''

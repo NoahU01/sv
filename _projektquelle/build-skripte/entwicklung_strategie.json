@@ -121,12 +121,47 @@
       "wer": ""
     },
     {
-      "id": "t1-2",
+      "id": "t1-2-mak",
       "strang": "t1",
       "meilenstein": "m2",
       "aufwand": "",
-      "titel": "T1 · Stufe 2",
-      "ergebnis": "Platzhalter – Details folgen.",
+      "titel": "MAK",
+      "ergebnis": "",
+      "status": "offen",
+      "braucht": [
+        "t1-1-webseite"
+      ],
+      "details": [
+        "Planung",
+        "Zukünftige Ausstattung"
+      ],
+      "offen": [],
+      "wer": ""
+    },
+    {
+      "id": "t1-2-leos",
+      "strang": "t1",
+      "meilenstein": "m2",
+      "aufwand": "",
+      "titel": "LEOS 2.0",
+      "ergebnis": "",
+      "status": "offen",
+      "braucht": [
+        "t1-1-webseite"
+      ],
+      "details": [
+        "Konzeption unseres zukünftigen zentralen Systems"
+      ],
+      "offen": [],
+      "wer": ""
+    },
+    {
+      "id": "t1-2-auftrag",
+      "strang": "t1",
+      "meilenstein": "m2",
+      "aufwand": "",
+      "titel": "Sicherstellung Auftrag Dr. Jan: „1 Akademie“",
+      "ergebnis": "",
       "status": "offen",
       "braucht": [
         "t1-1-webseite"
@@ -144,7 +179,9 @@
       "ergebnis": "Platzhalter – Details folgen.",
       "status": "offen",
       "braucht": [
-        "t1-2"
+        "t1-2-mak",
+        "t1-2-leos",
+        "t1-2-auftrag"
       ],
       "details": [],
       "offen": [],
