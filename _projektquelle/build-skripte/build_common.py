@@ -118,8 +118,8 @@ def nav_html(active):
       </a>
       <nav class="nav" id="mainNav">
         ''' + nav_inner + '''
-        <a href="''' + kontakt_href + '''" class="nav-kontakt-btn">Kontakt</a>
         ''' + dev_dropdown_html() + '''
+        <a href="''' + kontakt_href + '''" class="nav-kontakt-btn">Kontakt</a>
       </nav>
       <div class="nav-cta">
         <a href="portal.html" class="btn btn-primary btn-sm">KI-Lernassistent entdecken</a>

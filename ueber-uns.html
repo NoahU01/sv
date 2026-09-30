@@ -175,10 +175,6 @@ img { max-width: 100%; display:block; }
 .dev-dd-flyout-panel .dev-dd-group { margin:2px 8px 6px; }
 .dev-dd--corner { position:absolute; right:24px; top:0; bottom:0; }
 .dev-dd--corner .dev-dd-panel { top:calc(100% - 4px); }
-@media (min-width: 1280px) {
-  /* Entwicklung steht links vor den Menüpunkten, damit Kontakt direkt am CTA bleibt */
-  .nav .dev-dd { order:-1; margin-right:6px; }
-}
 /* Auf dem Desktop immer die Kurzform – die Langform passt nicht neben Logo und Menüpunkte */
 @media (min-width: 1280px) {
   .nav .dev-dd-long { display:none; }
@@ -566,8 +562,8 @@ img { max-width: 100%; display:block; }
       <a href="quickcheck.html" class="">Quick-Check</a>
       <a href="portal.html" class="">KI-Lernassistent</a>
       <a href="community.html" class="">Community-Austausch</a>
-        <a href="index.html#kontakt" class="nav-kontakt-btn">Kontakt</a>
         <div class="dev-dd" data-dev-dd><button class="dev-dd-toggle" type="button" aria-expanded="false"><span class="dev-dd-long">/ Entwicklung /</span><span class="dev-dd-short" aria-hidden="true">/ Entw. /</span><svg class="dev-dd-chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="dev-dd-panel"><p class="dev-dd-note"><b>Nur in der Entwicklungsumgebung sichtbar</b>Dieser Menüpunkt ist in der Live-Version nicht enthalten.</p><p class="dev-dd-group">Unterseiten</p><p class="dev-dd-empty">Noch keine neuen Unterseiten.</p><p class="dev-dd-group dev-dd-group--sub">Archiv</p><p class="dev-dd-empty">Noch keine archivierten Stände.</p></div></div><script>(function(){var h=location.hostname,d=document.currentScript.previousElementSibling;if(!(location.protocol==='file:'||h==='localhost'||h==='127.0.0.1'||/^svakademie-git-daniel-/.test(h)))d.remove();})();</script>
+        <a href="index.html#kontakt" class="nav-kontakt-btn">Kontakt</a>
       </nav>
       <div class="nav-cta">
         <a href="portal.html" class="btn btn-primary btn-sm">KI-Lernassistent entdecken</a>
