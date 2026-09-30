@@ -231,15 +231,54 @@
       "wer": ""
     },
     {
-      "id": "t2-2",
+      "id": "t2-2-produkte",
       "strang": "t2",
       "meilenstein": "m2",
       "aufwand": "",
-      "titel": "T2 · Stufe 2",
-      "ergebnis": "Platzhalter – Details folgen.",
+      "titel": "Produkte und Leistungssystem",
+      "ergebnis": "",
       "status": "offen",
       "braucht": [
         "t2-1-brainstorming"
+      ],
+      "details": [
+        "Gesamtbild",
+        "Produkte – Beispiele: aktive Kompetenzentwicklung, systematische Beratung",
+        "Konzept für die aktive Kompetenzentwicklung entwickeln"
+      ],
+      "offen": [],
+      "wer": "",
+      "zielfrage": "Was machen wir eigentlich?"
+    },
+    {
+      "id": "t2-2-lernen",
+      "strang": "t2",
+      "meilenstein": "m2",
+      "aufwand": "",
+      "titel": "Lernen der Zukunft: Tools, Formate und Medien",
+      "ergebnis": "",
+      "status": "offen",
+      "braucht": [
+        "t2-1-brainstorming"
+      ],
+      "details": [
+        "Laufend sichten, testen und bereitstellen",
+        "Egal ob Videos, Podcasts, automatisierte Präsentationserstellung usw."
+      ],
+      "offen": [],
+      "wer": ""
+    },
+    {
+      "id": "t2-2-brainstorming",
+      "strang": "t2",
+      "meilenstein": "m2",
+      "aufwand": "",
+      "titel": "Brainstorming zu den drei Ebenen und zur Rolle Trainer der Zukunft",
+      "ergebnis": "",
+      "status": "offen",
+      "braucht": [
+        "t2-2-produkte",
+        "t2-2-lernen"
       ],
       "details": [],
       "offen": [],
@@ -254,7 +293,7 @@
       "ergebnis": "Platzhalter – Details folgen.",
       "status": "offen",
       "braucht": [
-        "t2-2"
+        "t2-2-brainstorming"
       ],
       "details": [],
       "offen": [],

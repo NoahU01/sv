@@ -52,6 +52,7 @@ def berechne(pfad=os.path.join(WORKDIR, "entwicklung_strategie.json")):
         n.setdefault("details", [])
         n.setdefault("offen", [])
         n.setdefault("wer", "")
+        n.setdefault("zielfrage", "")
         n.update({
             "rang": rang[s["id"]],
             "blockiertVon": offen,

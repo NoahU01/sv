@@ -224,7 +224,7 @@ def graph_abschnitte(konzept, variante):
             s["status"], " is-machbar" if s["dran"] else "", s["id"], _liste(s["braucht"]), _liste(s["nachfolger"]),
             s["g2x"], s["g2y"], G["knotenBreite"], G["knotenHoehe"], s["farbe"], e(s["titel"]),
             '<span class="g2__wer" title="%s">%s</span>' % (e(s["werName"]), e(s["wer"])) if s["wer"] else "",
-            e(s["ergebnis"] or " · ".join(s["details"]))) for s in g["schritte"])
+            e(s["zielfrage"] or s["ergebnis"] or " · ".join(s["details"]))) for s in g["schritte"])
     return '''
 <div class="g2 g2--{0}" data-g2>
 ''' .format(variante) + kopf(konzept) + '''
@@ -260,6 +260,8 @@ def konzept_huelle(konzept, inhalt):
                      e(s["titel"]),
                      '<div class="k-detail__block"><h3>Aufwand</h3><p>%s</p></div>' % e(s["aufwandLabel"]) if s["aufwandLabel"] else "",
                      '<p class="k-detail__verantwortung">%s</p>' % e(s["verantwortung"]) if s["verantwortung"] else "")]
+        if s["zielfrage"]:
+            teile.append('<div class="k-detail__block"><h3>Zielfrage</h3><p>%s</p></div>' % e(s["zielfrage"]))
         if s["details"]:
             teile.append('<div class="k-detail__block"><h3>Inhalte</h3><ul>%s</ul></div>' % "".join("<li>%s</li>" % e(d) for d in s["details"]))
         if s["ergebnis"]:
