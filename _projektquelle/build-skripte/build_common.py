@@ -44,8 +44,8 @@ css_map.update({
 BASE_CSS = Template(css_tpl).substitute(**css_map)
 print("BASE_CSS chars:", len(BASE_CSS))
 
+# Hauptnavigation – zur Startseite führt das Logo, ein eigener Punkt „Start“ entfällt
 PAGES = [
-    ("index.html", "Start"),
     ("ueber-uns.html", "Über uns"),
     ("quickcheck.html", "Quick-Check"),
     ("portal.html", "KI-Lernassistent"),
@@ -108,9 +108,7 @@ def nav_html(active):
     for href, label in PAGES:
         cls = "active" if href == active else ""
         links.append('<a href="{0}" class="{1}">{2}</a>'.format(href, cls, label))
-    faq_href = "index.html#faq" if active != "index.html" else "#faq"
     kontakt_href = "index.html#kontakt" if active != "index.html" else "#kontakt"
-    links.insert(2, '<a href="{0}">FAQ</a>'.format(faq_href))
     nav_inner = "\n      ".join(links)
     return '''
   <header class="site-header">
