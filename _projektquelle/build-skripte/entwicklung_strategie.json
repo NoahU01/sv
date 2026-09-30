@@ -47,28 +47,40 @@
       "nr": 2,
       "termin": "30.06.2027",
       "titel": "",
-      "ergebnis": "Ergebnis folgt."
+      "ergebnis": [
+        "Das Fundament steht: Produkte und Leistungssystem, Kommunikationskonzept 2.0 und LEOS 2.0 sind konzipiert.",
+        "Die grundlegende Außenwirkung als „beste Akademie“ ist angelegt."
+      ]
     },
     {
       "id": "m3",
       "nr": 3,
       "termin": "31.12.2027",
       "titel": "",
-      "ergebnis": "Ergebnis folgt."
+      "ergebnis": [
+        "Das Zielbild „beste Akademie“ ist nach außen sichtbar und wird so wahrgenommen.",
+        "Angebote, Kanäle und Formate laufen im Alltag."
+      ]
     },
     {
       "id": "m4",
       "nr": 4,
       "termin": "30.06.2028",
       "titel": "",
-      "ergebnis": "Ergebnis folgt."
+      "ergebnis": [
+        "Das Erreichte ist untermauert: Wirkung wird gemessen und belegt.",
+        "Angebote und Abläufe werden gezielt optimiert."
+      ]
     },
     {
       "id": "m5",
       "nr": 5,
       "termin": "31.12.2028",
       "titel": "",
-      "ergebnis": "Ergebnis folgt."
+      "ergebnis": [
+        "Die SV Akademie hebt das Zielbild auf das nächste Level.",
+        "Die Position als „beste Akademie“ ist langfristig gesichert."
+      ]
     }
   ],
   "schritte": [
