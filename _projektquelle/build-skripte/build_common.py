@@ -70,6 +70,13 @@ DEV_MENU = _git_branch() == "daniel"
 # keine Seiten, die schon in der Hauptnavigation stehen.
 # (href, tag, titel, unterzeile[, [(href, tag, titel, unterzeile), …] für ein Flyout])
 DEV_UNTERSEITEN = []
+# Weitere Kategorien unter „Unterseiten“: (Überschrift, [(href, tag, titel, unterzeile), …])
+DEV_KATEGORIEN = [
+    ("Strategie", [
+        ("entwicklung-strategie-zielbild.html", "SZ", "Strategie und Zielbild", "Platzhalter"),
+        ("entwicklung-meilensteine-fein.html", "MS", "Meilensteine", "Der Weg zum Zielbild · fein, dunkel, hell"),
+    ]),
+]
 DEV_ARCHIV = []  # (href, tag, titel, unterzeile)
 
 def _dev_link(href, tag, title, sub, extra=""):
@@ -98,6 +105,8 @@ def dev_dropdown_html(extra_class=""):
             '<div class="dev-dd-panel">'
             '<p class="dev-dd-note"><b>Nur in der Entwicklungsumgebung sichtbar</b>Dieser Menüpunkt ist in der Live-Version nicht enthalten.</p>'
             '<p class="dev-dd-group">Unterseiten</p>' + ("".join(items) or '<p class="dev-dd-empty">Noch keine neuen Unterseiten.</p>') +
+            "".join('<p class="dev-dd-group dev-dd-group--sub">' + name + '</p>' + "".join(_dev_link(*l) for l in links)
+                    for name, links in DEV_KATEGORIEN) +
             '<p class="dev-dd-group dev-dd-group--sub">Archiv</p>' + archiv +
             '</div></div>'
             "<script>(function(){var h=location.hostname,d=document.currentScript.previousElementSibling;"

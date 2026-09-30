@@ -1,0 +1,436 @@
+{
+  "hinweis": "Platzhalterdaten: Struktur und Abhängigkeiten sind ein Beispiel. Inhalte der SV Akademie folgen.",
+  "zielbild": {
+    "kurz": "Platzhalter – Zielbild folgt.",
+    "text": "Platzhalter – das Zielbild der SV Akademie wird hier beschrieben."
+  },
+  "straenge": [
+    {
+      "id": "pe",
+      "kurz": "PE",
+      "label": "Personalentwicklung",
+      "frage": "Leitfrage folgt",
+      "farbe": "#9B348E"
+    },
+    {
+      "id": "bo",
+      "kurz": "BO",
+      "label": "Bildungsorganisation, -systeme und -medien",
+      "frage": "Leitfrage folgt",
+      "farbe": "#2C57D2"
+    },
+    {
+      "id": "tb",
+      "kurz": "TB",
+      "label": "Training und Bildungstransfer",
+      "frage": "Leitfrage folgt",
+      "farbe": "#FF8F00"
+    }
+  ],
+  "meilensteine": [
+    {
+      "id": "m1",
+      "nr": 1,
+      "titel": "Ergebnisstufe 1",
+      "ergebnis": "Platzhalter – Ergebnis folgt."
+    },
+    {
+      "id": "m2",
+      "nr": 2,
+      "titel": "Ergebnisstufe 2",
+      "ergebnis": "Platzhalter – Ergebnis folgt."
+    },
+    {
+      "id": "m3",
+      "nr": 3,
+      "titel": "Ergebnisstufe 3",
+      "ergebnis": "Platzhalter – Ergebnis folgt."
+    },
+    {
+      "id": "m4",
+      "nr": 4,
+      "titel": "Ergebnisstufe 4",
+      "ergebnis": "Platzhalter – Ergebnis folgt."
+    }
+  ],
+  "schritte": [
+    {
+      "id": "pe-1",
+      "strang": "pe",
+      "meilenstein": "m1",
+      "aufwand": "M",
+      "titel": "Schritt PE 1",
+      "ergebnis": "Platzhalter – das Ergebnis dieses Schritts folgt.",
+      "status": "aktiv",
+      "braucht": [],
+      "details": [
+        "Platzhalter – Inhalte folgen"
+      ],
+      "offen": [],
+      "wer": ""
+    },
+    {
+      "id": "pe-2",
+      "strang": "pe",
+      "meilenstein": "m1",
+      "aufwand": "S",
+      "titel": "Schritt PE 2",
+      "ergebnis": "Platzhalter – das Ergebnis dieses Schritts folgt.",
+      "status": "offen",
+      "braucht": [
+        "pe-1"
+      ],
+      "details": [
+        "Platzhalter – Inhalte folgen"
+      ],
+      "offen": [],
+      "wer": ""
+    },
+    {
+      "id": "pe-3",
+      "strang": "pe",
+      "meilenstein": "m1",
+      "aufwand": "M",
+      "titel": "Schritt PE 3",
+      "ergebnis": "Platzhalter – das Ergebnis dieses Schritts folgt.",
+      "status": "offen",
+      "braucht": [
+        "pe-1"
+      ],
+      "details": [
+        "Platzhalter – Inhalte folgen"
+      ],
+      "offen": [],
+      "wer": ""
+    },
+    {
+      "id": "pe-4",
+      "strang": "pe",
+      "meilenstein": "m2",
+      "aufwand": "M",
+      "titel": "Schritt PE 4",
+      "ergebnis": "Platzhalter – das Ergebnis dieses Schritts folgt.",
+      "status": "offen",
+      "braucht": [
+        "pe-2"
+      ],
+      "details": [
+        "Platzhalter – Inhalte folgen"
+      ],
+      "offen": [],
+      "wer": ""
+    },
+    {
+      "id": "pe-5",
+      "strang": "pe",
+      "meilenstein": "m2",
+      "aufwand": "M",
+      "titel": "Schritt PE 5",
+      "ergebnis": "Platzhalter – das Ergebnis dieses Schritts folgt.",
+      "status": "offen",
+      "braucht": [
+        "pe-4"
+      ],
+      "details": [
+        "Platzhalter – Inhalte folgen"
+      ],
+      "offen": [],
+      "wer": ""
+    },
+    {
+      "id": "pe-6",
+      "strang": "pe",
+      "meilenstein": "m2",
+      "aufwand": "L",
+      "titel": "Schritt PE 6",
+      "ergebnis": "Platzhalter – das Ergebnis dieses Schritts folgt.",
+      "status": "offen",
+      "braucht": [
+        "pe-5",
+        "pe-3"
+      ],
+      "details": [
+        "Platzhalter – Inhalte folgen"
+      ],
+      "offen": [],
+      "wer": ""
+    },
+    {
+      "id": "pe-7",
+      "strang": "pe",
+      "meilenstein": "m3",
+      "aufwand": "S",
+      "titel": "Schritt PE 7",
+      "ergebnis": "Platzhalter – das Ergebnis dieses Schritts folgt.",
+      "status": "offen",
+      "braucht": [
+        "pe-6"
+      ],
+      "details": [
+        "Platzhalter – Inhalte folgen"
+      ],
+      "offen": [],
+      "wer": ""
+    },
+    {
+      "id": "pe-8",
+      "strang": "pe",
+      "meilenstein": "m4",
+      "aufwand": "M",
+      "titel": "Schritt PE 8",
+      "ergebnis": "Platzhalter – das Ergebnis dieses Schritts folgt.",
+      "status": "offen",
+      "braucht": [
+        "pe-7"
+      ],
+      "details": [
+        "Platzhalter – Inhalte folgen"
+      ],
+      "offen": [],
+      "wer": ""
+    },
+    {
+      "id": "bo-1",
+      "strang": "bo",
+      "meilenstein": "m1",
+      "aufwand": "L",
+      "titel": "Schritt BO 1",
+      "ergebnis": "Platzhalter – das Ergebnis dieses Schritts folgt.",
+      "status": "erreicht",
+      "braucht": [],
+      "details": [
+        "Platzhalter – Inhalte folgen"
+      ],
+      "offen": [],
+      "wer": ""
+    },
+    {
+      "id": "bo-2",
+      "strang": "bo",
+      "meilenstein": "m1",
+      "aufwand": "M",
+      "titel": "Schritt BO 2",
+      "ergebnis": "Platzhalter – das Ergebnis dieses Schritts folgt.",
+      "status": "aktiv",
+      "braucht": [
+        "bo-1"
+      ],
+      "details": [
+        "Platzhalter – Inhalte folgen"
+      ],
+      "offen": [],
+      "wer": ""
+    },
+    {
+      "id": "bo-3",
+      "strang": "bo",
+      "meilenstein": "m2",
+      "aufwand": "L",
+      "titel": "Schritt BO 3",
+      "ergebnis": "Platzhalter – das Ergebnis dieses Schritts folgt.",
+      "status": "offen",
+      "braucht": [
+        "bo-2",
+        "pe-1"
+      ],
+      "details": [
+        "Platzhalter – Inhalte folgen"
+      ],
+      "offen": [],
+      "wer": ""
+    },
+    {
+      "id": "bo-4",
+      "strang": "bo",
+      "meilenstein": "m2",
+      "aufwand": "M",
+      "titel": "Schritt BO 4",
+      "ergebnis": "Platzhalter – das Ergebnis dieses Schritts folgt.",
+      "status": "offen",
+      "braucht": [
+        "bo-3"
+      ],
+      "details": [
+        "Platzhalter – Inhalte folgen"
+      ],
+      "offen": [],
+      "wer": ""
+    },
+    {
+      "id": "bo-5",
+      "strang": "bo",
+      "meilenstein": "m3",
+      "aufwand": "S",
+      "titel": "Schritt BO 5",
+      "ergebnis": "Platzhalter – das Ergebnis dieses Schritts folgt.",
+      "status": "offen",
+      "braucht": [
+        "bo-4"
+      ],
+      "details": [
+        "Platzhalter – Inhalte folgen"
+      ],
+      "offen": [],
+      "wer": ""
+    },
+    {
+      "id": "bo-6",
+      "strang": "bo",
+      "meilenstein": "m3",
+      "aufwand": "M",
+      "titel": "Schritt BO 6",
+      "ergebnis": "Platzhalter – das Ergebnis dieses Schritts folgt.",
+      "status": "offen",
+      "braucht": [
+        "bo-5",
+        "tb-3"
+      ],
+      "details": [
+        "Platzhalter – Inhalte folgen"
+      ],
+      "offen": [],
+      "wer": ""
+    },
+    {
+      "id": "bo-7",
+      "strang": "bo",
+      "meilenstein": "m4",
+      "aufwand": "M",
+      "titel": "Schritt BO 7",
+      "ergebnis": "Platzhalter – das Ergebnis dieses Schritts folgt.",
+      "status": "offen",
+      "braucht": [
+        "bo-4",
+        "bo-6"
+      ],
+      "details": [
+        "Platzhalter – Inhalte folgen"
+      ],
+      "offen": [],
+      "wer": ""
+    },
+    {
+      "id": "tb-1",
+      "strang": "tb",
+      "meilenstein": "m1",
+      "aufwand": "S",
+      "titel": "Schritt TB 1",
+      "ergebnis": "Platzhalter – das Ergebnis dieses Schritts folgt.",
+      "status": "aktiv",
+      "braucht": [],
+      "details": [
+        "Platzhalter – Inhalte folgen"
+      ],
+      "offen": [],
+      "wer": ""
+    },
+    {
+      "id": "tb-2",
+      "strang": "tb",
+      "meilenstein": "m1",
+      "aufwand": "S",
+      "titel": "Schritt TB 2",
+      "ergebnis": "Platzhalter – das Ergebnis dieses Schritts folgt.",
+      "status": "offen",
+      "braucht": [
+        "tb-1",
+        "pe-1"
+      ],
+      "details": [
+        "Platzhalter – Inhalte folgen"
+      ],
+      "offen": [],
+      "wer": ""
+    },
+    {
+      "id": "tb-3",
+      "strang": "tb",
+      "meilenstein": "m2",
+      "aufwand": "L",
+      "titel": "Schritt TB 3",
+      "ergebnis": "Platzhalter – das Ergebnis dieses Schritts folgt.",
+      "status": "offen",
+      "braucht": [
+        "tb-2",
+        "bo-2"
+      ],
+      "details": [
+        "Platzhalter – Inhalte folgen"
+      ],
+      "offen": [],
+      "wer": ""
+    },
+    {
+      "id": "tb-4",
+      "strang": "tb",
+      "meilenstein": "m3",
+      "aufwand": "M",
+      "titel": "Schritt TB 4",
+      "ergebnis": "Platzhalter – das Ergebnis dieses Schritts folgt.",
+      "status": "aktiv",
+      "braucht": [
+        "pe-5"
+      ],
+      "details": [
+        "Platzhalter – Inhalte folgen"
+      ],
+      "offen": [],
+      "wer": ""
+    },
+    {
+      "id": "tb-5",
+      "strang": "tb",
+      "meilenstein": "m3",
+      "aufwand": "M",
+      "titel": "Schritt TB 5",
+      "ergebnis": "Platzhalter – das Ergebnis dieses Schritts folgt.",
+      "status": "offen",
+      "braucht": [
+        "tb-4",
+        "pe-6"
+      ],
+      "details": [
+        "Platzhalter – Inhalte folgen"
+      ],
+      "offen": [],
+      "wer": ""
+    },
+    {
+      "id": "tb-6",
+      "strang": "tb",
+      "meilenstein": "m3",
+      "aufwand": "S",
+      "titel": "Schritt TB 6",
+      "ergebnis": "Platzhalter – das Ergebnis dieses Schritts folgt.",
+      "status": "offen",
+      "braucht": [
+        "tb-3"
+      ],
+      "details": [
+        "Platzhalter – Inhalte folgen"
+      ],
+      "offen": [],
+      "wer": ""
+    },
+    {
+      "id": "tb-7",
+      "strang": "tb",
+      "meilenstein": "m4",
+      "aufwand": "L",
+      "titel": "Schritt TB 7",
+      "ergebnis": "Platzhalter – das Ergebnis dieses Schritts folgt.",
+      "status": "offen",
+      "braucht": [
+        "tb-5",
+        "tb-6",
+        "bo-6"
+      ],
+      "details": [
+        "Platzhalter – Inhalte folgen"
+      ],
+      "offen": [],
+      "wer": ""
+    }
+  ],
+  "personen": {}
+}

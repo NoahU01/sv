@@ -1,0 +1,1003 @@
+/* =========================================================
+   Meilensteine – übertragen aus sofort sichtbar (Branch daniel):
+   konzept.css, k-kopf.css, k-metro.css, k-graph2.css (Stand cc62e02, Legende spaltenweise).
+   Farben auf die SV-Palette umgestellt, SV-Anpassungen am Ende.
+   Nur für den Branch daniel.
+   ========================================================= */
+/* =========================================================
+   Konzept-Hülle: Leiste, Detailschublade, Übersichtsseite
+   Die Konzeptseiten lösen sich bewusst vom Corporate Design.
+   ========================================================= */
+.k {
+  position: relative;
+  min-height: 70vh;
+  font-feature-settings: "tnum" 1;
+}
+
+/* --- Kopfleiste ------------------------------------------------------- */
+.k-bar {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #2b2b2b;
+  border-bottom: 1px solid #3d3d3d;
+}
+.k-bar__zurueck {
+  color: #999999;
+  font-size: 0.78rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.k-bar__zurueck::before { content: "← "; }
+.k-bar__zurueck:hover { color: #fff; }
+
+.k-bar__wechsel { display: flex; gap: 0.25rem; flex-wrap: wrap; }
+.k-bar__pill {
+  padding: 0.35rem 0.8rem;
+  border-radius: 99rem;
+  color: #999999;
+  font-size: 0.78rem;
+  text-decoration: none;
+  transition: background-color 0.15s, color 0.15s;
+}
+.k-bar__pill:hover { background-color: #3d3d3d; color: #fff; }
+.k-bar__pill.is-aktiv { background-color: #fff; color: #2b2b2b; font-weight: 600; }
+
+.k-bar__label {
+  color: #8a8a8a;
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.k-bar__meta { margin-left: auto; color: #8a8a8a; font-size: 0.72rem; white-space: nowrap; }
+
+/* --- Detail-Popover: erscheint am angeklickten Element ---------------- */
+.k-pop {
+  position: fixed;
+  z-index: 1300;
+  width: min(23rem, calc(100vw - 1.5rem));
+  max-height: min(30rem, calc(100vh - 6rem));
+  padding: 1.35rem;
+  overflow-y: auto;
+  background-color: #333333;
+  border: 1px solid #555555;
+  border-radius: 0.9rem;
+  box-shadow: 0 1.5rem 3rem rgb(0 0 0 / 0.55);
+  color: #eeeeee;
+  opacity: 0;
+  transform: scale(0.97);
+  transition: opacity 0.14s ease, transform 0.14s ease;
+}
+.k-pop[hidden] { display: none; }
+.k-pop.is-offen { opacity: 1; transform: scale(1); }
+.k-pop.wird-gezogen { transition: none; user-select: none; cursor: grabbing; }
+
+.k-pop__zu {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.7rem;
+  width: 1.6rem;
+  height: 1.6rem;
+  background: transparent;
+  border: 1px solid #555555;
+  border-radius: 0.4rem;
+  color: #eeeeee;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.k-pop__zu:hover { background-color: #3d3d3d; }
+
+.k-detail[hidden] { display: none; }
+
+/* Zugleich Griff zum Verschieben des Popovers */
+.k-detail__kopf {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding-right: 2rem;
+  cursor: grab;
+}
+.k-pop.wird-gezogen .k-detail__kopf { cursor: grabbing; }
+.k-detail__strang {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--f, #fff);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.k-detail__strang::before {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 99rem;
+  background-color: var(--f, #fff);
+}
+.k-detail__wer {
+  margin-left: auto;
+  padding: 0.15rem 0.4rem;
+  background-color: #474747;
+  border-radius: 0.25rem;
+  color: #c8c8c8;
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
+.k-detail__titel {
+  margin-top: 0.55rem;
+  padding-right: 1.5rem;
+  font-size: 1.2rem;
+  font-weight: 650;
+  line-height: 1.25;
+  color: #fff;
+}
+
+.k-detail__block { margin-top: 1.25rem; }
+.k-detail__block h3 {
+  color: #999999;
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.k-detail__block p { margin-top: 0.35rem; color: #d0d0d0; font-size: 0.88rem; line-height: 1.5; }
+.k-detail__block ul { margin: 0.5rem 0 0; padding-left: 1.1rem; display: flex; flex-flow: column; gap: 0.35rem; }
+.k-detail__block li { color: #c0c0c0; font-size: 0.88rem; line-height: 1.5; }
+
+.k-detail__offen { list-style: none; padding-left: 0; }
+.k-detail__offen li { position: relative; padding-left: 1.2rem; }
+.k-detail__offen li::before { content: "?"; position: absolute; left: 0; color: #d48ac8; font-weight: 700; }
+
+/* =========================================================
+   Gemeinsamer Kopf der Meilenstein-Ansichten
+   Hell ist die Grundeinstellung, die dunkle Ansicht überschreibt.
+   ========================================================= */
+.mk {
+  --mk-text: #333333;
+  --mk-leise: #666666;
+  --mk-sehr-leise: #999999;
+  --mk-rand: #e3e3e3;
+  --mk-flaeche: #ffffff;
+  --mk-schatten: 0 1px 2px rgb(21 20 26 / 0.05);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  flex-wrap: wrap;
+  padding: 0 2rem 3.25rem;
+}
+
+.mk__boxen { display: flex; align-items: stretch; gap: 1rem; flex-wrap: wrap; }
+
+.k--dunkel .mk {
+  --mk-text: #ffffff;
+  --mk-leise: #bbbbbb;
+  --mk-sehr-leise: #8a8a8a;
+  --mk-rand: #474747;
+  --mk-flaeche: #363636;
+  --mk-schatten: none;
+}
+
+.mk__text { flex: 1 1 26rem; }
+.mk__titel {
+  color: var(--mk-text);
+  font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+.mk__lead {
+  max-width: 38rem;
+  margin-top: 0.6rem;
+  color: var(--mk-leise);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+/* --- Legendenkasten ---------------------------------------------------- */
+.mk__box {
+  padding: 0.85rem 1rem;
+  background-color: var(--mk-flaeche);
+  border: 1px solid var(--mk-rand);
+  border-radius: 0.7rem;
+  box-shadow: var(--mk-schatten);
+}
+.mk__legende { min-width: 15rem; max-width: 27rem; }
+.mk__box--schalter { display: flex; flex-flow: column; flex: none; }
+
+.mk__box-titel {
+  color: var(--mk-sehr-leise);
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* Ansichtswechsel – dieselbe Kastenform wie die Legende */
+.mk__ansichten { display: flex; flex-flow: column; gap: 0.25rem; margin-top: 0.7rem; }
+.mk__ansicht {
+  padding: 0.3rem 0.75rem;
+  border: 1px solid transparent;
+  border-radius: 99rem;
+  color: var(--mk-leise);
+  font-size: 0.8rem;
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+}
+.mk__ansicht:hover { border-color: var(--mk-rand); color: var(--mk-text); }
+.mk__ansicht.is-aktiv {
+  background-color: var(--mk-text);
+  border-color: var(--mk-text);
+  color: var(--mk-flaeche);
+  font-weight: 650;
+}
+.mk__legende-kopf {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-bottom: 0.6rem;
+  margin-bottom: 0.6rem;
+  border-bottom: 1px solid var(--mk-rand);
+}
+
+/* Spaltenweise füllen: links die Zustände als Kreise,
+   rechts alles, was eine Linie zeigt. */
+.mk__eintraege {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(3, auto);
+  grid-auto-columns: max-content;
+  gap: 0.45rem 1.5rem;
+}
+.mk__eintrag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--mk-leise);
+  font-size: 0.73rem;
+  line-height: 1.3;
+}
+.mk__eintrag--pfeil::before,
+.mk__eintrag--quer::before {
+  content: "";
+  flex: none;
+  width: 1.5rem;
+  height: 0;
+}
+.mk__eintrag--pfeil::before { border-top: 2px solid var(--mk-sehr-leise); }
+.mk__eintrag--quer::before { border-top: 2px dashed var(--mk-sehr-leise); }
+
+/* Muster für die Liniennetz-Legende */
+.me__muster { display: inline-block; flex: none; }
+.me__muster--fertig {
+  width: 1.05rem; height: 1.05rem;
+  background-color: #6b6b6b;
+  border: 4px solid #6b6b6b;
+  border-radius: 99rem;
+}
+.me__muster--jetzt {
+  width: 1.05rem; height: 1.05rem;
+  background-color: #fff;
+  border: 4px solid #6b6b6b;
+  border-radius: 99rem;
+  box-shadow: 0 0 0 3px rgb(107 107 107 / 0.22);
+}
+.me__muster--wartet {
+  width: 1.05rem; height: 1.05rem;
+  background-color: #fff;
+  border: 3px solid #cccccc;
+  border-radius: 99rem;
+}
+.me__muster--dick { width: 1.5rem; height: 9px; background-color: #6b6b6b; border-radius: 99rem; }
+.me__muster--duenn { width: 1.5rem; height: 3px; background-color: #6b6b6b; border-radius: 99rem; opacity: 0.55; }
+.me__muster--bogen { width: 1.5rem; height: 0; border-top: 2px dashed #b3b3b3; }
+
+/* --- Info-Knopf: nativ über <details>, kein JavaScript nötig ---------- */
+.mk__info { position: relative; margin-left: auto; }
+.mk__info summary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  border: 1px solid var(--mk-sehr-leise);
+  border-radius: 99rem;
+  color: var(--mk-sehr-leise);
+  font-size: 0.72rem;
+  font-weight: 800;
+  font-style: italic;
+  cursor: pointer;
+  list-style: none;
+  transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+}
+.mk__info summary::-webkit-details-marker { display: none; }
+.mk__info summary:hover,
+.mk__info[open] summary {
+  background-color: var(--mk-text);
+  border-color: var(--mk-text);
+  color: var(--mk-flaeche);
+}
+
+.mk__info-panel {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  z-index: 40;
+  width: 22rem;
+  max-width: 78vw;
+  padding: 1.1rem 1.2rem;
+  background-color: var(--mk-flaeche);
+  border: 1px solid var(--mk-rand);
+  border-radius: 0.7rem;
+  box-shadow: 0 1rem 2.5rem rgb(0 0 0 / 0.28);
+}
+.mk__info-panel h2 {
+  color: var(--mk-text);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.mk__info-panel p {
+  margin-top: 0.6rem;
+  color: var(--mk-leise);
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+.mk__info-panel b { color: var(--mk-text); font-weight: 650; }
+
+@media (max-width: 991px) {
+  .mk { padding-left: 1rem; padding-right: 1rem; gap: 1.5rem; }
+  .mk__boxen { width: 100%; }
+  .mk__legende { max-width: none; flex: 1; }
+}
+@media (max-width: 479px) {
+  .mk__eintraege { grid-auto-flow: row; grid-template-rows: none; grid-auto-columns: auto; }
+}
+
+/* =========================================================
+   Konzept "Liniennetz" – U-Bahn-Plan, hell
+   ========================================================= */
+.me {
+  min-height: 78vh;
+  padding: 2.5rem 0 4rem;
+  background-color: #f5f5f5;
+  color: #333333;
+}
+
+/* --- Routenleiste ------------------------------------------------------ */
+.me__route {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 0 2rem 1rem;
+  padding: 0.65rem 1.15rem;
+  background-color: #333333;
+  border-radius: 0.7rem;
+}
+.me__route[hidden] { display: none; }
+.me__route-text { color: #fff; font-size: 0.85rem; }
+.me__route-zu {
+  margin-left: auto;
+  padding: 0.3rem 0.75rem;
+  background: transparent;
+  border: 1px solid #777777;
+  border-radius: 99rem;
+  color: #fff;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+.me__route-zu:hover { background-color: #555555; }
+
+/* --- Plan -------------------------------------------------------------- */
+.me__buehne { display: flex; align-items: flex-start; }
+
+/* Bleibt beim Seitwärtsscrollen stehen, wie eine fixierte Spalte */
+.me__rail {
+  position: relative;
+  flex: none;
+  width: 13rem;
+  margin-left: 2rem;
+}
+.me__rail-bahn {
+  position: absolute;
+  left: 0;
+  right: 0.75rem;
+  transform: translateY(-50%);
+  padding-left: 0.75rem;
+  border-left: 4px solid var(--f);
+}
+.me__rail-bahn b { display: block; color: #333333; font-size: 0.85rem; font-weight: 700; line-height: 1.25; }
+.me__rail-bahn span { display: block; margin-top: 0.1rem; color: #7a7a7a; font-size: 0.74rem; line-height: 1.3; }
+.me__rail-bahn i { display: block; margin-top: 0.25rem; color: var(--f); font-size: 0.78rem; font-style: normal; font-weight: 800; }
+
+.me__scroll { flex: 1; min-width: 0; overflow-x: auto; padding: 0 2rem 1.5rem 0.5rem; }
+.me__plan { position: relative; }
+.me__svg { position: absolute; inset: 0; overflow: visible; pointer-events: none; }
+
+.me__stationslinie { stroke: #d9d9d9; stroke-width: 1; stroke-dasharray: 3 5; }
+
+.me__saum { fill: none; stroke: #f5f5f5; stroke-linecap: round; }
+.me__saum--dick { stroke-width: 19; }
+.me__saum--duenn { stroke-width: 13; }
+
+.me__linie { fill: none; stroke: var(--f); stroke-width: 8; stroke-linecap: round; }
+
+/* V2: dick, wo wir schon sind – dünn, wo der Weg noch vor uns liegt */
+.me__linie--gegangen { stroke-width: 9; }
+.me__linie--offen { stroke-width: 3; opacity: 0.55; }
+
+.me__quer {
+  fill: none;
+  stroke: #d4d4d4;
+  stroke-width: 1.4;
+  stroke-dasharray: 5 4;
+  transition: stroke 0.2s, stroke-width 0.2s;
+}
+.me__quer.is-hell { stroke: #333333; stroke-width: 2.6; stroke-dasharray: none; }
+
+.me__quer-spitze { fill: #c4c4c4; }
+
+.me__linienname {
+  position: absolute;
+  left: 0;
+  margin-top: -2.1rem;
+  color: var(--f);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+/* --- Halte ------------------------------------------------------------ */
+.me__halt {
+  position: absolute;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  width: 9.5rem;
+  margin-left: -4.75rem;
+  margin-top: -0.62rem;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+.me__halt-punkt {
+  width: 1.15rem;
+  height: 1.15rem;
+  background-color: #fff;
+  border: 4px solid var(--f);
+  border-radius: 99rem;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.me__halt-label {
+  margin-top: 0.5rem;
+  padding: 0.05rem 0.3rem;
+  background-color: #f5f5f5;
+  border-radius: 0.2rem;
+  color: #444444;
+  font-size: 0.73rem;
+  font-weight: 500;
+  line-height: 1.25;
+  text-align: center;
+}
+.me__halt-wer {
+  margin-top: 0.25rem;
+  padding: 0.05rem 0.32rem;
+  background-color: #ececec;
+  border-radius: 0.25rem;
+  color: #666666;
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+.me__halt-jetzt {
+  margin-top: 0.25rem;
+  padding: 0.05rem 0.4rem;
+  background-color: #009864;
+  border-radius: 0.25rem;
+  color: #fff;
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.me__halt:hover .me__halt-punkt { transform: scale(1.22); }
+.me__halt:hover .me__halt-label { color: #333333; }
+
+.me__halt--erreicht .me__halt-punkt { background-color: var(--f); }
+.me__halt--offen .me__halt-punkt { border-color: #cccccc; border-width: 3px; }
+.me__halt--offen .me__halt-label { color: #aaaaaa; }
+.me__halt.is-machbar .me__halt-punkt {
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--f) 24%, transparent);
+}
+
+/* V2: der aktuelle Halt ist auch größer – Größe wirkt ohne Farbe.
+   Er sitzt genau dort, wo die Linie von dick auf dünn wechselt. */
+.me--v2 .me__halt.is-machbar { margin-top: -0.78rem; }
+.me--v2 .me__halt.is-machbar .me__halt-punkt {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-width: 5px;
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--f) 20%, transparent);
+}
+.me--v2 .me__halt.is-machbar .me__halt-label { color: #333333; font-weight: 700; }
+.me--v2 .me__halt--erreicht .me__halt-label { color: #7a7a7a; }
+.me__halt.is-gewaehlt .me__halt-punkt {
+  transform: scale(1.3);
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--f) 34%, transparent);
+}
+.me__halt.is-gewaehlt .me__halt-label { color: #333333; font-weight: 700; }
+
+/* --- Routenmodus: was nicht zum Ziel führt, tritt zurück ------------- */
+.me__plan.is-route .me__halt { opacity: 0.18; }
+.me__plan.is-route .me__halt.is-route-teil { opacity: 1; }
+.me__plan.is-route .me__station,
+.me__plan.is-route .me__stationslinie,
+.me__plan.is-route .me__quer-spitze { fill: #c4c4c4; }
+
+.me__linienname { opacity: 0.28; }
+
+.me__plan.is-route .me__linie { opacity: 0.1; }
+.me__plan.is-route .me__linie.is-route-teil { opacity: 1; }
+/* Ein noch offener Abschnitt der Route bleibt dünner als ein gegangener,
+   wird aber kräftig genug, dass die Route durchgehend lesbar ist. */
+.me__plan.is-route .me__linie--offen.is-route-teil { stroke-width: 5; }
+
+.me__plan.is-route .me__quer { opacity: 0.08; }
+.me__plan.is-route .me__quer.is-route-teil {
+  opacity: 1;
+  stroke: #333333;
+  stroke-width: 2.6;
+  stroke-dasharray: none;
+}
+
+.me__halt.is-gewaehlt .me__halt-label { color: #333333; font-weight: 700; }
+.me__plan.is-route .me__halt.is-gewaehlt .me__halt-punkt {
+  transform: scale(1.35);
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--f) 32%, transparent);
+}
+
+/* --- Stationen = Ergebnisstufen, eigene Zone oben -------------------- */
+.me__station {
+  position: absolute;
+  top: 0;
+  width: 9.5rem;
+  margin-left: -4.75rem;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  text-align: center;
+  pointer-events: none;
+}
+.me__station-nr {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  background-color: #333333;
+  border: 3px solid #f5f5f5;
+  border-radius: 99rem;
+  color: #fff;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+.me__station-titel { margin-top: 0.4rem; color: #333333; font-size: 0.88rem; font-weight: 700; }
+.me__station-text { margin-top: 0.2rem; color: #7a7a7a; font-size: 0.68rem; line-height: 1.35; }
+.me__station-balken {
+  width: 4.5rem;
+  height: 3px;
+  margin-top: 0.45rem;
+  background-color: #e3e3e3;
+  border-radius: 99rem;
+  overflow: hidden;
+}
+.me__station-balken i { display: block; height: 100%; background-color: #333333; border-radius: 99rem; }
+.me__station.is-erreicht .me__station-nr { background-color: #009864; }
+
+@media (max-width: 767px) {
+  .me__rail { display: none; }
+  .me__scroll { padding-left: 1rem; padding-right: 1rem; }
+  .me__route { margin-left: 1rem; margin-right: 1rem; }
+}
+
+/* =========================================================
+   Graph V2 / V3 – Abschnitte je Ergebnisstufe
+   Eine Struktur, zwei Paletten (V2 dunkel, V3 hell) und drei
+   Hervorhebungsvarianten A/B/C.
+
+   Farbregel: Die Bahnfarbe bedeutet "zählt jetzt". Alles, was
+   noch nicht dran ist, wird grau. Der Status benutzt keine
+   eigene Farbe mehr – sonst kollidiert er mit den Bahnen.
+   ========================================================= */
+.g2 {
+  --bg: #2b2b2b;
+  --karte: #363636;
+  --karte-hover: #3d3d3d;
+  --rand: #474747;
+  --rand-stark: #5a5a5a;
+  --text: #ffffff;
+  --leise: #bbbbbb;
+  --sehr-leise: #8a8a8a;
+  --linie: #6e6e6e;
+  --spitze: #808080;
+  --band: 7%;
+  --grau-balken: #555555;
+  --ring: #777777;
+  --erledigt-titel: #9a9a9a;
+  --erledigt-satz: #7a7a7a;
+  --erledigt-ton: 10%;
+  --wartet-titel: #d0d0d0;
+  --wartet-satz: #9a9a9a;
+  --jetzt-flaeche: #474747;
+  --jetzt-rand: #ffffff;
+  --jetzt-schein: 0 0 2.5rem -0.8rem rgb(255 255 255 / 0.5);
+  --invers-bg: #ffffff;
+  --invers-text: #333333;
+  --invers-leise: #777777;
+  --station-nr-bg: #ffffff;
+  --station-nr-text: #2b2b2b;
+  --tor: #5a5a5a;
+  --schatten: none;
+  --karte-schatten: none;
+  --kopfhoehe: 10.25rem;
+  --wer-bg: #474747;
+  --wer-text: #c8c8c8;
+  --spotlight-schatten: 0 0.8rem 2rem -0.6rem rgb(0 0 0 / 0.7);
+
+  padding: 2rem 0 3rem;
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+/* --- Zustandszeichen --------------------------------------------------- */
+.g2__zeichen {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.05rem;
+  height: 1.05rem;
+  border-radius: 99rem;
+  font-size: 0.6rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 1;
+}
+/* In der Legende neutral, auf der Karte in Bahnfarbe */
+.g2__zeichen--fertig { background-color: var(--leise); color: var(--bg); }
+.g2__zeichen--fertig::after { content: "\2713"; }
+.g2__zeichen--jetzt { border: 2px solid var(--text); box-shadow: 0 0 0 3px color-mix(in srgb, var(--text) 18%, transparent); }
+.g2__zeichen--wartet { border: 1.5px solid var(--ring); }
+
+.g2__karte--erreicht .g2__zeichen { background-color: var(--f); color: var(--bg); }
+.g2__karte--erreicht .g2__zeichen::after { content: "\2713"; }
+.g2__karte.is-machbar .g2__zeichen {
+  border: 2px solid var(--f);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--f) 26%, transparent);
+}
+.g2__karte--offen .g2__zeichen { border: 1.5px solid var(--ring); }
+
+/* --- Bühne ------------------------------------------------------------- */
+.g2__buehne { display: flex; align-items: flex-start; margin-top: 1.25rem; }
+
+.g2__rail {
+  position: relative;
+  flex: none;
+  width: 12.5rem;
+  margin-top: var(--kopfhoehe);
+  padding-left: 2rem;
+}
+.g2__rail-bahn {
+  position: absolute;
+  left: 2rem;
+  right: 0.75rem;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  gap: 0.15rem;
+  padding-left: 0.75rem;
+  border-left: 3px solid var(--f);
+}
+.g2__rail-bahn b { color: var(--text); font-size: 0.82rem; font-weight: 650; line-height: 1.25; }
+.g2__rail-bahn span { color: var(--sehr-leise); font-size: 0.72rem; line-height: 1.3; }
+.g2__rail-bahn i { color: var(--f); font-size: 0.72rem; font-style: normal; font-weight: 700; }
+
+.g2__scroll { flex: 1; overflow-x: auto; padding: 0 2rem 1.5rem 0; }
+.g2__inhalt { position: relative; }
+
+/* --- Stationen --------------------------------------------------------- */
+.g2__stationsreihe { position: relative; height: var(--kopfhoehe); }
+.g2__station {
+  position: absolute;
+  top: 0;
+  width: 12rem;
+  margin-left: -6rem;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  text-align: center;
+}
+.g2__station-nr {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  background-color: var(--station-nr-bg);
+  border-radius: 99rem;
+  color: var(--station-nr-text);
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+.g2__station-titel { margin-top: 0.4rem; color: var(--text); font-size: 0.88rem; font-weight: 700; }
+.g2__station-text { margin-top: 0.2rem; color: var(--sehr-leise); font-size: 0.7rem; line-height: 1.35; }
+.g2__station-balken {
+  width: 5.5rem;
+  height: 3px;
+  margin-top: 0.45rem;
+  background-color: var(--rand);
+  border-radius: 99rem;
+  overflow: hidden;
+}
+.g2__station-balken i { display: block; height: 100%; background-color: var(--leise); border-radius: 99rem; }
+.g2__station-quote { margin-top: 0.25rem; color: var(--sehr-leise); font-size: 0.65rem; }
+
+/* --- Fläche ------------------------------------------------------------ */
+.g2__flaeche { position: relative; }
+
+.g2__tor {
+  position: absolute;
+  top: -1.5rem;
+  bottom: -1rem;
+  width: 0;
+  margin-left: -1px;
+  border-left: 2px dashed var(--tor);
+  pointer-events: none;
+}
+
+.g2__bahn {
+  position: absolute;
+  left: -1.5rem;
+  right: -1.5rem;
+  border-radius: 0.85rem;
+  background-color: color-mix(in srgb, var(--f) var(--band), transparent);
+  pointer-events: none;
+}
+
+.g2__kanten { position: absolute; inset: 0; overflow: visible; pointer-events: none; }
+.g2__spitze { fill: var(--spitze); }
+.g2__kante {
+  fill: none;
+  stroke: var(--linie);
+  stroke-width: 1.75;
+  transition: stroke 0.2s, stroke-width 0.2s, opacity 0.2s;
+}
+.g2__kante.is-quer { stroke-dasharray: 5 4; }
+.g2__flaeche.is-auswahl .g2__kante { opacity: 0.12; }
+.g2__flaeche.is-auswahl .g2__kante.is-hell { opacity: 1; stroke: var(--text); stroke-width: 2.5; }
+
+/* --- Karten: Grundform ------------------------------------------------- */
+.g2__karte {
+  position: absolute;
+  display: flex;
+  flex-flow: column;
+  gap: 0.35rem;
+  padding: 0.85rem 0.95rem;
+  text-align: left;
+  background-color: var(--karte);
+  border: 1px solid var(--rand);
+  border-left: 4px solid var(--grau-balken);
+  border-radius: 0.7rem;
+  color: var(--text);
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: var(--karte-schatten);
+  transition: transform 0.16s, border-color 0.16s, background-color 0.16s, box-shadow 0.16s;
+}
+.g2__karte:hover { transform: translateY(-2px); border-color: var(--rand-stark); }
+
+.g2__karte-kopf { display: flex; align-items: center; gap: 0.45rem; }
+.g2__karte-titel {
+  flex: 1;
+  color: var(--text);
+  font-size: 0.95rem;
+  font-weight: 650;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+.g2__wer {
+  flex: none;
+  padding: 0.1rem 0.32rem;
+  background-color: var(--wer-bg);
+  border-radius: 0.25rem;
+  color: var(--wer-text);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+.g2__karte-satz {
+  color: var(--leise);
+  font-size: 0.775rem;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Erledigt: Bahnfarbe bleibt, Karte tritt zurück, Haken */
+.g2__karte--erreicht {
+  background-color: color-mix(in srgb, var(--f) var(--erledigt-ton), var(--karte));
+  border-color: color-mix(in srgb, var(--f) 22%, var(--rand));
+  border-left-color: var(--f);
+}
+.g2__karte--erreicht .g2__karte-titel { color: var(--erledigt-titel); font-weight: 500; }
+.g2__karte--erreicht .g2__karte-satz { color: var(--erledigt-satz); }
+.g2__karte--erreicht:hover .g2__karte-titel { color: var(--text); }
+
+/* Kommt später: grauer Balken, gestrichelt, blass */
+.g2__karte--offen { border-style: dashed; border-left-style: solid; }
+.g2__karte--offen .g2__karte-titel { color: var(--wartet-titel); font-weight: 600; }
+.g2__karte--offen .g2__karte-satz { color: var(--wartet-satz); }
+
+/* Jetzt machbar: Bahnfarbe am Balken, Hervorhebung je Variante */
+.g2__karte.is-machbar {
+  border-style: solid;
+  border-left-color: var(--f);
+  border-left-width: 5px;
+}
+.g2__karte.is-machbar .g2__karte-titel { color: var(--text); font-weight: 700; }
+
+
+/* =========================================================
+   Variante A – Grauwert
+   Der nächste Schritt hebt sich durch Helligkeit und einen
+   kräftigen neutralen Rahmen ab, nicht durch eine Farbe.
+   ========================================================= */
+.g2--a .g2__karte.is-machbar {
+  background-color: var(--jetzt-flaeche);
+  border-color: var(--jetzt-rand);
+  border-width: 2px;
+  border-left-width: 5px;
+  box-shadow: var(--jetzt-schein);
+}
+
+/* =========================================================
+   Variante B – Invertiert
+   Der nächste Schritt kehrt Vorder- und Hintergrund um.
+   Maximaler Kontrast, garantiert ohne Farbkonflikt.
+   ========================================================= */
+.g2--b .g2__karte.is-machbar {
+  background-color: var(--invers-bg);
+  border-color: var(--invers-bg);
+  border-left-color: var(--f);
+}
+.g2--b .g2__karte.is-machbar .g2__karte-titel { color: var(--invers-text); }
+.g2--b .g2__karte.is-machbar .g2__karte-satz { color: var(--invers-leise); }
+.g2--b .g2__karte.is-machbar .g2__zeichen {
+  border-color: var(--invers-text);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--invers-text) 16%, transparent);
+}
+.g2--b .g2__karte.is-machbar .g2__wer {
+  background-color: color-mix(in srgb, var(--invers-text) 12%, transparent);
+  color: var(--invers-text);
+}
+
+/* =========================================================
+   Variante C – Spotlight
+   Nicht der nächste Schritt wird lauter, alles andere wird
+   leiser: nur der aktive Schritt hat überhaupt eine Fläche.
+   ========================================================= */
+/* Deckend genug, dass die Verbindungslinien nicht durchscheinen,
+   aber blass genug, um zurückzutreten. */
+.g2--c .g2__karte {
+  background-color: color-mix(in srgb, var(--bg) 88%, transparent);
+  border-color: color-mix(in srgb, var(--rand) 60%, transparent);
+}
+.g2--c .g2__karte--erreicht {
+  background-color: color-mix(in srgb, var(--bg) 88%, transparent);
+  border-color: color-mix(in srgb, var(--f) 22%, transparent);
+}
+.g2--c .g2__karte--offen .g2__karte-titel { color: var(--sehr-leise); font-weight: 500; }
+.g2--c .g2__karte--offen .g2__karte-satz { color: color-mix(in srgb, var(--sehr-leise) 70%, transparent); }
+.g2--c .g2__karte.is-machbar {
+  background-color: var(--karte);
+  border-color: var(--rand-stark);
+  border-width: 1px;
+  border-left-width: 6px;
+  transform: scale(1.02);
+  box-shadow: var(--spotlight-schatten);
+  z-index: 2;
+}
+.g2--c .g2__karte.is-machbar:hover { transform: scale(1.02) translateY(-2px); }
+
+/* --- Auswahl (Kette) --------------------------------------------------- */
+.g2__flaeche.is-auswahl .g2__karte { opacity: 0.18; }
+.g2__flaeche.is-auswahl .g2__karte.is-vor,
+.g2__flaeche.is-auswahl .g2__karte.is-nach { opacity: 1; }
+.g2__flaeche.is-auswahl .g2__karte.is-gewaehlt {
+  opacity: 1;
+  border-color: var(--text);
+  box-shadow: 0 0 0 2px var(--text);
+}
+
+@media (max-width: 991px) {
+  .g2__varianten { margin-left: 0; }
+  .g2__rail { display: none; }
+  .g2__scroll { padding-left: 1rem; padding-right: 1rem; }
+}
+
+
+/* =========================================================
+   V3 – helle Variante
+   Eigene Tonwerte, Tiefe über Schatten statt über Leuchten.
+   ========================================================= */
+.k--hell .g2 {
+  --bg: #f5f5f5;
+  --karte: #ffffff;
+  --karte-hover: #ffffff;
+  --rand: #e3e3e3;
+  --rand-stark: #c4c4c4;
+  --text: #333333;
+  --leise: #666666;
+  --sehr-leise: #999999;
+  --linie: #aaaaaa;
+  --spitze: #8f8f8f;
+  --band: 12%;
+  --grau-balken: #d0d0d0;
+  --ring: #bdbdbd;
+  --erledigt-titel: #8f8f8f;
+  --erledigt-satz: #ababab;
+  --erledigt-ton: 14%;
+  --wartet-titel: #444444;
+  --wartet-satz: #7a7a7a;
+  /* "grau hinterlegt" – der aktive Schritt ist der einzige mit Fläche */
+  --jetzt-flaeche: #e9e9e9;
+  --jetzt-rand: #333333;
+  --jetzt-schein: 0 0.7rem 1.6rem -0.6rem rgb(21 20 26 / 0.28);
+  --invers-bg: #333333;
+  --invers-text: #ffffff;
+  --invers-leise: #bbbbbb;
+  --station-nr-bg: #333333;
+  --station-nr-text: #ffffff;
+  --tor: #d0d0d0;
+  --schatten: 0 0.6rem 1.4rem rgb(21 20 26 / 0.1);
+  --karte-schatten: 0 1px 2px rgb(21 20 26 / 0.05);
+  --spotlight-schatten: 0 0.8rem 1.8rem -0.5rem rgb(21 20 26 / 0.22);
+  --wer-bg: #ececec;
+  --wer-text: #666666;
+}
+.k--hell .g2__station-nr { box-shadow: 0 0 0 3px #f5f5f5; }
+.k--hell .g2__station-balken i { background-color: #333333; }
+
+
+/* =========================================================
+   SV-Anpassungen: Schriften, helle Kopfleiste
+   ========================================================= */
+.k { font-family: var(--font-body); color: var(--dunkelgrau2); }
+.k button { font-family: inherit; }
+.k h1, .k h2, .k h3 { margin: 0; }
+.mk__titel, .mk__box-titel, .mk__info-panel h2,
+.me__station-titel, .g2__station-titel, .me__station-nr, .g2__station-nr,
+.me__rail-bahn b, .g2__rail-bahn b, .g2__karte-titel,
+.k-detail__titel, .k-detail__block h3 { font-family: var(--font-head); }
+.mk__titel { font-weight: 700; letter-spacing: -0.01em; }
+.me__halt-label, .g2__karte-satz, .mk__lead, .mk__eintrag { font-family: var(--font-body); }
+
+.k-bar { background-color: var(--hellgrau); border-bottom: 1px solid var(--grau2); }
+.k-bar__zurueck { color: var(--dunkelgrau1); }
+.k-bar__zurueck:hover { color: var(--dunkelgrau2); }
+.k-bar__meta { color: var(--grau6); }

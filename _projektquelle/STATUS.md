@@ -82,6 +82,12 @@ falls in einem neuen Chat weitergearbeitet wird.
 - **Regel: Der Menüpunkt existiert nur auf dem Branch `daniel`, niemals auf main.** Abgesichert dreifach:
   Build baut ihn nur auf `daniel` ein; im Browser erscheint er nur lokal und auf svakademie-git-daniel-…;
   `.githooks/pre-commit` verweigert Commits mit Menü auf jedem anderen Branch (einmalig `git config core.hooksPath .githooks`).
+- Kategorie „Strategie“ im Entwicklungsmenü (nur `daniel`): `entwicklung-strategie-zielbild.html` (Platzhalter) und
+  Meilensteine in drei Darstellungen `entwicklung-meilensteine-{fein,dunkel,hell}.html`. Logik 1:1 aus sofort sichtbar
+  (Branch daniel, Stand cc62e02) übertragen: `entwicklung_graph.py` (Rechnung, gegen das Original geprüft),
+  `entwicklung_seiten.py` (Vorlagen), `entwicklung_meilensteine.css/.js`. Bauen: `python3 entwicklung_seiten.py`.
+  Inhalte stehen in `entwicklung_strategie.json` – derzeit Platzhalter (Bahnen = die drei SV-Handlungsfelder).
+  Der Git-Hook blockiert alle Dateien mit „entwicklung“ im Namen auf anderen Branches.
 - Freigabe nach main: nur was Daniel freigibt; auf main die Seiten neu bauen, dann committen.
 - Behoben: Handy-Menü war nur 56 px hoch und die Seite auf dem Handy doppelt so breit
   (`backdrop-filter` am Header). Burger-Menü jetzt unter 1280 px (vorher lief die Leiste ab ~1100 px aus dem Bild).
