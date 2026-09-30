@@ -284,6 +284,19 @@ def konzept_huelle(konzept, inhalt):
 </div>'''.format(konzept, SEITE_SZ, g["fortschritt"], len(g["erledigt"]), g["anzahl"], inhalt, "".join(details))
 
 
+# Strategieseiten: oben nur Logo und „/ Entwicklung /“, unten nur die Zeile zur Sparkassen-Finanzgruppe
+KOPF_SCHLANK = '''
+  <header class="site-header">
+    <div class="wrap" style="position:relative;">
+      <a href="index.html" class="brand">
+        <img src="''' + LOGO_COLOR_URI + '''" alt="SV Akademie Logo" />
+      </a>
+      ''' + dev_dropdown_html(" dev-dd--corner") + '''
+    </div>
+  </header>
+'''
+
+
 def schreibe(dateiname, html):
     with open(os.path.join(SITEDIR, dateiname), "w", encoding="utf-8") as f:
         f.write(html)
@@ -296,12 +309,13 @@ for konzept, dateiname in KONZEPTE:
         "Meilensteine – " + konzept + " — SV Akademie (Entwicklung)",
         "Meilensteine zur Transformation der SV Akademie – Arbeitsstand, nicht öffentlich.",
         "", konzept_huelle(konzept, inhalt),
-        extra_head="<style>" + MS_CSS + "</style>", extra_js=MS_JS))
+        extra_head="<style>" + MS_CSS + "</style>", extra_js=MS_JS,
+        header_override=KOPF_SCHLANK, footer_schlank=True))
 
 
 # ---- Strategie und Zielbild: Platzhalter -----------------------------------
 SZ_BODY = '''
-<section class="section">
+<section class="section" style="min-height: calc(100vh - 97px - 66px);">
   <div class="wrap" style="max-width:760px;">
     <h1 style="color:var(--dunkelgrau2);">Strategie und Zielbild</h1>
     <p class="lead" style="color:var(--dunkelgrau1);">Platzhalter – hier entsteht die Beschreibung von Strategie und Zielbild der SV Akademie.</p>
@@ -313,4 +327,4 @@ SZ_BODY = '''
 schreibe(SEITE_SZ, page_shell(
     "Strategie und Zielbild — SV Akademie (Entwicklung)",
     "Strategie und Zielbild – Arbeitsstand, nicht öffentlich.",
-    "", SZ_BODY))
+    "", SZ_BODY, header_override=KOPF_SCHLANK, footer_schlank=True))

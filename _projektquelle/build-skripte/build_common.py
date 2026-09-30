@@ -150,7 +150,14 @@ def minimal_header_html():
   </header>
 '''
 
-def footer_html():
+def footer_html(schlank=False):
+    if schlank:
+        # Nur die Zeile zur Sparkassen-Finanzgruppe – für die Strategieseiten unter „/ Entwicklung /“
+        return '''
+  <footer class="site-footer site-footer--schlank">
+    <div class="wrap"><span>&copy; 2026 SV Akademie &mdash; Teil der Sparkassen-Finanzgruppe.</span></div>
+  </footer>
+'''
     return '''
   <footer class="site-footer" id="impressum">
     <div class="wrap">
@@ -208,7 +215,7 @@ with open(os.path.join(WORKDIR, "shared.js.tpl"), encoding="utf-8") as f:
 
 LEITFADEN_PDF_URI = "data:application/pdf;base64," + B64['leitfaden_pdf']
 
-def page_shell(title, description, active, body_html, extra_head="", extra_js="", header_override=None):
+def page_shell(title, description, active, body_html, extra_head="", extra_js="", header_override=None, footer_schlank=False):
     header = header_override if header_override is not None else nav_html(active)
     return '''<!DOCTYPE html>
 <html lang="de">
@@ -224,7 +231,7 @@ def page_shell(title, description, active, body_html, extra_head="", extra_js=""
 <body>
 ''' + header + '''
 ''' + body_html + '''
-''' + footer_html() + '''
+''' + footer_html(footer_schlank) + '''
 <script>
 ''' + SHARED_JS + '''
 ''' + extra_js + '''
