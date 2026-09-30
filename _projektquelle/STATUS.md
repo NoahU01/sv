@@ -77,7 +77,8 @@ falls in einem neuen Chat weitergearbeitet wird.
 - Build-Skripte laufen lokal: `cd _projektquelle/build-skripte` und dann
   `python3 page_index.py`, `page_ueberuns.py`, `page_portal.py`, `page_quickcheck.py`, `page_community.py`.
   Die Seiten werden direkt ins Repo-Wurzelverzeichnis geschrieben. HTML nie von Hand ändern.
-- Menüpunkt „/ Entwicklung /“ (Aufbau wie auf der empiria-Seite): Unterseiten + Archiv.
+- Menüpunkt „/ Entwicklung /“ (Aufbau wie auf der empiria-Seite): Unterseiten + Archiv. Unter „Unterseiten“ stehen nur
+  neue Seiten, die Daniel entwickelt und die noch nicht auf main sind – keine bestehenden Seiten der Hauptnavigation.
   Einträge pflegen in `build_common.py` (`DEV_UNTERSEITEN`, `DEV_ARCHIV`). Sichtbar nur lokal und auf den
   Vercel-Vorschauen (`svakademie-git-…`, `svakademie-<hash>-…`), auf der Live-Adresse entfernt.
 - Behoben: Handy-Menü war nur 56 px hoch und die Seite auf dem Handy doppelt so breit

@@ -56,16 +56,10 @@ PAGES = [
 # Nur in der Entwicklungsumgebung: lokal (file://, localhost) und auf den
 # Vercel-Vorschauen (svakademie-git-…, svakademie-<hash>-…). Auf der Live-Adresse
 # entfernt das Inline-Skript den Menüpunkt, bevor er gezeichnet wird.
-DEV_UNTERSEITEN = [
-    ("ueber-uns.html", "ÜU", "Über uns", "Antrieb, Handlungsfelder, Team", []),
-    ("quickcheck.html", "QC", "Quick-Check", "Bedarfsklärung · Varianten", [
-        ("quickcheck-klaerung.html", "Q1", "Klärung Weiterbildungsbedarf", "Variante für mich persönlich"),
-        ("quickcheck-aufbau.html", "Q2", "Aufbau Bildungsthema", "Variante für mein Team"),
-        ("quickcheck-budget.html", "Q3", "Optimale Weiterbildung", "Variante für meine Vertriebseinheit"),
-    ]),
-    ("portal.html", "KI", "KI-Lernassistent", "Vorschau Portal 24/7"),
-    ("community.html", "CA", "Community-Austausch", "Anmeldung & Agenda"),
-]
+# Nur neue Unterseiten, die Daniel entwickelt und die noch nicht auf main sind –
+# keine Seiten, die schon in der Hauptnavigation stehen.
+# (href, tag, titel, unterzeile[, [(href, tag, titel, unterzeile), …] für ein Flyout])
+DEV_UNTERSEITEN = []
 DEV_ARCHIV = []  # (href, tag, titel, unterzeile)
 
 def _dev_link(href, tag, title, sub, extra=""):
@@ -91,7 +85,7 @@ def dev_dropdown_html(extra_class=""):
             '<svg class="dev-dd-chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>'
             '<div class="dev-dd-panel">'
             '<p class="dev-dd-note"><b>Nur in der Entwicklungsumgebung sichtbar</b>Dieser Menüpunkt ist in der Live-Version nicht enthalten.</p>'
-            '<p class="dev-dd-group">Unterseiten</p>' + "".join(items) +
+            '<p class="dev-dd-group">Unterseiten</p>' + ("".join(items) or '<p class="dev-dd-empty">Noch keine neuen Unterseiten.</p>') +
             '<p class="dev-dd-group dev-dd-group--sub">Archiv</p>' + archiv +
             '</div></div>'
             "<script>(function(){var h=location.hostname,d=document.currentScript.previousElementSibling;"
