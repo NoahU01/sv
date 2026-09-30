@@ -108,7 +108,8 @@ def berechne(pfad=os.path.join(WORKDIR, "entwicklung_strategie.json")):
 
     # --- Layout "fein": Liniennetz nach Meilensteinen --------------------
     # oben lässt Platz für die Stationsköpfe, damit sie nicht in den Linien liegen
-    M = {"halt": 176, "station": 128, "spurLuft": 122, "oben": 168, "links": 92, "rechts": 92}
+    # SV: "oben" von 168 auf 232 – Platz für Ergebnisse als Punkteliste
+    M = {"halt": 176, "station": 128, "spurLuft": 122, "oben": 232, "links": 92, "rechts": 92}
 
     metro_halte = []
     metro_stationen = []

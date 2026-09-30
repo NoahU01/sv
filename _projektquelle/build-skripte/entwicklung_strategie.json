@@ -36,7 +36,11 @@
       "nr": 1,
       "termin": "Ende 2026",
       "titel": "Big Bang",
-      "ergebnis": "Ergebnis folgt."
+      "ergebnis": [
+        "Die Webseite ist live.",
+        "Der KI-Assistent Lea läuft.",
+        "Zielbild und Strategie werden von Michael Sauerbrunn und dem Team der SV Akademie voll unterstützt."
+      ]
     },
     {
       "id": "m2",
@@ -69,15 +73,50 @@
   ],
   "schritte": [
     {
-      "id": "t1-1",
+      "id": "t1-1-taskforce",
       "strang": "t1",
       "meilenstein": "m1",
       "aufwand": "",
-      "titel": "T1 · Stufe 1",
-      "ergebnis": "Platzhalter – Details folgen.",
+      "titel": "Taskforce KI: Ideen für Lea",
+      "ergebnis": "Die Taskforce KI hat Ideen zur Umsetzung des KI-Assistenten Lea entwickelt.",
       "status": "offen",
       "braucht": [],
+      "details": [
+        "Taskforce KI wird tätig",
+        "Ideen zur Umsetzung des KI-Assistenten Lea"
+      ],
+      "offen": [],
+      "wer": ""
+    },
+    {
+      "id": "t1-1-lea",
+      "strang": "t1",
+      "meilenstein": "m1",
+      "aufwand": "",
+      "titel": "Entwicklung KI-Assistent Lea",
+      "ergebnis": "Der KI-Assistent Lea ist entwickelt.",
+      "status": "offen",
+      "braucht": [
+        "t1-1-taskforce"
+      ],
       "details": [],
+      "offen": [],
+      "wer": ""
+    },
+    {
+      "id": "t1-1-webseite",
+      "strang": "t1",
+      "meilenstein": "m1",
+      "aufwand": "",
+      "titel": "Webseite umsetzen und live schalten",
+      "ergebnis": "Die Webseite ist umgesetzt und live – voraussichtlich innerhalb des SharePoints.",
+      "status": "offen",
+      "braucht": [
+        "t1-1-lea"
+      ],
+      "details": [
+        "Voraussichtlich innerhalb des SharePoints"
+      ],
       "offen": [],
       "wer": ""
     },
@@ -90,7 +129,7 @@
       "ergebnis": "Platzhalter – Details folgen.",
       "status": "offen",
       "braucht": [
-        "t1-1"
+        "t1-1-webseite"
       ],
       "details": [],
       "offen": [],

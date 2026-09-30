@@ -122,6 +122,14 @@ def _verantwortung(strang):
     return '<em class="k-verantwortung">%s</em>' % e(v) if v else ""
 
 
+def _ergebnis(m, klasse):
+    # Ein Ergebnis kann ein Satz oder eine Liste von Punkten sein
+    x = m["ergebnis"]
+    if isinstance(x, list):
+        return '<ul class="%s k-ergebnisliste">%s</ul>' % (klasse, "".join("<li>%s</li>" % e(p) for p in x))
+    return '<span class="%s">%s</span>' % (klasse, e(x))
+
+
 def _liste(ids):
     return e(" ".join(ids))
 
@@ -154,9 +162,9 @@ def metro_plan():
     svg.append("</svg>")
     stationen = "".join(
         '<div class="me__station{0}" style="left: {1}px"><span class="me__station-nr">{2}</span>'
-        '<span class="me__station-titel">{3}</span><span class="me__station-text">{4}</span>'
+        '<span class="me__station-titel">{3}</span>{4}'
         '<span class="me__station-balken"><i style="width: {5}%"></i></span></div>'.format(
-            " is-erreicht" if s["erreicht"] else "", s["x"], s["nr"], e(s["titel"]), e(s["ergebnis"]), s["fortschritt"])
+            " is-erreicht" if s["erreicht"] else "", s["x"], s["nr"], e(s["titel"]), _ergebnis(s, "me__station-text"), s["fortschritt"])
         for s in m["stationen"])
     halte = "".join(
         '<button class="me__halt me__halt--{0}{1}" type="button" data-schritt="{2}" data-halt="{2}" data-knoten="{2}"'
@@ -196,10 +204,10 @@ def graph_abschnitte(konzept, variante):
         for sp in G["spuren"])
     stationen = "".join(
         '<div class="g2__station{0}" style="left: {1}px"><span class="g2__station-nr">{2}</span>'
-        '<span class="g2__station-titel">{3}</span><span class="g2__station-text">{4}</span>'
+        '<span class="g2__station-titel">{3}</span>{4}'
         '<span class="g2__station-balken"><i style="width: {5}%"></i></span>'
         '<span class="g2__station-quote">{5}% · {6} Schritte</span></div>'.format(
-            " is-erreicht" if st["erreicht"] else "", st["x"], st["nr"], e(st["titel"]), e(st["ergebnis"]),
+            " is-erreicht" if st["erreicht"] else "", st["x"], st["nr"], e(st["titel"]), _ergebnis(st, "g2__station-text"),
             st["fortschritt"], st["anzahl"]) for st in G["stationen"])
     tore = "".join('<div class="g2__tor{0}" style="left: {1}px"></div>'.format(
         " is-erreicht" if st["erreicht"] else "", st["x"]) for st in G["stationen"])

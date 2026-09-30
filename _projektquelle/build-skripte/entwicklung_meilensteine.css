@@ -1009,3 +1009,11 @@
 /* Dunkles Rot und Lila sind auf dunklem Grund als Schrift zu schwach:
    dort aufgehellt, Linien und Flächen behalten die Originalfarbe. */
 .k--dunkel .g2__rail-bahn i, .k-detail__strang { color: color-mix(in srgb, var(--f) 55%, #ffffff); }
+
+/* Ergebnis einer Stufe als Punkteliste; breitere Stationsköpfe für mehr Text */
+.k-ergebnisliste { margin: 0.3rem 0 0; padding: 0; list-style: none; display: flex; flex-flow: column; gap: 0.2rem; }
+.k-ergebnisliste li { position: relative; padding-left: 0.7rem; text-align: left; }
+.k-ergebnisliste li::before { content: "·"; position: absolute; left: 0.15rem; font-weight: 700; }
+.me__station { width: 13rem; margin-left: -6.5rem; }
+.g2__station { width: 15rem; margin-left: -7.5rem; }
+.g2 { --kopfhoehe: 14rem; }
