@@ -181,12 +181,12 @@
       "wer": ""
     },
     {
-      "id": "t2-1",
+      "id": "t2-1-brainstorming",
       "strang": "t2",
       "meilenstein": "m1",
       "aufwand": "",
-      "titel": "T2 · Stufe 1",
-      "ergebnis": "Platzhalter – Details folgen.",
+      "titel": "Brainstorming Zukunftskompetenzen und Lernen der Zukunft",
+      "ergebnis": "",
       "status": "offen",
       "braucht": [],
       "details": [],
@@ -202,7 +202,7 @@
       "ergebnis": "Platzhalter – Details folgen.",
       "status": "offen",
       "braucht": [
-        "t2-1"
+        "t2-1-brainstorming"
       ],
       "details": [],
       "offen": [],
