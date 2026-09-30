@@ -1,0 +1,9 @@
+#!/bin/sh
+# Der Menüpunkt „/ Entwicklung /“ bleibt immer nur auf dem Branch `daniel`.
+branch=$(git rev-parse --abbrev-ref HEAD)
+[ "$branch" = "daniel" ] && exit 0
+if git grep --cached -q "data-dev-dd" -- '*.html'; then
+  echo "Abbruch: Menüpunkt „/ Entwicklung /“ im Commit auf '$branch'."
+  echo "Seiten auf diesem Branch neu bauen (_projektquelle/build-skripte/page_*.py) – dann ist er raus."
+  exit 1
+fi

@@ -53,9 +53,19 @@ PAGES = [
 ]
 
 # ---- Menüpunkt „/ Entwicklung /“ ----
-# Nur in der Entwicklungsumgebung: lokal (file://, localhost) und auf den
-# Vercel-Vorschauen (svakademie-git-…, svakademie-<hash>-…). Auf der Live-Adresse
-# entfernt das Inline-Skript den Menüpunkt, bevor er gezeichnet wird.
+# Existiert NUR auf dem Branch `daniel`, niemals auf main:
+# 1. Build: Das Menü wird nur eingebaut, wenn der ausgecheckte Branch `daniel` ist.
+# 2. Laufzeit: Selbst dann erscheint es nur lokal und auf der Vercel-Vorschau
+#    des Branches (svakademie-git-daniel-…), sonst entfernt das Inline-Skript es.
+# 3. Ein Git-Hook (.githooks/pre-commit) verweigert Commits auf main mit dem Menü.
+import subprocess
+def _git_branch():
+    try:
+        return subprocess.check_output(["git", "rev-parse", "--abbrev-ref", "HEAD"],
+                                       cwd=WORKDIR, stderr=subprocess.DEVNULL).decode().strip()
+    except Exception:
+        return ""
+DEV_MENU = _git_branch() == "daniel"
 # Nur neue Unterseiten, die Daniel entwickelt und die noch nicht auf main sind –
 # keine Seiten, die schon in der Hauptnavigation stehen.
 # (href, tag, titel, unterzeile[, [(href, tag, titel, unterzeile), …] für ein Flyout])
@@ -67,6 +77,8 @@ def _dev_link(href, tag, title, sub, extra=""):
             '<span class="dev-dd-txt"><b>{2}</b><small>{3}</small></span></a>').format(href, tag, title, sub, extra)
 
 def dev_dropdown_html(extra_class=""):
+    if not DEV_MENU:
+        return ""
     items = []
     for entry in DEV_UNTERSEITEN:
         href, tag, title, sub = entry[:4]
@@ -89,7 +101,7 @@ def dev_dropdown_html(extra_class=""):
             '<p class="dev-dd-group dev-dd-group--sub">Archiv</p>' + archiv +
             '</div></div>'
             "<script>(function(){var h=location.hostname,d=document.currentScript.previousElementSibling;"
-            "if(!(location.protocol==='file:'||h==='localhost'||h==='127.0.0.1'||/^svakademie-(git-|[a-z0-9]{9}-)/.test(h)))d.remove();})();</script>")
+            "if(!(location.protocol==='file:'||h==='localhost'||h==='127.0.0.1'||/^svakademie-git-daniel-/.test(h)))d.remove();})();</script>")
 
 def nav_html(active):
     links = []

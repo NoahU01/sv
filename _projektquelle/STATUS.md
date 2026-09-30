@@ -78,8 +78,10 @@ falls in einem neuen Chat weitergearbeitet wird.
   `python3 page_index.py`, `page_ueberuns.py`, `page_portal.py`, `page_quickcheck.py`, `page_community.py`.
   Die Seiten werden direkt ins Repo-Wurzelverzeichnis geschrieben. HTML nie von Hand ändern.
 - Menüpunkt „/ Entwicklung /“ (Aufbau wie auf der empiria-Seite): Unterseiten + Archiv. Unter „Unterseiten“ stehen nur
-  neue Seiten, die Daniel entwickelt und die noch nicht auf main sind – keine bestehenden Seiten der Hauptnavigation.
-  Einträge pflegen in `build_common.py` (`DEV_UNTERSEITEN`, `DEV_ARCHIV`). Sichtbar nur lokal und auf den
-  Vercel-Vorschauen (`svakademie-git-…`, `svakademie-<hash>-…`), auf der Live-Adresse entfernt.
+  neue Seiten, die Daniel entwickelt und die noch nicht auf main sind. Einträge in `build_common.py` (`DEV_UNTERSEITEN`, `DEV_ARCHIV`).
+- **Regel: Der Menüpunkt existiert nur auf dem Branch `daniel`, niemals auf main.** Abgesichert dreifach:
+  Build baut ihn nur auf `daniel` ein; im Browser erscheint er nur lokal und auf svakademie-git-daniel-…;
+  `.githooks/pre-commit` verweigert Commits mit Menü auf jedem anderen Branch (einmalig `git config core.hooksPath .githooks`).
+- Freigabe nach main: nur was Daniel freigibt; auf main die Seiten neu bauen, dann committen.
 - Behoben: Handy-Menü war nur 56 px hoch und die Seite auf dem Handy doppelt so breit
   (`backdrop-filter` am Header). Burger-Menü jetzt unter 1280 px (vorher lief die Leiste ab ~1100 px aus dem Bild).
