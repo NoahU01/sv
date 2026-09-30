@@ -1002,6 +1002,10 @@
 .k-bar__zurueck:hover { color: var(--dunkelgrau2); }
 .k-bar__meta { color: var(--grau6); }
 
-/* Verantwortung je Strang in der Leiste links */
-.k-verantwortung { display: block; margin-top: 0.2rem; color: var(--dunkelgrau1); font-size: 0.72rem; font-style: normal; line-height: 1.3; }
+/* Verantwortliche je Strang, kursiv: in der Leiste links und im Detailfenster */
+.k-verantwortung { display: block; margin-top: 0.2rem; color: var(--dunkelgrau1); font-size: 0.72rem; font-style: italic; line-height: 1.3; }
 .k--dunkel .k-verantwortung { color: #bbbbbb; }
+.k-detail__verantwortung { margin-top: 0.35rem; color: #d0d0d0; font-size: 0.88rem; font-style: italic; }
+/* Dunkles Rot und Lila sind auf dunklem Grund als Schrift zu schwach:
+   dort aufgehellt, Linien und Flächen behalten die Originalfarbe. */
+.k--dunkel .g2__rail-bahn i, .k-detail__strang { color: color-mix(in srgb, var(--f) 55%, #ffffff); }

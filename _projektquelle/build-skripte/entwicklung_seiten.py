@@ -119,7 +119,7 @@ def _themen(strang):
 
 def _verantwortung(strang):
     v = strang.get("verantwortung")
-    return '<em class="k-verantwortung">Verantwortung: %s</em>' % e(v) if v else ""
+    return '<em class="k-verantwortung">%s</em>' % e(v) if v else ""
 
 
 def _liste(ids):
@@ -251,7 +251,7 @@ def konzept_huelle(konzept, inhalt):
                      '<span class="k-detail__wer" title="%s">%s</span>' % (e(s["werName"]), e(s["wer"])) if s["wer"] else "",
                      e(s["titel"]),
                      '<div class="k-detail__block"><h3>Aufwand</h3><p>%s</p></div>' % e(s["aufwandLabel"]) if s["aufwandLabel"] else "",
-                     '<div class="k-detail__block"><h3>Verantwortung</h3><p>%s</p></div>' % e(s["verantwortung"]) if s["verantwortung"] else "")]
+                     '<p class="k-detail__verantwortung">%s</p>' % e(s["verantwortung"]) if s["verantwortung"] else "")]
         if s["details"]:
             teile.append('<div class="k-detail__block"><h3>Inhalte</h3><ul>%s</ul></div>' % "".join("<li>%s</li>" % e(d) for d in s["details"]))
         teile.append('<div class="k-detail__block"><h3>Ergebnis</h3><p>%s</p></div>' % e(s["ergebnis"]))
