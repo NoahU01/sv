@@ -407,7 +407,8 @@
       "status": "offen",
       "braucht": [
         "sa-1-pw7",
-        "sa-1-puls"
+        "sa-1-puls",
+        "t1-1-webseite"
       ],
       "details": [],
       "offen": [],

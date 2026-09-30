@@ -107,6 +107,22 @@ def berechne(pfad=os.path.join(WORKDIR, "entwicklung_strategie.json")):
         s["meilensteinNr"] = stein["nr"]
         s["meilensteinTitel"] = stein["titel"]
 
+    # Abhängigkeitstiefe innerhalb einer Ergebnisstufe – bestimmt die Spalte
+    # in beiden Darstellungen
+    lokal_rang = {}
+
+    def lokal(i):
+        if i in lokal_rang:
+            return lokal_rang[i]
+        s = schritt_nach_id[i]
+        innen = [b for b in s["braucht"] if schritt_nach_id[b]["meilenstein"] == s["meilenstein"]]
+        wert = max(lokal(b) for b in innen) + 1 if innen else 0
+        lokal_rang[i] = wert
+        return wert
+
+    for s in schritte:
+        lokal(s["id"])
+
     # --- Layout "fein": Liniennetz nach Meilensteinen --------------------
     # oben lässt Platz für die Stationsköpfe, damit sie nicht in den Linien liegen
     # SV: "oben" von 168 auf 232 – Platz für Ergebnisse als Punkteliste;
@@ -118,9 +134,11 @@ def berechne(pfad=os.path.join(WORKDIR, "entwicklung_strategie.json")):
     # davor und läuft danach wieder zusammen.
     M["ast"] = 34  # halber senkrechter Abstand paralleler Halte
 
+    # SV: Spalte = Abhängigkeitstiefe innerhalb der Stufe (wie im Graph), damit
+    # Querverbindungen zwischen den Strängen immer nach rechts laufen.
     def gruppen(m, st):
         eigene = [s for s in m["schritte"] if s["strang"] == st["id"]]
-        return [[s for s in eigene if s["rang"] == r] for r in sorted(set(s["rang"] for s in eigene))]
+        return [[s for s in eigene if lokal_rang[s["id"]] == r] for r in sorted(set(lokal_rang[s["id"]] for s in eigene))]
 
     # Jeder Strang bekommt so viel Höhe, wie seine breiteste Verzweigung braucht
     halbe = [max([0] + [(len(g) - 1) * M["ast"] for m in meilensteine for g in gruppen(m, st)]) for st in straenge]
@@ -133,11 +151,11 @@ def berechne(pfad=os.path.join(WORKDIR, "entwicklung_strategie.json")):
     x = M["links"]
     for m in meilensteine:
         pro_strang = [gruppen(m, st) for st in straenge]
-        breiteste = max([1] + [len(spalten) for spalten in pro_strang])
+        breiteste = max([1] + [lokal_rang[s["id"]] + 1 for s in m["schritte"]])
         for spur, spalten in enumerate(pro_strang):
-            # Halte mittig im Abschnitt verteilen, damit kurze Stränge nicht kleben
-            versatz = (breiteste - len(spalten)) / 2
-            for i, gruppe in enumerate(spalten):
+            versatz = 0
+            for gruppe in spalten:
+                i = lokal_rang[gruppe[0]["id"]]
                 for j, s in enumerate(gruppe):
                     ast = (j - (len(gruppe) - 1) / 2) * 2 * M["ast"]
                     metro_halte.append({"id": s["id"], "x": x + (versatz + i + 0.5) * M["halt"],
@@ -220,19 +238,6 @@ def berechne(pfad=os.path.join(WORKDIR, "entwicklung_strategie.json")):
     # kein Schritt von einer späteren Stufe abhängt – alle Pfeile zeigen rechts.
     G2 = {"breite": 238, "hoehe": 110, "spaltenLuft": 58, "zeilenLuft": 16, "spurLuft": 56, "station": 132}
 
-    lokal_rang = {}
-
-    def lokal(i):
-        if i in lokal_rang:
-            return lokal_rang[i]
-        s = schritt_nach_id[i]
-        innen = [b for b in s["braucht"] if schritt_nach_id[b]["meilenstein"] == s["meilenstein"]]
-        wert = max(lokal(b) for b in innen) + 1 if innen else 0
-        lokal_rang[i] = wert
-        return wert
-
-    for s in schritte:
-        lokal(s["id"])
 
     abschnitte = [{"stein": m, "spalten": max(lokal_rang[s["id"]] for s in m["schritte"]) + 1} for m in meilensteine]
     zelle2 = lambda m, lr, sid: [s for s in m["schritte"] if lokal_rang[s["id"]] == lr and s["strang"] == sid]
