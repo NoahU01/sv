@@ -99,13 +99,18 @@ img { max-width: 100%; display:block; }
 
 .site-header {
   position: sticky; top: 0; z-index: 500;
-  background: rgba(255,255,255,.92); backdrop-filter: blur(10px);
+  background: rgba(255,255,255,.92);
   border-bottom: 1px solid var(--grau2);
 }
+/* Der Weichzeichner sitzt auf einer eigenen Ebene: direkt am Header würde
+   backdrop-filter den Header zum Bezugsrahmen des fixierten Handy-Menüs machen
+   (Menü nur 56 px hoch, Seite auf dem Handy doppelt so breit). */
+.site-header::before { content:""; position:absolute; inset:0; z-index:-1; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
 .site-header .wrap { display:flex; align-items:center; justify-content:space-between; min-height: 96px; padding-top:8px; padding-bottom:8px; }
-.brand { display:flex; align-items:center; gap:12px; flex-shrink:0; }
+.brand { display:flex; align-items:center; gap:12px; flex-shrink:0; margin-right:32px; }
 .brand img { height: 76px; width:auto; }
-.nav { display:flex; align-items:center; gap: 26px; }
+/* Logo links, Menüpunkte rechtsbündig bis an den CTA-Button */
+.nav { display:flex; align-items:center; gap: 26px; margin-left:auto; }
 .nav a { color: var(--dunkelgrau2); font-weight:600; font-size:.95rem; padding: 6px 2px; border-bottom: 2px solid transparent; white-space:nowrap; }
 .nav a:hover, .nav a.active { color: var(--rot); border-color: var(--rot); }
 .nav a.nav-kontakt-btn {
@@ -117,16 +122,23 @@ img { max-width: 100%; display:block; }
   cursor:pointer; transition: all .18s ease; white-space:nowrap;
 }
 .nav a.nav-kontakt-btn:hover { border-color:var(--rot); color:var(--rot); }
-.nav-cta { display:flex; align-items:center; gap:14px; flex-shrink:0; }
+.nav-cta { display:flex; align-items:center; gap:14px; flex-shrink:0; margin-left:26px; }
 .burger { display:none; background:none; border:none; cursor:pointer; padding:8px; }
 .burger span { display:block; width:26px; height:3px; background:var(--dunkelgrau2); margin:5px 0; border-radius:2px; }
 
-@media (max-width: 900px) {
+/* Burger-Menü unter 1280 px (vorher lief die Leiste zwischen 900 und 1100 px aus dem Bild) */
+@media (max-width: 1279px) {
   .nav { position:fixed; inset: 84px 0 0 0; background:#fff; flex-direction:column; align-items:flex-start;
     padding: 28px; gap:20px; transform: translateX(100%); transition: transform .25s ease; overflow:auto; }
   .nav.open { transform: translateX(0); }
   .burger { display:block; }
   .nav-cta .btn-outline { display:none; }
+}
+/* Logo, Button und Burger passen auf dem Handy nicht nebeneinander; der Button steht im Menü und im Aufmacher */
+@media (max-width: 480px) { .nav-cta .btn-primary { display:none; } }
+@media (min-width: 1280px) and (max-width: 1400px) {
+  .nav { gap:20px; }
+  .nav-cta { margin-left:20px; }
 }
 
 .site-footer { background: var(--dunkelgrau2); color: #fff; padding: 56px 0 28px; }
@@ -378,6 +390,7 @@ img { max-width: 100%; display:block; }
 .simple-table th { text-align:left; font-family: var(--font-head); font-size:.78rem; text-transform:uppercase; letter-spacing:.05em;
   color:var(--dunkelgrau1); padding: 10px 14px; border-bottom:2px solid var(--grau3); }
 .simple-table td { padding: 14px 14px; border-bottom:1px solid var(--grau2); font-size:.92rem; }
+@media (max-width:480px) { .simple-table th, .simple-table td { padding-left:8px; padding-right:8px; } }
 
 .badge-check { color: var(--dunkelgruen); font-weight:700; }
 

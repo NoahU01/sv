@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import sys, os
-sys.path.insert(0, "/sessions/ecstatic-nice-gauss/mnt/outputs/_work")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from build_common import *
 
 ICON_PERSON = '''<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"><circle cx="50" cy="36" r="18"/><path d="M14 92c0-22 16-38 36-38s36 16 36 38"/></g></svg>'''

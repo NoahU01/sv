@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import sys, os
-sys.path.insert(0, "/sessions/ecstatic-nice-gauss/mnt/outputs/_work")
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from build_common import *
 
 # ---- Content per Situation (aus den 3 OnePager-Handouts, auf Du-Ansprache umgestellt) ----

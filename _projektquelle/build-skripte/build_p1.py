@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import json, os
 
-WORKDIR = "/sessions/ecstatic-nice-gauss/mnt/outputs/_work"
-SITEDIR = os.path.join(WORKDIR, "site")
+WORKDIR = os.path.dirname(os.path.abspath(__file__))
+SITEDIR = os.path.abspath(os.path.join(WORKDIR, "..", ".."))
 os.makedirs(SITEDIR, exist_ok=True)
 
 with open(os.path.join(WORKDIR, "assets_b64.json")) as f:
