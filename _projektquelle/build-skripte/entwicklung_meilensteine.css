@@ -1001,3 +1001,7 @@
 .k-bar__zurueck { color: var(--dunkelgrau1); }
 .k-bar__zurueck:hover { color: var(--dunkelgrau2); }
 .k-bar__meta { color: var(--grau6); }
+
+/* Verantwortung je Strang in der Leiste links */
+.k-verantwortung { display: block; margin-top: 0.2rem; color: var(--dunkelgrau1); font-size: 0.72rem; font-style: normal; line-height: 1.3; }
+.k--dunkel .k-verantwortung { color: #bbbbbb; }

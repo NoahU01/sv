@@ -74,7 +74,7 @@ DEV_UNTERSEITEN = []
 DEV_KATEGORIEN = [
     ("Strategie", [
         ("entwicklung-strategie-zielbild.html", "SZ", "Strategie und Zielbild", "Platzhalter"),
-        ("entwicklung-meilensteine-fein.html", "MS", "Meilensteine", "Der Weg zum Zielbild · fein, dunkel, hell"),
+        ("entwicklung-meilensteine-fein.html", "MS", "Meilensteine", "Transformation der SV Akademie · fein, dunkel, hell"),
     ]),
 ]
 DEV_ARCHIV = []  # (href, tag, titel, unterzeile)

@@ -84,6 +84,11 @@ def berechne(pfad=os.path.join(WORKDIR, "entwicklung_strategie.json")):
         meilensteine.append(dict(m, schritte=eigene, anzahl=len(eigene), fortschritt=anteil(eigene),
                                  erreicht=all(s["status"] == "erreicht" for s in eigene)))
 
+    # Ergebnisstufen hängen an festen Terminen: Titel = Termin, ggf. mit Namen
+    for m in meilensteine:
+        termin, name = m.get("termin", ""), m.get("titel", "")
+        m["titel"] = " · ".join(t for t in (termin, name) if t) or "Stufe %s" % m["nr"]
+
     aktueller = next((m for m in meilensteine if not m["erreicht"]), meilensteine[-1])
 
     aufwand_namen = {"S": "Klein (Stunden bis ein Tag)", "M": "Mittel (mehrere Tage)", "L": "Groß (Wochen)"}
@@ -95,6 +100,7 @@ def berechne(pfad=os.path.join(WORKDIR, "entwicklung_strategie.json")):
         s["werName"] = personen.get(s["wer"], "")
         s["strangLabel"] = strang["label"]
         s["strangKurz"] = strang["kurz"]
+        s["verantwortung"] = strang.get("verantwortung", "")
         s["farbe"] = strang["farbe"]
         s["spur"] = strang["spur"]
         s["meilensteinNr"] = stein["nr"]
@@ -154,6 +160,7 @@ def berechne(pfad=os.path.join(WORKDIR, "entwicklung_strategie.json")):
         # Hinter dem letzten Halt liegt kein erreichter Punkt mehr
         abschnitte.append({"pfad": "M %s %s L %s %s" % (cursor, y, ende_x, y), "dick": False, "bis": None})
         metro_linien.append({"id": st["id"], "label": st["label"], "kurz": st["kurz"], "frage": st["frage"],
+                             "verantwortung": st.get("verantwortung", ""),
                              "farbe": st["farbe"], "y": y, "fortschritt": st["fortschritt"], "abschnitte": abschnitte})
 
     # Nur Abhängigkeiten zwischen verschiedenen Strängen zeichnen – der Rest
@@ -243,6 +250,7 @@ def berechne(pfad=os.path.join(WORKDIR, "entwicklung_strategie.json")):
         "kanten": g2_kanten,
         "stationen": g2_stationen,
         "spuren": [{"id": st["id"], "label": st["label"], "kurz": st["kurz"], "frage": st["frage"],
+                    "verantwortung": st.get("verantwortung", ""),
                     "farbe": st["farbe"], "fortschritt": st["fortschritt"], "y": g2_spur_y[i],
                     "hoehe": g2_spur_hoehe[i]} for i, st in enumerate(straenge)],
     }

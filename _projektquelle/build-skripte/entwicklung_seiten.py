@@ -49,14 +49,14 @@ def kopf(konzept):
         for k, href in KONZEPTE)
     if konzept == "fein":
         info = '''
-            <p>Jedes Handlungsfeld ist eine <b>Linie</b>, die von links nach rechts läuft.
+            <p>Jeder Strang ist eine <b>Linie</b>, die von links nach rechts läuft.
               Jeder <b>Halt</b> darauf ist ein Schritt.</p>
             <p>Ein Abschnitt ist <b>dick</b>, wenn der Halt an seinem Ende erledigt ist oder
-              gerade ansteht — sonst dünn. So zeigt die Linie selbst, wie weit das Feld
+              gerade ansteht — sonst dünn. So zeigt die Linie selbst, wie weit der Strang
               gekommen ist.</p>
-            <p>Die <b>nummerierten Stationen</b> sind Ergebnisstufen. Dort muss jede Linie
+            <p>Die <b>nummerierten Stationen</b> sind Ergebnisstufen mit festem Termin. Dort muss jede Linie
               angekommen sein, bevor es weitergeht.</p>
-            <p>Gestrichelte <b>Umstiege</b> zeigen, wo ein Feld auf ein anderes wartet.</p>
+            <p>Gestrichelte <b>Umstiege</b> zeigen, wo ein Strang auf einen anderen wartet.</p>
             <p>Ein Klick auf einen Halt zeigt die <b>Route dorthin</b>: alles, was nicht zu
               diesem Ziel führt, tritt zurück. Ein Klick daneben hebt das wieder auf.</p>'''
         eintraege = '''
@@ -69,9 +69,9 @@ def kopf(konzept):
     else:
         info = '''
             <p>Von links nach rechts. Jeder <b>Pfeil</b> heißt „muss vorher fertig sein".</p>
-            <p>Die drei <b>Bahnen</b> untereinander sind die Handlungsfelder. Links steht,
-              welches Feld welche Frage beantwortet.</p>
-            <p>Nach jedem Abschnitt steht eine <b>Ergebnisstufe</b>. Dort muss jede der drei
+            <p>Die drei <b>Bahnen</b> untereinander sind die Stränge. Links stehen ihre
+              Themen und wer verantwortlich ist.</p>
+            <p>Nach jedem Abschnitt steht eine <b>Ergebnisstufe</b> mit festem Termin. Dort muss jede der drei
               Bahnen angekommen sein, bevor der nächste Abschnitt beginnt.</p>
             <p>Ein Klick auf eine Karte zeigt ihre <b>Kette</b> nach vorn und nach hinten und
               öffnet die Details. Ein Klick daneben hebt das wieder auf.</p>'''
@@ -84,11 +84,11 @@ def kopf(konzept):
     return '''
 <header class="mk">
   <div class="mk__text">
-    <h1 class="mk__titel">Der Weg zum Zielbild</h1>
+    <h1 class="mk__titel">Meilensteine zur Transformation der SV Akademie</h1>
     <p class="mk__lead">
-      Drei Handlungsfelder laufen parallel auf das Zielbild zu. Dazwischen liegen
-      vier Ergebnisstufen — jede ist erst erreicht, wenn alle drei Felder ihren
-      Teil erledigt haben.
+      Drei Stränge laufen parallel auf das Zielbild zu. Dazwischen liegen fünf
+      Ergebnisstufen mit festen Terminen — jede ist erst erreicht, wenn alle drei
+      Stränge ihren Teil erledigt haben.
     </p>
   </div>
   <div class="mk__boxen">
@@ -113,6 +113,15 @@ def kopf(konzept):
 </header>'''
 
 
+def _themen(strang):
+    return "<span>%s</span>" % e(strang["frage"]) if strang["frage"] else ""
+
+
+def _verantwortung(strang):
+    v = strang.get("verantwortung")
+    return '<em class="k-verantwortung">Verantwortung: %s</em>' % e(v) if v else ""
+
+
 def _liste(ids):
     return e(" ".join(ids))
 
@@ -121,8 +130,8 @@ def _liste(ids):
 def metro_plan():
     m = g["metro"]
     rail = "".join(
-        '<div class="me__rail-bahn" style="top: {0}px; --f: {1}"><b>{2}</b><span>{3}</span><i>{4}%</i></div>'.format(
-            l["y"], l["farbe"], e(l["label"]), e(l["frage"]), l["fortschritt"]) for l in m["linien"])
+        '<div class="me__rail-bahn" style="top: {0}px; --f: {1}"><b>{2}</b>{3}{4}<i>{5}%</i></div>'.format(
+            l["y"], l["farbe"], e(l["label"]), _themen(l), _verantwortung(l), l["fortschritt"]) for l in m["linien"])
     svg = ['<svg class="me__svg" width="{0}" height="{1}" aria-hidden="true"><defs>'
            '<marker id="mpfeil" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse">'
            '<path d="M 0 0 L 8 4 L 0 8 z" class="me__quer-spitze" /></marker></defs>'.format(m["breite"], m["hoehe"])]
@@ -182,8 +191,8 @@ def graph_abschnitte(konzept, variante):
     G = g["graph2"]
     band = G["bandLuft"]
     rail = "".join(
-        '<div class="g2__rail-bahn" style="top: {0}px; height: {1}px; --f: {2}"><b>{3}</b><span>{4}</span><i>{5}%</i></div>'.format(
-            sp["y"] - band, sp["hoehe"] + band * 2, sp["farbe"], e(sp["label"]), e(sp["frage"]), sp["fortschritt"])
+        '<div class="g2__rail-bahn" style="top: {0}px; height: {1}px; --f: {2}"><b>{3}</b>{4}{5}<i>{6}%</i></div>'.format(
+            sp["y"] - band, sp["hoehe"] + band * 2, sp["farbe"], e(sp["label"]), _themen(sp), _verantwortung(sp), sp["fortschritt"])
         for sp in G["spuren"])
     stationen = "".join(
         '<div class="g2__station{0}" style="left: {1}px"><span class="g2__station-nr">{2}</span>'
@@ -237,10 +246,12 @@ def konzept_huelle(konzept, inhalt):
         teile = ['<article class="k-detail" data-detail="{0}" hidden><div class="k-detail__kopf">'
                  '<span class="k-detail__strang" style="--f: {1}">{2}</span>{3}</div>'
                  '<h2 class="k-detail__titel">{4}</h2>'
-                 '<div class="k-detail__block"><h3>Aufwand</h3><p>{5}</p></div>'.format(
+                 '{6}{5}'.format(
                      s["id"], s["farbe"], e(s["strangLabel"]),
                      '<span class="k-detail__wer" title="%s">%s</span>' % (e(s["werName"]), e(s["wer"])) if s["wer"] else "",
-                     e(s["titel"]), e(s["aufwandLabel"]))]
+                     e(s["titel"]),
+                     '<div class="k-detail__block"><h3>Aufwand</h3><p>%s</p></div>' % e(s["aufwandLabel"]) if s["aufwandLabel"] else "",
+                     '<div class="k-detail__block"><h3>Verantwortung</h3><p>%s</p></div>' % e(s["verantwortung"]) if s["verantwortung"] else "")]
         if s["details"]:
             teile.append('<div class="k-detail__block"><h3>Inhalte</h3><ul>%s</ul></div>' % "".join("<li>%s</li>" % e(d) for d in s["details"]))
         teile.append('<div class="k-detail__block"><h3>Ergebnis</h3><p>%s</p></div>' % e(s["ergebnis"]))
@@ -272,7 +283,7 @@ for konzept, dateiname in KONZEPTE:
     inhalt = metro_plan() if konzept == "fein" else graph_abschnitte(konzept, "a" if konzept == "dunkel" else "c")
     schreibe(dateiname, page_shell(
         "Meilensteine – " + konzept + " — SV Akademie (Entwicklung)",
-        "Der Weg zum Zielbild – Arbeitsstand, nicht öffentlich.",
+        "Meilensteine zur Transformation der SV Akademie – Arbeitsstand, nicht öffentlich.",
         "", konzept_huelle(konzept, inhalt),
         extra_head="<style>" + MS_CSS + "</style>", extra_js=MS_JS))
 

@@ -86,7 +86,8 @@ falls in einem neuen Chat weitergearbeitet wird.
   Meilensteine in drei Darstellungen `entwicklung-meilensteine-{fein,dunkel,hell}.html`. Logik 1:1 aus sofort sichtbar
   (Branch daniel, Stand cc62e02) übertragen: `entwicklung_graph.py` (Rechnung, gegen das Original geprüft),
   `entwicklung_seiten.py` (Vorlagen), `entwicklung_meilensteine.css/.js`. Bauen: `python3 entwicklung_seiten.py`.
-  Inhalte stehen in `entwicklung_strategie.json` – derzeit Platzhalter (Bahnen = die drei SV-Handlungsfelder).
+  Inhalte stehen in `entwicklung_strategie.json`: Grundstruktur „Transformation der SV Akademie“ mit drei Strängen
+  (inkl. Verantwortung) und fünf Ergebnisstufen mit festen Terminen; die Schritte je Stufe sind noch Platzhalter.
   Der Git-Hook blockiert alle Dateien mit „entwicklung“ im Namen auf anderen Branches.
 - Freigabe nach main: nur was Daniel freigibt; auf main die Seiten neu bauen, dann committen.
 - Behoben: Handy-Menü war nur 56 px hoch und die Seite auf dem Handy doppelt so breit
