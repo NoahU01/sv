@@ -2,8 +2,8 @@
 import json, os
 from string import Template
 
-WORKDIR = "/sessions/ecstatic-nice-gauss/mnt/outputs/_work"
-SITEDIR = os.path.join(WORKDIR, "site")
+WORKDIR = os.path.dirname(os.path.abspath(__file__))
+SITEDIR = os.path.abspath(os.path.join(WORKDIR, "..", ".."))
 os.makedirs(SITEDIR, exist_ok=True)
 
 with open(os.path.join(WORKDIR, "assets_b64.json")) as f:
@@ -52,6 +52,51 @@ PAGES = [
     ("community.html", "Community-Austausch"),
 ]
 
+# ---- Menüpunkt „/ Entwicklung /“ ----
+# Nur in der Entwicklungsumgebung: lokal (file://, localhost) und auf den
+# Vercel-Vorschauen (svakademie-git-…, svakademie-<hash>-…). Auf der Live-Adresse
+# entfernt das Inline-Skript den Menüpunkt, bevor er gezeichnet wird.
+DEV_UNTERSEITEN = [
+    ("ueber-uns.html", "ÜU", "Über uns", "Antrieb, Handlungsfelder, Team", []),
+    ("quickcheck.html", "QC", "Quick-Check", "Bedarfsklärung · Varianten", [
+        ("quickcheck-klaerung.html", "Q1", "Klärung Weiterbildungsbedarf", "Variante für mich persönlich"),
+        ("quickcheck-aufbau.html", "Q2", "Aufbau Bildungsthema", "Variante für mein Team"),
+        ("quickcheck-budget.html", "Q3", "Optimale Weiterbildung", "Variante für meine Vertriebseinheit"),
+    ]),
+    ("portal.html", "KI", "KI-Lernassistent", "Vorschau Portal 24/7"),
+    ("community.html", "CA", "Community-Austausch", "Anmeldung & Agenda"),
+]
+DEV_ARCHIV = []  # (href, tag, titel, unterzeile)
+
+def _dev_link(href, tag, title, sub, extra=""):
+    return ('<a href="{0}" class="dev-dd-link{4}"><span class="dev-dd-tag">{1}</span>'
+            '<span class="dev-dd-txt"><b>{2}</b><small>{3}</small></span></a>').format(href, tag, title, sub, extra)
+
+def dev_dropdown_html(extra_class=""):
+    items = []
+    for entry in DEV_UNTERSEITEN:
+        href, tag, title, sub = entry[:4]
+        children = entry[4] if len(entry) > 4 else []
+        if children:
+            fly = "".join(_dev_link(*c) for c in children)
+            items.append('<div class="dev-dd-sub">' + _dev_link(href, tag, title, sub, " dev-dd-link--parent")
+                         + '<div class="dev-dd-flyout"><div class="dev-dd-flyout-panel"><p class="dev-dd-group">Die Varianten</p>'
+                         + fly + '</div></div></div>')
+        else:
+            items.append(_dev_link(href, tag, title, sub))
+    archiv = "".join(_dev_link(*a) for a in DEV_ARCHIV) or '<p class="dev-dd-empty">Noch keine archivierten Stände.</p>'
+    return ('<div class="dev-dd' + extra_class + '" data-dev-dd>'
+            '<button class="dev-dd-toggle" type="button" aria-expanded="false"><span class="dev-dd-long">/ Entwicklung /</span>'
+            '<span class="dev-dd-short" aria-hidden="true">/ Entw. /</span>'
+            '<svg class="dev-dd-chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>'
+            '<div class="dev-dd-panel">'
+            '<p class="dev-dd-note"><b>Nur in der Entwicklungsumgebung sichtbar</b>Dieser Menüpunkt ist in der Live-Version nicht enthalten.</p>'
+            '<p class="dev-dd-group">Unterseiten</p>' + "".join(items) +
+            '<p class="dev-dd-group dev-dd-group--sub">Archiv</p>' + archiv +
+            '</div></div>'
+            "<script>(function(){var h=location.hostname,d=document.currentScript.previousElementSibling;"
+            "if(!(location.protocol==='file:'||h==='localhost'||h==='127.0.0.1'||/^svakademie-(git-|[a-z0-9]{9}-)/.test(h)))d.remove();})();</script>")
+
 def nav_html(active):
     links = []
     for href, label in PAGES:
@@ -70,6 +115,7 @@ def nav_html(active):
       <nav class="nav" id="mainNav">
         ''' + nav_inner + '''
         <a href="''' + kontakt_href + '''" class="nav-kontakt-btn">Kontakt</a>
+        ''' + dev_dropdown_html() + '''
       </nav>
       <div class="nav-cta">
         <a href="portal.html" class="btn btn-primary btn-sm">KI-Lernassistent entdecken</a>
@@ -82,10 +128,11 @@ def nav_html(active):
 def minimal_header_html():
     return '''
   <header class="site-header">
-    <div class="wrap" style="justify-content:center;">
+    <div class="wrap" style="justify-content:center; position:relative;">
       <a href="index.html" class="brand">
         <img src="''' + LOGO_COLOR_URI + '''" alt="SV Akademie Logo" />
       </a>
+      ''' + dev_dropdown_html(" dev-dd--corner") + '''
     </div>
   </header>
 '''

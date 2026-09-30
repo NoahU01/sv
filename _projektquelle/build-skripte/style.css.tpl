@@ -99,9 +99,13 @@ img { max-width: 100%; display:block; }
 
 .site-header {
   position: sticky; top: 0; z-index: 500;
-  background: rgba(255,255,255,.92); backdrop-filter: blur(10px);
+  background: rgba(255,255,255,.92);
   border-bottom: 1px solid var(--grau2);
 }
+/* Der Weichzeichner sitzt auf einer eigenen Ebene: direkt am Header würde
+   backdrop-filter den Header zum Bezugsrahmen des fixierten Handy-Menüs machen
+   (Menü nur 56 px hoch, Seite auf dem Handy doppelt so breit). */
+.site-header::before { content:""; position:absolute; inset:0; z-index:-1; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
 .site-header .wrap { display:flex; align-items:center; justify-content:space-between; min-height: 96px; padding-top:8px; padding-bottom:8px; }
 .brand { display:flex; align-items:center; gap:12px; flex-shrink:0; }
 .brand img { height: 76px; width:auto; }
@@ -121,12 +125,69 @@ img { max-width: 100%; display:block; }
 .burger { display:none; background:none; border:none; cursor:pointer; padding:8px; }
 .burger span { display:block; width:26px; height:3px; background:var(--dunkelgrau2); margin:5px 0; border-radius:2px; }
 
-@media (max-width: 900px) {
+/* Burger-Menü unter 1280 px: darüber passt die volle Leiste samt „/ Entwicklung /“ */
+@media (max-width: 1279px) {
   .nav { position:fixed; inset: 84px 0 0 0; background:#fff; flex-direction:column; align-items:flex-start;
     padding: 28px; gap:20px; transform: translateX(100%); transition: transform .25s ease; overflow:auto; }
   .nav.open { transform: translateX(0); }
   .burger { display:block; }
   .nav-cta .btn-outline { display:none; }
+}
+/* Logo, Button und Burger passen auf dem Handy nicht nebeneinander; der Button steht im Menü und im Aufmacher */
+@media (max-width: 480px) { .nav-cta .btn-primary { display:none; } }
+
+/* ---- Menüpunkt „/ Entwicklung /“ – nur in der Entwicklungsumgebung (Aufbau wie empiria) ---- */
+.dev-dd { position:relative; display:inline-flex; align-items:center; }
+.dev-dd-toggle { display:inline-flex; align-items:center; gap:.35rem; font-family:inherit; font-size:.95rem; font-weight:400; line-height:1.4; color:var(--grau6); background:none; border:0; padding:6px 0; cursor:pointer; white-space:nowrap; transition:color .18s ease; }
+.dev-dd-toggle:hover, .dev-dd.is-open .dev-dd-toggle { color:var(--dunkelgrau2); }
+.dev-dd-short { display:none; }
+.dev-dd-chev { width:12px; height:12px; transition:transform .2s ease; }
+.dev-dd.is-open .dev-dd-chev { transform:rotate(180deg); }
+.dev-dd-panel { position:absolute; top:calc(100% + 18px); right:-14px; width:390px; padding:12px; background:#fff; border:1px solid var(--hellgrau); border-radius:18px; box-shadow:0 20px 50px rgba(0,0,0,.14); opacity:0; visibility:hidden; transform:translateY(6px); transition:opacity .16s ease, transform .16s ease, visibility .16s ease; z-index:600; text-align:left; }
+.dev-dd-panel::before { content:""; position:absolute; left:0; right:0; top:-20px; height:20px; }
+.dev-dd.is-open .dev-dd-panel { opacity:1; visibility:visible; transform:none; }
+.dev-dd-note { margin:0 0 14px; padding:11px 13px; background:#fff400; color:#1a1817; border-radius:10px; font-size:12px; line-height:1.45; }
+.dev-dd-note b { display:block; font-size:13px; font-weight:600; margin-bottom:2px; }
+.dev-dd-group { margin:4px 8px 8px; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--grau6); font-weight:600; }
+.dev-dd-group--sub { margin-top:14px; padding-top:12px; border-top:1px solid var(--hellgrau); }
+.dev-dd a.dev-dd-link, .nav .dev-dd a.dev-dd-link { display:flex; align-items:center; gap:12px; padding:9px 8px; border-radius:10px; border-bottom:0; color:var(--dunkelgrau2); font-weight:400; font-size:inherit; white-space:normal; text-decoration:none; }
+.dev-dd a.dev-dd-link:hover, .dev-dd a.dev-dd-link.is-current, .nav .dev-dd a.dev-dd-link:hover { background:var(--hellgrau); color:var(--dunkelgrau2); }
+.dev-dd-tag { flex:0 0 32px; height:32px; display:flex; align-items:center; justify-content:center; border-radius:8px; background:var(--dunkelgrau2); color:#fff; font-weight:600; font-size:12px; }
+.dev-dd-txt { display:flex; flex-direction:column; line-height:1.3; min-width:0; }
+.dev-dd-txt b { font-weight:500; font-size:14px; }
+.dev-dd-txt small { font-size:12px; color:var(--grau6); margin-top:1px; }
+.dev-dd-empty { margin:0 8px 4px; padding:6px 0; font-size:13px; color:var(--grau6); }
+.dev-dd-sub { position:relative; }
+.dev-dd a.dev-dd-link--parent::after { content:""; width:6px; height:6px; margin-left:auto; flex:0 0 auto; border-right:1.5px solid currentColor; border-bottom:1.5px solid currentColor; transform:rotate(-45deg); opacity:.45; }
+.dev-dd-sub:hover > a.dev-dd-link--parent, .dev-dd-sub:focus-within > a.dev-dd-link--parent { background:var(--hellgrau); }
+.dev-dd-flyout { position:absolute; right:100%; top:-10px; padding-right:10px; opacity:0; visibility:hidden; transition:opacity .16s ease, visibility .16s ease; z-index:601; }
+.dev-dd-sub:hover > .dev-dd-flyout, .dev-dd-sub:focus-within > .dev-dd-flyout { opacity:1; visibility:visible; }
+.dev-dd-flyout-panel { width:262px; padding:10px; background:#fff; border:1px solid var(--hellgrau); border-radius:14px; box-shadow:0 20px 50px rgba(0,0,0,.14); }
+.dev-dd-flyout-panel .dev-dd-group { margin:2px 8px 6px; }
+.dev-dd--corner { position:absolute; right:24px; top:0; bottom:0; }
+.dev-dd--corner .dev-dd-panel { top:calc(100% - 4px); }
+@media (min-width: 1280px) {
+  .nav .dev-dd { margin-right:10px; }
+}
+@media (min-width: 1280px) and (max-width: 1400px) {
+  .nav { gap:20px; }
+}
+@media (max-width: 1279px) {
+  .nav .dev-dd { display:block; width:100%; }
+  .nav .dev-dd-toggle { display:flex; width:100%; justify-content:space-between; font-size:.95rem; }
+  .nav .dev-dd-flyout { position:static; opacity:1; visibility:visible; padding:0; }
+  .nav .dev-dd-flyout-panel { width:auto; padding:0 0 0 12px; margin:2px 0 6px 20px; background:none; border:0; border-left:2px solid var(--hellgrau); border-radius:0; box-shadow:none; }
+  .nav .dev-dd a.dev-dd-link--parent::after { display:none; }
+  .nav .dev-dd-panel { position:static; width:auto; display:none; opacity:1; visibility:visible; transform:none; box-shadow:none; border:0; border-left:2px solid var(--hellgrau); border-radius:0; margin:10px 0 6px; padding:0 0 0 12px; }
+  .nav .dev-dd-panel::before { display:none; }
+  .nav .dev-dd.is-open .dev-dd-panel { display:block; }
+}
+@media (max-width: 900px) {
+  .dev-dd--corner { right:16px; }
+  .dev-dd--corner .dev-dd-flyout { position:static; opacity:1; visibility:visible; padding:0; }
+  .dev-dd--corner .dev-dd-flyout-panel { width:auto; padding:0 0 0 12px; margin:2px 0 6px 20px; background:none; border:0; border-left:2px solid var(--hellgrau); border-radius:0; box-shadow:none; }
+  .dev-dd--corner a.dev-dd-link--parent::after { display:none; }
+  .dev-dd--corner .dev-dd-panel { position:fixed; top:96px; left:16px; right:16px; width:auto; max-height:calc(100vh - 112px); overflow:auto; }
 }
 
 .site-footer { background: var(--dunkelgrau2); color: #fff; padding: 56px 0 28px; }
@@ -378,6 +439,7 @@ img { max-width: 100%; display:block; }
 .simple-table th { text-align:left; font-family: var(--font-head); font-size:.78rem; text-transform:uppercase; letter-spacing:.05em;
   color:var(--dunkelgrau1); padding: 10px 14px; border-bottom:2px solid var(--grau3); }
 .simple-table td { padding: 14px 14px; border-bottom:1px solid var(--grau2); font-size:.92rem; }
+@media (max-width:480px) { .simple-table th, .simple-table td { padding-left:8px; padding-right:8px; } }
 
 .badge-check { color: var(--dunkelgruen); font-weight:700; }
 

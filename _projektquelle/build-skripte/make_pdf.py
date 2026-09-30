@@ -6,7 +6,7 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.utils import ImageReader
 import io, base64, json, os
 
-WORKDIR = "/sessions/ecstatic-nice-gauss/mnt/outputs/_work"
+WORKDIR = os.path.dirname(os.path.abspath(__file__))
 with open(os.path.join(WORKDIR, "assets_b64.json")) as f:
     B64 = json.load(f)
 

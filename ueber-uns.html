@@ -107,9 +107,13 @@ img { max-width: 100%; display:block; }
 
 .site-header {
   position: sticky; top: 0; z-index: 500;
-  background: rgba(255,255,255,.92); backdrop-filter: blur(10px);
+  background: rgba(255,255,255,.92);
   border-bottom: 1px solid var(--grau2);
 }
+/* Der Weichzeichner sitzt auf einer eigenen Ebene: direkt am Header würde
+   backdrop-filter den Header zum Bezugsrahmen des fixierten Handy-Menüs machen
+   (Menü nur 56 px hoch, Seite auf dem Handy doppelt so breit). */
+.site-header::before { content:""; position:absolute; inset:0; z-index:-1; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
 .site-header .wrap { display:flex; align-items:center; justify-content:space-between; min-height: 96px; padding-top:8px; padding-bottom:8px; }
 .brand { display:flex; align-items:center; gap:12px; flex-shrink:0; }
 .brand img { height: 76px; width:auto; }
@@ -129,12 +133,69 @@ img { max-width: 100%; display:block; }
 .burger { display:none; background:none; border:none; cursor:pointer; padding:8px; }
 .burger span { display:block; width:26px; height:3px; background:var(--dunkelgrau2); margin:5px 0; border-radius:2px; }
 
-@media (max-width: 900px) {
+/* Burger-Menü unter 1280 px: darüber passt die volle Leiste samt „/ Entwicklung /“ */
+@media (max-width: 1279px) {
   .nav { position:fixed; inset: 84px 0 0 0; background:#fff; flex-direction:column; align-items:flex-start;
     padding: 28px; gap:20px; transform: translateX(100%); transition: transform .25s ease; overflow:auto; }
   .nav.open { transform: translateX(0); }
   .burger { display:block; }
   .nav-cta .btn-outline { display:none; }
+}
+/* Logo, Button und Burger passen auf dem Handy nicht nebeneinander; der Button steht im Menü und im Aufmacher */
+@media (max-width: 480px) { .nav-cta .btn-primary { display:none; } }
+
+/* ---- Menüpunkt „/ Entwicklung /“ – nur in der Entwicklungsumgebung (Aufbau wie empiria) ---- */
+.dev-dd { position:relative; display:inline-flex; align-items:center; }
+.dev-dd-toggle { display:inline-flex; align-items:center; gap:.35rem; font-family:inherit; font-size:.95rem; font-weight:400; line-height:1.4; color:var(--grau6); background:none; border:0; padding:6px 0; cursor:pointer; white-space:nowrap; transition:color .18s ease; }
+.dev-dd-toggle:hover, .dev-dd.is-open .dev-dd-toggle { color:var(--dunkelgrau2); }
+.dev-dd-short { display:none; }
+.dev-dd-chev { width:12px; height:12px; transition:transform .2s ease; }
+.dev-dd.is-open .dev-dd-chev { transform:rotate(180deg); }
+.dev-dd-panel { position:absolute; top:calc(100% + 18px); right:-14px; width:390px; padding:12px; background:#fff; border:1px solid var(--hellgrau); border-radius:18px; box-shadow:0 20px 50px rgba(0,0,0,.14); opacity:0; visibility:hidden; transform:translateY(6px); transition:opacity .16s ease, transform .16s ease, visibility .16s ease; z-index:600; text-align:left; }
+.dev-dd-panel::before { content:""; position:absolute; left:0; right:0; top:-20px; height:20px; }
+.dev-dd.is-open .dev-dd-panel { opacity:1; visibility:visible; transform:none; }
+.dev-dd-note { margin:0 0 14px; padding:11px 13px; background:#fff400; color:#1a1817; border-radius:10px; font-size:12px; line-height:1.45; }
+.dev-dd-note b { display:block; font-size:13px; font-weight:600; margin-bottom:2px; }
+.dev-dd-group { margin:4px 8px 8px; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--grau6); font-weight:600; }
+.dev-dd-group--sub { margin-top:14px; padding-top:12px; border-top:1px solid var(--hellgrau); }
+.dev-dd a.dev-dd-link, .nav .dev-dd a.dev-dd-link { display:flex; align-items:center; gap:12px; padding:9px 8px; border-radius:10px; border-bottom:0; color:var(--dunkelgrau2); font-weight:400; font-size:inherit; white-space:normal; text-decoration:none; }
+.dev-dd a.dev-dd-link:hover, .dev-dd a.dev-dd-link.is-current, .nav .dev-dd a.dev-dd-link:hover { background:var(--hellgrau); color:var(--dunkelgrau2); }
+.dev-dd-tag { flex:0 0 32px; height:32px; display:flex; align-items:center; justify-content:center; border-radius:8px; background:var(--dunkelgrau2); color:#fff; font-weight:600; font-size:12px; }
+.dev-dd-txt { display:flex; flex-direction:column; line-height:1.3; min-width:0; }
+.dev-dd-txt b { font-weight:500; font-size:14px; }
+.dev-dd-txt small { font-size:12px; color:var(--grau6); margin-top:1px; }
+.dev-dd-empty { margin:0 8px 4px; padding:6px 0; font-size:13px; color:var(--grau6); }
+.dev-dd-sub { position:relative; }
+.dev-dd a.dev-dd-link--parent::after { content:""; width:6px; height:6px; margin-left:auto; flex:0 0 auto; border-right:1.5px solid currentColor; border-bottom:1.5px solid currentColor; transform:rotate(-45deg); opacity:.45; }
+.dev-dd-sub:hover > a.dev-dd-link--parent, .dev-dd-sub:focus-within > a.dev-dd-link--parent { background:var(--hellgrau); }
+.dev-dd-flyout { position:absolute; right:100%; top:-10px; padding-right:10px; opacity:0; visibility:hidden; transition:opacity .16s ease, visibility .16s ease; z-index:601; }
+.dev-dd-sub:hover > .dev-dd-flyout, .dev-dd-sub:focus-within > .dev-dd-flyout { opacity:1; visibility:visible; }
+.dev-dd-flyout-panel { width:262px; padding:10px; background:#fff; border:1px solid var(--hellgrau); border-radius:14px; box-shadow:0 20px 50px rgba(0,0,0,.14); }
+.dev-dd-flyout-panel .dev-dd-group { margin:2px 8px 6px; }
+.dev-dd--corner { position:absolute; right:24px; top:0; bottom:0; }
+.dev-dd--corner .dev-dd-panel { top:calc(100% - 4px); }
+@media (min-width: 1280px) {
+  .nav .dev-dd { margin-right:10px; }
+}
+@media (min-width: 1280px) and (max-width: 1400px) {
+  .nav { gap:20px; }
+}
+@media (max-width: 1279px) {
+  .nav .dev-dd { display:block; width:100%; }
+  .nav .dev-dd-toggle { display:flex; width:100%; justify-content:space-between; font-size:.95rem; }
+  .nav .dev-dd-flyout { position:static; opacity:1; visibility:visible; padding:0; }
+  .nav .dev-dd-flyout-panel { width:auto; padding:0 0 0 12px; margin:2px 0 6px 20px; background:none; border:0; border-left:2px solid var(--hellgrau); border-radius:0; box-shadow:none; }
+  .nav .dev-dd a.dev-dd-link--parent::after { display:none; }
+  .nav .dev-dd-panel { position:static; width:auto; display:none; opacity:1; visibility:visible; transform:none; box-shadow:none; border:0; border-left:2px solid var(--hellgrau); border-radius:0; margin:10px 0 6px; padding:0 0 0 12px; }
+  .nav .dev-dd-panel::before { display:none; }
+  .nav .dev-dd.is-open .dev-dd-panel { display:block; }
+}
+@media (max-width: 900px) {
+  .dev-dd--corner { right:16px; }
+  .dev-dd--corner .dev-dd-flyout { position:static; opacity:1; visibility:visible; padding:0; }
+  .dev-dd--corner .dev-dd-flyout-panel { width:auto; padding:0 0 0 12px; margin:2px 0 6px 20px; background:none; border:0; border-left:2px solid var(--hellgrau); border-radius:0; box-shadow:none; }
+  .dev-dd--corner a.dev-dd-link--parent::after { display:none; }
+  .dev-dd--corner .dev-dd-panel { position:fixed; top:96px; left:16px; right:16px; width:auto; max-height:calc(100vh - 112px); overflow:auto; }
 }
 
 .site-footer { background: var(--dunkelgrau2); color: #fff; padding: 56px 0 28px; }
@@ -386,6 +447,7 @@ img { max-width: 100%; display:block; }
 .simple-table th { text-align:left; font-family: var(--font-head); font-size:.78rem; text-transform:uppercase; letter-spacing:.05em;
   color:var(--dunkelgrau1); padding: 10px 14px; border-bottom:2px solid var(--grau3); }
 .simple-table td { padding: 14px 14px; border-bottom:1px solid var(--grau2); font-size:.92rem; }
+@media (max-width:480px) { .simple-table th, .simple-table td { padding-left:8px; padding-right:8px; } }
 
 .badge-check { color: var(--dunkelgruen); font-weight:700; }
 
@@ -499,6 +561,7 @@ img { max-width: 100%; display:block; }
       <a href="portal.html" class="">KI-Lernassistent</a>
       <a href="community.html" class="">Community-Austausch</a>
         <a href="index.html#kontakt" class="nav-kontakt-btn">Kontakt</a>
+        <div class="dev-dd" data-dev-dd><button class="dev-dd-toggle" type="button" aria-expanded="false"><span class="dev-dd-long">/ Entwicklung /</span><span class="dev-dd-short" aria-hidden="true">/ Entw. /</span><svg class="dev-dd-chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="dev-dd-panel"><p class="dev-dd-note"><b>Nur in der Entwicklungsumgebung sichtbar</b>Dieser Menüpunkt ist in der Live-Version nicht enthalten.</p><p class="dev-dd-group">Unterseiten</p><a href="ueber-uns.html" class="dev-dd-link"><span class="dev-dd-tag">ÜU</span><span class="dev-dd-txt"><b>Über uns</b><small>Antrieb, Handlungsfelder, Team</small></span></a><div class="dev-dd-sub"><a href="quickcheck.html" class="dev-dd-link dev-dd-link--parent"><span class="dev-dd-tag">QC</span><span class="dev-dd-txt"><b>Quick-Check</b><small>Bedarfsklärung · Varianten</small></span></a><div class="dev-dd-flyout"><div class="dev-dd-flyout-panel"><p class="dev-dd-group">Die Varianten</p><a href="quickcheck-klaerung.html" class="dev-dd-link"><span class="dev-dd-tag">Q1</span><span class="dev-dd-txt"><b>Klärung Weiterbildungsbedarf</b><small>Variante für mich persönlich</small></span></a><a href="quickcheck-aufbau.html" class="dev-dd-link"><span class="dev-dd-tag">Q2</span><span class="dev-dd-txt"><b>Aufbau Bildungsthema</b><small>Variante für mein Team</small></span></a><a href="quickcheck-budget.html" class="dev-dd-link"><span class="dev-dd-tag">Q3</span><span class="dev-dd-txt"><b>Optimale Weiterbildung</b><small>Variante für meine Vertriebseinheit</small></span></a></div></div></div><a href="portal.html" class="dev-dd-link"><span class="dev-dd-tag">KI</span><span class="dev-dd-txt"><b>KI-Lernassistent</b><small>Vorschau Portal 24/7</small></span></a><a href="community.html" class="dev-dd-link"><span class="dev-dd-tag">CA</span><span class="dev-dd-txt"><b>Community-Austausch</b><small>Anmeldung & Agenda</small></span></a><p class="dev-dd-group dev-dd-group--sub">Archiv</p><p class="dev-dd-empty">Noch keine archivierten Stände.</p></div></div><script>(function(){var h=location.hostname,d=document.currentScript.previousElementSibling;if(!(location.protocol==='file:'||h==='localhost'||h==='127.0.0.1'||/^svakademie-(git-|[a-z0-9]{9}-)/.test(h)))d.remove();})();</script>
       </nav>
       <div class="nav-cta">
         <a href="portal.html" class="btn btn-primary btn-sm">KI-Lernassistent entdecken</a>
@@ -1037,6 +1100,22 @@ img { max-width: 100%; display:block; }
       a.addEventListener('click', function(){ nav.classList.remove('open'); });
     });
   }
+})();
+
+// ---- Menüpunkt „/ Entwicklung /“ (Aufbau wie empiria) ----
+(function(){
+  var here = location.href.split('#')[0].split('?')[0];
+  document.querySelectorAll('[data-dev-dd]').forEach(function(d){
+    var b = d.querySelector('.dev-dd-toggle'), t;
+    function desk(){ return d.classList.contains('dev-dd--corner') ? window.innerWidth > 900 : window.innerWidth >= 1280; }
+    function set(o){ d.classList.toggle('is-open', o); b.setAttribute('aria-expanded', String(o)); }
+    b.addEventListener('click', function(e){ e.stopPropagation(); set(desk() && d.matches(':hover') ? true : !d.classList.contains('is-open')); });
+    d.addEventListener('mouseenter', function(){ if (desk()) { clearTimeout(t); set(true); } });
+    d.addEventListener('mouseleave', function(){ if (desk()) { t = setTimeout(function(){ set(false); }, 180); } });
+    document.addEventListener('click', function(e){ if (!d.contains(e.target)) set(false); });
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape') set(false); });
+    d.querySelectorAll('.dev-dd-link').forEach(function(a){ if (a.href.split('#')[0] === here) a.classList.add('is-current'); });
+  });
 })();
 
 // ---- Scroll reveal ----
