@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="E-Learning-Monitor--Streamline-Ultimate" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 250 250">
+  <!-- Generator: Adobe Illustrator 29.8.3, SVG Export Plug-In . SVG Version: 2.1.1 Build 3)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: none;
+        stroke: #000;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 10px;
+      }
+    </style>
+  </defs>
+  <path class="st0" d="M27.5,12.51h195s15,0,15,15v150s0,15-15,15H27.5s-15,0-15-15V27.51s0-15,15-15"/>
+  <path class="st0" d="M162.5,237.51h-75l7.5-45h60l7.5,45Z"/>
+  <path class="st0" d="M65,237.51h120"/>
+  <path class="st0" d="M192.5,80.01v22.5"/>
+  <path class="st0" d="M162.5,93.35v39.16c-10.22,9.41-23.54,14.74-37.43,15-13.93-.28-27.28-5.61-37.57-15v-39.16"/>
+  <path class="st0" d="M57.5,80.01l67.5,30,67.5-30-67.5-30-67.5,30Z"/>
+</svg>
