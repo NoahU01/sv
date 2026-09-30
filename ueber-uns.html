@@ -115,9 +115,10 @@ img { max-width: 100%; display:block; }
    (Menü nur 56 px hoch, Seite auf dem Handy doppelt so breit). */
 .site-header::before { content:""; position:absolute; inset:0; z-index:-1; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
 .site-header .wrap { display:flex; align-items:center; justify-content:space-between; min-height: 96px; padding-top:8px; padding-bottom:8px; }
-.brand { display:flex; align-items:center; gap:12px; flex-shrink:0; }
+.brand { display:flex; align-items:center; gap:12px; flex-shrink:0; margin-right:32px; }
 .brand img { height: 76px; width:auto; }
-.nav { display:flex; align-items:center; gap: 26px; }
+/* Logo links, Menüpunkte rechtsbündig bis an den CTA-Button */
+.nav { display:flex; align-items:center; gap: 26px; margin-left:auto; }
 .nav a { color: var(--dunkelgrau2); font-weight:600; font-size:.95rem; padding: 6px 2px; border-bottom: 2px solid transparent; white-space:nowrap; }
 .nav a:hover, .nav a.active { color: var(--rot); border-color: var(--rot); }
 .nav a.nav-kontakt-btn {
@@ -129,7 +130,7 @@ img { max-width: 100%; display:block; }
   cursor:pointer; transition: all .18s ease; white-space:nowrap;
 }
 .nav a.nav-kontakt-btn:hover { border-color:var(--rot); color:var(--rot); }
-.nav-cta { display:flex; align-items:center; gap:14px; flex-shrink:0; }
+.nav-cta { display:flex; align-items:center; gap:14px; flex-shrink:0; margin-left:26px; }
 .burger { display:none; background:none; border:none; cursor:pointer; padding:8px; }
 .burger span { display:block; width:26px; height:3px; background:var(--dunkelgrau2); margin:5px 0; border-radius:2px; }
 
@@ -175,10 +176,17 @@ img { max-width: 100%; display:block; }
 .dev-dd--corner { position:absolute; right:24px; top:0; bottom:0; }
 .dev-dd--corner .dev-dd-panel { top:calc(100% - 4px); }
 @media (min-width: 1280px) {
-  .nav .dev-dd { margin-right:10px; }
+  /* Entwicklung steht links vor den Menüpunkten, damit Kontakt direkt am CTA bleibt */
+  .nav .dev-dd { order:-1; margin-right:6px; }
+}
+/* Auf dem Desktop immer die Kurzform – die Langform passt nicht neben Logo und Menüpunkte */
+@media (min-width: 1280px) {
+  .nav .dev-dd-long { display:none; }
+  .nav .dev-dd-short { display:inline; }
 }
 @media (min-width: 1280px) and (max-width: 1400px) {
   .nav { gap:20px; }
+  .nav-cta { margin-left:20px; }
 }
 @media (max-width: 1279px) {
   .nav .dev-dd { display:block; width:100%; }
