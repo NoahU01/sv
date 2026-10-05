@@ -165,6 +165,7 @@ img { max-width: 100%; display:block; }
 .dev-dd-sub:hover > .dev-dd-flyout, .dev-dd-sub:focus-within > .dev-dd-flyout { opacity:1; visibility:visible; }
 .dev-dd-flyout-panel { width:262px; padding:10px; background:#fff; border:1px solid var(--hellgrau); border-radius:14px; box-shadow:0 20px 50px rgba(0,0,0,.14); }
 .dev-dd-flyout-panel .dev-dd-group { margin:2px 8px 6px; }
+.dev-dd-flyout.nach-rechts { right:auto; left:100%; padding-right:0; padding-left:10px; }
 .dev-dd--corner { position:absolute; right:24px; top:0; bottom:0; }
 .dev-dd--corner .dev-dd-panel { top:calc(100% - 4px); }
 /* Auf dem Desktop immer die Kurzform – die Langform passt nicht neben Logo und Menüpunkte */

@@ -23,6 +23,17 @@
     document.addEventListener('click', function(e){ if (!d.contains(e.target)) set(false); });
     document.addEventListener('keydown', function(e){ if (e.key === 'Escape') set(false); });
     d.querySelectorAll('.dev-dd-link').forEach(function(a){ if (a.href.split('#')[0] === here) a.classList.add('is-current'); });
+    // Flyouts öffnen nach links; reicht dort der Platz nicht (tiefe Ebenen,
+    // schmale Fenster), klappen sie nach rechts auf.
+    d.querySelectorAll('.dev-dd-sub').forEach(function(sub){
+      var f = sub.querySelector(':scope > .dev-dd-flyout');
+      if (!f) return;
+      sub.addEventListener('mouseenter', function(){
+        if (!desk()) return;
+        f.classList.remove('nach-rechts');
+        if (f.getBoundingClientRect().left < 8) f.classList.add('nach-rechts');
+      });
+    });
   });
 })();
 

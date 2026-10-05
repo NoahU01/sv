@@ -71,8 +71,23 @@ DEV_MENU = _git_branch() == "daniel"
 # (href, tag, titel, unterzeile[, [(href, tag, titel, unterzeile), …] für ein Flyout])
 DEV_UNTERSEITEN = []
 # Weitere Kategorien unter „Unterseiten“: (Überschrift, [(href, tag, titel, unterzeile), …])
+# Ein Eintrag kann Unterpunkte tragen: (href, tag, titel, unterzeile, gruppe, [Unterpunkte])
+# → Flyout, beliebig tief. Die SV-Akademie-Seiten liegen 1:1 aus dem empiria-Repo
+# (Branch Daniel, site/projekte/) in entwicklung-empiria/.
+_EMP = "entwicklung-empiria/projekte/"
 DEV_KATEGORIEN = [
     ("Strategie", [
+        (_EMP + "sv-akademie.html", "SV", "SV Akademie", "Steuerungsseite · drei Module", "Die Module", [
+            (_EMP + "sv-selbstverstaendnis.html", "1", "Selbstverständnis", "Wofür stehen wir?"),
+            (_EMP + "sv-vision.html", "2", "Vision", "Wie wollen wir wahrgenommen werden?"),
+            (_EMP + "sv-strategie.html", "3", "Strategie", "Wie kommen wir dorthin?", "Darunter", [
+                (_EMP + "sv-strategie-ist.html", "IS", "Ist-Situation", "SWOT-Logik und was einfließt"),
+                (_EMP + "sv-strategie-stossrichtungen.html", "ST", "Stoßrichtungen", "Herkunft, Auswahl, Nachweis"),
+                (_EMP + "sv-meilensteine.html", "MS", "Meilensteinplan", "Drei Stränge · fein, hell, dunkel"),
+                (_EMP + "sv-abstimmung-hal.html", "AG", "Agenda Vision & Strategie", "Workshop mit dem Hauptabteilungsleiter"),
+            ]),
+            (_EMP + "sv-projektplanung.html", "PP", "Projektplanung", "Termine, Agenden und der Meilensteinplan"),
+        ]),
         ("entwicklung-meilensteine-fein.html", "MS", "Meilensteine", "Transformation der SV Akademie · fein, dunkel, hell"),
     ]),
 ]
@@ -81,6 +96,15 @@ DEV_ARCHIV = []  # (href, tag, titel, unterzeile)
 def _dev_link(href, tag, title, sub, extra=""):
     return ('<a href="{0}" class="dev-dd-link{4}"><span class="dev-dd-tag">{1}</span>'
             '<span class="dev-dd-txt"><b>{2}</b><small>{3}</small></span></a>').format(href, tag, title, sub, extra)
+
+def _dev_eintrag(e):
+    # Eintrag mit Unterpunkten wird zum Flyout – rekursiv, also beliebig tief
+    if len(e) > 4:
+        href, tag, title, sub, gruppe, kinder = e
+        return ('<div class="dev-dd-sub">' + _dev_link(href, tag, title, sub, " dev-dd-link--parent")
+                + '<div class="dev-dd-flyout"><div class="dev-dd-flyout-panel"><p class="dev-dd-group">' + gruppe + '</p>'
+                + "".join(_dev_eintrag(k) for k in kinder) + '</div></div></div>')
+    return _dev_link(*e)
 
 def dev_dropdown_html(extra_class=""):
     if not DEV_MENU:
@@ -104,7 +128,7 @@ def dev_dropdown_html(extra_class=""):
             '<div class="dev-dd-panel">'
             '<p class="dev-dd-note"><b>Nur in der Entwicklungsumgebung sichtbar</b>Dieser Menüpunkt ist in der Live-Version nicht enthalten.</p>'
             '<p class="dev-dd-group">Unterseiten</p>' + ("".join(items) or '<p class="dev-dd-empty">Noch keine neuen Unterseiten.</p>') +
-            "".join('<p class="dev-dd-group dev-dd-group--sub">' + name + '</p>' + "".join(_dev_link(*l) for l in links)
+            "".join('<p class="dev-dd-group dev-dd-group--sub">' + name + '</p>' + "".join(_dev_eintrag(l) for l in links)
                     for name, links in DEV_KATEGORIEN) +
             '<p class="dev-dd-group dev-dd-group--sub">Archiv</p>' + archiv +
             '</div></div>'

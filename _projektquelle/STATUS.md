@@ -92,3 +92,12 @@ falls in einem neuen Chat weitergearbeitet wird.
 - Freigabe nach main: nur was Daniel freigibt; auf main die Seiten neu bauen, dann committen.
 - Behoben: Handy-Menü war nur 56 px hoch und die Seite auf dem Handy doppelt so breit
   (`backdrop-filter` am Header). Burger-Menü jetzt unter 1280 px (vorher lief die Leiste ab ~1100 px aus dem Bild).
+
+## SV Akademie aus dem empiria-Projekt (Stand 05.10.2026, nur Branch daniel)
+- Ordner `entwicklung-empiria/`: die Seiten der SV Akademie 1:1 aus dem empiria-Repo
+  (NoahU01/empiria, Branch Daniel, site/projekte/, Stand 09c6016) – Layout, empiria-Logo, Kopf und Fuß unverändert.
+  Einzige Anpassung: absolute Pfade (/styles.css, /assets/…) auf relative umgestellt.
+  Links in die übrige empiria-Seite (Leistungen, Startseite usw.) führen hier ins Leere.
+- Menü „/ Entwicklung /“ → Strategie: SV Akademie mit Ebene 2 (Selbstverständnis, Vision, Strategie,
+  Projektplanung) und Ebene 3 unter Strategie (Ist-Situation, Stoßrichtungen, Meilensteinplan, Agenda).
+  Gepflegt in `build_common.py` (DEV_KATEGORIEN, beliebig tief).
