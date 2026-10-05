@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-"""Seiten unter „/ Entwicklung /“ → Kategorie „Strategie“.
+"""Seiten unter „/ Entwicklung /“ → Kategorie „Strategie“ (Meilensteine).
 
-- entwicklung-strategie-zielbild.html   Platzhalter
 - entwicklung-meilensteine-fein.html    Liniennetz
 - entwicklung-meilensteine-dunkel.html  Graph, dunkel
 - entwicklung-meilensteine-hell.html    Graph, hell
@@ -26,7 +25,6 @@ if not DEV_MENU:
 
 e = lambda t: escape(str(t), quote=True)
 
-SEITE_SZ = "entwicklung-strategie-zielbild.html"
 KONZEPTE = [
     ("fein", "entwicklung-meilensteine-fein.html"),
     ("dunkel", "entwicklung-meilensteine-dunkel.html"),
@@ -274,7 +272,6 @@ def konzept_huelle(konzept, inhalt):
     return '''
 <div class="k k--{0}">
   <header class="k-bar">
-    <a class="k-bar__zurueck" href="{1}">Strategie und Zielbild</a>
     <span class="k-bar__meta">{2}% · {3}/{4}</span>
   </header>
   {5}
@@ -282,7 +279,7 @@ def konzept_huelle(konzept, inhalt):
     <button class="k-pop__zu" type="button" data-pop-zu aria-label="Schließen">&times;</button>
     {6}
   </div>
-</div>'''.format(konzept, SEITE_SZ, g["fortschritt"], len(g["erledigt"]), g["anzahl"], inhalt, "".join(details))
+</div>'''.format(konzept, "", g["fortschritt"], len(g["erledigt"]), g["anzahl"], inhalt, "".join(details))
 
 
 # Strategieseiten: oben nur Logo und „/ Entwicklung /“, unten nur die Zeile zur Sparkassen-Finanzgruppe
@@ -312,20 +309,3 @@ for konzept, dateiname in KONZEPTE:
         "", konzept_huelle(konzept, inhalt),
         extra_head="<style>" + MS_CSS + "</style>", extra_js=MS_JS,
         header_override=KOPF_SCHLANK, footer_schlank=True))
-
-
-# ---- Strategie und Zielbild: Platzhalter -----------------------------------
-SZ_BODY = '''
-<section class="section" style="min-height: calc(100vh - 97px - 66px);">
-  <div class="wrap" style="max-width:760px;">
-    <h1 style="color:var(--dunkelgrau2);">Strategie und Zielbild</h1>
-    <p class="lead" style="color:var(--dunkelgrau1);">Platzhalter – hier entsteht die Beschreibung von Strategie und Zielbild der SV Akademie.</p>
-    <p style="margin-top:28px;">Wie sich der Weg dorthin verzweigt, zeigen die
-      <a href="''' + KONZEPTE[0][1] + '''" style="color:var(--rot); text-decoration:underline;">Meilensteine</a>.</p>
-  </div>
-</section>
-'''
-schreibe(SEITE_SZ, page_shell(
-    "Strategie und Zielbild — SV Akademie (Entwicklung)",
-    "Strategie und Zielbild – Arbeitsstand, nicht öffentlich.",
-    "", SZ_BODY, header_override=KOPF_SCHLANK, footer_schlank=True))

@@ -1024,3 +1024,5 @@
 .me__halt--oben { flex-direction: column-reverse; transform: translateY(calc(-100% + 1.2rem)); }
 .me__halt--oben .me__halt-label { margin-top: 0; margin-bottom: 0.5rem; }
 .me__halt--oben .me__halt-wer { margin-top: 0; margin-bottom: 0.25rem; }
+/* Ohne Rücklink steht der Fortschritt allein rechts in der Kopfleiste */
+.k-bar { justify-content: flex-end; }

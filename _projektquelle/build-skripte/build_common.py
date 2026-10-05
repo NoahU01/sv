@@ -73,7 +73,6 @@ DEV_UNTERSEITEN = []
 # Weitere Kategorien unter „Unterseiten“: (Überschrift, [(href, tag, titel, unterzeile), …])
 DEV_KATEGORIEN = [
     ("Strategie", [
-        ("entwicklung-strategie-zielbild.html", "SZ", "Strategie und Zielbild", "Platzhalter"),
         ("entwicklung-meilensteine-fein.html", "MS", "Meilensteine", "Transformation der SV Akademie · fein, dunkel, hell"),
     ]),
 ]

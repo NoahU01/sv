@@ -82,7 +82,7 @@ falls in einem neuen Chat weitergearbeitet wird.
 - **Regel: Der Menüpunkt existiert nur auf dem Branch `daniel`, niemals auf main.** Abgesichert dreifach:
   Build baut ihn nur auf `daniel` ein; im Browser erscheint er nur lokal und auf svakademie-git-daniel-…;
   `.githooks/pre-commit` verweigert Commits mit Menü auf jedem anderen Branch (einmalig `git config core.hooksPath .githooks`).
-- Kategorie „Strategie“ im Entwicklungsmenü (nur `daniel`): `entwicklung-strategie-zielbild.html` (Platzhalter) und
+- Kategorie „Strategie“ im Entwicklungsmenü (nur `daniel`): `Meilensteine (Seite „Strategie und Zielbild“ am 05.10.2026 entfernt) –
   Meilensteine in drei Darstellungen `entwicklung-meilensteine-{fein,dunkel,hell}.html`. Logik 1:1 aus sofort sichtbar
   (Branch daniel, Stand cc62e02) übertragen: `entwicklung_graph.py` (Rechnung, gegen das Original geprüft),
   `entwicklung_seiten.py` (Vorlagen), `entwicklung_meilensteine.css/.js`. Bauen: `python3 entwicklung_seiten.py`.
