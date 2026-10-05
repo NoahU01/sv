@@ -8,7 +8,8 @@ führen würde – das Projekt-Repository steht für sich:
 
 - absolute Pfade (/styles.css, /assets/…) werden relativ
 - Logo und „Zur Startseite“ führen zur Projektübersicht (projekte/sv-akademie.html)
-- Hauptnavigation (Problem, Lösung, Leistungen) und „Kontakt“ entfallen
+- Hauptnavigation (Problem, Lösung, Leistungen), „Kontakt“ und Burger-Menü entfallen
+- Menü „/ Entwicklung /“ als Dreieck direkt neben dem Logo, ohne Wort
 - Menü „/ Entwicklung /“ zeigt nur das Projekt und die SV-Homepage
   (gleicher Inhalt wie auf den SV-Seiten, aus build_common.DEV_KATEGORIEN)
 - „Zur Webseite gehen“ führt auf die SV-Homepage in diesem Branch
@@ -28,12 +29,30 @@ if not DEV_MENU:
 QUELLE = os.path.abspath(os.path.join(WORKDIR, "..", "entwicklung-empiria-quelle"))
 ZIEL = os.path.join(SITEDIR, "entwicklung-empiria")
 
-# Flyouts des empiria-Menüs öffnen nach rechts; das Menü steht jetzt am
-# rechten Rand, deshalb nach links.
-CSS_PROJEKT = ('<style>/* Projekt-Repository SV */'
-               '.dev-dd--desktop .dev-dd-flyout{left:auto;right:100%;padding-left:0;padding-right:10px}'
-               '.dev-dd-empty{margin:0 8px 4px;padding:6px 0;font-size:13px;color:var(--grey-50,#8a8a8a)}'
-               '</style>')
+# Menü „/ Entwicklung /“ als Dreieck direkt rechts neben dem Logo, ohne Wort.
+# Das Panel klappt darunter links bündig auf; die Flyouts setzt das empiria-Skript
+# selbst (rechts daneben, wenn Platz ist). Auf dem
+# Handy dasselbe Dreieck; das Burger-Menü entfällt (es trug nur dieses Menü).
+CSS_PROJEKT = ("<style>/* Projekt-Repository SV – mit Vorrang, weil die Menüregeln von empiria im Seitenkörper stehen */"
+    ".site-header .nav,.site-header .wrap{justify-content:flex-start!important;gap:0!important}"
+    ".site-header .brand{margin-right:0!important}"
+    ".site-header .dev-dd-long,.site-header .dev-dd-short{display:none!important}"
+    ".site-header .dev-dd{margin-left:.4rem!important;position:relative!important;right:auto!important;top:auto!important;bottom:auto!important;display:inline-flex!important;align-items:center}"
+    ".site-header .dev-dd-toggle{padding:6px!important;border-radius:6px;gap:0!important}"
+    ".site-header .dev-dd-toggle:hover,.site-header .dev-dd.is-open .dev-dd-toggle{background:rgba(0,0,0,.05)}"
+    ".site-header .dev-dd-chev{width:14px;height:14px}"
+    ".site-header .dev-dd .dev-dd-panel{left:-14px!important;right:auto!important}"
+    # Meilensteinplan: Kopf aus dem SV-Build, ohne Positionierskript → Flyouts per CSS nach rechts
+    ".site-header .dev-dd--corner .dev-dd-flyout{left:100%!important;right:auto!important;padding-left:10px!important;padding-right:0!important}"
+    ".dev-dd-empty{margin:0 8px 4px;padding:6px 0;font-size:13px;color:var(--grey-50,#8a8a8a)}"
+    "@media (max-width:900px){"
+    ".site-header .dev-dd .dev-dd-panel{position:fixed!important;left:16px!important;right:16px!important;top:72px!important;width:auto!important;"
+    "max-height:calc(100vh - 88px);overflow:auto}"
+    ".site-header .dev-dd .dev-dd-flyout{position:static!important;opacity:1!important;visibility:visible!important;padding:0!important}"
+    ".site-header .dev-dd .dev-dd-flyout-panel{width:auto;padding:0 0 0 12px;margin:2px 0 6px 20px;background:none;"
+    "border:0;border-left:2px solid #eee;border-radius:0;box-shadow:none}"
+    ".site-header .dev-dd a.dev-dd-link--parent::after{display:none}}"
+    "</style>")
 
 
 def _div_ende(s, start):
@@ -89,7 +108,17 @@ def bauen(rel):
 
     # 5. Menü „/ Entwicklung /“: nur Projekt und SV-Homepage
     s = panel_ersetzen(s, zum_repo)
-    if 'dev-dd--desktop' in s and "Projekt-Repository SV" not in s:
+
+    # 5b. Menü als Dreieck direkt neben das Logo, Burger-Menü raus
+    m = re.search(r'<!-- ENTWICKLUNG:START[^>]*-->\s*<div class="dev-dd dev-dd--desktop".*?<!-- ENTWICKLUNG:END -->', s, re.S)
+    if m:
+        block = m.group(0)
+        s = s[:m.start()] + s[m.end():]
+        b = re.search(r'<a class="brand"[^>]*>.*?</a>', s, re.S)
+        s = s[:b.end()] + "\n" + block + s[b.end():]
+    s = re.sub(r'\s*<button class="nav-toggle"[^>]*>.*?</button>', '', s, flags=re.S)
+    s = re.sub(r'\s*<nav class="mobile-menu"[^>]*>.*?</nav>', '', s, flags=re.S)
+    if 'data-dev-dd' in s and "Projekt-Repository SV" not in s:
         s = s.replace("</head>", CSS_PROJEKT + "\n</head>", 1)
 
     # 6. Absprung zur Webseite → SV-Homepage in diesem Branch
