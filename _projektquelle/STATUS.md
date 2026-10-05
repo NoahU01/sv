@@ -101,3 +101,15 @@ falls in einem neuen Chat weitergearbeitet wird.
 - Menü „/ Entwicklung /“ → Strategie: SV Akademie mit Ebene 2 (Selbstverständnis, Vision, Strategie,
   Projektplanung) und Ebene 3 unter Strategie (Ist-Situation, Stoßrichtungen, Meilensteinplan, Agenda).
   Gepflegt in `build_common.py` (DEV_KATEGORIEN, beliebig tief).
+
+## Projekt-Repository SV Akademie (Stand 05.10.2026, nur Branch daniel)
+- Einstieg: Projektübersicht `entwicklung-empiria/projekte/sv-akademie.html` (empiria-Design), von dort in die Module.
+- Gebaut mit `python3 _projektquelle/build-skripte/entwicklung_empiria.py` aus den Originalen in
+  `_projektquelle/entwicklung-empiria-quelle/` (1:1 aus empiria, Branch Daniel). Das Skript entfernt nur die
+  Verbindungen zur empiria-Homepage (Hauptnavigation, Kontakt, übriges Entwicklungsmenü, Tracking), Logo und
+  „Zur Startseite“ führen zur Projektübersicht, „Zur Webseite gehen“ zur SV-Homepage in diesem Branch.
+- Meilensteinplan: nur noch die empiria-Fassung (`sv-meilensteine*.html`). Die SV-gestaltete Fassung
+  (`entwicklung_seiten.py`) wird nicht mehr gebaut.
+- Menü „/ Entwicklung /“ (SV-Seiten und Projektseiten, gleiche Quelle `DEV_KATEGORIEN` in build_common.py):
+  Strategie → SV Akademie mit allen Projektseiten; Homepage → Startseite mit Über uns, Quick-Check (3 Varianten),
+  KI-Lernassistent, Community-Austausch.

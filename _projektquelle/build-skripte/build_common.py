@@ -77,7 +77,7 @@ DEV_UNTERSEITEN = []
 _EMP = "entwicklung-empiria/projekte/"
 DEV_KATEGORIEN = [
     ("Strategie", [
-        (_EMP + "sv-akademie.html", "SV", "SV Akademie", "Steuerungsseite · drei Module", "Die Module", [
+        (_EMP + "sv-akademie.html", "SV", "SV Akademie", "Projektübersicht · drei Module", "Die Module", [
             (_EMP + "sv-selbstverstaendnis.html", "1", "Selbstverständnis", "Wofür stehen wir?"),
             (_EMP + "sv-vision.html", "2", "Vision", "Wie wollen wir wahrgenommen werden?"),
             (_EMP + "sv-strategie.html", "3", "Strategie", "Wie kommen wir dorthin?", "Darunter", [
@@ -88,50 +88,56 @@ DEV_KATEGORIEN = [
             ]),
             (_EMP + "sv-projektplanung.html", "PP", "Projektplanung", "Termine, Agenden und der Meilensteinplan"),
         ]),
-        ("entwicklung-meilensteine-fein.html", "MS", "Meilensteine", "Transformation der SV Akademie · fein, dunkel, hell"),
+    ]),
+    # Die Homepage der SV Akademie – Sprungziel aus dem Projekt, hier wird sie weiterentwickelt
+    ("Homepage", [
+        ("index.html", "HP", "Startseite SV Akademie", "Die Homepage, wie sie bislang ist", "Die Unterseiten", [
+            ("ueber-uns.html", "ÜU", "Über uns", "Antrieb, Handlungsfelder, Team"),
+            ("quickcheck.html", "QC", "Quick-Check", "Bedarfsklärung · drei Varianten", "Die Varianten", [
+                ("quickcheck-klaerung.html", "Q1", "Klärung Weiterbildungsbedarf", "Für mich persönlich"),
+                ("quickcheck-aufbau.html", "Q2", "Aufbau Bildungsthema", "Für mein Team"),
+                ("quickcheck-budget.html", "Q3", "Optimale Weiterbildung", "Für meine Vertriebseinheit"),
+            ]),
+            ("portal.html", "KI", "KI-Lernassistent", "Vorschau Portal 24/7"),
+            ("community.html", "CA", "Community-Austausch", "Anmeldung & Agenda"),
+        ]),
     ]),
 ]
 DEV_ARCHIV = []  # (href, tag, titel, unterzeile)
 
-def _dev_link(href, tag, title, sub, extra=""):
+def _dev_link(href, tag, title, sub, extra="", praefix=""):
+    href = praefix + href
     return ('<a href="{0}" class="dev-dd-link{4}"><span class="dev-dd-tag">{1}</span>'
             '<span class="dev-dd-txt"><b>{2}</b><small>{3}</small></span></a>').format(href, tag, title, sub, extra)
 
-def _dev_eintrag(e):
+def _dev_eintrag(e, praefix=""):
     # Eintrag mit Unterpunkten wird zum Flyout – rekursiv, also beliebig tief
     if len(e) > 4:
         href, tag, title, sub, gruppe, kinder = e
-        return ('<div class="dev-dd-sub">' + _dev_link(href, tag, title, sub, " dev-dd-link--parent")
+        return ('<div class="dev-dd-sub">' + _dev_link(href, tag, title, sub, " dev-dd-link--parent", praefix)
                 + '<div class="dev-dd-flyout"><div class="dev-dd-flyout-panel"><p class="dev-dd-group">' + gruppe + '</p>'
-                + "".join(_dev_eintrag(k) for k in kinder) + '</div></div></div>')
-    return _dev_link(*e)
+                + "".join(_dev_eintrag(k, praefix) for k in kinder) + '</div></div></div>')
+    return _dev_link(*e, praefix=praefix)
+
+def dev_panel_inhalt(praefix=""):
+    """Inhalt des Panels „/ Entwicklung /“ – auch für die Projektseiten in
+    entwicklung-empiria/ (dort mit Präfix ../ bzw. ../../)."""
+    items = "".join(_dev_eintrag(e, praefix) for e in DEV_UNTERSEITEN)
+    archiv = "".join(_dev_link(*a, praefix=praefix) for a in DEV_ARCHIV) or '<p class="dev-dd-empty">Noch keine archivierten Stände.</p>'
+    return ('<p class="dev-dd-note"><b>Nur in der Entwicklungsumgebung sichtbar</b>Dieser Menüpunkt ist in der Live-Version nicht enthalten.</p>'
+            '<p class="dev-dd-group">Unterseiten</p>' + (items or '<p class="dev-dd-empty">Noch keine neuen Unterseiten.</p>') +
+            "".join('<p class="dev-dd-group dev-dd-group--sub">' + name + '</p>' + "".join(_dev_eintrag(l, praefix) for l in links)
+                    for name, links in DEV_KATEGORIEN) +
+            '<p class="dev-dd-group dev-dd-group--sub">Archiv</p>' + archiv)
 
 def dev_dropdown_html(extra_class=""):
     if not DEV_MENU:
         return ""
-    items = []
-    for entry in DEV_UNTERSEITEN:
-        href, tag, title, sub = entry[:4]
-        children = entry[4] if len(entry) > 4 else []
-        if children:
-            fly = "".join(_dev_link(*c) for c in children)
-            items.append('<div class="dev-dd-sub">' + _dev_link(href, tag, title, sub, " dev-dd-link--parent")
-                         + '<div class="dev-dd-flyout"><div class="dev-dd-flyout-panel"><p class="dev-dd-group">Die Varianten</p>'
-                         + fly + '</div></div></div>')
-        else:
-            items.append(_dev_link(href, tag, title, sub))
-    archiv = "".join(_dev_link(*a) for a in DEV_ARCHIV) or '<p class="dev-dd-empty">Noch keine archivierten Stände.</p>'
     return ('<div class="dev-dd' + extra_class + '" data-dev-dd>'
             '<button class="dev-dd-toggle" type="button" aria-expanded="false"><span class="dev-dd-long">/ Entwicklung /</span>'
             '<span class="dev-dd-short" aria-hidden="true">/ Entw. /</span>'
             '<svg class="dev-dd-chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>'
-            '<div class="dev-dd-panel">'
-            '<p class="dev-dd-note"><b>Nur in der Entwicklungsumgebung sichtbar</b>Dieser Menüpunkt ist in der Live-Version nicht enthalten.</p>'
-            '<p class="dev-dd-group">Unterseiten</p>' + ("".join(items) or '<p class="dev-dd-empty">Noch keine neuen Unterseiten.</p>') +
-            "".join('<p class="dev-dd-group dev-dd-group--sub">' + name + '</p>' + "".join(_dev_eintrag(l) for l in links)
-                    for name, links in DEV_KATEGORIEN) +
-            '<p class="dev-dd-group dev-dd-group--sub">Archiv</p>' + archiv +
-            '</div></div>'
+            '<div class="dev-dd-panel">' + dev_panel_inhalt() + '</div></div>'
             "<script>(function(){var h=location.hostname,d=document.currentScript.previousElementSibling;"
             "if(!(location.protocol==='file:'||h==='localhost'||h==='127.0.0.1'||/^svakademie-git-daniel-/.test(h)))d.remove();})();</script>")
 

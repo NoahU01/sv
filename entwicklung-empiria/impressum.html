@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Impressum – empiria</title>
+<meta name="description" content="Impressum der empiria GmbH.">
+<link rel="canonical" href="https://www.empiria.de/impressum.html">
+
+<!-- ===== Consent Mode v2 + CMP + GA4 (identisch zu index.html) ===== -->
+<script data-cookieconsent="ignore">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    analytics_storage: 'denied',
+    functionality_storage: 'denied',
+    personalization_storage: 'denied',
+    security_storage: 'granted',
+    wait_for_update: 500
+  });
+  gtag('set', 'ads_data_redaction', true);
+  gtag('set', 'url_passthrough', true);
+</script>
+<!-- ===== Interner Traffic am Browser markieren (statt per IP) =====
+     Einmal je Browser/Geraet ?internal=1 aufrufen (Rueckgaengig: ?internal=0).
+     Setzt traffic_type=internal fuer ALLE folgenden Events; GA4-Datenfilter
+     "Internal Traffic" muss auf AKTIV stehen. Baustein aus dem AdMemory-Skill
+     tracking-seo-setup/interner-traffic.html, hier mit Key empiria_internal. -->
+<script data-cookieconsent="ignore">
+  (function () {
+    var schalter = null;
+    try {
+      var wert = new URLSearchParams(location.search).get('internal');
+      if (wert === '1') { localStorage.setItem('empiria_internal', '1'); schalter = 'an'; }
+      if (wert === '0') { localStorage.removeItem('empiria_internal'); schalter = 'aus'; }
+    } catch (e) { /* Speicher gesperrt: dann ohne Markierung */ }
+    var intern = false;
+    try { intern = localStorage.getItem('empiria_internal') === '1'; } catch (e) {}
+    if (intern) gtag('set', { traffic_type: 'internal' });
+    if (schalter) {
+      var zeigen = function () {
+        var el = document.createElement('div');
+        el.textContent = schalter === 'an'
+          ? 'Dieses Gerät zählt ab jetzt als interner Traffic'
+          : 'Markierung entfernt – dieses Gerät zählt wieder mit';
+        el.setAttribute('role', 'status');
+        el.style.cssText = 'position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:9999;'
+          + 'background:#1a1817;color:#fff;border-radius:14px;padding:10px 18px;'
+          + 'font:13px/1.35 system-ui,sans-serif;max-width:90vw;text-align:center;'
+          + 'box-shadow:0 6px 24px rgba(0,0,0,.25)';
+        document.body.appendChild(el);
+        setTimeout(function () { el.style.transition = 'opacity .4s'; el.style.opacity = '0'; }, 4000);
+        setTimeout(function () { el.remove(); }, 4600);
+      };
+      if (document.body) zeigen(); else document.addEventListener('DOMContentLoaded', zeigen);
+    }
+  })();
+</script>
+
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="projekte/sv-akademie.html" aria-label="Projekt SV Akademie">
+      <img src="assets/empiria-logo.svg" alt="empiria">
+    </a>
+    <a class="btn btn--ghost btn--sm nav-back" href="projekte/sv-akademie.html">Zur Projektübersicht</a>
+  </div>
+</header>
+
+<main class="legal">
+  <div class="container">
+    <h1>Impressum</h1>
+
+    <h2>Angaben gemäß § 5 DDG</h2>
+    <address>
+      empiria GmbH<br>
+      Kapellengasse 6<br>
+      74564 Crailsheim
+    </address>
+
+    <h2>Vertreten durch</h2>
+    <p>Daniel Ströbel</p>
+
+    <h2>Kontakt</h2>
+    <p>
+      Telefon: <a href="tel:+4917631347217">+49 176 31347217</a><br>
+      E-Mail: <a href="mailto:daniel.stroebel@empiria.de">daniel.stroebel@empiria.de</a>
+    </p>
+
+    <h2>Registereintrag</h2>
+    <p>
+      Eintragung im Handelsregister.<br>
+      Registergericht: Amtsgericht Ulm<br>
+      Registernummer: HRB 750146
+    </p>
+
+    <h2>Umsatzsteuer-ID</h2>
+    <p>
+      Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:<br>
+      DE 281217286
+    </p>
+
+    <h2>Verbraucher­streit­beilegung / Universal­schlichtungs­stelle</h2>
+    <p>
+      Wir nehmen an einem Streitbeilegungsverfahren vor einer Verbraucher­schlichtungs­stelle teil.
+      Zuständig ist die Universalschlichtungsstelle des Zentrums für Schlichtung e.V.,
+      Straßburger Straße 8, 77694 Kehl am Rhein
+      (<a href="https://www.verbraucher-schlichter.de" target="_blank" rel="noopener">www.verbraucher-schlichter.de</a>).
+    </p>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-row">
+    <span>empiria GmbH 2026</span>
+    <span class="footer-links"><a href="impressum.html">Impressum</a> <span>|</span> <a href="datenschutz.html">Datenschutz</a> <span>|</span> <button type="button" data-cookie-settings>Cookie-Einstellungen</button></span>
+  </div>
+</footer>
+</body>
+</html>

@@ -23,6 +23,13 @@ if not DEV_MENU:
     print("Entwicklungsseiten übersprungen: nicht auf Branch daniel.")
     sys.exit(0)
 
+# Seit 05.10.2026 gilt nur noch der Meilensteinplan in empiria-Logik und -Design
+# (entwicklung-empiria/projekte/sv-meilensteine*.html). Diese SV-gestaltete
+# Fassung wird nicht mehr gebaut; das Skript bleibt als Grundlage stehen.
+if "--trotzdem" not in sys.argv:
+    print("SV-Fassung der Meilensteine wird nicht mehr gebaut (siehe entwicklung-empiria/).")
+    sys.exit(0)
+
 e = lambda t: escape(str(t), quote=True)
 
 KONZEPTE = [
