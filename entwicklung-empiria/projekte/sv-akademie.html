@@ -245,7 +245,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 
       <div class="fl-ebenen">
 
-        <section class="fl-ebene">
+        <section class="fl-ebene" id="projektziel" style="scroll-margin-top: 100px">
           <button type="button" class="fl-kopf" aria-expanded="false">
             <span class="fl-kopf-nr">01</span>
             <span class="fl-kopf-text">
@@ -281,7 +281,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
           </div>
         </section>
 
-        <section class="fl-ebene is-offen">
+        <section class="fl-ebene is-offen" id="projektmodule" style="scroll-margin-top: 100px">
           <button type="button" class="fl-kopf" aria-expanded="true">
             <span class="fl-kopf-nr">02</span>
             <span class="fl-kopf-text">
@@ -369,7 +369,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
           </div>
         </section>
 
-        <section class="fl-ebene fl-ebene--werkzeug">
+        <section class="fl-ebene fl-ebene--werkzeug" id="werkzeugkasten" style="scroll-margin-top: 100px">
           <button type="button" class="fl-kopf" aria-expanded="false">
             <span class="fl-kopf-nr">03</span>
             <span class="fl-kopf-text">
@@ -467,6 +467,15 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
         k.setAttribute('aria-expanded', offen ? 'true' : 'false');
       });
     });
+    /* Sprung aus dem Dashboard (#projektziel, #projektmodule, #werkzeugkasten): Ebene öffnen und hinscrollen */
+    function sprung() {
+      var e = location.hash && document.getElementById(location.hash.slice(1));
+      if (!e || !e.classList.contains('fl-ebene')) return;
+      e.classList.add('is-offen');
+      var k = e.querySelector('.fl-kopf'); if (k) k.setAttribute('aria-expanded', 'true');
+      e.scrollIntoView({ block: 'start' });
+    }
+    sprung(); window.addEventListener('hashchange', sprung);
   })();
   </script>
 
