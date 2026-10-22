@@ -23,7 +23,7 @@
   D.meilensteine.forEach(function (m, i) { m.i = i; MS[m.id] = m; });
 
   function esc(t) { return String(t == null ? "" : t).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
-  function msName(m) { return m.titel || "Ergebnisstufe " + m.nr; }
+  function msName(m) { return m.titel || "Ergebnislevel " + m.nr; }
   function stufeErreicht(mid) { return (MS[mid].braucht || []).every(function (b) { return S[b] && S[b].status === "erreicht"; }); }
   function fertig(id) { return MS[id] ? stufeErreicht(id) : S[id] && S[id].status === "erreicht"; }
   function zustand(s) {
@@ -51,16 +51,16 @@
   /* ---------- Ergebnisstufen als Reiter, Erklärung und Legende als kleines Fenster ---------- */
   // Ergebnisstufen als Kästen: oben „Stufe n · Datum“, darunter Titel oder Kern des Ergebnisses (höchstens zwei Zeilen).
   // Ein Klick auf den Kasten wechselt die Stufe; das ⓘ im Kasten öffnet „Erreicht, wenn …“ direkt darunter.
-  function kastenText(x) { return x.titel || ((x.ergebnis || [])[0] || "Stufe " + x.nr).split(":")[0].replace(/\.$/, ""); }
+  function kastenText(x) { return x.titel || ((x.ergebnis || [])[0] || "Level " + x.nr).split(":")[0].replace(/\.$/, ""); }
   function stufen() {
     var h = '<div class="ub-kaesten" role="tablist">';
     D.meilensteine.forEach(function (x) {
       h += '<div role="tab" tabindex="0" class="ub-kasten" data-ms="' + x.id + '" aria-selected="' + (x.id === zustandUI.ms) + '">' +
-        '<small>Stufe ' + x.nr + " &middot; " + esc(x.termin) + "</small><b>" + esc(kastenText(x)) + "</b>" +
+        '<small>Level ' + x.nr + " &middot; " + esc(x.termin) + "</small><b>" + esc(kastenText(x)) + "</b>" +
         '<button type="button" class="ub-kasten-info" data-info-ms="' + x.id + '" aria-label="Erreicht, wenn …">+</button></div>';
     });
     h += '<div role="tab" tabindex="0" class="ub-kasten ub-kasten--ziel" data-ms="ziel" aria-selected="' + (zustandUI.ms === "ziel") + '">' +
-      "<small>Ziel &middot; alle Stufen</small><b>Gesamtplan</b>" +
+      "<small>Ziel &middot; alle Level</small><b>Gesamtplan</b>" +
       '<button type="button" class="ub-kasten-info" data-info-ms="ziel" aria-label="Zielbild">+</button></div></div>';
     stufenEl.innerHTML = h;
     stufenEl.querySelectorAll("[data-ms]").forEach(function (k) {
@@ -96,7 +96,7 @@
       return '<p class="ub-pop-titel">' + esc(ZIEL.titel) + '</p><p class="ub-pop-meta">Zielbild</p><p>' + (zb ? esc(zb) : "Das Zielbild wird noch beschrieben.") + "</p>";
     }
     var m = MS[id];
-    return '<p class="ub-pop-titel">' + esc(msName(m)) + '</p><p class="ub-pop-meta">Stufe ' + m.nr + " &middot; " + esc(m.termin) + " &middot; erreicht, wenn</p><ul>" +
+    return '<p class="ub-pop-titel">' + esc(msName(m)) + '</p><p class="ub-pop-meta">Level ' + m.nr + " &middot; " + esc(m.termin) + " &middot; erreicht, wenn</p><ul>" +
       (m.ergebnis || []).map(function (e) { return "<li>" + esc(e) + "</li>"; }).join("") + "</ul>";
   }
   var infoPop = null;
@@ -243,7 +243,7 @@
       var hx = xHalt(x.id), letzter = x.id === letzte.id;
       halte += balken(hx, letzter, false);
       namen += '<div class="ub-halt-name' + (letzter ? " ub-halt-name--ende" : "") + '" style="left:' + (letzter ? hx + 36 : hx + 13) + "px;top:" + (letzter ? (obenAlle + untenAlle) / 2 : 4) + 'px"><b>' +
-        esc(msName(x)) + "</b><small>" + (stufeErreicht(x.id) ? "erreicht" : "Stufe " + x.nr + " &middot; " + esc(x.termin)) + "</small></div>";
+        esc(msName(x)) + "</b><small>" + (stufeErreicht(x.id) ? "erreicht" : "Level " + x.nr + " &middot; " + esc(x.termin)) + "</small></div>";
     });
     if (vorStufe) {
       halte += balken(8, false, true);

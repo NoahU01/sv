@@ -91,9 +91,6 @@ DEV_KATEGORIEN = [
         (_EMP + "sv-uebersicht-2.html", "2.0", "Übersicht 2.0", "Neue Fassung · im Aufbau", "Darunter", [
             (_EMP + "sv-ziel-ubahn-11.html", "1.1", "Weg zum Ergebnis · Sicht 1.1", "vereinfacht"),
             (_EMP + "sv-ziel-ubahn-12.html", "1.2", "Weg zum Ergebnis · Sicht 1.2", "nah am U-Bahn-Plan"),
-            (_EMP + "sv-ziel-ubahn-2.html", "2", "Weg zum Ergebnis · Sicht 2", "Schloss · sachlich"),
-            (_EMP + "sv-ziel-ubahn-3.html", "3", "Weg zum Ergebnis · Sicht 3", "Zusammenführen · sachlich"),
-            (_EMP + "sv-ziel-ubahn-4.html", "4", "Weg zum Ergebnis · Sicht 4", "Schloss · Level"),
         ]),
         (_EMP + "sitemap.html", "\u25a6", "Sitemap", "Alle Seiten der SV Akademie · mit Vorschau"),
     ]),
