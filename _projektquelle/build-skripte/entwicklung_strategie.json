@@ -11,7 +11,8 @@
       "label": "Transformation 1",
       "frage": "Rollen, Prozesse, KI etc.",
       "verantwortung": "Lukas Euring",
-      "farbe": "#EE0000"
+      "farbe": "#EE0000",
+      "beschreibung": ""
     },
     {
       "id": "t2",
@@ -19,7 +20,8 @@
       "label": "Transformation 2",
       "frage": "USP Mensch, Zukunftskompetenzen, Lernen der Zukunft etc.",
       "verantwortung": "Philip Dreyer & Stefanie Frank",
-      "farbe": "#AC1033"
+      "farbe": "#AC1033",
+      "beschreibung": ""
     },
     {
       "id": "sa",
@@ -27,7 +29,8 @@
       "label": "Sichtbarkeit & Außenwirkung",
       "frage": "",
       "verantwortung": "Marie Herzig",
-      "farbe": "#6A1F66"
+      "farbe": "#6A1F66",
+      "beschreibung": ""
     }
   ],
   "meilensteine": [

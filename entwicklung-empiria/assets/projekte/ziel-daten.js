@@ -10,6 +10,7 @@ window.ZIEL_DATEN = {
    "kurz": "T1",
    "label": "Transformation 1",
    "frage": "Rollen, Prozesse, KI etc.",
+   "beschreibung": "",
    "verantwortung": "Lukas Euring",
    "farbe": "#C51F5D"
   },
@@ -18,6 +19,7 @@ window.ZIEL_DATEN = {
    "kurz": "T2",
    "label": "Transformation 2",
    "frage": "USP Mensch, Zukunftskompetenzen, Lernen der Zukunft etc.",
+   "beschreibung": "",
    "verantwortung": "Philip Dreyer & Stefanie Frank",
    "farbe": "#8613A1"
   },
@@ -26,6 +28,7 @@ window.ZIEL_DATEN = {
    "kurz": "SA",
    "label": "Sichtbarkeit & Außenwirkung",
    "frage": "",
+   "beschreibung": "",
    "verantwortung": "Marie Herzig",
    "farbe": "#0B9FBD"
   }

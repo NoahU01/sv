@@ -107,7 +107,7 @@
   // Eine Nebenstrecke zweigt in der Lücke vor ihrem Halt ab und kehrt in der Lücke danach zurück.
   // Endhaltestelle: senkrechter Balken, in den jede beteiligte Linie waagerecht auf ihrer Höhe einläuft.
   // Keine Transparenz: helle Töne sind echte Mischfarben mit Weiß, damit Überlagerungen nicht dunkler werden.
-  var ABST = 136, ZH = 72, UEBER = 64, UNTER = 44, LUECKE = 40, EINLAUF = 26, SPALTE = 190;
+  var ABST = 136, ZH = 72, UEBER = 64, UNTER = 58, LUECKE = 40, EINLAUF = 26, SPALTE = 214;
   function hell(hex, t) {   // Farbe mit Weiß mischen, t = Anteil Weiß
     var n = parseInt(hex.slice(1), 16), r = n >> 16, g = (n >> 8) & 255, b = n & 255;
     function m(c) { return Math.round(c + (255 - c) * t); }
@@ -185,7 +185,7 @@
       tiefsteZeile[s.strang] = Math.max(tiefsteZeile[s.strang] || 0, unter[s.id]);
     });
     var bahnen = D.straenge.filter(function (st) { return liste.some(function (s) { return s.strang === st.id; }); });
-    var linieY = {}, y0 = (nr > 1 ? 46 : 8) + (monatsBloecke.length ? 26 : 0);   // oben eine Zeile für die Namen der Stufenhalte (nur im Gesamtplan)
+    var linieY = {}, y0 = (nr > 1 ? 46 : 8) + (monatsBloecke.length ? 44 : 0);   // oben eine Zeile für die Namen der Stufenhalte (nur im Gesamtplan)
     bahnen.forEach(function (st) { linieY[st.id] = y0 + UEBER; y0 += UEBER + tiefsteZeile[st.id] * ZH + (tiefsteZeile[st.id] ? UNTER + 34 : UNTER); });
     var hoehe = y0 + 6 + (vorStufe ? 22 : 0);   // unten Platz für „Voraussetzung: …“
     function yVon(s) { return linieY[s.strang] + unter[s.id] * ZH; }
@@ -198,8 +198,9 @@
     var monatsNamen = "";
     monatsBloecke.forEach(function (b) {
       var xa = START + (bandStart[b.ms] + b.ab) * ABST + bandNr[b.ms] * HALT, yo = nr > 1 ? 46 : 8;
-      svg += '<line x1="' + xa + '" y1="' + (yo + 20) + '" x2="' + xa + '" y2="' + hoehe + '" stroke="#ebe7e1" stroke-width="1"/>';
       monatsNamen += '<div class="ub-monat" style="left:' + (xa + b.breite * ABST / 2) + "px;top:" + yo + 'px">' + monatsName(b.monat) + "</div>";
+      if (!b.ab) return;   // keine Linie vor dem ersten Monat: links steht schon die Grenze der Spalte
+      svg += '<line x1="' + xa + '" y1="' + (yo + 26) + '" x2="' + xa + '" y2="' + hoehe + '" stroke="#ebe7e1" stroke-width="1"/>';
     });
     var duenn = "", dick = "", quer = "", halte = "", namen = "", durch = "";
     function strecke(pkte, farbe, gegangen, schwach) {
@@ -293,7 +294,7 @@
     });
     svg += halte + durch + punkte + "</svg>";
     var spalte = bahnen.map(function (st) {
-      return '<div class="ub-bahn" style="top:' + (linieY[st.id] - 15) + 'px"><span class="ub-linie" style="background:' + st.farbe + '">' + esc(st.kurz) + "</span><div><b>" + esc(st.label) + "</b><small>" + esc(st.verantwortung) + "</small></div></div>";
+      return '<button type="button" class="ub-bahn" data-strang="' + st.id + '" aria-label="' + esc(st.label) + ': worum es geht" style="top:' + (linieY[st.id] - 15) + 'px"><span class="ub-linie" style="background:' + st.farbe + '">' + esc(st.kurz) + "</span><span><b>" + esc(st.label) + '<span class="ub-bahn-plus" aria-hidden="true">+</span></b><small>' + esc(st.verantwortung) + "</small></span></button>";
     }).join("");
     planEl.innerHTML = '<div class="ub-rahmen"><div class="ub-spalte" style="height:' + hoehe + 'px">' + spalte + '</div><div class="ub-scroll"><div class="ub-flaeche" style="width:' + breite + "px;height:" + hoehe + 'px">' + svg + monatsNamen + namen + "</div></div></div>";
     planEl.querySelectorAll("[data-station]").forEach(function (b) {
@@ -303,6 +304,10 @@
         plan(); detail();
       });
     });
+    planEl.querySelectorAll("[data-strang]").forEach(function (b) {
+      b.addEventListener("click", function (e) { e.stopPropagation(); strangInfo(b.getAttribute("data-strang") === strangOffen ? null : b.getAttribute("data-strang")); });
+    });
+    strangInfo(strangOffen);
     var sc = planEl.querySelector(".ub-scroll");
     if (sc && !zustandUI.station && sc.scrollWidth > sc.clientWidth) {
       var offen = liste.filter(function (s) { return fokus[s.id] && s.status !== "erreicht"; }).map(xVon);
@@ -325,6 +330,24 @@
     zug.sc = sc;
     sc.addEventListener("mousedown", function (e) { if (e.button !== 0) return; zug.start = { x: e.clientX, l: sc.scrollLeft }; zug.bewegt = false; });
     sc.addEventListener("click", function (e) { if (zug.bewegt) { e.stopPropagation(); e.preventDefault(); zug.bewegt = false; } }, true);
+  }
+
+  /* ---------- Fenster am Strang: worum es geht, wer verantwortet ---------- */
+  var strangOffen = null;
+  function strangInfo(id) {
+    var alt = planEl.querySelector(".ub-pop--strang"); if (alt) alt.remove();
+    planEl.querySelectorAll(".ub-bahn").forEach(function (b) { b.setAttribute("aria-expanded", b.getAttribute("data-strang") === id ? "true" : "false"); });
+    strangOffen = id;
+    if (!id) return;
+    var st = STR[id], knopf = planEl.querySelector('.ub-bahn[data-strang="' + id + '"]'), sp = planEl.querySelector(".ub-spalte");
+    if (!knopf || !sp) return;
+    var text = st.beschreibung || st.frage;
+    var pop = document.createElement("div");
+    pop.className = "ub-pop ub-pop--strang";
+    pop.innerHTML = '<p class="ub-pop-titel">' + esc(st.label) + '</p><p class="ub-pop-meta">Verantwortlich: ' + esc(st.verantwortung) + "</p>" +
+      "<p>" + (text ? "Worum es geht: " + esc(text) : "Die Beschreibung des Strangs folgt.") + "</p>";
+    sp.appendChild(pop);
+    pop.style.top = (parseFloat(knopf.style.top) - 6) + "px";
   }
 
   /* ---------- Fenster an der Station: knapp, eine Schrift, zwei Größen, zwei Farben ---------- */
@@ -367,6 +390,7 @@
   // Klick irgendwo daneben löst die Auswahl
   document.addEventListener("click", function (e) {
     if (infoPop && !e.target.closest(".ub-pop--info")) infoZu();
+    if (strangOffen && !e.target.closest(".ub-pop--strang, .ub-bahn")) strangInfo(null);
     if (!zustandUI.station) return;
     if (e.target.closest(".ub-name, .ub-treffer, .ub-pop")) return;
     zustandUI.station = null; plan(); detail();

@@ -36,7 +36,7 @@
 
 /* Plan */
 .ub-rahmen{display:flex;align-items:flex-start;padding:10px 0 0}
-.ub-spalte{flex:none;width:190px;position:relative;border-right:1px solid #efece7}
+.ub-spalte{flex:none;width:214px;position:relative;border-right:1px solid #efece7}
 .ub-bahn{position:absolute;left:18px;right:10px;display:flex;align-items:center;gap:10px}
 .ub-linie{flex:none;min-width:32px;height:28px;padding:0 6px;border-radius:7px;color:#fff;font-weight:600;font-size:.74rem;display:flex;align-items:center;justify-content:center}
 .ub-bahn b{display:block;font-size:.84rem;font-weight:600;line-height:1.25}
@@ -127,3 +127,9 @@
 .ub-steuerung{padding-bottom:18px}
 .ub-steuerung .ub-legende-zeile{margin-top:14px;padding-top:14px}
 .ub-monat{position:absolute;transform:translateX(-50%);white-space:nowrap;font-size:.72rem;color:#8a857d;pointer-events:none}
+.ub-bahn{font:inherit;color:inherit;text-align:left;background:none;border:0;padding:4px 0;border-radius:8px;cursor:pointer}
+.ub-bahn > span:nth-child(2){flex:1;min-width:0}
+.ub-bahn-plus{display:inline-flex;vertical-align:1px;margin-left:6px;width:16px;height:16px;border-radius:50%;border:1px solid #c9c5bf;background:#fff;color:#8a857d;font:500 .78rem/1 Poppins,sans-serif;align-items:center;justify-content:center;padding-bottom:1px;box-sizing:border-box}
+.ub-bahn:hover .ub-bahn-plus,.ub-bahn[aria-expanded="true"] .ub-bahn-plus{border-color:#111;color:#111}
+.ub-spalte{z-index:3}
+.ub-pop--strang{left:200px;width:280px}

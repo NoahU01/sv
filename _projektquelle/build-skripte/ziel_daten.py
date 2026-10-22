@@ -13,7 +13,7 @@ d = json.load(open(os.path.join(HIER, "entwicklung_strategie.json"), encoding="u
 daten = {
     "zielbild": d.get("zielbild", {}),
     # Farben wie im Meilensteinplan (empiria-Fassung, Sekundärfarben im CD)
-    "straenge": [dict({k: s.get(k) for k in ("id", "kurz", "label", "frage", "verantwortung")}, farbe=FARBE.get(s["id"], s.get("farbe"))) for s in d["straenge"]],
+    "straenge": [dict({k: s.get(k) for k in ("id", "kurz", "label", "frage", "beschreibung", "verantwortung")}, farbe=FARBE.get(s["id"], s.get("farbe"))) for s in d["straenge"]],
     "meilensteine": [{k: m.get(k) for k in ("id", "nr", "termin", "titel", "ergebnis", "braucht")} for m in d["meilensteine"]],
     "schritte": [{k: s.get(k) for k in ("id", "strang", "meilenstein", "titel", "status", "braucht", "ergebnis", "details", "wer", "kritisch", "termin", "monat")} for s in d["schritte"]],
 }
