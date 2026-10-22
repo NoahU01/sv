@@ -40,16 +40,24 @@
         "Die Webseite ist live.",
         "Der KI-Assistent Lea läuft.",
         "Zielbild und Strategie werden von Michael Sauerbrunn und dem Team der SV Akademie voll unterstützt."
+      ],
+      "braucht": [
+        "sa-1-golive"
       ]
     },
     {
       "id": "m2",
       "nr": 2,
       "termin": "30.06.2027",
-      "titel": "",
+      "titel": "Das Fundament steht",
       "ergebnis": [
         "Das Fundament steht: Produkte und Leistungssystem, Kommunikationskonzept 2.0 und LEOS 2.0 sind konzipiert.",
         "Die grundlegende Außenwirkung als „beste Akademie“ ist angelegt."
+      ],
+      "braucht": [
+        "t1-2-auftrag",
+        "t2-2-brainstorming",
+        "sa-2-kommunikation"
       ]
     },
     {
@@ -60,6 +68,11 @@
       "ergebnis": [
         "Das Zielbild „beste Akademie“ ist nach außen sichtbar und wird so wahrgenommen.",
         "Angebote, Kanäle und Formate laufen im Alltag."
+      ],
+      "braucht": [
+        "t1-3",
+        "t2-3",
+        "sa-3"
       ]
     },
     {
@@ -70,6 +83,11 @@
       "ergebnis": [
         "Das Erreichte ist untermauert: Wirkung wird gemessen und belegt.",
         "Angebote und Abläufe werden gezielt optimiert."
+      ],
+      "braucht": [
+        "t1-4",
+        "t2-4",
+        "sa-4"
       ]
     },
     {
@@ -80,6 +98,11 @@
       "ergebnis": [
         "Die SV Akademie hebt das Zielbild auf das nächste Level.",
         "Die Position als „beste Akademie“ ist langfristig gesichert."
+      ],
+      "braucht": [
+        "t1-5",
+        "t2-5",
+        "sa-5"
       ]
     }
   ],
@@ -494,5 +517,6 @@
       "wer": ""
     }
   ],
-  "personen": {}
+  "personen": {},
+  "hinweis_braucht": "meilensteine[].braucht: die Ergebnisse, die der Meilenstein unmittelbar braucht (Daniel, 22.10.2026). Was davor einfließt, folgt aus schritte[].braucht. m1: Annahme Big Bang = GoLive."
 }
