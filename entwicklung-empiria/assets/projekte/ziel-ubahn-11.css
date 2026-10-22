@@ -129,7 +129,7 @@
 .ub-monat{position:absolute;transform:translateX(-50%);white-space:nowrap;font-size:.72rem;color:#8a857d;pointer-events:none}
 .ub-bahn{font:inherit;color:inherit;text-align:left;background:none;border:0;padding:4px 0;border-radius:8px;cursor:pointer}
 .ub-bahn > span:nth-child(2){flex:1;min-width:0}
-.ub-bahn-plus{display:inline-flex;vertical-align:1px;margin-left:6px;width:16px;height:16px;border-radius:50%;border:1px solid #c9c5bf;background:#fff;color:#8a857d;font:500 .78rem/1 Poppins,sans-serif;align-items:center;justify-content:center;padding-bottom:1px;box-sizing:border-box}
-.ub-bahn:hover .ub-bahn-plus,.ub-bahn[aria-expanded="true"] .ub-bahn-plus{border-color:#111;color:#111}
+.ub-bahn:hover b,.ub-bahn[aria-expanded="true"] b{text-decoration:underline;text-underline-offset:3px}
 .ub-spalte{z-index:3}
 .ub-pop--strang{left:200px;width:280px}
+.ub-strang-treffer{position:absolute;left:0;height:18px;padding:0;border:0;background:transparent;cursor:pointer}

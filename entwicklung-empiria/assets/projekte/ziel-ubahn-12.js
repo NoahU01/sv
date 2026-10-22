@@ -299,8 +299,16 @@
       namen += '<button type="button" class="ub-treffer" data-station="' + s.id + '" aria-label="' + esc(s.titel) + '" style="left:' + (cx - 16) + "px;top:" + (cy - 16) + 'px"></button>';
     });
     svg += halte + durch + punkte + "</svg>";
+    var treffer = "";
+    bahnen.forEach(function (st) {
+      var ys = {}; liste.forEach(function (s) { if (s.strang === st.id) ys[yVon(s)] = true; });
+      Object.keys(ys).forEach(function (y) {
+        treffer += '<button type="button" class="ub-strang-treffer" data-strang="' + st.id + '" tabindex="-1" aria-hidden="true" style="top:' + (+y - 9) + 'px;width:' + breite + 'px"></button>';
+      });
+    });
+    namen = treffer + namen;
     var spalte = bahnen.map(function (st) {
-      return '<button type="button" class="ub-bahn" data-strang="' + st.id + '" aria-label="' + esc(st.label) + ': worum es geht" style="top:' + (linieY[st.id] - 15) + 'px"><span class="ub-linie" style="background:' + st.farbe + '">' + esc(st.kurz) + "</span><span><b>" + esc(st.label) + '<span class="ub-bahn-plus" aria-hidden="true">+</span></b><small>' + esc(st.verantwortung) + "</small></span></button>";
+      return '<button type="button" class="ub-bahn" data-strang="' + st.id + '" aria-label="' + esc(st.label) + ': worum es in dieser Stoßrichtung geht" style="top:' + (linieY[st.id] - 15) + 'px"><span class="ub-linie" style="background:' + st.farbe + '">' + esc(st.kurz) + "</span><span><b>" + esc(st.label) + '</b><small>' + esc(st.verantwortung) + "</small></span></button>";
     }).join("");
     planEl.innerHTML = '<div class="ub-rahmen"><div class="ub-spalte" style="height:' + hoehe + 'px">' + spalte + '</div><div class="ub-scroll"><div class="ub-flaeche" style="width:' + breite + "px;height:" + hoehe + 'px">' + svg + monatsNamen + namen + "</div></div></div>";
     planEl.querySelectorAll("[data-station]").forEach(function (b) {
@@ -350,7 +358,7 @@
     var text = st.beschreibung || st.frage;
     var pop = document.createElement("div");
     pop.className = "ub-pop ub-pop--strang";
-    pop.innerHTML = '<p class="ub-pop-titel">' + esc(st.label) + '</p><p class="ub-pop-meta">Verantwortlich: ' + esc(st.verantwortung) + "</p>" +
+    pop.innerHTML = '<p class="ub-pop-titel">' + esc(st.label) + '</p><p class="ub-pop-meta">Stoßrichtung &middot; verantwortlich: ' + esc(st.verantwortung) + "</p>" +
       "<p>" + (text ? "Worum es geht: " + esc(text) : "Die Beschreibung des Strangs folgt.") + "</p>";
     sp.appendChild(pop);
     pop.style.top = (parseFloat(knopf.style.top) - 6) + "px";
@@ -396,7 +404,7 @@
   // Klick irgendwo daneben löst die Auswahl
   document.addEventListener("click", function (e) {
     if (infoPop && !e.target.closest(".ub-pop--info")) infoZu();
-    if (strangOffen && !e.target.closest(".ub-pop--strang, .ub-bahn")) strangInfo(null);
+    if (strangOffen && !e.target.closest(".ub-pop--strang, .ub-bahn, .ub-strang-treffer")) strangInfo(null);
     if (!zustandUI.station) return;
     if (e.target.closest(".ub-name, .ub-treffer, .ub-pop")) return;
     zustandUI.station = null; plan(); detail();
