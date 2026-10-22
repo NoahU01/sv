@@ -9,22 +9,25 @@ window.ZIEL_DATEN = {
    "id": "t1",
    "kurz": "T1",
    "label": "Transformation 1",
+   "frage": "Rollen, Prozesse, KI etc.",
    "verantwortung": "Lukas Euring",
-   "farbe": "#EE0000"
+   "farbe": "#C51F5D"
   },
   {
    "id": "t2",
    "kurz": "T2",
    "label": "Transformation 2",
+   "frage": "USP Mensch, Zukunftskompetenzen, Lernen der Zukunft etc.",
    "verantwortung": "Philip Dreyer & Stefanie Frank",
-   "farbe": "#AC1033"
+   "farbe": "#8613A1"
   },
   {
    "id": "sa",
    "kurz": "SA",
    "label": "Sichtbarkeit & Außenwirkung",
+   "frage": "",
    "verantwortung": "Marie Herzig",
-   "farbe": "#6A1F66"
+   "farbe": "#0B9FBD"
   }
  ],
  "meilensteine": [
@@ -109,8 +112,36 @@ window.ZIEL_DATEN = {
    "strang": "t1",
    "meilenstein": "m1",
    "titel": "Taskforce KI: Ideen für Lea",
-   "status": "offen",
-   "braucht": []
+   "status": "erreicht",
+   "braucht": [],
+   "ergebnis": "Die Taskforce KI hat Ideen zur Umsetzung des KI-Assistenten Lea entwickelt.",
+   "details": [
+    "Taskforce KI wird tätig",
+    "Ideen zur Umsetzung des KI-Assistenten Lea"
+   ],
+   "wer": "",
+   "kritisch": null,
+   "termin": null
+  },
+  {
+   "id": "t1-1-copilot",
+   "strang": "t1",
+   "meilenstein": "m1",
+   "titel": "Pilotierung Copilot Pro",
+   "status": "aktiv",
+   "braucht": [
+    "t1-1-taskforce"
+   ],
+   "ergebnis": "Copilot Pro wird pilotiert – ab November 2026.",
+   "details": [
+    "Start ab November 2026"
+   ],
+   "wer": "",
+   "kritisch": {
+    "grund": "Wie lange die Pilotierung läuft, ist offen.",
+    "blockiert": "Davon hängt ab, wann die Entwicklung des KI-Assistenten Lea starten kann – und mit ihr die Kette bis zur Webseite."
+   },
+   "termin": "ab 11/2026"
   },
   {
    "id": "t1-1-lea",
@@ -119,8 +150,13 @@ window.ZIEL_DATEN = {
    "titel": "Entwicklung KI-Assistent Lea",
    "status": "offen",
    "braucht": [
-    "t1-1-taskforce"
-   ]
+    "t1-1-copilot"
+   ],
+   "ergebnis": "Der KI-Assistent Lea ist entwickelt.",
+   "details": [],
+   "wer": "",
+   "kritisch": null,
+   "termin": null
   },
   {
    "id": "t1-1-webseite",
@@ -130,7 +166,14 @@ window.ZIEL_DATEN = {
    "status": "offen",
    "braucht": [
     "t1-1-lea"
-   ]
+   ],
+   "ergebnis": "Die Webseite ist umgesetzt und live – voraussichtlich innerhalb des SharePoints.",
+   "details": [
+    "Voraussichtlich innerhalb des SharePoints"
+   ],
+   "wer": "",
+   "kritisch": null,
+   "termin": null
   },
   {
    "id": "t1-2-mak",
@@ -140,7 +183,15 @@ window.ZIEL_DATEN = {
    "status": "offen",
    "braucht": [
     "t1-1-webseite"
-   ]
+   ],
+   "ergebnis": "",
+   "details": [
+    "Planung",
+    "Zukünftige Ausstattung"
+   ],
+   "wer": "",
+   "kritisch": null,
+   "termin": null
   },
   {
    "id": "t1-2-leos",
@@ -150,7 +201,14 @@ window.ZIEL_DATEN = {
    "status": "offen",
    "braucht": [
     "t1-2-mak"
-   ]
+   ],
+   "ergebnis": "",
+   "details": [
+    "Konzeption unseres zukünftigen zentralen Systems"
+   ],
+   "wer": "",
+   "kritisch": null,
+   "termin": null
   },
   {
    "id": "t1-2-auftrag",
@@ -160,7 +218,12 @@ window.ZIEL_DATEN = {
    "status": "offen",
    "braucht": [
     "t1-2-leos"
-   ]
+   ],
+   "ergebnis": "",
+   "details": [],
+   "wer": "",
+   "kritisch": null,
+   "termin": null
   },
   {
    "id": "t1-3",
@@ -170,7 +233,12 @@ window.ZIEL_DATEN = {
    "status": "offen",
    "braucht": [
     "t1-2-auftrag"
-   ]
+   ],
+   "ergebnis": "Platzhalter – Details folgen.",
+   "details": [],
+   "wer": "",
+   "kritisch": null,
+   "termin": null
   },
   {
    "id": "t1-4",
@@ -180,7 +248,12 @@ window.ZIEL_DATEN = {
    "status": "offen",
    "braucht": [
     "t1-3"
-   ]
+   ],
+   "ergebnis": "Platzhalter – Details folgen.",
+   "details": [],
+   "wer": "",
+   "kritisch": null,
+   "termin": null
   },
   {
    "id": "t1-5",
@@ -190,7 +263,12 @@ window.ZIEL_DATEN = {
    "status": "offen",
    "braucht": [
     "t1-4"
-   ]
+   ],
+   "ergebnis": "Platzhalter – Details folgen.",
+   "details": [],
+   "wer": "",
+   "kritisch": null,
+   "termin": null
   },
   {
    "id": "t2-1-brainstorming",
@@ -198,7 +276,12 @@ window.ZIEL_DATEN = {
    "meilenstein": "m1",
    "titel": "Brainstorming Zukunftskompetenzen und Lernen der Zukunft",
    "status": "offen",
-   "braucht": []
+   "braucht": [],
+   "ergebnis": "",
+   "details": [],
+   "wer": "",
+   "kritisch": null,
+   "termin": null
   },
   {
    "id": "t2-2-produkte",
@@ -208,7 +291,16 @@ window.ZIEL_DATEN = {
    "status": "offen",
    "braucht": [
     "t2-1-brainstorming"
-   ]
+   ],
+   "ergebnis": "",
+   "details": [
+    "Gesamtbild",
+    "Produkte – Beispiele: aktive Kompetenzentwicklung, systematische Beratung",
+    "Konzept für die aktive Kompetenzentwicklung entwickeln"
+   ],
+   "wer": "",
+   "kritisch": null,
+   "termin": null
   },
   {
    "id": "t2-2-lernen",
@@ -218,7 +310,15 @@ window.ZIEL_DATEN = {
    "status": "offen",
    "braucht": [
     "t2-1-brainstorming"
-   ]
+   ],
+   "ergebnis": "",
+   "details": [
+    "Laufend sichten, testen und bereitstellen",
+    "Egal ob Videos, Podcasts, automatisierte Präsentationserstellung usw."
+   ],
+   "wer": "",
+   "kritisch": null,
+   "termin": null
   },
   {
    "id": "t2-2-brainstorming",
@@ -229,7 +329,12 @@ window.ZIEL_DATEN = {
    "braucht": [
     "t2-2-produkte",
     "t2-2-lernen"
-   ]
+   ],
+   "ergebnis": "",
+   "details": [],
+   "wer": "",
+   "kritisch": null,
+   "termin": null
   },
   {
    "id": "t2-3",
@@ -239,7 +344,12 @@ window.ZIEL_DATEN = {
    "status": "offen",
    "braucht": [
     "t2-2-brainstorming"
-   ]
+   ],
+   "ergebnis": "Platzhalter – Details folgen.",
+   "details": [],
+   "wer": "",
+   "kritisch": null,
+   "termin": null
   },
   {
    "id": "t2-4",
@@ -249,7 +359,12 @@ window.ZIEL_DATEN = {
    "status": "offen",
    "braucht": [
     "t2-3"
-   ]
+   ],
+   "ergebnis": "Platzhalter – Details folgen.",
+   "details": [],
+   "wer": "",
+   "kritisch": null,
+   "termin": null
   },
   {
    "id": "t2-5",
@@ -259,25 +374,40 @@ window.ZIEL_DATEN = {
    "status": "offen",
    "braucht": [
     "t2-4"
-   ]
+   ],
+   "ergebnis": "Platzhalter – Details folgen.",
+   "details": [],
+   "wer": "",
+   "kritisch": null,
+   "termin": null
   },
   {
    "id": "sa-1-team",
    "strang": "sa",
    "meilenstein": "m1",
    "titel": "Team abholen",
-   "status": "offen",
-   "braucht": []
+   "status": "aktiv",
+   "braucht": [],
+   "ergebnis": "",
+   "details": [],
+   "wer": "GLs",
+   "kritisch": null,
+   "termin": null
   },
   {
    "id": "sa-1-hal",
    "strang": "sa",
    "meilenstein": "m1",
    "titel": "Abstimmung HAL M.S.",
-   "status": "offen",
+   "status": "aktiv",
    "braucht": [
     "sa-1-team"
-   ]
+   ],
+   "ergebnis": "",
+   "details": [],
+   "wer": "AL",
+   "kritisch": null,
+   "termin": null
   },
   {
    "id": "sa-1-pw7",
@@ -287,7 +417,12 @@ window.ZIEL_DATEN = {
    "status": "offen",
    "braucht": [
     "sa-1-hal"
-   ]
+   ],
+   "ergebnis": "",
+   "details": [],
+   "wer": "",
+   "kritisch": null,
+   "termin": null
   },
   {
    "id": "sa-1-puls",
@@ -297,7 +432,12 @@ window.ZIEL_DATEN = {
    "status": "offen",
    "braucht": [
     "sa-1-hal"
-   ]
+   ],
+   "ergebnis": "",
+   "details": [],
+   "wer": "",
+   "kritisch": null,
+   "termin": null
   },
   {
    "id": "sa-1-abteilung",
@@ -309,7 +449,12 @@ window.ZIEL_DATEN = {
     "sa-1-pw7",
     "sa-1-puls",
     "t1-1-webseite"
-   ]
+   ],
+   "ergebnis": "",
+   "details": [],
+   "wer": "",
+   "kritisch": null,
+   "termin": null
   },
   {
    "id": "sa-1-golive",
@@ -319,7 +464,12 @@ window.ZIEL_DATEN = {
    "status": "offen",
    "braucht": [
     "sa-1-abteilung"
-   ]
+   ],
+   "ergebnis": "",
+   "details": [],
+   "wer": "",
+   "kritisch": null,
+   "termin": null
   },
   {
    "id": "sa-2-kommunikation",
@@ -329,7 +479,16 @@ window.ZIEL_DATEN = {
    "status": "offen",
    "braucht": [
     "sa-1-golive"
-   ]
+   ],
+   "ergebnis": "",
+   "details": [
+    "Festlegung und Analyse von Zielgruppen",
+    "Kanäle, die wir nutzen wollen",
+    "Community-Formate"
+   ],
+   "wer": "",
+   "kritisch": null,
+   "termin": null
   },
   {
    "id": "sa-3",
@@ -339,7 +498,12 @@ window.ZIEL_DATEN = {
    "status": "offen",
    "braucht": [
     "sa-2-kommunikation"
-   ]
+   ],
+   "ergebnis": "Platzhalter – Details folgen.",
+   "details": [],
+   "wer": "",
+   "kritisch": null,
+   "termin": null
   },
   {
    "id": "sa-4",
@@ -349,7 +513,12 @@ window.ZIEL_DATEN = {
    "status": "offen",
    "braucht": [
     "sa-3"
-   ]
+   ],
+   "ergebnis": "Platzhalter – Details folgen.",
+   "details": [],
+   "wer": "",
+   "kritisch": null,
+   "termin": null
   },
   {
    "id": "sa-5",
@@ -359,7 +528,12 @@ window.ZIEL_DATEN = {
    "status": "offen",
    "braucht": [
     "sa-4"
-   ]
+   ],
+   "ergebnis": "Platzhalter – Details folgen.",
+   "details": [],
+   "wer": "",
+   "kritisch": null,
+   "termin": null
   }
  ]
 };

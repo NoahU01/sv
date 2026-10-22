@@ -9,9 +9,9 @@
 <link rel="stylesheet" href="/styles.css">
 <link rel="stylesheet" href="/assets/projekte/projekte.css">
 <link rel="stylesheet" href="/assets/projekte/dashboard.css">
-<link rel="stylesheet" href="/assets/projekte/ziel-varianten.css">
+<link rel="stylesheet" href="/assets/projekte/ziel-ubahn.css">
 </head>
-<body data-variante="ubahn">
+<body>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <!-- Eigene Strichzeichen fuer die Methoden. Bewusst keine CD-Formen
@@ -570,24 +570,35 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 
       <div class="fl-kopf-zeile">
         <div>
-          <p class="kicker">Projekt &middot; SV Akademie &middot; Variante B</p>
+          <p class="kicker">Projekt &middot; SV Akademie</p>
           <h1 class="h-serif">Vom <span class="hl">Ergebnis</span> her gedacht.</h1>
         </div>
-        <p class="fl-satz">W&auml;hle einen Ergebnismeilenstein: Du siehst, welchen Zustand wir dann erreicht haben, was daf&uuml;r erledigt sein muss und was jetzt dran ist.</p>
+        <p class="fl-satz">W&auml;hle eine Ergebnisstufe: Du siehst, welchen Zustand wir dann erreicht haben, welcher Weg dorthin f&uuml;hrt und wo er gerade frei ist.</p>
       </div>
 
       <nav class="zv-varianten" aria-label="Varianten"><a href="/projekte/sv-ziel-zufluss.html">A &middot; Zuflussplan</a><a href="/projekte/sv-ziel-ubahn.html" aria-current="page">B &middot; U-Bahn-Plan</a><a href="/projekte/sv-ziel-startfreigabe.html">C &middot; Startfreigabe</a></nav>
 
-      <section class="zv-block" aria-label="Ergebnismeilensteine">
-        <h2>Ergebnismeilensteine</h2>
-        <p class="zv-unter">Von der ersten Stufe bis zum Zielbild.</p>
-        <div id="zv-kopf"></div>
+      <section class="ub-block" aria-labelledby="ub-stufen-h">
+        <div class="ub-block-kopf"><h2 id="ub-stufen-h">Ergebnisstufen</h2></div>
+        <div id="ub-stufen"></div>
       </section>
 
-      <section class="zv-block" aria-label="U-Bahn-Plan">
-        <h2>U-Bahn-Plan</h2>
-        <p class="zv-unter">Jede Stoßrichtung ist eine Linie, jedes Arbeitspaket ein Halt. Wo Linien sich brauchen, wird umgestiegen. Die Endhaltestelle ist der Meilenstein.</p>
-        <div id="zv-buehne"></div>
+      <section class="ub-block" aria-labelledby="ub-plan-h">
+        <div class="ub-block-kopf">
+          <h2 id="ub-plan-h">Der Weg dorthin</h2>
+          <p class="ub-legende" aria-label="Legende">
+            <span><svg width="18" height="18"><circle cx="9" cy="9" r="7" fill="#111"/></svg>erledigt</span>
+            <span><svg width="18" height="18"><circle cx="9" cy="9" r="6.5" fill="#fff" stroke="#111" stroke-width="3.5"/></svg>in Arbeit</span>
+            <span><svg width="18" height="18"><circle cx="9" cy="9" r="6.5" fill="#fff" stroke="#111" stroke-width="2"/></svg>kann starten</span>
+            <span><svg width="18" height="18"><circle cx="9" cy="9" r="6" fill="#fff" stroke="#c4bfb7" stroke-width="2"/></svg>wartet</span>
+            <span><svg width="30" height="10"><line x1="2" y1="5" x2="28" y2="5" stroke="#111" stroke-width="6" stroke-linecap="round"/></svg>gegangener Weg</span>
+            <span><svg width="30" height="10"><line x1="2" y1="5" x2="28" y2="5" stroke="#111" stroke-opacity=".55" stroke-width="2.5" stroke-linecap="round"/></svg>noch offen</span>
+            <span><svg width="30" height="10"><line x1="2" y1="5" x2="28" y2="5" stroke="#8a857d" stroke-width="1.6" stroke-dasharray="4 5"/></svg>braucht Ergebnis einer anderen Stoßrichtung</span>
+          </p>
+        </div>
+        <p class="ub-hinweis" id="ub-hinweis"></p>
+        <div id="ub-plan"></div>
+        <div class="ub-detail" id="ub-detail" hidden></div>
       </section>
 
     </div>
@@ -604,6 +615,6 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 
 <script src="/script.js"></script>
 <script src="/assets/projekte/ziel-daten.js"></script>
-<script src="/assets/projekte/ziel-varianten.js"></script>
+<script src="/assets/projekte/ziel-ubahn.js"></script>
 </body>
 </html>

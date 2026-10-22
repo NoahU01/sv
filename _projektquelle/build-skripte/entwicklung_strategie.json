@@ -114,7 +114,7 @@
       "aufwand": "",
       "titel": "Taskforce KI: Ideen für Lea",
       "ergebnis": "Die Taskforce KI hat Ideen zur Umsetzung des KI-Assistenten Lea entwickelt.",
-      "status": "offen",
+      "status": "erreicht",
       "braucht": [],
       "details": [
         "Taskforce KI wird tätig",
@@ -122,6 +122,28 @@
       ],
       "offen": [],
       "wer": ""
+    },
+    {
+      "id": "t1-1-copilot",
+      "strang": "t1",
+      "meilenstein": "m1",
+      "aufwand": "",
+      "titel": "Pilotierung Copilot Pro",
+      "ergebnis": "Copilot Pro wird pilotiert – ab November 2026.",
+      "status": "aktiv",
+      "braucht": [
+        "t1-1-taskforce"
+      ],
+      "details": [
+        "Start ab November 2026"
+      ],
+      "offen": [],
+      "wer": "",
+      "kritisch": {
+        "grund": "Wie lange die Pilotierung läuft, ist offen.",
+        "blockiert": "Davon hängt ab, wann die Entwicklung des KI-Assistenten Lea starten kann – und mit ihr die Kette bis zur Webseite."
+      },
+      "termin": "ab 11/2026"
     },
     {
       "id": "t1-1-lea",
@@ -132,7 +154,7 @@
       "ergebnis": "Der KI-Assistent Lea ist entwickelt.",
       "status": "offen",
       "braucht": [
-        "t1-1-taskforce"
+        "t1-1-copilot"
       ],
       "details": [],
       "offen": [],
@@ -369,11 +391,11 @@
       "aufwand": "",
       "titel": "Team abholen",
       "ergebnis": "",
-      "status": "offen",
+      "status": "aktiv",
       "braucht": [],
       "details": [],
       "offen": [],
-      "wer": ""
+      "wer": "GLs"
     },
     {
       "id": "sa-1-hal",
@@ -382,13 +404,13 @@
       "aufwand": "",
       "titel": "Abstimmung HAL M.S.",
       "ergebnis": "",
-      "status": "offen",
+      "status": "aktiv",
       "braucht": [
         "sa-1-team"
       ],
       "details": [],
       "offen": [],
-      "wer": ""
+      "wer": "AL"
     },
     {
       "id": "sa-1-pw7",
@@ -518,5 +540,6 @@
     }
   ],
   "personen": {},
-  "hinweis_braucht": "meilensteine[].braucht: die Ergebnisse, die der Meilenstein unmittelbar braucht (Daniel, 22.10.2026). Was davor einfließt, folgt aus schritte[].braucht. m1: Annahme Big Bang = GoLive."
+  "hinweis_braucht": "meilensteine[].braucht: die Ergebnisse, die der Meilenstein unmittelbar braucht (Daniel, 22.10.2026). Was davor einfließt, folgt aus schritte[].braucht. m1: Annahme Big Bang = GoLive.",
+  "hinweis_stand": "Stand 22.10.2026 abgeglichen mit der gebauten Seite sv-meilensteine-fein.html (Stand 01.10.2026 aus empiria): Copilot-Pilotierung, Zustände, wer."
 }

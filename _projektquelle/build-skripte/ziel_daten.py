@@ -8,12 +8,14 @@ an der JSON-Datei einmal laufen lassen:  python3 ziel_daten.py
 import json, os
 HIER = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HIER))
+FARBE = {"t1": "#C51F5D", "t2": "#8613A1", "sa": "#0B9FBD"}
 d = json.load(open(os.path.join(HIER, "entwicklung_strategie.json"), encoding="utf-8"))
 daten = {
     "zielbild": d.get("zielbild", {}),
-    "straenge": [{k: s.get(k) for k in ("id", "kurz", "label", "verantwortung", "farbe")} for s in d["straenge"]],
+    # Farben wie im Meilensteinplan (empiria-Fassung, Sekundärfarben im CD)
+    "straenge": [dict({k: s.get(k) for k in ("id", "kurz", "label", "frage", "verantwortung")}, farbe=FARBE.get(s["id"], s.get("farbe"))) for s in d["straenge"]],
     "meilensteine": [{k: m.get(k) for k in ("id", "nr", "termin", "titel", "ergebnis", "braucht")} for m in d["meilensteine"]],
-    "schritte": [{k: s.get(k) for k in ("id", "strang", "meilenstein", "titel", "status", "braucht")} for s in d["schritte"]],
+    "schritte": [{k: s.get(k) for k in ("id", "strang", "meilenstein", "titel", "status", "braucht", "ergebnis", "details", "wer", "kritisch", "termin")} for s in d["schritte"]],
 }
 ziel = os.path.join(ROOT, "entwicklung-empiria", "assets", "projekte", "ziel-daten.js")
 with open(ziel, "w", encoding="utf-8") as f:

@@ -16,7 +16,7 @@
 
   function esc(t) { return String(t == null ? "" : t).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   function msName(m) { return m.titel || ("Ergebnisstufe " + m.nr); }
-  function erledigt(id) { return S[id] && S[id].status === "erledigt"; }
+  function erledigt(id) { return S[id] && (S[id].status === "erledigt" || S[id].status === "erreicht"); }
   function zustand(id) {
     if (S[id] && S[id].pseudo) return S[id].offen.length ? (S[id].dran.length ? "dran" : "wartet") : "fertig";
     if (erledigt(id)) return "fertig";
