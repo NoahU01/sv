@@ -681,7 +681,6 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
         <div class="u3-umschalter" role="tablist" aria-label="Variante">
           <button type="button" role="tab" data-ziel="a" aria-selected="true"><span>A</span>Stand je Strang</button>
           <button type="button" role="tab" data-ziel="b" aria-selected="false"><span>B</span>Plan</button>
-          <button type="button" role="tab" data-ziel="c" aria-selected="false"><span>C</span>N&auml;chste Schritte</button>
         </div>
       </header>
 
@@ -720,14 +719,6 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
           <h3 class="u3-h3">Termine</h3>
           <ul class="u3-termine u3-termine--quer" data-termine></ul>
         </div>
-        <a class="ue-zeile" href="/projekte/sv-ziel-ubahn-12.html"><span><b>Weg zum Ergebnis</b><small>Alle Ergebnislevel mit allen Schritten und Abh&auml;ngigkeiten</small></span><span aria-hidden="true">&#8594;</span></a>
-      </section>
-
-      <!-- Variante C: was jetzt ansteht, in zeitlicher Reihenfolge -->
-      <section class="ue-block u3-variante" data-v="c" aria-labelledby="u3-c-h" hidden>
-        <h2 id="u3-c-h">Was jetzt ansteht</h2>
-        <p class="ue-unter" data-c-unter></p>
-        <ol class="u3-folge" id="u3-folge"></ol>
         <a class="ue-zeile" href="/projekte/sv-ziel-ubahn-12.html"><span><b>Weg zum Ergebnis</b><small>Alle Ergebnislevel mit allen Schritten und Abh&auml;ngigkeiten</small></span><span aria-hidden="true">&#8594;</span></a>
       </section>
 
@@ -1260,23 +1251,8 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
       '<ul class="u3-zeilen">' + zeilen.join("") + "</ul></div></div>";
   }).join("");
 
-  // C: was jetzt ansteht – laufende Schritte, Termine, das Level selbst
-  var lauf = D.schritte.filter(function (s) { return s.status === "aktiv"; });
-  lauf.sort(function (x, y) { return (x.termin ? 1 : 0) - (y.termin ? 1 : 0); });
-  var f = lauf.map(function (s) {
-    var st = STR[s.strang];
-    return '<li class="ist-laeuft"><span class="u3-wann">' + (s.termin ? esc(s.termin) : "l&auml;uft") + '</span><span class="u3-punkt"></span><span><b>' + esc(s.titel) + "</b><small>" +
-      esc(st.label) + " &middot; " + esc(st.verantwortung) + (s.wer ? " &middot; beteiligt: " + esc(s.wer) : "") + (s.kritisch ? " &middot; kritisch f&uuml;r das Level" : "") + "</small></span></li>";
-  });
-  TERMINE.forEach(function (t) {
-    f.push('<li><span class="u3-wann">' + esc(t.wann) + '</span><span class="u3-punkt"></span><span><b>' + esc(t.was) + "</b><small>" + esc(t.info) + " &middot; " + esc(t.zusatz) + "</small></span></li>");
-  });
-  f.push('<li class="ist-level"><span class="u3-wann">' + esc(akt.termin) + '</span><span class="u3-punkt"></span><span><b>Level ' + akt.nr + " erreicht: " + esc(name) + "</b><small>" + esc((akt.ergebnis || []).join(" ")) + "</small></span></li>");
-  var c = document.getElementById("u3-folge"); if (c) c.innerHTML = f.join("");
-  var cu = document.querySelector("[data-c-unter]");
-  if (cu) cu.textContent = "Bis Level " + akt.nr + " · " + name + " · " + akt.termin + ".";
 
-  // Umschalter A / B / C; der Plan (B) wird erst beim ersten Zeigen gebaut, damit er die volle Breite kennt
+  // Umschalter A / B; der Plan (B) wird erst beim ersten Zeigen gebaut, damit er die volle Breite kennt
   var knoepfe = document.querySelectorAll(".u3-umschalter button"), planGeladen = false;
   function zeige(v) {
     knoepfe.forEach(function (b) { b.setAttribute("aria-selected", b.getAttribute("data-ziel") === v ? "true" : "false"); });
@@ -1290,7 +1266,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   }
   knoepfe.forEach(function (b) { b.addEventListener("click", function () { zeige(b.getAttribute("data-ziel")); }); });
   var h = location.hash.replace("#", "");
-  zeige(h === "b" || h === "c" ? h : "a");
+  zeige(h === "b" ? h : "a");
 })();
 </script>
 <script src="/script.js"></script>

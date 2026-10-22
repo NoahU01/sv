@@ -92,7 +92,7 @@ DEV_KATEGORIEN = [
             (_EMP + "sv-ziel-ubahn-11.html", "1.1", "Weg zum Ergebnis · Sicht 1.1", "vereinfacht"),
             (_EMP + "sv-ziel-ubahn-12.html", "1.2", "Weg zum Ergebnis · Sicht 1.2", "nah am U-Bahn-Plan"),
         ]),
-        (_EMP + "sv-uebersicht-3.html", "3.0", "Übersicht 3.0", "Stand oben in drei Varianten · Ergebnisse nach dem Strategiemodell"),
+        (_EMP + "sv-uebersicht-3.html", "3.0", "Übersicht 3.0", "Stand oben in zwei Varianten · Ergebnisse nach dem Strategiemodell"),
         (_EMP + "sitemap.html", "\u25a6", "Sitemap", "Alle Seiten der SV Akademie · mit Vorschau"),
     ]),
     # Die Homepage der SV Akademie – Sprungziel aus dem Projekt, hier wird sie weiterentwickelt
