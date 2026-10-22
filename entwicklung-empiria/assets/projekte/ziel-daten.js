@@ -181,9 +181,7 @@ window.ZIEL_DATEN = {
    "meilenstein": "m2",
    "titel": "MAK",
    "status": "offen",
-   "braucht": [
-    "t1-1-webseite"
-   ],
+   "braucht": [],
    "ergebnis": "",
    "details": [
     "Planung",
