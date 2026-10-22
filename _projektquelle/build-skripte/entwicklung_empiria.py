@@ -99,7 +99,7 @@ def bauen(rel):
 
     # 3. Hauptnavigation und Kontakt raus
     s = re.sub(r'\s*<nav class="nav-links"[^>]*>.*?</nav>', '', s, count=1, flags=re.S)
-    s = re.sub(r'\s*<a class="btn btn--dark[^"]*"[^>]*href="[^"]*#kontakt">.*?</a>', '', s, flags=re.S)
+    s = re.sub(r'\s*<a class="btn btn--dark[^"]*"[^>]*href="[^"]*(?:#kontakt|/kontakt\.html)">.*?</a>', '', s, flags=re.S)   # alte und neue empiria-Fassung
 
     # 4. Mobiles Menü: nur das Menü „/ Entwicklung /“ bleibt
     m = re.search(r'(<nav class="mobile-menu"[^>]*>)(.*?)(<!-- ENTWICKLUNG:START)', s, re.S)

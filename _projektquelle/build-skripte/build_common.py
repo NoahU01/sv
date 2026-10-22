@@ -88,6 +88,7 @@ DEV_KATEGORIEN = [
             ]),
             (_EMP + "sv-projektplanung.html", "PP", "Projektplanung", "Termine, Agenden und der Meilensteinplan"),
         ]),
+        (_EMP + "sitemap.html", "\u25a6", "Sitemap", "Alle Seiten der SV Akademie · mit Vorschau"),
     ]),
     # Die Homepage der SV Akademie – Sprungziel aus dem Projekt, hier wird sie weiterentwickelt
     ("Homepage", [
