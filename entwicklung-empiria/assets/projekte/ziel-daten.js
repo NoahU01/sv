@@ -430,9 +430,7 @@ window.ZIEL_DATEN = {
    "meilenstein": "m1",
    "titel": "SV-Pulskanal",
    "status": "offen",
-   "braucht": [
-    "sa-1-hal"
-   ],
+   "braucht": [],
    "ergebnis": "",
    "details": [],
    "wer": "",

@@ -180,6 +180,9 @@
       var xs = rueck ? x1 + ABST / 2 : x2 - ABST / 2;
       return [[x1, y1], [xs, y1], [xs, y2], [x2, y2]];
     }
+    function freiStart(v) {   // ohne Zuführung: keine Stufe, keine frühere Vorarbeit, kein Vorgänger auf der eigenen Linie
+      return !(v.braucht || []).some(function (b) { return MS[b] || !imPlan[b] || S[b].strang === v.strang; });
+    }
     // Woher kommt eine Strecke in den Halt? aus der eigenen Linie, aus einem Stufenhalt – oder frei
     liste.forEach(function (s) {
       var f = STR[s.strang].farbe, x2 = xVon(s), y2 = yVon(s), linieRein = false;
@@ -194,7 +197,8 @@
         }
         var v = S[b], x1 = xVon(v), y1 = yVon(v);
         if (v.strang === s.strang) {
-          var pk = weg(x1, y1, x2, y2, unter[b] > unter[s.id]);
+          // frei beginnender Strang auf einer Nebenstrecke bleibt auf seiner Strecke und mündet erst kurz vor dem Halt ein
+          var pk = weg(x1, y1, x2, y2, unter[b] > unter[s.id] && !freiStart(v));
           var nachMain = function (id) { return liste.some(function (n) { return n.strang === s.strang && unter[n.id] === 0 && (n.braucht || []).indexOf(id) > -1; }); };
           var vorMain = function (n) { return (n.braucht || []).some(function (x) { return imPlan[x] && S[x].strang === n.strang && unter[x] === 0; }); };
           if (pk.length === 4 && unter[b] === 0 && unter[s.id] > 0 && nachMain(b)) pk = pk.slice(1);
@@ -207,10 +211,11 @@
           quer += '<path d="' + rund([[x1, y1], [x1, yk], [x2, yk], [x2, y2]]) + '" stroke="' + (blass(s.id) ? "#dedad4" : "#8a857d") + '" stroke-width="2" fill="none" stroke-dasharray="3 5"/>';
         }
       });
-      // frei startend: kurzer Einlauf ohne Verbindung nach hinten
+      // frei startend: eigene kurze Strecke mit Kopfbahnhof (Querstrich) – „kann sofort los“
       if (!linieRein) {
-        var band0 = START + bandStart[s.meilenstein] * ABST + bandNr[s.meilenstein] * HALT;
-        strecke(weg(Math.max(band0 - (bandNr[s.meilenstein] ? 8 : 26), 0) + (bandNr[s.meilenstein] ? 12 : 0), linieY[s.strang], x2, y2, false), f, s.status !== "offen", blass(s.id));
+        var xa = x2 - ABST * 0.42, geg = s.status !== "offen";
+        strecke([[xa, y2], [x2, y2]], f, geg, blass(s.id));
+        strecke([[xa, y2 - 9], [xa, y2 + 9]], f, geg, blass(s.id));
       }
       // Auslauf: Halt ohne Nachfolger auf der eigenen Linie endet im Stufenhalt seiner Stufe, wenn er einfließt
       var weiter = D.schritte.some(function (n) { return n.strang === s.strang && imPlan[n.id] && (n.braucht || []).indexOf(s.id) > -1; });
