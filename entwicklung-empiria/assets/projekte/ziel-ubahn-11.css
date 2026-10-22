@@ -1,0 +1,75 @@
+/* Weg zum Ergebnis – U-Bahn-Plan als Management-Cockpit (Daniel, 22.10.2026)
+   Im Cockpit: eine Schrift (Poppins), zwei Größen (.84rem / .74rem), zwei Farben (#111 / Grau).
+   Farbe nur für die Stoßrichtungen. Ziel: auf dem Laptop ohne Scrollen vollständig im Blick. */
+.ub-seite{padding-top:clamp(20px,2.4vw,32px)!important}
+.ub-titel{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;margin-bottom:16px}
+.ub-titel .kicker{margin:0}
+.ub-titel h1{font-size:clamp(1.6rem,2.4vw,2.1rem);margin:0;line-height:1.15}
+
+.ub-cockpit{background:#fff;border:1px solid #e8e5e0;border-radius:16px;padding:0 0 10px;font-size:.84rem;color:#111}
+.ub-kopfzeile{display:flex;align-items:center;gap:14px;padding:0 18px;border-bottom:1px solid #efece7}
+.ub-kopfzeile #ub-stufen{flex:1;min-width:0;align-self:stretch}
+.ub-etikett{flex:none;font-size:.74rem;font-weight:600;color:#111}
+.ub-legende-zeile{display:flex;flex-wrap:wrap;align-items:center;gap:6px 18px;padding:10px 18px;border-bottom:1px solid #efece7;font-size:.74rem;color:var(--grey-50,#8a8a8a)}
+.ub-legende-zeile span{display:inline-flex;align-items:center;gap:6px}
+.ub-legende-zeile .ub-etikett{margin-right:2px}
+
+/* Reiter der Ergebnisstufen */
+.ub-reiter{display:flex;gap:2px;overflow-x:auto;height:100%}
+.ub-reiter button{flex:none;border:0;background:none;font:inherit;color:var(--grey-50,#8a8a8a);text-align:left;padding:12px 14px 10px;border-bottom:2px solid transparent;margin-bottom:-1px;cursor:pointer}
+.ub-reiter button b{display:block;font-size:.84rem;font-weight:500}
+.ub-reiter button small{display:block;font-size:.74rem;margin-top:1px}
+.ub-reiter button:hover{color:#111}
+.ub-reiter button[aria-selected="true"]{color:#111;border-bottom-color:#111}
+.ub-reiter button[aria-selected="true"] b{font-weight:600}
+
+/* Erklärung und Legende auf Abruf */
+.ub-infos{position:relative;display:flex;align-items:center;gap:8px;flex:none}
+.ub-info{border:1px solid #e0dcd5;background:#fff;border-radius:999px;padding:5px 12px;font:inherit;font-size:.74rem;color:#111;cursor:pointer}
+.ub-info:hover,.ub-info[aria-expanded="true"]{border-color:#111}
+.ub-pop--info{top:calc(100% - 4px);right:0;width:340px}
+.ub-pop ul{margin:6px 0 0;padding-left:16px}
+.ub-pop li + li{margin-top:3px}
+.ub-pop .ub-legende{list-style:none;padding:0;display:grid;gap:6px}
+.ub-pop .ub-legende li{display:flex;align-items:center;gap:10px;margin:0}
+.ub-pop .ub-legende svg{flex:none;width:34px}
+
+/* Plan */
+.ub-rahmen{display:flex;align-items:flex-start;padding:10px 0 0}
+.ub-spalte{flex:none;width:190px;position:relative;border-right:1px solid #efece7}
+.ub-bahn{position:absolute;left:18px;right:10px;display:flex;align-items:center;gap:10px}
+.ub-linie{flex:none;min-width:32px;height:28px;padding:0 6px;border-radius:7px;color:#fff;font-weight:600;font-size:.74rem;display:flex;align-items:center;justify-content:center}
+.ub-bahn b{display:block;font-size:.84rem;font-weight:600;line-height:1.25}
+.ub-bahn small{display:block;font-size:.74rem;color:var(--grey-50,#8a8a8a);margin-top:1px}
+.ub-scroll{overflow-x:auto;flex:1;min-width:0;padding:0 0 4px;cursor:grab}
+.ub-scroll.ub-zieht{cursor:grabbing;user-select:none}
+.ub-flaeche{position:relative}
+.ub-svg{position:absolute;left:0;top:0}
+.ub-grenze{stroke:#d9d5ce;stroke-width:1.2;stroke-dasharray:3 4}
+.ub-grenze-name{position:absolute;top:0;transform:translateX(-50%);white-space:nowrap;font-size:.74rem;color:var(--grey-50,#8a8a8a)}
+.ub-ausruf{font:600 9px/1 Poppins,sans-serif;fill:#fff}
+.ub-name{position:absolute;border:0;background:none;padding:0;font:inherit;font-size:.74rem;line-height:1.3;font-weight:500;color:#111;text-align:center;cursor:pointer;hyphens:auto}
+.ub-name--oben{transform:translateY(-100%)}
+.ub-name:hover{text-decoration:underline;text-underline-offset:3px}
+.ub-name--erreicht,.ub-name--offen,.ub-name--frei,.ub-name--wartet{color:var(--grey-50,#8a8a8a)}
+.ub-name--aktiv{font-weight:600}
+.ub-name--blass{color:#c9c5bf}
+.ub-treffer{position:absolute;width:32px;height:32px;border:0;background:none;padding:0;cursor:pointer;border-radius:50%}
+.ub-halt-name{position:absolute;transform:translateX(-50%);white-space:nowrap;text-align:center}
+.ub-halt-name b{display:block;font-size:.74rem;font-weight:600}
+.ub-halt-name small{display:block;font-size:.74rem;color:var(--grey-50,#8a8a8a)}
+.ub-halt-name--ende{transform:translateY(-50%);text-align:left;white-space:normal;width:130px}
+.ub-halt-name--ende b{font-size:.84rem}
+.ub-halt-name--start{transform:none;text-align:left}
+.ub-endhalt b{display:block;font-size:.84rem;font-weight:600}
+.ub-endhalt small{display:block;font-size:.74rem;color:var(--grey-50,#8a8a8a);margin-top:1px}
+
+/* Fenster: an der Station und für Erklärung/Legende */
+.ub-pop{position:absolute;z-index:20;width:300px;box-sizing:border-box;padding:14px 16px;background:#fff;border:1px solid #e8e5e0;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.08);font-size:.74rem;line-height:1.5;color:#111;cursor:default;text-align:left}
+.ub-pop p{margin:0}
+.ub-pop p + p{margin-top:6px}
+.ub-pop-titel{font-size:.84rem;font-weight:600}
+.ub-pop-meta{color:var(--grey-50,#8a8a8a)}
+.zv-varianten{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+.zv-varianten a{font-size:.84rem;padding:6px 14px;border:1px solid #d9d5ce;border-radius:999px;color:inherit;text-decoration:none;background:#fff}
+.zv-varianten a[aria-current="page"]{background:#111;color:#fff;border-color:#111}

@@ -304,10 +304,24 @@
     pop.className = "ub-pop"; pop.innerHTML = h;
     flaeche.appendChild(pop);
     var px = parseFloat(punkt.style.left) + 16, py = parseFloat(punkt.style.top) + 16;
-    var links = Math.min(Math.max(8, px - 150), flaeche.offsetWidth - 308);
-    var unten = py + 34 + pop.offsetHeight < flaeche.offsetHeight || py < pop.offsetHeight + 40;
-    pop.style.left = links + "px";
-    pop.style.top = (unten ? py + 34 : py - 34 - pop.offsetHeight) + "px";
+    // Position wählen, die keinen Halt auf dem Weg dorthin verdeckt (Reihenfolge: rechts, unten, oben, links)
+    var W = pop.offsetWidth, H = pop.offsetHeight, FW = flaeche.offsetWidth, FH = flaeche.offsetHeight;
+    var weg = vorlauf([id]), halte = [];
+    planEl.querySelectorAll(".ub-treffer").forEach(function (t) {
+      if (t.getAttribute("data-station") === id) return;
+      halte.push({ x: parseFloat(t.style.left) + 16, y: parseFloat(t.style.top) + 16, wichtig: !!weg[t.getAttribute("data-station")] });
+    });
+    var kandidaten = [[px + 70, py - 24], [px - W / 2, py + 64], [px - W / 2, py - H - 64], [px - 70 - W, py - 24]];
+    var best = null;
+    kandidaten.forEach(function (k, i) {
+      var x = Math.min(Math.max(4, k[0]), FW - W - 4), y = Math.min(Math.max(4, k[1]), FH - H - 4), wert = i * 0.1;
+      halte.forEach(function (h) {   // Halt samt Namen: etwas Rand um den Punkt
+        if (h.x > x - 50 && h.x < x + W + 50 && h.y > y - 50 && h.y < y + H + 40) wert += h.wichtig ? 10 : 1;
+      });
+      if (!best || wert < best.w) best = { x: x, y: y, w: wert };
+    });
+    pop.style.left = best.x + "px";
+    pop.style.top = best.y + "px";
   }
   // Klick irgendwo daneben löst die Auswahl
   document.addEventListener("click", function (e) {
