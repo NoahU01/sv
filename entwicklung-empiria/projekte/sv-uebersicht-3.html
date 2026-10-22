@@ -1,0 +1,964 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SV Akademie &middot; &Uuml;bersicht 3.0 &ndash; empiria</title>
+<meta name="description" content="SV Akademie: Projektsteuerung – wo wir stehen und was als Nächstes kommt.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../assets/projekte/projekte.css">
+<link rel="stylesheet" href="../assets/projekte/dashboard.css">
+<link rel="stylesheet" href="../assets/projekte/ziel-ubahn-12.css">
+<style>
+/* Übersicht 3.0 – oben der Stand (Varianten A, B, C), darunter Ergebnisse nach dem Strategiemodell, ganz unten das Vorgehen */
+.u3-seite{padding-top:clamp(28px,4vw,56px)!important}
+.u3-kopf{margin-bottom:clamp(24px,3vw,36px)}
+.u3-kicker{display:flex;align-items:center;gap:12px;margin:0 0 14px;font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#111}
+.u3-kicker::before{content:"";width:28px;height:3px;background:#111}
+.u3-h1{font-family:var(--font-serif);font-weight:700;font-size:clamp(2.6rem,6vw,4.4rem);line-height:1.05;letter-spacing:-.01em;margin:0 0 16px}
+.u3-satz{max-width:720px;margin:0 0 26px;font-size:1.02rem;line-height:1.6;color:#555}
+.u3-stand{display:block;margin-top:4px;font-size:.85rem;color:#8a857d}
+.u3-umschalter{display:inline-flex;gap:4px;padding:5px;background:#e9e6e1;border-radius:999px;flex-wrap:wrap}
+.u3-umschalter button{display:inline-flex;align-items:center;gap:10px;font:500 .92rem/1 Poppins,sans-serif;color:#555;background:none;border:0;border-radius:999px;padding:8px 18px 8px 8px;cursor:pointer}
+.u3-umschalter button span{width:26px;height:26px;border-radius:50%;background:#fff;color:#111;display:inline-flex;align-items:center;justify-content:center;font-weight:600;font-size:.8rem}
+.u3-umschalter button[aria-selected="true"]{background:#111;color:#fff}
+.u3-umschalter button[aria-selected="true"] span{background:var(--yellow,#ffed00);color:#111}
+.ue-block{background:#fff;border:1px solid #e8e5e0;border-radius:18px;padding:clamp(20px,3vw,34px);margin-bottom:18px}
+.ue-block h2{font-family:var(--font-serif);font-weight:700;font-size:clamp(1.25rem,2vw,1.5rem);margin:0 0 4px}
+.ue-unter{margin:0 0 22px;color:#555;font-size:.95rem}
+.ue-zeile{display:flex;align-items:center;justify-content:space-between;gap:20px;border:1px solid #e8e5e0;border-radius:14px;padding:16px 20px;color:inherit;text-decoration:none;margin-top:24px}
+.ue-zeile:hover{border-color:#111}
+.ue-zeile b{display:block;font-weight:600}
+.ue-zeile small{color:#555;font-size:.9rem}
+.u3-variante[hidden]{display:none}
+.u3-h3{font:600 .95rem/1.3 Poppins,sans-serif;margin:0 0 12px}
+.u3-link{display:inline-block;margin-top:14px;font-size:.9rem;color:#111;text-decoration:none;border-bottom:1px solid #cfcac2}
+.u3-link:hover{border-color:#111}
+/* Kopf des aktuellen Levels */
+.u3-level{margin-bottom:26px;padding-bottom:22px;border-bottom:1px solid #efece7}
+.u3-level .u3-meta{margin:0 0 4px;font-size:.88rem;color:#8a857d}
+.u3-level h2{margin:0 0 8px}
+.u3-level .u3-wenn{margin:0;max-width:820px;font-size:.95rem;line-height:1.6;color:#555}
+/* A: Stränge in Sätzen */
+.u3-a-raster{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:clamp(24px,4vw,56px)}
+.u3-strang{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:18px 0;border-top:1px solid #efece7}
+.u3-strang:first-child{border-top:0;padding-top:0}
+.u3-marke{width:32px;height:32px;border-radius:8px;color:#fff;font-weight:600;font-size:.78rem;display:flex;align-items:center;justify-content:center}
+.u3-strang-kopf{margin:0 0 8px;font-size:.95rem}
+.u3-strang-kopf b{font-weight:600}
+.u3-strang-kopf span{color:#8a857d;font-size:.88rem;margin-left:6px}
+.u3-zeilen{list-style:none;margin:0;padding:0;display:grid;gap:5px}
+.u3-zeilen li{display:grid;grid-template-columns:96px 1fr;gap:12px;font-size:.95rem;line-height:1.45}
+.u3-zeilen li > span:first-child{color:#8a857d;font-size:.88rem;padding-top:1px}
+.u3-zeilen .ist-laeuft > span:last-child{font-weight:600}
+.u3-zeilen small{font-weight:400;color:#8a857d;font-size:.88rem}
+.u3-termine{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.u3-termine li{font-size:.95rem;line-height:1.45}
+.u3-termine b{display:block;font-weight:600}
+.u3-termine small{display:block;color:#8a857d;font-size:.88rem}
+.u3-termine-spalte{border-left:1px solid #efece7;padding-left:clamp(20px,3vw,40px)}
+/* B: Plan */
+.u3-b-legende .ub-legende-zeile{padding:0 0 6px;border:0;justify-content:flex-start;flex-wrap:wrap}
+.u3-b-plan{margin:0 calc(-1 * clamp(20px,3vw,34px));border-top:1px solid #efece7;border-bottom:1px solid #efece7}
+.u3-b-plan .ub-pop{z-index:5}
+.u3-b-fuss{margin-top:22px}
+.u3-termine--quer{grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px 32px}
+/* C: Folge */
+.u3-folge{list-style:none;margin:0;padding:0}
+.u3-folge li{display:grid;grid-template-columns:150px 18px 1fr;gap:16px;padding:14px 0;border-top:1px solid #efece7;font-size:.95rem;line-height:1.45}
+.u3-folge li:first-child{border-top:0;padding-top:0}
+.u3-folge .u3-wann{color:#8a857d;font-size:.88rem;padding-top:1px}
+.u3-folge .u3-punkt{width:12px;height:12px;border-radius:50%;border:2px solid #111;background:#fff;margin-top:5px}
+.u3-folge .ist-laeuft .u3-punkt{background:#111}
+.u3-folge .ist-level .u3-punkt{border-radius:3px;width:6px;height:16px;border-width:3px;margin-top:2px;margin-left:2px}
+.u3-folge b{display:block;font-weight:600}
+.u3-folge small{display:block;color:#8a857d;font-size:.88rem}
+/* Ergebnisse nach dem Strategiemodell */
+.u3-modell{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.u3-modell > li{border:1px solid #e8e5e0;border-radius:14px;padding:18px 18px 16px;display:flex;flex-direction:column}
+.u3-modell-kopf{display:flex;align-items:center;gap:10px;margin:0 0 6px;font-size:1rem}
+.u3-modell-kopf b{font-weight:600}
+.u3-nr{width:26px;height:26px;border-radius:50%;border:1.5px solid #111;display:inline-flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:600}
+.ist-fertig .u3-nr{background:#111;color:#fff}
+.u3-frage{min-height:2.9em;margin:0 0 4px;font-size:.88rem;color:#8a857d;line-height:1.45}
+.u3-zustand{margin:0 0 14px;font-size:.88rem;color:#8a857d}
+.u3-zustand::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;border:1.5px solid #111;margin-right:7px;vertical-align:1px}
+.ist-fertig .u3-zustand::before{background:#111}
+.u3-liste{list-style:none;margin:0;padding:12px 0 0;border-top:1px solid #efece7;display:grid;gap:8px}
+.u3-liste a{display:flex;justify-content:space-between;gap:10px;font-size:.95rem;color:#111;text-decoration:none}
+.u3-liste a::after{content:"\2192";color:#8a857d}
+.u3-liste a:hover{text-decoration:underline;text-underline-offset:3px}
+/* So gehen wir vor */
+.u3-vorgehen summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:20px;cursor:pointer}
+.u3-vorgehen summary::-webkit-details-marker{display:none}
+.u3-sum-h{display:block;font-family:var(--font-serif);font-weight:700;font-size:clamp(1.25rem,2vw,1.5rem)}
+.u3-sum-unter{display:block;margin-top:4px;color:#555;font-size:.95rem}
+.u3-pfeil{width:12px;height:12px;border-right:2px solid #111;border-bottom:2px solid #111;transform:rotate(45deg);margin-right:6px;transition:transform .2s}
+.u3-vorgehen[open] .u3-pfeil{transform:rotate(-135deg)}
+.u3-vorgehen-raster{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(24px,3vw,44px);margin-top:26px;padding-top:24px;border-top:1px solid #efece7}
+.u3-text h3{font:600 .95rem/1.3 Poppins,sans-serif;margin:16px 0 6px}
+.u3-text h3:first-child{margin-top:0}
+.u3-text p,.u3-text li{font-size:.95rem;line-height:1.6;color:#555}
+.u3-text p{margin:0 0 10px}
+.u3-text .fl-ziel-liste{padding-left:18px;margin:0 0 10px}
+.u3-vorgehen .pj-methodenliste{margin-top:6px}
+@media (max-width:1000px){
+ .u3-modell{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .u3-vorgehen-raster{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+ .u3-a-raster{grid-template-columns:1fr}
+ .u3-termine-spalte{border-left:0;padding-left:0;border-top:1px solid #efece7;padding-top:18px}
+ .u3-modell{grid-template-columns:1fr}
+ .u3-folge li{grid-template-columns:18px 1fr;gap:12px}
+ .u3-folge .u3-wann{grid-column:2}
+ .u3-folge .u3-punkt{grid-row:1 / span 2}
+}
+</style>
+<style>/* Projekt-Repository SV – mit Vorrang, weil die Menüregeln von empiria im Seitenkörper stehen */.site-header .nav,.site-header .wrap{justify-content:flex-start!important;gap:0!important}.site-header .brand{margin-right:0!important}.site-header .dev-dd-long,.site-header .dev-dd-short{display:none!important}.site-header .dev-dd{margin-left:.4rem!important;position:relative!important;right:auto!important;top:auto!important;bottom:auto!important;display:inline-flex!important;align-items:center}.site-header .dev-dd-toggle{padding:6px!important;border-radius:6px;gap:0!important}.site-header .dev-dd-toggle:hover,.site-header .dev-dd.is-open .dev-dd-toggle{background:rgba(0,0,0,.05)}.site-header .dev-dd-chev{width:14px;height:14px}.site-header .dev-dd .dev-dd-panel{left:-14px!important;right:auto!important}.site-header .dev-dd--corner .dev-dd-flyout{left:100%!important;right:auto!important;padding-left:10px!important;padding-right:0!important}.dev-dd-empty{margin:0 8px 4px;padding:6px 0;font-size:13px;color:var(--grey-50,#8a8a8a)}@media (max-width:900px){.site-header .dev-dd .dev-dd-panel{position:fixed!important;left:16px!important;right:16px!important;top:72px!important;width:auto!important;max-height:calc(100vh - 88px);overflow:auto}.site-header .dev-dd .dev-dd-flyout{position:static!important;opacity:1!important;visibility:visible!important;padding:0!important}.site-header .dev-dd .dev-dd-flyout-panel{width:auto;padding:0 0 0 12px;margin:2px 0 6px 20px;background:none;border:0;border-left:2px solid #eee;border-radius:0;box-shadow:none}.site-header .dev-dd a.dev-dd-link--parent::after{display:none}}</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<!-- Eigene Strichzeichen fuer die Methoden. Bewusst keine CD-Formen
+     (Forward, Kreuz, Raute, Kreis, Quadrat) - die stehen fuer die
+     Leistungen des Hauses und sind belegt. -->
+<symbol id="mi-modell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4.5 18.5h15"/><path d="M6.5 13.5h11"/><path d="M8.5 8.5h7"/><path d="M12 3.5v1.6"/>
+</symbol>
+<symbol id="mi-regeln" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M20.5 14.5a2 2 0 0 1-2 2H9l-4.5 3.5v-3.5h-1a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2h15a2 2 0 0 1 2 2z"/>
+  <path d="M8 9.8l2.6 2.6L16 7"/>
+</symbol>
+<symbol id="mi-zielgruppe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.4"/><circle cx="12" cy="12" r=".9" fill="currentColor" stroke="none"/>
+</symbol>
+<symbol id="mi-werkstatt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4 19.5 10.5 13"/><path d="M14.5 3.5a4.5 4.5 0 0 0-3.9 6.7L4 16.8 7.2 20l6.6-6.6a4.5 4.5 0 0 0 6.7-3.9l-2.8 2.8-3.2-.9-.9-3.2z"/>
+</symbol>
+<symbol id="mi-protokoll" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M6 3.5h9l4 4V20a.5.5 0 0 1-.5.5h-12A.5.5 0 0 1 6 20V4a.5.5 0 0 1 .5-.5z"/>
+  <path d="M14.5 3.5V8h4.2"/><path d="M9 12.5h6M9 16h4"/>
+</symbol>
+<symbol id="zi-fundament" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M4 20h16"/><path d="M6.5 20v-6.5h11V20"/><path d="M12 3.5 19 9H5l7-5.5z"/>
+</symbol>
+<symbol id="zi-zielbild" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="3" y="4.5" width="18" height="15" rx="2.5"/><path d="M3 15.5 8.5 11l4 3.5 3-2.5L21 16"/>
+  <circle cx="8.5" cy="8.8" r="1.4"/>
+</symbol>
+<symbol id="zi-weg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="5.5" cy="18.5" r="2.3"/><circle cx="18.5" cy="5.5" r="2.3"/>
+  <path d="M7.8 18.5h5.4a3.4 3.4 0 0 0 0-6.8h-2.4a3.4 3.4 0 0 1 0-6.8h5.4"/>
+</symbol>
+<symbol id="zi-dokument" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M6.5 3.5h7L19 9v11.5a.5.5 0 0 1-.5.5h-12a.5.5 0 0 1-.5-.5v-16a.5.5 0 0 1 .5-.5z"/>
+  <path d="M13.2 3.5V9H19"/><path d="M9 13h6M9 16.5h4"/>
+</symbol>
+<symbol id="zi-fenster" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="3" y="4.5" width="18" height="15" rx="2.5"/><path d="M3 9h18"/>
+  <circle cx="6.4" cy="6.8" r=".7" fill="currentColor" stroke="none"/>
+  <circle cx="8.8" cy="6.8" r=".7" fill="currentColor" stroke="none"/>
+</symbol>
+</defs></svg>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="ic-forward" viewBox="0 0 232.44 232.44">
+      <path fill="currentColor" d="M124.63,201.36c-7.96-.02-14.41-6.49-14.39-14.43,0-2.73.78-5.38,2.24-7.69l40.09-63.07-40.08-63c-4.25-6.77-2.2-15.67,4.52-19.89,2.28-1.43,4.91-2.19,7.59-2.2h43.03c7.41.02,14.18,3.76,18.12,10.02l40.52,63.6c4.45,7.01,4.45,16.05,0,23.04l-40.54,63.64c-3.92,6.22-10.69,9.97-18.08,9.99h-43.01ZM125.11,45.72l42.32,66.52c1.52,2.4,1.53,5.46,0,7.86l-42.34,66.62h42.54c2.33,0,4.48-1.2,5.73-3.18l40.55-63.66c1.41-2.22,1.41-5.09,0-7.31l-40.53-63.62c-1.27-2.02-3.42-3.21-5.77-3.21h-42.51Z"/>
+      <path fill="currentColor" d="M60.23,201.36H17.22c-7.96-.02-14.41-6.49-14.39-14.43,0-2.72.78-5.38,2.24-7.68l40.09-63.08L5.08,53.2c-4.26-6.72-2.26-15.63,4.45-19.88,2.31-1.46,4.97-2.23,7.69-2.24h43c7.41.01,14.18,3.76,18.13,10.02l40.52,63.6c4.45,7.01,4.45,16.05,0,23.04l-40.54,63.64c-3.93,6.23-10.7,9.97-18.1,9.99ZM17.68,45.72l42.34,66.52c1.52,2.4,1.53,5.46,0,7.86l-42.34,66.62h42.53c2.34,0,4.49-1.2,5.74-3.18l40.55-63.66c1.41-2.22,1.41-5.09,0-7.31l-40.53-63.62c-1.27-2.02-3.42-3.21-5.77-3.21H17.68Z"/>
+    </symbol>
+<symbol id="ic-kreis" viewBox="0 0 232.44 232.44">
+      <path fill="currentColor" d="M116.22,22.83c51.49,0,93.39,41.89,93.39,93.39s-41.89,93.39-93.39,93.39S22.83,167.71,22.83,116.22,64.73,22.83,116.22,22.83M116.22,2.83C53.6,2.83,2.83,53.6,2.83,116.22s50.76,113.39,113.39,113.39,113.39-50.76,113.39-113.39S178.84,2.83,116.22,2.83h0Z"/>
+    </symbol>
+<symbol id="ic-kreuz" viewBox="0 0 232.44 232.44">
+      <path fill="currentColor" d="M162.06,27.36l43.02,43.02-31.7,31.7-14.14,14.14,14.14,14.14,31.7,31.7-43.02,43.02-31.7-31.7-14.14-14.14-14.14,14.14-31.7,31.7-43.02-43.02,31.7-31.7,14.14-14.14-14.14-14.14-31.7-31.7,43.02-43.02,31.7,31.7,14.14,14.14,14.14-14.14,31.7-31.7M162.06,2.83c-2.32,0-4.64.89-6.41,2.66l-39.43,39.43L76.79,5.49c-1.77-1.77-4.09-2.66-6.41-2.66-2.32,0-4.64.88-6.41,2.66L5.49,63.97c-3.54,3.54-3.54,9.28,0,12.82l39.43,39.43L5.49,155.65c-3.54,3.54-3.54,9.28,0,12.82l58.48,58.48c1.77,1.77,4.09,2.66,6.41,2.66s4.64-.89,6.41-2.66l39.43-39.43,39.43,39.43c1.77,1.77,4.09,2.66,6.41,2.66s4.64-.89,6.41-2.66l58.48-58.48c3.54-3.54,3.54-9.28,0-12.82l-39.43-39.43,39.43-39.43c3.54-3.54,3.54-9.28,0-12.82L168.47,5.49c-1.77-1.77-4.09-2.66-6.41-2.66h0Z"/>
+    </symbol>
+<symbol id="ic-raute" viewBox="0 0 232.44 232.44">
+      <path fill="currentColor" d="M116.22,27.03l89.19,89.19-89.19,89.19L27.03,116.22,116.22,27.03M116.22,2.83c-2.53,0-5.06.96-6.99,2.89L5.73,109.23c-3.86,3.86-3.86,10.11,0,13.97l103.51,103.51c1.93,1.93,4.46,2.89,6.99,2.89s5.06-.96,6.99-2.89l103.51-103.51c3.86-3.86,3.86-10.11,0-13.97L123.21,5.73c-1.93-1.93-4.46-2.89-6.99-2.89h0Z"/>
+    </symbol>
+</defs></svg>
+
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="sv-akademie.html" aria-label="Projekt SV Akademie">
+      <img src="../assets/empiria-logo.svg" alt="empiria">
+    </a>
+<!-- ENTWICKLUNG:START (nur Sandbox – wird beim Push automatisch entfernt) -->
+<div class="dev-dd dev-dd--desktop" data-dev-dd>
+<button class="dev-dd-toggle" type="button" aria-expanded="false"><span class="dev-dd-long">/ Entwicklung /</span><span class="dev-dd-short" aria-hidden="true">/ Entw. /</span><svg class="dev-dd-chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+<div class="dev-dd-panel"><p class="dev-dd-note"><b>Nur in der Entwicklungsumgebung sichtbar</b>Dieser Menüpunkt ist in der Live-Version nicht enthalten.</p><p class="dev-dd-group">Unterseiten</p><p class="dev-dd-empty">Noch keine neuen Unterseiten.</p><p class="dev-dd-group dev-dd-group--sub">Steuerung</p><div class="dev-dd-sub"><a href="../../entwicklung-empiria/projekte/sv-akademie.html" class="dev-dd-link dev-dd-link--parent"><span class="dev-dd-tag">SV</span><span class="dev-dd-txt"><b>Übersicht</b><small>Projektübersicht · drei Module</small></span></a><div class="dev-dd-flyout"><div class="dev-dd-flyout-panel"><p class="dev-dd-group">Die Module</p><a href="../../entwicklung-empiria/projekte/sv-selbstverstaendnis.html" class="dev-dd-link"><span class="dev-dd-tag">1</span><span class="dev-dd-txt"><b>Selbstverständnis</b><small>Wofür stehen wir?</small></span></a><a href="../../entwicklung-empiria/projekte/sv-vision.html" class="dev-dd-link"><span class="dev-dd-tag">2</span><span class="dev-dd-txt"><b>Vision</b><small>Wie wollen wir wahrgenommen werden?</small></span></a><div class="dev-dd-sub"><a href="../../entwicklung-empiria/projekte/sv-strategie.html" class="dev-dd-link dev-dd-link--parent"><span class="dev-dd-tag">3</span><span class="dev-dd-txt"><b>Strategie</b><small>Wie kommen wir dorthin?</small></span></a><div class="dev-dd-flyout"><div class="dev-dd-flyout-panel"><p class="dev-dd-group">Darunter</p><a href="../../entwicklung-empiria/projekte/sv-strategie-ist.html" class="dev-dd-link"><span class="dev-dd-tag">IS</span><span class="dev-dd-txt"><b>Ist-Situation</b><small>SWOT-Logik und was einfließt</small></span></a><a href="../../entwicklung-empiria/projekte/sv-strategie-stossrichtungen.html" class="dev-dd-link"><span class="dev-dd-tag">ST</span><span class="dev-dd-txt"><b>Stoßrichtungen</b><small>Herkunft, Auswahl, Nachweis</small></span></a><a href="../../entwicklung-empiria/projekte/sv-meilensteine.html" class="dev-dd-link"><span class="dev-dd-tag">MS</span><span class="dev-dd-txt"><b>Meilensteinplan</b><small>Drei Stränge · fein, hell, dunkel</small></span></a><a href="../../entwicklung-empiria/projekte/sv-abstimmung-hal.html" class="dev-dd-link"><span class="dev-dd-tag">AG</span><span class="dev-dd-txt"><b>Agenda Vision & Strategie</b><small>Workshop mit dem Hauptabteilungsleiter</small></span></a></div></div></div><a href="../../entwicklung-empiria/projekte/sv-projektplanung.html" class="dev-dd-link"><span class="dev-dd-tag">PP</span><span class="dev-dd-txt"><b>Projektplanung</b><small>Termine, Agenden und der Meilensteinplan</small></span></a></div></div></div><div class="dev-dd-sub"><a href="../../entwicklung-empiria/projekte/sv-uebersicht-2.html" class="dev-dd-link dev-dd-link--parent"><span class="dev-dd-tag">2.0</span><span class="dev-dd-txt"><b>Übersicht 2.0</b><small>Neue Fassung · im Aufbau</small></span></a><div class="dev-dd-flyout"><div class="dev-dd-flyout-panel"><p class="dev-dd-group">Darunter</p><a href="../../entwicklung-empiria/projekte/sv-ziel-ubahn-11.html" class="dev-dd-link"><span class="dev-dd-tag">1.1</span><span class="dev-dd-txt"><b>Weg zum Ergebnis · Sicht 1.1</b><small>vereinfacht</small></span></a><a href="../../entwicklung-empiria/projekte/sv-ziel-ubahn-12.html" class="dev-dd-link"><span class="dev-dd-tag">1.2</span><span class="dev-dd-txt"><b>Weg zum Ergebnis · Sicht 1.2</b><small>nah am U-Bahn-Plan</small></span></a></div></div></div><a href="../../entwicklung-empiria/projekte/sv-uebersicht-3.html" class="dev-dd-link"><span class="dev-dd-tag">3.0</span><span class="dev-dd-txt"><b>Übersicht 3.0</b><small>Stand oben in drei Varianten · Ergebnisse nach dem Strategiemodell</small></span></a><a href="../../entwicklung-empiria/projekte/sitemap.html" class="dev-dd-link"><span class="dev-dd-tag">▦</span><span class="dev-dd-txt"><b>Sitemap</b><small>Alle Seiten der SV Akademie · mit Vorschau</small></span></a><p class="dev-dd-group dev-dd-group--sub">Homepage</p><div class="dev-dd-sub"><a href="../../index.html" class="dev-dd-link dev-dd-link--parent"><span class="dev-dd-tag">HP</span><span class="dev-dd-txt"><b>Startseite SV Akademie</b><small>Die Homepage, wie sie bislang ist</small></span></a><div class="dev-dd-flyout"><div class="dev-dd-flyout-panel"><p class="dev-dd-group">Die Unterseiten</p><a href="../../ueber-uns.html" class="dev-dd-link"><span class="dev-dd-tag">ÜU</span><span class="dev-dd-txt"><b>Über uns</b><small>Antrieb, Handlungsfelder, Team</small></span></a><div class="dev-dd-sub"><a href="../../quickcheck.html" class="dev-dd-link dev-dd-link--parent"><span class="dev-dd-tag">QC</span><span class="dev-dd-txt"><b>Quick-Check</b><small>Bedarfsklärung · drei Varianten</small></span></a><div class="dev-dd-flyout"><div class="dev-dd-flyout-panel"><p class="dev-dd-group">Die Varianten</p><a href="../../quickcheck-klaerung.html" class="dev-dd-link"><span class="dev-dd-tag">Q1</span><span class="dev-dd-txt"><b>Klärung Weiterbildungsbedarf</b><small>Für mich persönlich</small></span></a><a href="../../quickcheck-aufbau.html" class="dev-dd-link"><span class="dev-dd-tag">Q2</span><span class="dev-dd-txt"><b>Aufbau Bildungsthema</b><small>Für mein Team</small></span></a><a href="../../quickcheck-budget.html" class="dev-dd-link"><span class="dev-dd-tag">Q3</span><span class="dev-dd-txt"><b>Optimale Weiterbildung</b><small>Für meine Vertriebseinheit</small></span></a></div></div></div><a href="../../portal.html" class="dev-dd-link"><span class="dev-dd-tag">KI</span><span class="dev-dd-txt"><b>KI-Lernassistent</b><small>Vorschau Portal 24/7</small></span></a><a href="../../community.html" class="dev-dd-link"><span class="dev-dd-tag">CA</span><span class="dev-dd-txt"><b>Community-Austausch</b><small>Anmeldung & Agenda</small></span></a></div></div></div><p class="dev-dd-group dev-dd-group--sub">Archiv</p><p class="dev-dd-empty">Noch keine archivierten Stände.</p></div>
+</div>
+<style>
+.dev-dd{position:relative;display:inline-flex;align-items:center;margin-left:auto}
+.dev-dd-toggle{display:inline-flex;align-items:center;gap:.35rem;font-family:inherit;font-size:.95rem;font-weight:400;line-height:1.4;color:var(--grey-50);background:none;border:0;padding:0;cursor:pointer;white-space:nowrap;transition:color .18s ease}
+.dev-dd-toggle:hover,.dev-dd.is-open .dev-dd-toggle{color:var(--ink)}
+.dev-dd-chev{width:12px;height:12px;transition:transform .2s ease}
+.dev-dd.is-open .dev-dd-chev{transform:rotate(180deg)}
+.dev-dd-panel{position:absolute;top:calc(100% + 18px);right:-14px;width:390px;max-height:calc(100vh - 120px);overflow-y:auto;overscroll-behavior:contain;padding:12px;background:#fff;border:1px solid var(--grey-bg);border-radius:18px;box-shadow:0 20px 50px rgba(0,0,0,.14);opacity:0;visibility:hidden;transform:translateY(6px);transition:opacity .16s ease,transform .16s ease,visibility .16s ease;z-index:80;text-align:left}
+.dev-dd-panel::before{content:"";position:absolute;left:0;right:0;top:-20px;height:20px}
+.dev-dd.is-open .dev-dd-panel{opacity:1;visibility:visible;transform:none}
+.dev-dd-note{margin:0 0 14px;padding:11px 13px;background:#fff400;color:#1a1817;border-radius:10px;font-size:12px;line-height:1.45}
+.dev-dd-note b{display:block;font-size:13px;font-weight:600;margin-bottom:2px}
+.dev-dd-group{margin:4px 8px 8px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--grey-50);font-weight:600}
+.dev-dd-group--sub{margin-top:14px;padding-top:12px;border-top:1px solid var(--grey-bg)}
+a.dev-dd-link{display:flex;align-items:center;gap:12px;padding:9px 8px;border-radius:10px;color:var(--ink);text-decoration:none;border-bottom:0;font-size:inherit;min-height:0;white-space:normal}
+a.dev-dd-link:hover,a.dev-dd-link.is-current{background:var(--grey-bg);color:var(--ink)}
+a.dev-dd-link--indent{padding-left:30px}
+.dev-dd-tag{flex:0 0 32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:var(--ink);color:#fff;font-weight:600;font-size:12px}
+.dev-dd-link--muted .dev-dd-tag{background:var(--grey-bg);color:var(--grey-70)}
+.dev-dd-txt{display:flex;flex-direction:column;line-height:1.3;min-width:0}
+.dev-dd-txt b{font-weight:500;font-size:14px}
+.dev-dd-txt small{font-size:12px;color:var(--grey-50);margin-top:1px}
+/* ---- Zweite Ebene: oeffnet nach rechts, wie im Leistungen-Menue -----------
+   Das Panel sitzt am rechten Rand; gemessen bleiben dort auch bei 1280 px
+   Fensterbreite noch 277 px frei, das reicht fuer das Flyout. */
+.dev-dd-sub{position:relative}
+a.dev-dd-link--parent::after{content:"";width:6px;height:6px;margin-left:auto;flex:0 0 auto;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(-45deg);opacity:.45}
+.dev-dd-sub:hover>a.dev-dd-link--parent,.dev-dd-sub:focus-within>a.dev-dd-link--parent{background:var(--grey-bg)}
+.dev-dd-flyout{position:absolute;left:100%;top:-10px;padding-left:10px;opacity:0;visibility:hidden;transition:opacity .16s ease,visibility .16s ease;z-index:81}
+.dev-dd-sub:hover>.dev-dd-flyout,.dev-dd-sub:focus-within>.dev-dd-flyout,.dev-dd-flyout.is-auf{opacity:1;visibility:visible}
+.dev-dd-sub.is-auf>a.dev-dd-link--parent{background:var(--grey-bg)}
+.dev-dd-flyout-panel{width:262px;padding:10px;background:#fff;border:1px solid var(--grey-bg);border-radius:14px;box-shadow:0 20px 50px rgba(0,0,0,.14)}
+.dev-dd-flyout-panel .dev-dd-group{margin:2px 8px 6px}
+.dev-dd--mobile{display:none}
+.dev-dd-short{display:none}
+@media (min-width:901px) and (max-width:1140px){
+.dev-dd--desktop .dev-dd-long{display:none}
+.dev-dd--desktop .dev-dd-short{display:inline}
+.dev-dd--desktop ~ .nav-cta{margin-left:1.1rem;padding-left:1.6rem;padding-right:1.6rem}
+}
+@media (max-width:900px){
+.nav .dev-dd--desktop{display:none}
+.mobile-menu .dev-dd--mobile{display:block;margin:0}
+.mobile-menu .dev-dd-toggle{display:flex;width:100%;justify-content:space-between;padding:14px 0;font-size:1.15rem;border-bottom:1px solid #f2f2f2}
+.mobile-menu .dev-dd-panel{position:static;width:auto;max-height:none;overflow:visible;display:none;opacity:1;visibility:visible;transform:none;box-shadow:none;border:0;border-left:2px solid var(--grey-bg);border-radius:0;margin:10px 0 6px;padding:0 0 0 12px}
+.mobile-menu .dev-dd-panel::before{display:none}
+.mobile-menu .dev-dd.is-open .dev-dd-panel{display:block}
+.mobile-menu a.dev-dd-link{padding:9px 8px;font-size:inherit;border-bottom:0}
+.mobile-menu a.dev-dd-link--indent{padding-left:30px}
+.mobile-menu .dev-dd-panel{overflow:auto}
+.mobile-menu .dev-dd-flyout{position:static;opacity:1;visibility:visible;padding-left:0}
+.mobile-menu .dev-dd-flyout-panel{width:auto;padding:0 0 0 12px;margin:2px 0 6px 20px;background:none;border:0;border-left:2px solid var(--grey-bg);border-radius:0;box-shadow:none}
+.mobile-menu a.dev-dd-link--parent::after{display:none}
+}
+</style>
+<script>
+(function(){
+function init(){
+var here=location.href.split('#')[0].split('?')[0];
+document.querySelectorAll('[data-dev-dd]').forEach(function(d){
+var b=d.querySelector('.dev-dd-toggle'),t;
+function desk(){return window.innerWidth>900;}
+function set(o){d.classList.toggle('is-open',o);b.setAttribute('aria-expanded',String(o));}
+b.addEventListener('click',function(e){e.stopPropagation();set(desk()&&d.matches(':hover')?true:!d.classList.contains('is-open'));});
+d.addEventListener('mouseenter',function(){if(desk()){clearTimeout(t);set(true);}});
+d.addEventListener('mouseleave',function(){if(desk()){t=setTimeout(function(){set(false);},180);}});
+document.addEventListener('click',function(e){if(!d.contains(e.target))set(false);});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false);});
+d.querySelectorAll('.dev-dd-link').forEach(function(a){if(a.href&&a.href.split('#')[0]===here)a.classList.add('is-current');});
+
+var panel=d.querySelector('.dev-dd-panel');
+
+// ---- Zweite Ebene -------------------------------------------------------
+// Das Panel muss scrollen, seit es vier Kategorien hat (gemessen: 834px
+// Inhalt bei 680px Platz auf einem 900er Bildschirm). Ein Flyout darin wuerde
+// mitgeschnitten. position:fixed hilft nicht - die Kopfzeile hat einen
+// backdrop-filter und wird dadurch zum Bezugsrahmen fuer fixed. Das Flyout
+// haengt sich beim Oeffnen deshalb unter .dev-dd um: dort ist es absolut
+// positioniert, aber ausserhalb des scrollenden Panels.
+// Weil :hover dort nicht mehr traegt, steuert eine Klasse die Sichtbarkeit.
+panel&&panel.querySelectorAll(':scope>.dev-dd-sub').forEach(function(s){
+var f=s.querySelector(':scope>.dev-dd-flyout');if(!f)return;
+var heim=f.parentNode,nachbar=f.nextSibling,t2;
+function heimholen(){
+clearTimeout(t2);f.classList.remove('is-auf');s.classList.remove('is-auf');
+if(f.parentNode!==heim){heim.insertBefore(f,nachbar);f.removeAttribute('style');}
+}
+function auf(){
+if(!desk()){heimholen();return;}
+clearTimeout(t2);
+if(f.parentNode!==d)d.appendChild(f);
+var z=s.getBoundingClientRect(),dr=d.getBoundingClientRect(),
+    k=f.firstElementChild.getBoundingClientRect();
+// Rechts daneben, wenn Platz ist - sonst nach links gekippt.
+if(z.right+10+k.width>window.innerWidth-12){
+f.style.left=(z.left-dr.left-10-k.width)+'px';
+f.style.paddingLeft='0';f.style.paddingRight='10px';
+}else{
+f.style.left=(z.right-dr.left)+'px';
+f.style.paddingLeft='';f.style.paddingRight='';
+}
+// Senkrecht an der Zeile, aber nie unter den Fensterrand.
+var oben=z.top-dr.top-10,grenze=window.innerHeight-12-k.height-dr.top;
+f.style.top=Math.max(-dr.top+12,Math.min(oben,grenze))+'px';
+f.classList.add('is-auf');s.classList.add('is-auf');
+}
+function zu(){t2=setTimeout(function(){f.classList.remove('is-auf');s.classList.remove('is-auf');},180);}
+s.addEventListener('mouseenter',auf);
+s.addEventListener('focusin',auf);
+s.addEventListener('mouseleave',zu);
+f.addEventListener('mouseenter',function(){clearTimeout(t2);});
+f.addEventListener('mouseleave',zu);
+panel.addEventListener('scroll',function(){if(f.classList.contains('is-auf'))auf();});
+window.addEventListener('resize',heimholen);
+});
+
+// ---- Dritte Ebene -------------------------------------------------------
+// Die bleibt, wo sie ist: ihr Elternteil ist bereits aus dem Panel heraus,
+// dort wird nichts mehr abgeschnitten. Sie braucht nur die Kippung nach
+// links, weil rechts neben der zweiten Ebene kein Platz mehr ist.
+d.querySelectorAll('.dev-dd-flyout .dev-dd-sub').forEach(function(s){
+var f=s.querySelector(':scope>.dev-dd-flyout');if(!f)return;
+function platzieren(){
+f.style.top='';f.style.left='';f.style.right='';f.style.paddingLeft='';f.style.paddingRight='';
+if(!desk())return;
+f.style.top='-10px';
+var r=f.firstElementChild.getBoundingClientRect(),z=s.getBoundingClientRect();
+if(z.right+10+r.width>window.innerWidth-12){
+f.style.left='auto';f.style.right='100%';
+f.style.paddingLeft='0';f.style.paddingRight='10px';
+}
+var u=f.getBoundingClientRect().bottom-(window.innerHeight-12);
+if(u>0)f.style.top=(-10-u)+'px';
+}
+s.addEventListener('mouseenter',platzieren);
+s.addEventListener('focusin',platzieren);
+window.addEventListener('resize',function(){f.removeAttribute('style');});
+});
+});
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- ENTWICKLUNG:END -->
+  </div>
+</header>
+
+<main class="vt-falt vt-falt--grau">
+
+  <section class="section section--eng u3-seite">
+    <div class="container">
+
+      <header class="u3-kopf">
+        <p class="u3-kicker">Projekt &middot; SV SparkassenVersicherung</p>
+        <h1 class="u3-h1">SV Akademie.</h1>
+        <p class="u3-satz">Wir schaffen die beste Akademie der Versicherungsbranche und stellen die menschliche Wettbewerbsf&auml;higkeit im KI-Zeitalter sicher. <span class="u3-stand">Stand: 22.10.2026</span></p>
+        <div class="u3-umschalter" role="tablist" aria-label="Variante">
+          <button type="button" role="tab" data-ziel="a" aria-selected="true"><span>A</span>Stand je Strang</button>
+          <button type="button" role="tab" data-ziel="b" aria-selected="false"><span>B</span>Plan</button>
+          <button type="button" role="tab" data-ziel="c" aria-selected="false"><span>C</span>N&auml;chste Schritte</button>
+        </div>
+      </header>
+
+      <!-- Variante A: aktuelles Level, je Strang in Sätzen, rechts die Termine -->
+      <section class="ue-block u3-variante" data-v="a" aria-label="Wo wir stehen">
+        <div class="u3-level" data-level-kopf></div>
+        <div class="u3-a-raster">
+          <div class="u3-straenge" id="u3-straenge"></div>
+          <aside class="u3-termine-spalte">
+            <h3 class="u3-h3">Termine</h3>
+            <ul class="u3-termine" data-termine></ul>
+            <a class="u3-link" href="../projekte/sv-projektplanung.html">Gesamter Zeitplan <span aria-hidden="true">&#8594;</span></a>
+          </aside>
+        </div>
+        <a class="ue-zeile" href="../projekte/sv-ziel-ubahn-12.html"><span><b>Weg zum Ergebnis</b><small>Alle Ergebnislevel mit allen Schritten und Abh&auml;ngigkeiten</small></span><span aria-hidden="true">&#8594;</span></a>
+      </section>
+
+      <!-- Variante B: der Plan des aktuellen Levels, darunter die Termine -->
+      <section class="ue-block u3-variante" data-v="b" aria-label="Wo wir stehen" hidden>
+        <div class="u3-level" data-level-kopf></div>
+        <div class="u3-b-legende">
+        <div class="ub-legende-zeile" aria-label="Legende">
+          <span><svg width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="11" r="8.75" fill="#fff" stroke="#111" stroke-width="4.5"/></svg>in Arbeit</span>
+          <span><svg width="16" height="22" viewBox="0 0 16 22"><circle cx="8" cy="11" r="5.5" fill="#fff" stroke="#111" stroke-width="2.5"/></svg>erledigt</span>
+          <span><svg width="20" height="22" viewBox="0 0 20 22"><circle cx="10" cy="11" r="8.5" fill="#fff" stroke="#a39e96" stroke-width="3"/></svg>kommt noch</span>
+          <span><svg width="30" height="10"><line x1="4" y1="5" x2="26" y2="5" stroke="#111" stroke-width="8" stroke-linecap="round"/></svg>erledigt</span>
+          <span><svg width="30" height="10"><line x1="4" y1="5" x2="26" y2="5" stroke="#dedad4" stroke-width="8" stroke-linecap="round"/></svg>offen</span>
+          <span><svg width="26" height="20"><line x1="3" y1="3" x2="3" y2="17" stroke="#111" stroke-width="4" stroke-linecap="round"/><line x1="3" y1="10" x2="24" y2="10" stroke="#111" stroke-width="4" stroke-linecap="round"/></svg>beginnt eigenst&auml;ndig</span>
+          <span><svg width="30" height="10"><line x1="2" y1="5" x2="28" y2="5" stroke="#8a857d" stroke-width="2" stroke-dasharray="3 5"/></svg>Abh&auml;ngigkeit</span>
+          <span><svg width="16" height="24"><rect x="3" y="3" width="10" height="18" rx="5" fill="#fff" stroke="#111" stroke-width="3"/></svg>Ergebnislevel</span>
+        </div>
+        </div>
+        <div id="ub-stufen" hidden></div>
+        <div class="u3-b-plan"><div id="ub-plan" data-skript="../assets/projekte/ziel-ubahn-12.js"></div></div>
+        <div class="u3-b-fuss">
+          <h3 class="u3-h3">Termine</h3>
+          <ul class="u3-termine u3-termine--quer" data-termine></ul>
+        </div>
+        <a class="ue-zeile" href="../projekte/sv-ziel-ubahn-12.html"><span><b>Weg zum Ergebnis</b><small>Alle Ergebnislevel mit allen Schritten und Abh&auml;ngigkeiten</small></span><span aria-hidden="true">&#8594;</span></a>
+      </section>
+
+      <!-- Variante C: was jetzt ansteht, in zeitlicher Reihenfolge -->
+      <section class="ue-block u3-variante" data-v="c" aria-labelledby="u3-c-h" hidden>
+        <h2 id="u3-c-h">Was jetzt ansteht</h2>
+        <p class="ue-unter" data-c-unter></p>
+        <ol class="u3-folge" id="u3-folge"></ol>
+        <a class="ue-zeile" href="../projekte/sv-ziel-ubahn-12.html"><span><b>Weg zum Ergebnis</b><small>Alle Ergebnislevel mit allen Schritten und Abh&auml;ngigkeiten</small></span><span aria-hidden="true">&#8594;</span></a>
+      </section>
+
+      <!-- Ergebnisse, geordnet nach dem Strategiemodell -->
+      <section class="ue-block" aria-labelledby="u3-erg-h">
+        <h2 id="u3-erg-h">Ergebnisse</h2>
+        <p class="ue-unter">Geordnet nach dem Strategiemodell, nach dem wir vorgehen.</p>
+        <ol class="u3-modell">
+          <li class="ist-fertig">
+            <p class="u3-modell-kopf"><span class="u3-nr">1</span><b>Selbstverst&auml;ndnis</b></p>
+            <p class="u3-frage">Wof&uuml;r stehen wir?</p>
+            <p class="u3-zustand">abgeschlossen</p>
+            <ul class="u3-liste">
+              <li><a href="../projekte/sv-selbstverstaendnis.html">Das Selbstverst&auml;ndnis</a></li>
+              <li><a href="../assets/projekte/sv-akademie-selbstverstaendnis.pdf" target="_blank" rel="noopener">Leitbild als PDF</a></li>
+            </ul>
+          </li>
+          <li class="ist-dran">
+            <p class="u3-modell-kopf"><span class="u3-nr">2</span><b>Vision</b></p>
+            <p class="u3-frage">Wie wollen wir wahrgenommen werden?</p>
+            <p class="u3-zustand">in Arbeit</p>
+            <ul class="u3-liste">
+              <li><a href="../projekte/sv-vision.html">Die Vision</a></li>
+              <li><a href="../../index.html" target="_blank" rel="noopener">SharePoint SV Akademie</a></li>
+            </ul>
+          </li>
+          <li class="ist-dran">
+            <p class="u3-modell-kopf"><span class="u3-nr">3</span><b>Strategie</b></p>
+            <p class="u3-frage">Wie kommen wir dorthin?</p>
+            <p class="u3-zustand">in Arbeit</p>
+            <ul class="u3-liste">
+              <li><a href="../projekte/sv-strategie.html">Die Strategie</a></li>
+              <li><a href="../projekte/sv-strategie-ist.html">Ist-Situation</a></li>
+              <li><a href="../projekte/sv-strategie-stossrichtungen.html">Sto&szlig;richtungen</a></li>
+            </ul>
+          </li>
+          <li class="ist-dran">
+            <p class="u3-modell-kopf"><span class="u3-nr">4</span><b>Umsetzung</b></p>
+            <p class="u3-frage">Wie sichern wir die Zielerreichung?</p>
+            <p class="u3-zustand">l&auml;uft</p>
+            <ul class="u3-liste">
+              <li><a href="../projekte/sv-ziel-ubahn-12.html">Weg zum Ergebnis</a></li>
+              <li><a href="../projekte/sv-meilensteine.html">Meilensteinplan</a></li>
+              <li><a href="../projekte/sv-projektplanung.html">Projektplanung</a></li>
+            </ul>
+          </li>
+        </ol>
+      </section>
+
+      <!-- Wissensdatenbank: Ziel, Modell, Methoden – zugeklappt -->
+      <details class="ue-block u3-vorgehen">
+        <summary><span><span class="u3-sum-h">So gehen wir vor</span><span class="u3-sum-unter">Ziel, Vorgehensmodell und Methoden zum Nachlesen</span></span><span class="u3-pfeil" aria-hidden="true"></span></summary>
+        <div class="u3-vorgehen-raster">
+          <div class="u3-vorgehen-teil">
+            <h3 class="u3-h3">Das Ziel</h3>
+            <div class="u3-text">
+            <h3>USP Mensch</h3>
+                <p>In Zeiten von KI werden persönliche Beziehungen, Vertrauen und menschliche Nähe nicht nur im Vertrieb immer wichtiger. Sie werden zu einem zentralen USP der SV SparkassenVersicherung als klar positionierter Serviceversicherer. Wir schaffen die beste Akademie der Versicherungsbranche und stellen die menschliche Wettbewerbsfähigkeit im KI-Zeitalter sicher.</p>
+
+                <h3>Projekt-Scope</h3>
+                <p>Um dies zu realisieren, brauchen wir im Team, bei den Führungskräften und bei allen, die mit der Akademie arbeiten, ein gemeinsames Bild:</p>
+                <ul class="fl-ziel-liste">
+                  <li><b>Selbstverständnis</b> – Wofür stehen wir?</li>
+                  <li><b>Vision (klares Zielbild)</b> – Wie funktioniert die Akademie zukünftig?</li>
+                  <li><b>Strategie</b> – Wie kommen wir dorthin?</li>
+                </ul>
+
+                <h3>Kontinuierliche Umsetzung</h3>
+                <p>Selbstverständnis, Vision &amp; Strategie sind der Anfang, nicht der Projektabschluss. Alle Module werden mit Blick auf die Umsetzung im Alltag entwickelt.</p>
+            </div>
+          </div>
+          <div class="u3-vorgehen-teil">
+            <h3 class="u3-h3">Das Modell</h3>
+            <div class="u3-text">
+              <p>Wir gehen nach dem Strategiemodell von empiria vor: zuerst das Selbstverst&auml;ndnis, dann die Vision als konkretes Zielbild, dann die Strategie als Weg dorthin. Daraus folgen die Ergebnislevel und die Schritte der Umsetzung.</p>
+            </div>
+            <ul class="pj-methodenliste u3-knoepfe">
+              <li><button type="button" class="mk mk--klein" data-modal-target="ausgangslageModal"><span class="mk-text"><b>Womit das Projekt begonnen hat</b><small>Die Fragen, auf die das Projekt antwortet.</small></span><span class="mk-pfeil">&#8594;</span></button></li>
+            </ul>
+          </div>
+          <div class="u3-vorgehen-teil">
+            <h3 class="u3-h3">Die Methoden</h3>
+            <div class="u3-text"><p>Diese Werkzeuge haben wir im Projekt angewandt.</p></div>
+            <ul class="pj-methodenliste">
+                <li><button type="button" class="mk mk--klein" data-modal-target="strategiemodellModal">
+                  <span class="mk-ic"><svg><use href="#mi-modell"/></svg></span>
+                  <span class="mk-text"><b>Strategiemodell</b><small>Die Reihenfolge, in der wir arbeiten.</small></span>
+                  <span class="mk-pfeil">&#8594;</span>
+                </button></li>
+                <li><button type="button" class="mk mk--klein" data-modal-target="mZielgruppeModal">
+                  <span class="mk-ic"><svg><use href="#mi-zielgruppe"/></svg></span>
+                  <span class="mk-text"><b>Zielgruppenanalyse</b><small>Wen beeinflussen wir und wer beeinflusst uns?</small></span>
+                  <span class="mk-pfeil">&#8594;</span>
+                </button></li>
+                <li><button type="button" class="mk mk--klein" data-modal-target="mNeugruendungModal">
+                  <span class="mk-ic"><svg><use href="#mi-werkstatt"/></svg></span>
+                  <span class="mk-text"><b>Gedankliche Neugründung</b><small>Wie würden wir heute gründen – ohne Altlasten?</small></span>
+                  <span class="mk-pfeil">&#8594;</span>
+                </button></li>
+                <li><button type="button" class="mk mk--klein" data-modal-target="swotModal">
+                  <span class="mk-ic"><svg><use href="#mi-protokoll"/></svg></span>
+                  <span class="mk-text"><b>SWOT-Analyse</b><small>Systematische Ableitung strategischer Stoßrichtungen</small></span>
+                  <span class="mk-pfeil">&#8594;</span>
+                </button></li>
+                <li><button type="button" class="mk mk--klein" data-modal-target="mGrundregelnModal">
+                  <span class="mk-ic"><svg><use href="#mi-regeln"/></svg></span>
+                  <span class="mk-text"><b>Grundregeln für erfolgreiche Kommunikation</b><small>Welche Bedeutung hat Dein Thema für die Zielgruppe?</small></span>
+                  <span class="mk-pfeil">&#8594;</span>
+                </button></li>
+                </ul>
+          </div>
+        </div>
+      </details>
+
+    </div>
+  </section>
+
+</main>
+
+
+<footer class="site-footer">
+  <div class="container footer-row">
+    <span>empiria GmbH 2026</span>
+    <span class="footer-links"><a href="../impressum.html">Impressum</a> <span>|</span> <a href="../datenschutz.html">Datenschutz</a> <span>|</span> <button type="button" data-cookie-settings>Cookie-Einstellungen</button></span>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="ausgangslageModal" data-generic>
+  <div class="modal-wrap">
+    <button class="modal-close" aria-label="Schließen">&times;</button>
+    <div class="modal">
+      <div class="modal-structure-head">
+        <h3>Ausgangssituation</h3>
+        <p>Warum das Projekt läuft.</p>
+      </div>
+      <!-- INHALT BITTE SETZEN: Hier gehoert der echte Anlass hinein - der
+           Stand, den Du aus den Gespraechen mit der Akademie kennst. Bis
+           dahin stehen hier nur die Fragen, die das Projekt beantwortet;
+           erfundene Befunde stehen hier bewusst nicht. -->
+      <div class="pj-modal-text">
+        <p>Die Fragen, auf die das Projekt eine Antwort geben soll:</p>
+        <ul>
+          <li>Wofür steht die Akademie – und wofür ausdrücklich nicht?</li>
+          <li>Was haben Mitarbeitende und Vertriebspartner konkret davon?</li>
+          <li>Woran lässt sich erkennen, ob ein Format gewirkt hat?</li>
+          <li>Wie entscheidet die Akademie künftig, was sie anbietet und was nicht?</li>
+        </ul>
+        <p class="pj-hinweis">Der konkrete Anlass aus den Gesprächen ist hier noch nicht
+          hinterlegt – gib ihn mir, dann steht er an dieser Stelle.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal-overlay" id="selbstverstaendnisModal" data-generic>
+  <div class="modal-wrap modal-wrap--structure">
+    <button class="modal-close" aria-label="Schließen">&times;</button>
+    <div class="modal modal--structure">
+      <div class="modal-structure-head">
+        <h3>Unser Selbstverständnis</h3>
+        <p>SV Akademie &middot; was uns antreibt, wofür wir stehen und wie wir zusammenarbeiten.</p>
+      </div>
+      <div class="pj-modal-bild">
+        <img src="../assets/projekte/sv-akademie-selbstverstaendnis-1.webp"
+             alt="Selbstverständnis der SV Akademie, alle Seiten" loading="lazy">
+      </div>
+      <div class="pj-modal-fuss">
+        <a class="btn btn--dark" href="../assets/projekte/sv-akademie-selbstverstaendnis.pdf" target="_blank" rel="noopener">Als PDF öffnen</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="mGrundregelnModal" data-generic>
+  <div class="modal-wrap modal-wrap--structure">
+    <button class="modal-close" aria-label="Schließen">&times;</button>
+    <div class="modal modal--structure modal--breit">
+      <div class="modal-structure-head">
+        <h3>Grundregeln für erfolgreiche Kommunikation</h3>
+        <p>Zwei Roll-ups aus dem Methodenkoffer &middot; für Gespräche mit Entscheidern</p>
+      </div>
+      <div class="pj-rollups">
+        <div class="pj-rollup">
+          <a class="pj-rollup-bild" href="../assets/downloads/EMP_01_rollup_golden_rules.pdf" target="_blank" rel="noopener">
+            <img src="../assets/downloads/rollup-golden-rules-thumb.jpg"
+                 alt="Roll-up: Die 3 goldenen Regeln für erfolgreiche Gespräche mit Entscheidern" loading="lazy">
+          </a>
+          <b>Die 3 goldenen Regeln</b>
+          <small>Mache Deine Zielgruppe erfolgreich. Spare ihr Arbeit. Zeige den nächsten
+            Schritt auf.</small>
+          <a class="btn btn--dark btn--sm" href="../assets/downloads/EMP_01_rollup_golden_rules.pdf" download>PDF herunterladen</a>
+        </div>
+        <div class="pj-rollup">
+          <a class="pj-rollup-bild" href="../assets/downloads/EMP_02_rollup_umsetzung.pdf" target="_blank" rel="noopener">
+            <img src="../assets/downloads/rollup-umsetzung-thumb.jpg"
+                 alt="Roll-up: Das gewünschte Ziel bei den Entscheidern in 15 Minuten erreichen" loading="lazy">
+          </a>
+          <b>In 15 Minuten zum Ziel</b>
+          <small>Auftragsklärung, Storyboard, Abbildung in der Präsentation, der Termin
+            selbst – in vier Schritten.</small>
+          <a class="btn btn--dark btn--sm" href="../assets/downloads/EMP_02_rollup_umsetzung.pdf" download>PDF herunterladen</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="svHomepageModal" data-generic>
+  <div class="modal-wrap modal-wrap--structure">
+    <button class="modal-close" aria-label="Schließen">&times;</button>
+    <div class="modal modal--structure">
+      <div class="modal-structure-head">
+        <h3>SharePoint SV Akademie</h3>
+        <p>Die Vision, sichtbar gemacht: So wollen wir als beste Akademie wahrgenommen werden.</p>
+      </div>
+      <div class="pj-modal-bild">
+        <img src="../assets/projekte/sv-akademie-homepage.webp"
+             alt="Startseite der SV Akademie in voller Größe" loading="lazy">
+      </div>
+      <div class="pj-modal-fuss">
+        <a class="btn btn--dark" href="../../index.html" target="_blank" rel="noopener">Zum SharePoint gehen <span class="pj-extern" aria-label="öffnet in neuem Tab">&#8599;</span></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="strategiemodellModal" data-generic>
+  <div class="modal-wrap modal-wrap--structure">
+    <button class="modal-close" aria-label="Schließen">&times;</button>
+    <div class="modal modal--structure modal--strategiemodell">
+      <div class="modal-structure-head">
+        <h3>Unser Strategiemodell</h3>
+        <p>Vom Selbstverständnis bis in den Alltag deines Bereichs.</p>
+      </div>
+      <div class="modal-structure-layout">
+        <div class="modal-structure-frame" style="width:min(90vw, calc(66vh * 0.849)); aspect-ratio:900/1060">
+<svg viewBox="0 0 900 1060" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Strategiemodell: vom Selbstverständnis über Ausgangssituation, Vision und Strategie bis in den Alltag">
+<rect x="20" y="20" width="860" height="230" rx="16" fill="rgba(255,255,255,.025)" stroke="rgba(255,255,255,.28)" stroke-width="1.3" stroke-dasharray="5 5"/>
+<text x="450" y="50" text-anchor="middle" font-family="var(--font-sans)" font-size="11" font-weight="700" letter-spacing="1.2" fill="rgba(255,255,255,.85)">WOFÜR STEHEN WIR?</text>
+<text x="110" y="88" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="600" fill="rgba(255,255,255,.72)">Unternehmens-</text>
+<text x="110" y="103" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="600" fill="rgba(255,255,255,.72)">strategie</text>
+<rect x="72" y="130" width="76" height="90" rx="4" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.3)" stroke-width="1.2"/>
+<rect x="80" y="140.0" width="60.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<rect x="80" y="158.5" width="49.2" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<rect x="80" y="177.0" width="38.4" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<rect x="80" y="195.5" width="60.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<text x="270" y="88" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="600" fill="rgba(255,255,255,.72)">Führungs-</text>
+<text x="270" y="103" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="600" fill="rgba(255,255,255,.72)">verständnis</text>
+<rect x="232" y="130" width="76" height="90" rx="4" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.3)" stroke-width="1.2"/>
+<rect x="240" y="140.0" width="60.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<rect x="240" y="158.5" width="49.2" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<rect x="240" y="177.0" width="38.4" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<rect x="240" y="195.5" width="60.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<text x="440" y="88" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="600" fill="rgba(255,255,255,.72)">Zielgruppe:</text>
+<text x="440" y="103" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="600" fill="rgba(255,255,255,.72)">„What's in for me?“</text>
+<rect x="402" y="130" width="76" height="90" rx="4" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.3)" stroke-width="1.2"/>
+<rect x="410" y="140.0" width="60.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<rect x="410" y="158.5" width="49.2" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<rect x="410" y="177.0" width="38.4" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<rect x="410" y="195.5" width="60.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<circle cx="440" cy="175" r="0" fill="none"/>
+<line x1="540" y1="175" x2="610" y2="175" stroke="#fff400" stroke-width="2.2"/>
+<path d="M610,175 L598.8,179.8 L598.8,170.2Z" fill="#fff400"/>
+<circle cx="540" cy="175" r="4" fill="#fff400"/>
+<rect x="640" y="60" width="230" height="180" rx="12" fill="rgba(255,255,255,.06)"/>
+<rect x="658" y="90" width="70" height="110" rx="4" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.3)" stroke-width="1.2"/>
+<rect x="666" y="100.0" width="54.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<rect x="666" y="115.66666666666667" width="44.3" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<rect x="666" y="131.33333333333334" width="34.6" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<rect x="666" y="147.0" width="54.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<rect x="666" y="162.66666666666666" width="44.3" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<rect x="666" y="178.33333333333331" width="34.6" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<text x="802" y="142" text-anchor="middle" font-family="var(--font-serif)" font-size="19" font-weight="700" fill="rgba(255,255,255,.95)">Selbst-</text>
+<text x="802" y="166" text-anchor="middle" font-family="var(--font-serif)" font-size="19" font-weight="700" fill="rgba(255,255,255,.95)">verständnis</text>
+<circle cx="711" cy="240" r="4" fill="#fff400"/>
+<line x1="711" y1="240" x2="711" y2="300" stroke="#fff400" stroke-width="2.2"/>
+<path d="M711,300 L706.2,288.8 L715.8,288.8Z" fill="#fff400"/>
+<rect x="20" y="310" width="540" height="730" rx="16" fill="rgba(255,255,255,.025)" stroke="rgba(255,255,255,.28)" stroke-width="1.3" stroke-dasharray="5 5"/>
+<rect x="580" y="310" width="300" height="730" rx="16" fill="rgba(255,255,255,.025)" stroke="rgba(255,255,255,.28)" stroke-width="1.3" stroke-dasharray="5 5"/>
+<text x="290" y="340" text-anchor="middle" font-family="var(--font-sans)" font-size="11" font-weight="700" letter-spacing="1.2" fill="rgba(255,255,255,.85)">WIE KOMMEN WIR DORTHIN?</text>
+<text x="730" y="340" text-anchor="middle" font-family="var(--font-sans)" font-size="11" font-weight="700" letter-spacing="1.2" fill="rgba(255,255,255,.85)">WIE WOLLEN WIR</text>
+<text x="730" y="355" text-anchor="middle" font-family="var(--font-sans)" font-size="11" font-weight="700" letter-spacing="1.2" fill="rgba(255,255,255,.85)">WAHRGENOMMEN WERDEN?</text>
+<circle cx="730" cy="410" r="22" fill="none" stroke="#fff400" stroke-width="2.4"/>
+<text x="730" y="416" text-anchor="middle" font-family="var(--font-sans)" font-size="17" font-weight="700" fill="#fff">2</text>
+<text x="730" y="470" text-anchor="middle" font-family="var(--font-serif)" font-size="19" font-weight="700" fill="rgba(255,255,255,.95)">Vision</text>
+<circle cx="140" cy="530" r="22" fill="none" stroke="#fff400" stroke-width="2.4"/>
+<text x="140" y="536" text-anchor="middle" font-family="var(--font-sans)" font-size="17" font-weight="700" fill="#fff">1</text>
+<text x="140" y="590" text-anchor="middle" font-family="var(--font-serif)" font-size="19" font-weight="700" fill="rgba(255,255,255,.95)">Ausgangssituation</text>
+<line x1="170" y1="515" x2="700" y2="402" stroke="rgba(255,255,255,.8)" stroke-width="1.8"/>
+<path d="M700,402 L690.0,409.0 L688.0,399.6Z" fill="rgba(255,255,255,.8)"/>
+<line x1="700" y1="424" x2="425" y2="482.6" stroke="rgba(255,255,255,.8)" stroke-width="1.8"/>
+<path d="M425,482.6 L435.0,475.6 L437.0,485.0Z" fill="rgba(255,255,255,.8)"/>
+<circle cx="390" cy="470" r="28" fill="#000"/>
+<circle cx="390" cy="470" r="22" fill="#000" stroke="#fff400" stroke-width="2.4"/>
+<text x="390" y="476" text-anchor="middle" font-family="var(--font-sans)" font-size="17" font-weight="700" fill="#fff">3</text>
+<text x="390" y="530" text-anchor="middle" font-family="var(--font-serif)" font-size="19" font-weight="700" fill="rgba(255,255,255,.95)">Strategie</text>
+<text x="585" y="480" text-anchor="middle" font-family="var(--font-sans)" font-size="12" font-weight="700" letter-spacing="0.6" fill="rgba(255,255,255,.5)">Mission</text>
+<text x="140" y="625" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="600" fill="rgba(255,255,255,.72)">Heutiges Geschäfts- und</text>
+<text x="140" y="640" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="600" fill="rgba(255,255,255,.72)">Organisationsmodell</text>
+<text x="390" y="570" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="600" fill="rgba(255,255,255,.72)">Stoßrichtungen &</text>
+<text x="390" y="585" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="600" fill="rgba(255,255,255,.72)">Handlungsfelder</text>
+<line x1="730" y1="485" x2="730" y2="590" stroke="rgba(255,255,255,.35)" stroke-width="1.3"/>
+<text x="730" y="625" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="600" fill="rgba(255,255,255,.72)">Zukünftiges Geschäfts- und</text>
+<text x="730" y="640" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="600" fill="rgba(255,255,255,.72)">Organisationsmodell</text>
+<rect x="100" y="660" width="80" height="56" rx="4" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.3)" stroke-width="1.2"/>
+<rect x="108" y="670.0" width="64.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<rect x="108" y="680.0" width="52.5" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<rect x="108" y="690.0" width="41.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<rect x="108" y="700.0" width="64.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<rect x="350" y="610" width="80" height="56" rx="4" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.3)" stroke-width="1.2"/>
+<rect x="358" y="620.0" width="64.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<rect x="358" y="630.0" width="52.5" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<rect x="358" y="640.0" width="41.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<rect x="358" y="650.0" width="64.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<rect x="690" y="660" width="80" height="56" rx="4" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.3)" stroke-width="1.2"/>
+<rect x="698" y="670.0" width="64.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<rect x="698" y="680.0" width="52.5" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<rect x="698" y="690.0" width="41.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<rect x="698" y="700.0" width="64.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<line x1="390" y1="675" x2="390" y2="715" stroke="rgba(255,255,255,.35)" stroke-width="1.3"/>
+<text x="390" y="735" text-anchor="middle" font-family="var(--font-sans)" font-size="12.5" font-weight="700" fill="rgba(255,255,255,.85)">Detaillierung der Strategie</text>
+<line x1="390" y1="748" x2="390" y2="770" stroke="rgba(255,255,255,.35)" stroke-width="1.3"/>
+<line x1="165" y1="770" x2="415" y2="770" stroke="rgba(255,255,255,.35)" stroke-width="1.3"/>
+<line x1="165" y1="770" x2="165" y2="790" stroke="rgba(255,255,255,.35)" stroke-width="1.3"/>
+<line x1="415" y1="770" x2="415" y2="790" stroke="rgba(255,255,255,.35)" stroke-width="1.3"/>
+<text x="165" y="812" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="600" fill="rgba(255,255,255,.72)">Führungs- und</text>
+<text x="165" y="827" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="600" fill="rgba(255,255,255,.72)">Arbeitsalltag</text>
+<text x="415" y="812" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="600" fill="rgba(255,255,255,.72)">Strategie-</text>
+<text x="415" y="827" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="600" fill="rgba(255,255,255,.72)">kommunikation</text>
+<line x1="730" y1="730" x2="730" y2="790" stroke="rgba(255,255,255,.35)" stroke-width="1.3"/>
+<text x="730" y="812" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="600" fill="rgba(255,255,255,.72)">Positionierung</text>
+<text x="730" y="827" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="600" fill="rgba(255,255,255,.72)">& Pitch</text>
+<rect x="108" y="848" width="32" height="32" rx="6" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="1.2"/>
+<rect x="148" y="848" width="32" height="32" rx="6" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="1.2"/>
+<rect x="188" y="848" width="32" height="32" rx="6" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="1.2"/>
+<rect x="390" y="840" width="50" height="68" rx="4" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.3)" stroke-width="1.2"/>
+<rect x="398" y="850.0" width="34.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<rect x="398" y="860.4" width="27.9" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<rect x="398" y="870.8" width="21.8" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<rect x="398" y="881.2" width="34.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<rect x="398" y="891.6" width="27.9" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<rect x="686" y="840" width="40" height="68" rx="4" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.3)" stroke-width="1.2"/>
+<rect x="694" y="850.0" width="24.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<rect x="694" y="860.4" width="19.7" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<rect x="694" y="870.8" width="15.4" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<rect x="694" y="881.2" width="24.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<rect x="694" y="891.6" width="19.7" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<rect x="734" y="840" width="40" height="68" rx="4" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.3)" stroke-width="1.2"/>
+<rect x="742" y="850.0" width="24.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<rect x="742" y="860.4" width="19.7" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<rect x="742" y="870.8" width="15.4" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<rect x="742" y="881.2" width="24.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<rect x="742" y="891.6" width="19.7" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
+<path d="M147,930 L183,930 L165,944Z" fill="#fff400"/>
+<text x="165" y="970" text-anchor="middle" font-family="var(--font-sans)" font-size="12.5" font-weight="700" fill="#fff400">Wie sichern wir die</text>
+<text x="165" y="987" text-anchor="middle" font-family="var(--font-sans)" font-size="12.5" font-weight="700" fill="#fff400">Zielerreichung?</text>
+<path d="M397,930 L433,930 L415,944Z" fill="#fff400"/>
+<text x="415" y="970" text-anchor="middle" font-family="var(--font-sans)" font-size="12.5" font-weight="700" fill="#fff400">Wie erklären wir die</text>
+<text x="415" y="987" text-anchor="middle" font-family="var(--font-sans)" font-size="12.5" font-weight="700" fill="#fff400">Strategie intern?</text>
+<path d="M712,930 L748,930 L730,944Z" fill="#fff400"/>
+<text x="730" y="970" text-anchor="middle" font-family="var(--font-sans)" font-size="12.5" font-weight="700" fill="#fff400">Welches Problem lösen wir</text>
+<text x="730" y="987" text-anchor="middle" font-family="var(--font-sans)" font-size="12.5" font-weight="700" fill="#fff400">– und was macht uns</text>
+<text x="730" y="1004" text-anchor="middle" font-family="var(--font-sans)" font-size="12.5" font-weight="700" fill="#fff400">einzigartig?</text>
+</svg>
+        </div>
+        <div class="modal-structure-note-wrap">
+          <p class="modal-structure-note">Am Anfang steht die Frage, wofür dein Bereich steht. Die Antwort ist euer Selbstverständnis – die Basis für alles Weitere.</p>
+          <p class="modal-structure-note">Dann der Blick nach vorn: Wie wollt ihr wahrgenommen werden? Das ist die Vision. Der ehrliche Abgleich mit der Ausgangssituation zeigt, welche Strategie dorthin führt.</p>
+          <p class="modal-structure-note">Zum Schluss wird es konkret: im Führungs- und Arbeitsalltag, in der Kommunikation nach innen und in der Positionierung nach außen.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="mZielgruppeModal" data-generic>
+  <div class="modal-wrap">
+    <button class="modal-close" aria-label="Schließen">&times;</button>
+    <div class="modal">
+      <div class="modal-structure-head">
+        <h3>Zielgruppenanalyse</h3>
+        <p>Methode &middot; für Führungskräfte zum Nachmachen</p>
+      </div>
+      <div class="pj-modal-text">
+        <p><b>Wofür.</b> Bevor man beschreibt, was ein Bereich anbietet, muss klar sein, für
+          wen. Die Zielgruppenanalyse zwingt dazu, von den Menschen her zu denken statt vom
+          eigenen Angebot.</p>
+        <p><b>Wie.</b> In drei Durchgängen:</p>
+        <ul>
+          <li><b>Trennen</b> – Wer gehört dazu? Nicht „alle Mitarbeitenden“, sondern
+            unterscheidbare Gruppen mit unterschiedlichem Bedarf.</li>
+          <li><b>Zuhören</b> – Was ist für diese Gruppe der Anlass, zu uns zu kommen? Und was
+            hält sie ab?</li>
+          <li><b>Zuspitzen</b> – Welchen Satz würde die Gruppe über uns sagen, wenn sie
+            zufrieden ist? Der Satz ist das Ziel.</li>
+        </ul>
+        <p><b>Woran man merkt, dass es getragen hat.</b> Man kann für jede Gruppe in einem
+          Satz sagen, was sie davon hat – ohne das eigene Angebot aufzuzählen.</p>
+        <p class="pj-hinweis">Übertragbar auf jeden Bereich: Die Frage „Für wen sind wir da?“
+          lässt sich überall stellen, wo eine Abteilung ihren Nutzen erklären muss.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="mNeugruendungModal" data-generic>
+  <div class="modal-wrap">
+    <button class="modal-close" aria-label="Schließen">&times;</button>
+    <div class="modal">
+      <div class="modal-structure-head">
+        <h3>Gedankliche Neugründung</h3>
+        <p>Methode &middot; für Führungskräfte zum Nachmachen</p>
+      </div>
+      <div class="pj-modal-text">
+        <p><b>Wofür.</b> Stell Dir vor, Dein Bereich würde morgen als eigenes Unternehmen
+          gegründet. Keine gewachsenen Zuständigkeiten, kein „das haben wir immer so gemacht“ –
+          nur die Frage, wofür es ihn überhaupt gäbe. Wer so denkt, hört auf, das Bestehende
+          zu verteidigen, und fängt an, es zu begründen.</p>
+        <p><b>Wie.</b> Man stellt sich vor, der Bereich würde morgen als eigenes Unternehmen
+          gegründet – ohne Altlasten, ohne Besitzstände. Dann beantwortet man fünf Fragen:</p>
+        <ul>
+          <li>Welche Zielgruppe sprechen wir an?</li>
+          <li>Welches konkrete Problem lösen wir?</li>
+          <li>Welcher Nutzen entsteht daraus?</li>
+          <li>Was macht uns einzigartig?</li>
+          <li>Wie läuft die Zusammenarbeit ab?</li>
+        </ul>
+        <p><b>Die Probe.</b> Wie sähe die Homepage dieses Unternehmens aus? Eine Seite lässt
+          keine Unschärfe zu – was sich dort nicht in einem Satz erklären lässt, ist noch nicht
+          geklärt.</p>
+        <p class="pj-hinweis">In diesem Projekt ist daraus der Entwurf der Akademie-Startseite
+          entstanden.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="swotModal" data-generic>
+  <div class="modal-wrap">
+    <button class="modal-close" aria-label="Schließen">&times;</button>
+    <div class="modal">
+      <div class="modal-structure-head">
+        <h3>SWOT-Analyse</h3>
+        <p>Vier Felder, zwei Achsen – mehr ist es nicht.</p>
+      </div>
+      <div class="pj-modal-text">
+        <p>Die SWOT sortiert, was über eine Organisation bekannt ist, entlang von zwei Fragen:
+          Kommt es von innen oder von außen? Und hilft es oder behindert es?</p>
+        <ul>
+          <li><b>Stärken</b> – intern und hilfreich. Was können wir, das andere nicht können?</li>
+          <li><b>Schwächen</b> – intern und hinderlich. Woran scheitern wir regelmäßig selbst?</li>
+          <li><b>Chancen</b> – extern und hilfreich. Was verändert sich im Umfeld zu unseren Gunsten?</li>
+          <li><b>Risiken</b> – extern und hinderlich. Was könnte uns das Geschäft kosten?</li>
+        </ul>
+        <p>Der Wert liegt nicht in der Liste, sondern in den Kombinationen: Eine Stärke, die auf
+          eine Chance trifft, ergibt eine Stoßrichtung. Eine Schwäche, die auf ein Risiko
+          trifft, ergibt eine Baustelle, die man nicht liegen lassen darf.</p>
+        <p class="pj-hinweis">Deshalb ist die SWOT bei uns kein Selbstzweck – sie ist der
+          Zwischenschritt zwischen Ist-Analyse und Strategie.</p>
+      </div>
+
+      <div class="pj-modal-dok">
+        <a class="pj-modal-dok-bild" href="../assets/projekte/sv-swot-arbeitsauftrag.pdf" target="_blank" rel="noopener">
+          <img src="../assets/projekte/sv-swot-vorschau.webp" alt="Erste Seite des Arbeitsauftrags zur SWOT-Analyse" loading="lazy">
+        </a>
+        <div class="pj-modal-dok-text">
+          <b>Arbeitsauftrag zur Einzelübung</b>
+          <small>Die vier Schritte als Vorlage, mit den Leitfragen zu Stärken, Schwächen,
+            Chancen und Risiken. Vorbereitend ausgefüllt – jede Führungskraft für sich, aus
+            ihrer eigenen Sicht auf die Akademie. Das ist der erste Schritt; die gemeinsame
+            Auswertung und die Ableitung der Stoßrichtungen folgen darauf.</small>
+          <span class="pj-modal-dok-knoepfe">
+            <a class="btn btn--dark btn--sm" href="../assets/projekte/sv-swot-arbeitsauftrag.pdf" target="_blank" rel="noopener">PDF öffnen</a>
+            <a class="btn btn--ghost btn--sm" href="../assets/projekte/sv-swot-arbeitsauftrag.pdf" download>Herunterladen</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../assets/projekte/ziel-daten.js"></script>
+<script>
+/* Übersicht 3.0: Stand oben aus window.ZIEL_DATEN (dieselbe Quelle wie „Weg zum Ergebnis“) */
+(function () {
+  var D = window.ZIEL_DATEN; if (!D) return;
+  function esc(t) { return String(t == null ? "" : t).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  var STR = {}; D.straenge.forEach(function (s) { STR[s.id] = s; });
+  var MSNR = {}; D.meilensteine.forEach(function (m) { MSNR[m.id] = m.nr; });
+  // Termine im Projekt (wie in Übersicht 2.0)
+  var TERMINE = [
+    { wann: "November 2026", zusatz: "Termin folgt", was: "Abteilungsbesprechung SV Akademie (PW7)", info: "Einbindung des Teams" },
+    { wann: "08./09.12.2026", zusatz: "zwei Tage", was: "Strategieklausur", info: "Hotel Rössle" }
+  ];
+  // Aktuelles Level: das erste, in dem noch nicht alles erreicht ist
+  var akt = null;
+  D.meilensteine.forEach(function (m) {
+    if (akt) return;
+    if (D.schritte.some(function (s) { return s.meilenstein === m.id && s.status !== "erreicht"; })) akt = m;
+  });
+  akt = akt || D.meilensteine[D.meilensteine.length - 1];
+  var name = akt.titel || "Ergebnislevel " + akt.nr;
+
+  document.querySelectorAll("[data-level-kopf]").forEach(function (el) {
+    el.innerHTML = '<p class="u3-meta">Aktuelles Ergebnislevel &middot; Level ' + akt.nr + " von " + D.meilensteine.length + " &middot; " + esc(akt.termin) + "</p>" +
+      "<h2>" + esc(name) + "</h2>" +
+      '<p class="u3-wenn">Erreicht, wenn: ' + esc((akt.ergebnis || []).join(" ")) + "</p>";
+  });
+  var th = TERMINE.map(function (t) { return "<li><b>" + esc(t.was) + "</b><small>" + esc(t.wann) + " &middot; " + esc(t.info) + "</small></li>"; }).join("");
+  document.querySelectorAll("[data-termine]").forEach(function (el) { el.innerHTML = th; });
+
+  // A: je Strang erledigt / läuft / danach
+  var a = document.getElementById("u3-straenge");
+  if (a) a.innerHTML = D.straenge.map(function (st) {
+    var ss = D.schritte.filter(function (s) { return s.strang === st.id && s.meilenstein === akt.id; });
+    var zeilen = [], erl = ss.filter(function (s) { return s.status === "erreicht"; }).pop();
+    var lauf = ss.filter(function (s) { return s.status === "aktiv"; });
+    var nae = ss.filter(function (s) { return s.status === "offen"; })[0], spaeter = false;
+    if (!nae && !lauf.length) {   // in diesem Level nichts offen: nächster Schritt aus einem späteren Level
+      nae = D.schritte.filter(function (s) { return s.strang === st.id && s.status === "offen"; })[0]; spaeter = !!nae;
+    }
+    if (erl) zeilen.push("<li><span>erledigt</span><span>" + esc(erl.titel) + "</span></li>");
+    lauf.forEach(function (s) {
+      zeilen.push('<li class="ist-laeuft"><span>l&auml;uft</span><span>' + esc(s.titel) + (s.termin ? " <small>&middot; " + esc(s.termin) + "</small>" : "") + "</span></li>");
+    });
+    if (nae) zeilen.push("<li><span>" + (lauf.length ? "danach" : "als N&auml;chstes") + "</span><span>" + esc(nae.titel) + (spaeter ? " <small>&middot; Level " + MSNR[nae.meilenstein] + "</small>" : "") + "</span></li>");
+    return '<div class="u3-strang"><span class="u3-marke" style="background:' + st.farbe + '">' + esc(st.kurz) + "</span><div>" +
+      '<p class="u3-strang-kopf"><b>' + esc(st.label) + "</b><span>" + esc(st.verantwortung) + "</span></p>" +
+      '<ul class="u3-zeilen">' + zeilen.join("") + "</ul></div></div>";
+  }).join("");
+
+  // C: was jetzt ansteht – laufende Schritte, Termine, das Level selbst
+  var lauf = D.schritte.filter(function (s) { return s.status === "aktiv"; });
+  lauf.sort(function (x, y) { return (x.termin ? 1 : 0) - (y.termin ? 1 : 0); });
+  var f = lauf.map(function (s) {
+    var st = STR[s.strang];
+    return '<li class="ist-laeuft"><span class="u3-wann">' + (s.termin ? esc(s.termin) : "l&auml;uft") + '</span><span class="u3-punkt"></span><span><b>' + esc(s.titel) + "</b><small>" +
+      esc(st.label) + " &middot; " + esc(st.verantwortung) + (s.wer ? " &middot; beteiligt: " + esc(s.wer) : "") + (s.kritisch ? " &middot; kritisch f&uuml;r das Level" : "") + "</small></span></li>";
+  });
+  TERMINE.forEach(function (t) {
+    f.push('<li><span class="u3-wann">' + esc(t.wann) + '</span><span class="u3-punkt"></span><span><b>' + esc(t.was) + "</b><small>" + esc(t.info) + " &middot; " + esc(t.zusatz) + "</small></span></li>");
+  });
+  f.push('<li class="ist-level"><span class="u3-wann">' + esc(akt.termin) + '</span><span class="u3-punkt"></span><span><b>Level ' + akt.nr + " erreicht: " + esc(name) + "</b><small>" + esc((akt.ergebnis || []).join(" ")) + "</small></span></li>");
+  var c = document.getElementById("u3-folge"); if (c) c.innerHTML = f.join("");
+  var cu = document.querySelector("[data-c-unter]");
+  if (cu) cu.textContent = "Bis Level " + akt.nr + " · " + name + " · " + akt.termin + ".";
+
+  // Umschalter A / B / C; der Plan (B) wird erst beim ersten Zeigen gebaut, damit er die volle Breite kennt
+  var knoepfe = document.querySelectorAll(".u3-umschalter button"), planGeladen = false;
+  function zeige(v) {
+    knoepfe.forEach(function (b) { b.setAttribute("aria-selected", b.getAttribute("data-ziel") === v ? "true" : "false"); });
+    document.querySelectorAll(".u3-variante").forEach(function (s) { s.hidden = s.getAttribute("data-v") !== v; });
+    if (v === "b" && !planGeladen) {
+      planGeladen = true;
+      var p = document.getElementById("ub-plan"), sk = document.createElement("script");
+      sk.src = p.getAttribute("data-skript"); document.body.appendChild(sk);
+    }
+    try { history.replaceState(null, "", "#" + v); } catch (e) {}
+  }
+  knoepfe.forEach(function (b) { b.addEventListener("click", function () { zeige(b.getAttribute("data-ziel")); }); });
+  var h = location.hash.replace("#", "");
+  zeige(h === "b" || h === "c" ? h : "a");
+})();
+</script>
+<script src="../script.js"></script>
+</body>
+</html>
