@@ -113,3 +113,16 @@ falls in einem neuen Chat weitergearbeitet wird.
 - Menü „/ Entwicklung /“ (SV-Seiten und Projektseiten, gleiche Quelle `DEV_KATEGORIEN` in build_common.py):
   Strategie → SV Akademie mit allen Projektseiten; Homepage → Startseite mit Über uns, Quick-Check (3 Varianten),
   KI-Lernassistent, Community-Austausch.
+
+## Projekt nur noch hier – Stand 22.10.2026 (Branch daniel)
+- Die Projektseiten der SV Akademie liegen nur noch in diesem Repo. Die frühere Kopie im empiria-Repo
+  (Branch Daniel, site/projekte/sv-*) wird entfernt. Gepflegt wird ausschließlich in
+  `_projektquelle/entwicklung-empiria-quelle/`, gebaut mit `entwicklung_empiria.py`.
+- Werkzeuge aus empiria hierher umgezogen: `_projektquelle/werkzeuge/`
+  - `pdf-projekt/seiten_drucken.py` – Druckfassungen der Projektseiten (A3/A1)
+  - `pdf-agenda/agenda_pdf.py` – Agenda als PDF (liest sv-abstimmung-hal.html); Vorschaubild über
+    `werkzeuge/pdf-vorlage` im empiria-Repo (muss unter ~/Projekte/empiria liegen)
+  - `sv_plan_marken.py` – Marken im Meilensteinplan (setzt in die Originale, danach neu bauen)
+- Design mit festem Stand (Entscheidung A, Daniel 22.10.2026): `_projektquelle/cd/empiria-design.json`
+  hält Stildatei, Skript, Logos und Schriften aus empiria main fest. `cd_abgleich.py` zeigt, ob empiria
+  einen neuen Stand hat; übernommen wird nur nach Daniels Ja (`--uebernehmen`).
