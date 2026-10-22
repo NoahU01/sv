@@ -103,3 +103,21 @@
 
 /* Legende zentriert, ohne Trennstrich (Daniel, 22.10.2026) */
 .ub-steuerung .ub-legende-zeile{justify-content:center;border-top:0;margin-top:4px;padding-top:12px}
+
+/* Stufenkästen: Stufe und Datum oben, Titel bzw. Kern des Ergebnisses höchstens zweizeilig, ⓘ öffnet „Erreicht, wenn …“ */
+#ub-stufen{position:relative}
+.ub-kasten{position:relative;display:block;padding:10px 30px 10px 12px;min-height:0;outline:none}
+.ub-kasten:focus-visible{border-color:#111}
+.ub-kasten small{display:block;font-size:.74rem;color:var(--grey-50,#8a8a8a);margin:0 0 3px}
+.ub-kasten b{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:.84rem;font-weight:500;line-height:1.3;min-height:2.6em}
+.ub-kasten[aria-selected="true"] b{font-weight:600}
+.ub-kasten-nr{display:none}
+.ub-kasten-info{position:absolute;top:8px;right:8px;width:18px;height:18px;border-radius:50%;border:1px solid #c9c5bf;background:#fff;color:var(--grey-50,#8a8a8a);font:600 .66rem/1 Poppins,sans-serif;font-style:italic;display:flex;align-items:center;justify-content:center;padding:0;cursor:pointer}
+.ub-kasten-info:hover,.ub-kasten-info[aria-expanded="true"]{border-color:#111;color:#111}
+.ub-kasten[aria-selected="true"]{box-shadow:inset 0 0 0 1px #111;border-color:#111}
+.ub-steuerung .ub-pop--info{right:auto;width:320px}
+
+/* etwas weniger Luft über dem Titel – Stufe 2 passt so auch auf 1280×800 */
+.ub-seite{padding-top:14px!important}
+.ub-titel{margin-bottom:10px}
+.ub-rahmen{padding-top:6px}

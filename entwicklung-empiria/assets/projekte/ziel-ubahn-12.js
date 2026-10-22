@@ -49,56 +49,61 @@
   var stufenEl = document.getElementById("ub-stufen"), planEl = document.getElementById("ub-plan"), detailEl = document.getElementById("ub-detail");
 
   /* ---------- Ergebnisstufen als Reiter, Erklärung und Legende als kleines Fenster ---------- */
+  // Ergebnisstufen als Kästen: oben „Stufe n · Datum“, darunter Titel oder Kern des Ergebnisses (höchstens zwei Zeilen).
+  // Ein Klick auf den Kasten wechselt die Stufe; das ⓘ im Kasten öffnet „Erreicht, wenn …“ direkt darunter.
+  function kastenText(x) { return x.titel || ((x.ergebnis || [])[0] || "Stufe " + x.nr).split(":")[0].replace(/\.$/, ""); }
   function stufen() {
     var h = '<div class="ub-kaesten" role="tablist">';
     D.meilensteine.forEach(function (x) {
-      h += '<button type="button" role="tab" class="ub-kasten" data-ms="' + x.id + '" aria-selected="' + (x.id === zustandUI.ms) + '"><span class="ub-kasten-nr">' + x.nr + '</span><span><b>' + esc(x.titel || "Stufe " + x.nr) + "</b><small>" + esc(x.termin) + "</small></span></button>";
+      h += '<div role="tab" tabindex="0" class="ub-kasten" data-ms="' + x.id + '" aria-selected="' + (x.id === zustandUI.ms) + '">' +
+        '<small>Stufe ' + x.nr + " &middot; " + esc(x.termin) + "</small><b>" + esc(kastenText(x)) + "</b>" +
+        '<button type="button" class="ub-kasten-info" data-info-ms="' + x.id + '" aria-label="Erreicht, wenn …">i</button></div>';
     });
-    h += '<button type="button" role="tab" class="ub-kasten ub-kasten--ziel" data-ms="ziel" aria-selected="' + (zustandUI.ms === "ziel") + '"><span class="ub-kasten-nr"><svg width="10" height="10" viewBox="0 0 10 10"><rect x="1.5" y="1.5" width="7" height="7" rx="1.5" transform="rotate(45 5 5)" fill="currentColor"/></svg></span><span><b>Gesamtplan</b><small>bis zum Zielbild</small></span></button></div>';
+    h += '<div role="tab" tabindex="0" class="ub-kasten ub-kasten--ziel" data-ms="ziel" aria-selected="' + (zustandUI.ms === "ziel") + '">' +
+      "<small>Ziel &middot; alle Stufen</small><b>Gesamtplan</b>" +
+      '<button type="button" class="ub-kasten-info" data-info-ms="ziel" aria-label="Zielbild">i</button></div></div>';
     stufenEl.innerHTML = h;
-    stufenEl.querySelectorAll("[data-ms]").forEach(function (b) {
-      b.addEventListener("click", function () {
-        zustandUI.ms = b.getAttribute("data-ms"); zustandUI.station = null;
+    stufenEl.querySelectorAll("[data-ms]").forEach(function (k) {
+      function waehlen() {
+        zustandUI.ms = k.getAttribute("data-ms"); zustandUI.station = null;
         history.replaceState(null, "", "#" + zustandUI.ms);
         infoZu(); stufen(); plan(); detail();
+      }
+      k.addEventListener("click", waehlen);
+      k.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); waehlen(); } });
+    });
+    stufenEl.querySelectorAll("[data-info-ms]").forEach(function (b) {
+      b.addEventListener("click", function (e) {
+        e.stopPropagation();
+        var id = b.getAttribute("data-info-ms"), offen = infoPop && infoPop.getAttribute("data-fuer") === id;
+        infoZu();
+        if (offen) return;
+        var kasten = b.closest(".ub-kasten");
+        infoPop = document.createElement("div");
+        infoPop.className = "ub-pop ub-pop--info";
+        infoPop.setAttribute("data-fuer", id);
+        infoPop.innerHTML = infoInhalt(id);
+        stufenEl.appendChild(infoPop);
+        infoPop.style.left = Math.min(kasten.offsetLeft, stufenEl.offsetWidth - infoPop.offsetWidth) + "px";
+        infoPop.style.top = (kasten.offsetTop + kasten.offsetHeight + 8) + "px";
+        b.setAttribute("aria-expanded", "true");
       });
     });
   }
-  function infoInhalt(art) {
-    var m = msVon(zustandUI.ms);
-    if (art === "legende") {
-      var k = function (svg, t) { return "<li>" + svg + "<span>" + t + "</span></li>"; };
-      return '<p class="ub-pop-titel">Legende</p><ul class="ub-legende">' +
-        k('<svg width="22" height="22"><circle cx="11" cy="11" r="7.5" fill="#111" stroke="#fff" stroke-width="3"/><circle cx="11" cy="11" r="9" fill="none" stroke="#111" stroke-width="1.5"/></svg>', "erledigt") +
-        k('<svg width="22" height="22"><circle cx="11" cy="11" r="7" fill="#fff" stroke="#111" stroke-width="4.5"/></svg>', "in Arbeit") +
-        k('<svg width="22" height="22"><circle cx="11" cy="11" r="7" fill="#fff" stroke="#111" stroke-width="3"/></svg>', "offen") +
-        k('<svg width="34" height="12"><line x1="5" y1="6" x2="29" y2="6" stroke="#111" stroke-width="10" stroke-linecap="round"/></svg>', "gegangener Weg") +
-        k('<svg width="34" height="12"><line x1="5" y1="6" x2="29" y2="6" stroke="#111" stroke-opacity=".5" stroke-width="5" stroke-linecap="round"/></svg>', "noch offen") +
-        k('<svg width="34" height="12"><line x1="2" y1="6" x2="32" y2="6" stroke="#8a857d" stroke-width="2" stroke-dasharray="3 5"/></svg>', "Umstieg: braucht eine andere Linie") +
-        k('<svg width="22" height="22"><circle cx="11" cy="11" r="8" fill="#111" opacity=".2"/></svg>', "blass: f&uuml;r diese Stufe nicht n&ouml;tig") + "</ul>";
+  function infoInhalt(id) {
+    if (id === "ziel") {
+      var zb = D.zielbild.text && D.zielbild.text.indexOf("Platzhalter") < 0 ? D.zielbild.text : "";
+      return '<p class="ub-pop-titel">' + esc(ZIEL.titel) + '</p><p class="ub-pop-meta">Zielbild</p><p>' + (zb ? esc(zb) : "Das Zielbild wird noch beschrieben.") + "</p>";
     }
-    if (m.gesamt) return '<p class="ub-pop-titel">' + esc(ZIEL.titel) + '</p><p class="ub-pop-meta">Das Zielbild wird noch beschrieben.</p>';
-    return '<p class="ub-pop-titel">' + esc(msName(m)) + '</p><p class="ub-pop-meta">Stufe ' + m.nr + " &middot; " + esc(m.termin) + "</p><ul>" +
+    var m = MS[id];
+    return '<p class="ub-pop-titel">' + esc(msName(m)) + '</p><p class="ub-pop-meta">Stufe ' + m.nr + " &middot; " + esc(m.termin) + " &middot; erreicht, wenn</p><ul>" +
       (m.ergebnis || []).map(function (e) { return "<li>" + esc(e) + "</li>"; }).join("") + "</ul>";
   }
   var infoPop = null;
   function infoZu() {
     if (infoPop) { infoPop.remove(); infoPop = null; }
-    document.querySelectorAll(".ub-info").forEach(function (b) { b.setAttribute("aria-expanded", "false"); });
+    document.querySelectorAll(".ub-kasten-info").forEach(function (b) { b.setAttribute("aria-expanded", "false"); });
   }
-  document.querySelectorAll(".ub-info").forEach(function (b) {
-    b.addEventListener("click", function (e) {
-      e.stopPropagation();
-      var offen = b.getAttribute("aria-expanded") === "true";
-      infoZu();
-      if (offen) return;
-      infoPop = document.createElement("div");
-      infoPop.className = "ub-pop ub-pop--info";
-      infoPop.innerHTML = infoInhalt(b.getAttribute("data-info"));
-      b.parentNode.appendChild(infoPop);
-      b.setAttribute("aria-expanded", "true");
-    });
-  });
 
   /* ---------- Plan: U-Bahn ---------- */
   // Nur waagerecht und senkrecht, Ecken leicht gerundet – wie ein Liniennetzplan.
@@ -163,9 +168,9 @@
       tiefsteZeile[s.strang] = Math.max(tiefsteZeile[s.strang] || 0, unter[s.id]);
     });
     var bahnen = D.straenge.filter(function (st) { return liste.some(function (s) { return s.strang === st.id; }); });
-    var linieY = {}, y0 = (vorStufe || nr > 1) ? 46 : 8;   // oben eine Zeile für die Namen der Stufenhalte
+    var linieY = {}, y0 = nr > 1 ? 46 : 8;   // oben eine Zeile für die Namen der Stufenhalte (nur im Gesamtplan)
     bahnen.forEach(function (st) { linieY[st.id] = y0 + UEBER; y0 += UEBER + tiefsteZeile[st.id] * ZH + (tiefsteZeile[st.id] ? UNTER + 34 : UNTER); });
-    var hoehe = y0 + 6;
+    var hoehe = y0 + 6 + (vorStufe ? 22 : 0);   // unten Platz für „Voraussetzung: …“
     function yVon(s) { return linieY[s.strang] + unter[s.id] * ZH; }
     var letzte = stufenImBlick[stufenImBlick.length - 1];
     var breite = xHalt(letzte.id) + 190;
@@ -242,7 +247,7 @@
     });
     if (vorStufe) {
       halte += balken(8, false, true);
-      namen += '<div class="ub-halt-name ub-halt-name--start" style="left:8px;top:4px"><small>Voraussetzung: ' + esc(msName(vorStufe)) + (stufeErreicht(vorStufe.id) ? " (erreicht)" : " (noch offen)") + "</small></div>";
+      namen += '<div class="ub-halt-name ub-halt-name--start" style="left:8px;top:' + (untenAlle + 8) + 'px"><small>Voraussetzung: ' + esc(msName(vorStufe)) + (stufeErreicht(vorStufe.id) ? " (erreicht)" : " (noch offen)") + "</small></div>";
     }
     svg += quer + duenn + dick;
     var punkte = "";   // Halte zuletzt, damit keine Linie sie überdeckt
