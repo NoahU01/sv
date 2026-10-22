@@ -89,10 +89,8 @@ DEV_KATEGORIEN = [
             (_EMP + "sv-projektplanung.html", "PP", "Projektplanung", "Termine, Agenden und der Meilensteinplan"),
         ]),
         (_EMP + "sv-uebersicht-2.html", "2.0", "Übersicht 2.0", "Neue Fassung · im Aufbau", "Darunter", [
-            (_EMP + "sv-ziel-ubahn.html", "UB", "Weg zum Ergebnis", "U-Bahn-Plan · Management-Cockpit"),
-            (_EMP + "sv-ziel-ubahn-11.html", "1.1", "Weg zum Ergebnis, vereinfacht", "Sicht 1.1"),
-            (_EMP + "sv-ziel-ubahn-12.html", "1.2", "Weg zum Ergebnis, nah am U-Bahn-Plan", "Sicht 1.2"),
-            (_EMP + "sv-ziel-ubahn-alt.html", "U1", "U-Bahn-Plan, erste Fassung", "Sicht 2 zum Vergleich"),
+            (_EMP + "sv-ziel-ubahn-11.html", "1.1", "Weg zum Ergebnis · Sicht 1.1", "vereinfacht"),
+            (_EMP + "sv-ziel-ubahn-12.html", "1.2", "Weg zum Ergebnis · Sicht 1.2", "nah am U-Bahn-Plan"),
         ]),
         (_EMP + "sitemap.html", "\u25a6", "Sitemap", "Alle Seiten der SV Akademie · mit Vorschau"),
     ]),

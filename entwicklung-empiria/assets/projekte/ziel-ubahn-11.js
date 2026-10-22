@@ -46,11 +46,11 @@
 
   /* ---------- Ergebnisstufen als Reiter, Erklärung und Legende als kleines Fenster ---------- */
   function stufen() {
-    var h = '<div class="ub-reiter" role="tablist">';
+    var h = '<div class="ub-kaesten" role="tablist">';
     D.meilensteine.forEach(function (x) {
-      h += '<button type="button" role="tab" data-ms="' + x.id + '" aria-selected="' + (x.id === zustandUI.ms) + '"><b>' + (x.titel ? x.nr + " &middot; " + esc(x.titel) : "Stufe " + x.nr) + "</b><small>" + esc(x.termin) + "</small></button>";
+      h += '<button type="button" role="tab" class="ub-kasten" data-ms="' + x.id + '" aria-selected="' + (x.id === zustandUI.ms) + '"><span class="ub-kasten-nr">' + x.nr + '</span><span><b>' + esc(x.titel || "Stufe " + x.nr) + "</b><small>" + esc(x.termin) + "</small></span></button>";
     });
-    h += '<button type="button" role="tab" data-ms="ziel" aria-selected="' + (zustandUI.ms === "ziel") + '"><b>Gesamtplan</b><small>bis zum Zielbild</small></button></div>';
+    h += '<button type="button" role="tab" class="ub-kasten ub-kasten--ziel" data-ms="ziel" aria-selected="' + (zustandUI.ms === "ziel") + '"><span class="ub-kasten-nr"><svg width="10" height="10" viewBox="0 0 10 10"><rect x="1.5" y="1.5" width="7" height="7" rx="1.5" transform="rotate(45 5 5)" fill="currentColor"/></svg></span><span><b>Gesamtplan</b><small>bis zum Zielbild</small></span></button></div>';
     stufenEl.innerHTML = h;
     stufenEl.querySelectorAll("[data-ms]").forEach(function (b) {
       b.addEventListener("click", function () {

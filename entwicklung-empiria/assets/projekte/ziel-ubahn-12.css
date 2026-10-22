@@ -100,3 +100,6 @@
 .ub-kasten{padding:9px 11px 8px;align-items:center}
 .ub-steuerung .ub-legende-zeile{padding-top:11px;margin-top:11px}
 .ub-titel{flex-wrap:nowrap}
+
+/* Legende zentriert, ohne Trennstrich (Daniel, 22.10.2026) */
+.ub-steuerung .ub-legende-zeile{justify-content:center;border-top:0;margin-top:4px;padding-top:12px}
