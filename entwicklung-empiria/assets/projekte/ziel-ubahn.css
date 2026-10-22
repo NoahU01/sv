@@ -7,10 +7,15 @@
 .ub-titel h1{font-size:clamp(1.6rem,2.4vw,2.1rem);margin:0;line-height:1.15}
 
 .ub-cockpit{background:#fff;border:1px solid #e8e5e0;border-radius:16px;padding:0 0 10px;font-size:.84rem;color:#111}
-.ub-kopfzeile{display:flex;align-items:stretch;justify-content:space-between;gap:16px;padding:0 18px;border-bottom:1px solid #efece7}
+.ub-kopfzeile{display:flex;align-items:center;gap:14px;padding:0 18px;border-bottom:1px solid #efece7}
+.ub-kopfzeile #ub-stufen{flex:1;min-width:0;align-self:stretch}
+.ub-etikett{flex:none;font-size:.74rem;font-weight:600;color:#111}
+.ub-legende-zeile{display:flex;flex-wrap:wrap;align-items:center;gap:6px 18px;padding:10px 18px;border-bottom:1px solid #efece7;font-size:.74rem;color:var(--grey-50,#8a8a8a)}
+.ub-legende-zeile span{display:inline-flex;align-items:center;gap:6px}
+.ub-legende-zeile .ub-etikett{margin-right:2px}
 
 /* Reiter der Ergebnisstufen */
-.ub-reiter{display:flex;gap:2px;overflow-x:auto}
+.ub-reiter{display:flex;gap:2px;overflow-x:auto;height:100%}
 .ub-reiter button{flex:none;border:0;background:none;font:inherit;color:var(--grey-50,#8a8a8a);text-align:left;padding:12px 14px 10px;border-bottom:2px solid transparent;margin-bottom:-1px;cursor:pointer}
 .ub-reiter button b{display:block;font-size:.84rem;font-weight:500}
 .ub-reiter button small{display:block;font-size:.74rem;margin-top:1px}
@@ -46,7 +51,9 @@
 .ub-name{position:absolute;border:0;background:none;padding:0;font:inherit;font-size:.74rem;line-height:1.3;font-weight:500;color:#111;text-align:center;cursor:pointer;hyphens:auto}
 .ub-name--oben{transform:translateY(-100%)}
 .ub-name:hover{text-decoration:underline;text-underline-offset:3px}
-.ub-name--blass{opacity:.28}
+.ub-name--erreicht,.ub-name--offen,.ub-name--frei,.ub-name--wartet{color:var(--grey-50,#8a8a8a)}
+.ub-name--aktiv{font-weight:600}
+.ub-name--blass{color:#c9c5bf}
 .ub-treffer{position:absolute;width:32px;height:32px;border:0;background:none;padding:0;cursor:pointer;border-radius:50%}
 .ub-endhalt{position:absolute;width:120px;text-align:left;transform:translateY(-50%)}
 .ub-endhalt b{display:block;font-size:.84rem;font-weight:600}
