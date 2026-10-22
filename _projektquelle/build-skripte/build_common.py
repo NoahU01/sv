@@ -76,8 +76,8 @@ DEV_UNTERSEITEN = []
 # (Branch Daniel, site/projekte/) in entwicklung-empiria/.
 _EMP = "entwicklung-empiria/projekte/"
 DEV_KATEGORIEN = [
-    ("Strategie", [
-        (_EMP + "sv-akademie.html", "SV", "SV Akademie", "Projektübersicht · drei Module", "Die Module", [
+    ("Steuerung", [
+        (_EMP + "sv-akademie.html", "SV", "Übersicht", "Projektübersicht · drei Module", "Die Module", [
             (_EMP + "sv-selbstverstaendnis.html", "1", "Selbstverständnis", "Wofür stehen wir?"),
             (_EMP + "sv-vision.html", "2", "Vision", "Wie wollen wir wahrgenommen werden?"),
             (_EMP + "sv-strategie.html", "3", "Strategie", "Wie kommen wir dorthin?", "Darunter", [
@@ -88,6 +88,7 @@ DEV_KATEGORIEN = [
             ]),
             (_EMP + "sv-projektplanung.html", "PP", "Projektplanung", "Termine, Agenden und der Meilensteinplan"),
         ]),
+        (_EMP + "sv-uebersicht-2.html", "2.0", "Übersicht 2.0", "Neue Fassung · im Aufbau"),
         (_EMP + "sitemap.html", "\u25a6", "Sitemap", "Alle Seiten der SV Akademie · mit Vorschau"),
     ]),
     # Die Homepage der SV Akademie – Sprungziel aus dem Projekt, hier wird sie weiterentwickelt
