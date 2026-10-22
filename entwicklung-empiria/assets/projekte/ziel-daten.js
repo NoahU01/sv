@@ -232,7 +232,7 @@ window.ZIEL_DATEN = {
    "titel": "T1 · Stufe 3",
    "status": "offen",
    "braucht": [
-    "t1-2-auftrag"
+    "m2"
    ],
    "ergebnis": "Platzhalter – Details folgen.",
    "details": [],
@@ -343,7 +343,7 @@ window.ZIEL_DATEN = {
    "titel": "T2 · Stufe 3",
    "status": "offen",
    "braucht": [
-    "t2-2-brainstorming"
+    "m2"
    ],
    "ergebnis": "Platzhalter – Details folgen.",
    "details": [],
@@ -497,7 +497,7 @@ window.ZIEL_DATEN = {
    "titel": "SA · Stufe 3",
    "status": "offen",
    "braucht": [
-    "sa-2-kommunikation"
+    "m2"
    ],
    "ergebnis": "Platzhalter – Details folgen.",
    "details": [],

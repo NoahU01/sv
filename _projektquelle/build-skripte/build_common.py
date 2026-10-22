@@ -90,6 +90,7 @@ DEV_KATEGORIEN = [
         ]),
         (_EMP + "sv-uebersicht-2.html", "2.0", "Übersicht 2.0", "Neue Fassung · im Aufbau", "Darunter", [
             (_EMP + "sv-ziel-ubahn.html", "UB", "Weg zum Ergebnis", "U-Bahn-Plan · Management-Cockpit"),
+            (_EMP + "sv-ziel-ubahn-alt.html", "U1", "U-Bahn-Plan, erste Fassung", "Sicht 2 zum Vergleich"),
         ]),
         (_EMP + "sitemap.html", "\u25a6", "Sitemap", "Alle Seiten der SV Akademie · mit Vorschau"),
     ]),

@@ -236,7 +236,7 @@
       "ergebnis": "Platzhalter – Details folgen.",
       "status": "offen",
       "braucht": [
-        "t1-2-auftrag"
+        "m2"
       ],
       "details": [],
       "offen": [],
@@ -348,7 +348,7 @@
       "ergebnis": "Platzhalter – Details folgen.",
       "status": "offen",
       "braucht": [
-        "t2-2-brainstorming"
+        "m2"
       ],
       "details": [],
       "offen": [],
@@ -502,7 +502,7 @@
       "ergebnis": "Platzhalter – Details folgen.",
       "status": "offen",
       "braucht": [
-        "sa-2-kommunikation"
+        "m2"
       ],
       "details": [],
       "offen": [],
@@ -540,6 +540,6 @@
     }
   ],
   "personen": {},
-  "hinweis_braucht": "meilensteine[].braucht: die Ergebnisse, die der Meilenstein unmittelbar braucht (Daniel, 22.10.2026). Was davor einfließt, folgt aus schritte[].braucht. m1: Annahme Big Bang = GoLive.",
+  "hinweis_braucht": "meilensteine[].braucht: die Ergebnisse, die der Meilenstein unmittelbar braucht (Daniel, 22.10.2026). Was davor einfließt, folgt aus schritte[].braucht. m1: Annahme Big Bang = GoLive. schritte[].braucht darf auch eine Ergebnisstufe nennen (z. B. \"m2\"): der Schritt startet, sobald die Stufe erreicht ist – ohne direkte Verbindung zu einzelnen Schritten davor (Stufe 3, Beispiel 22.10.2026).",
   "hinweis_stand": "Stand 22.10.2026 abgeglichen mit der gebauten Seite sv-meilensteine-fein.html (Stand 01.10.2026 aus empiria): Copilot-Pilotierung, Zustände, wer."
 }

@@ -55,7 +55,12 @@
 .ub-name--aktiv{font-weight:600}
 .ub-name--blass{color:#c9c5bf}
 .ub-treffer{position:absolute;width:32px;height:32px;border:0;background:none;padding:0;cursor:pointer;border-radius:50%}
-.ub-endhalt{position:absolute;width:120px;text-align:left;transform:translateY(-50%)}
+.ub-halt-name{position:absolute;transform:translateX(-50%);white-space:nowrap;text-align:center}
+.ub-halt-name b{display:block;font-size:.74rem;font-weight:600}
+.ub-halt-name small{display:block;font-size:.74rem;color:var(--grey-50,#8a8a8a)}
+.ub-halt-name--ende{transform:translateY(-50%);text-align:left;white-space:normal;width:130px}
+.ub-halt-name--ende b{font-size:.84rem}
+.ub-halt-name--start{transform:none;text-align:left}
 .ub-endhalt b{display:block;font-size:.84rem;font-weight:600}
 .ub-endhalt small{display:block;font-size:.74rem;color:var(--grey-50,#8a8a8a);margin-top:1px}
 
@@ -65,3 +70,6 @@
 .ub-pop p + p{margin-top:6px}
 .ub-pop-titel{font-size:.84rem;font-weight:600}
 .ub-pop-meta{color:var(--grey-50,#8a8a8a)}
+.zv-varianten{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+.zv-varianten a{font-size:.84rem;padding:6px 14px;border:1px solid #d9d5ce;border-radius:999px;color:inherit;text-decoration:none;background:#fff}
+.zv-varianten a[aria-current="page"]{background:#111;color:#fff;border-color:#111}

@@ -16,7 +16,8 @@
 
   function esc(t) { return String(t == null ? "" : t).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   function msName(m) { return m.titel || "Ergebnisstufe " + m.nr; }
-  function fertig(id) { return S[id] && S[id].status === "erreicht"; }
+  function stufeErreicht(mid) { return (MS[mid].braucht || []).every(function (b) { return S[b] && S[b].status === "erreicht"; }); }
+  function fertig(id) { return MS[id] ? stufeErreicht(id) : S[id] && S[id].status === "erreicht"; }
   function zustand(s) {
     if (s.status === "erreicht") return "erreicht";
     if (s.status === "aktiv") return "aktiv";
@@ -25,7 +26,11 @@
   var ZTEXT = { erreicht: "erledigt", aktiv: "in Arbeit", frei: "kann starten", wartet: "wartet auf Vorarbeit" };
   function vorlauf(ids) {               // alles, was in diese Schritte einfließt – inklusive der Schritte selbst
     var drin = {}, st = ids.slice();
-    while (st.length) { var id = st.pop(); if (drin[id] || !S[id]) continue; drin[id] = true; (S[id].braucht || []).forEach(function (b) { st.push(b); }); }
+    while (st.length) {
+      var id = st.pop();
+      if (MS[id]) { (MS[id].braucht || []).forEach(function (b) { st.push(b); }); continue; }   // Stufe als Voraussetzung
+      if (drin[id] || !S[id]) continue; drin[id] = true; (S[id].braucht || []).forEach(function (b) { st.push(b); });
+    }
     return drin;
   }
 
@@ -115,12 +120,15 @@
   }
   function plan() {
     var m = msVon(zustandUI.ms);
-    var liste = D.schritte.filter(function (s) { return MS[s.meilenstein].i <= m.i; });
+    // Ausschnitt: eine Stufe zeigt nur ihre eigenen Halte; der Gesamtplan zeigt alle
+    var stufenImBlick = D.meilensteine.filter(function (x) { return m.gesamt || x.id === m.id; });
+    var imBlick = {}; stufenImBlick.forEach(function (x) { imBlick[x.id] = true; });
+    var liste = D.schritte.filter(function (s) { return imBlick[s.meilenstein]; });
     var imPlan = {}; liste.forEach(function (s) { imPlan[s.id] = true; });
+    var vorStufe = m.gesamt ? null : D.meilensteine[m.i - 1] || null;   // Starthalt: die Stufe davor
     var fokus = zustandUI.station ? vorlauf([zustandUI.station]) : m.gesamt ? imPlan : vorlauf(m.braucht || []);
     function blass(id) { return !fokus[id]; }
 
-    // Spalten: je Stufe ein Band, darin die Tiefe innerhalb der Stufe
     var tiefe = {};
     function t(id) {
       if (tiefe[id] != null) return tiefe[id];
@@ -128,16 +136,17 @@
       return (tiefe[id] = v.length ? 1 + Math.max.apply(null, v.map(t)) : 0);
     }
     liste.forEach(function (s) { t(s.id); });
-    var bandStart = [], bandBreite = [], lauf = 0;
-    D.meilensteine.forEach(function (x) {
-      if (x.i > m.i) return;
+    var bandStart = {}, bandBreite = {}, lauf = 0, nr = 0, bandNr = {};
+    stufenImBlick.forEach(function (x) {
       var w = 1; liste.forEach(function (s) { if (s.meilenstein === x.id) w = Math.max(w, tiefe[s.id] + 1); });
-      bandStart[x.i] = lauf; bandBreite[x.i] = w; lauf += w;
+      bandStart[x.id] = lauf; bandBreite[x.id] = w; bandNr[x.id] = nr++; lauf += w;
     });
+    var HALT = 64;                               // Platz für einen Stufenhalt zwischen zwei Bändern
+    var START = vorStufe ? 70 : EINLAUF;         // links: Starthalt der Stufe davor
     var verfuegbar = planEl.clientWidth - SPALTE;
-    ABST = Math.max(108, Math.min(140, (verfuegbar - EINLAUF - LUECKE * m.i - 200) / lauf));
-    function xVon(s) { var k = MS[s.meilenstein].i; return EINLAUF + (bandStart[k] + tiefe[s.id]) * ABST + k * LUECKE + ABST / 2; }
-    function xGrenze(k) { return EINLAUF + (bandStart[k] + bandBreite[k]) * ABST + k * LUECKE + LUECKE / 2; }
+    ABST = Math.max(108, Math.min(140, (verfuegbar - START - HALT * (nr - 1) - 190) / lauf));
+    function xVon(s) { var x = MS[s.meilenstein]; return START + (bandStart[x.id] + tiefe[s.id]) * ABST + bandNr[x.id] * HALT + ABST / 2; }
+    function xHalt(mid) { return START + (bandStart[mid] + bandBreite[mid]) * ABST + bandNr[mid] * HALT + 14; }   // Stufenhalt nach dem Band
 
     var unter = {}, gruppen = {}, tiefsteZeile = {};
     liste.forEach(function (s) {
@@ -146,103 +155,106 @@
       tiefsteZeile[s.strang] = Math.max(tiefsteZeile[s.strang] || 0, unter[s.id]);
     });
     var bahnen = D.straenge.filter(function (st) { return liste.some(function (s) { return s.strang === st.id; }); });
-    var linieY = {}, y0 = m.i > 0 ? 26 : 6;
+    var linieY = {}, y0 = (vorStufe || nr > 1) ? 46 : 8;   // oben eine Zeile für die Namen der Stufenhalte
     bahnen.forEach(function (st) { linieY[st.id] = y0 + UEBER; y0 += UEBER + tiefsteZeile[st.id] * ZH + (tiefsteZeile[st.id] ? UNTER + 34 : UNTER); });
     var hoehe = y0 + 6;
     function yVon(s) { return linieY[s.strang] + unter[s.id] * ZH; }
-
-    // Endhaltestelle: Balken über alle Linien, die einfließen
-    var zielX = xGrenze(m.i) + 34;
-    var zielBahnen = zustandUI.station ? [] : bahnen.filter(function (st) { return liste.some(function (s) { return s.strang === st.id && fokus[s.id]; }); });
-    var breite = zielX + 170;
+    var letzte = stufenImBlick[stufenImBlick.length - 1];
+    var breite = xHalt(letzte.id) + 190;
+    var obenAlle = Math.min.apply(null, bahnen.map(function (st) { return linieY[st.id]; })) - 18;
+    var untenAlle = Math.max.apply(null, bahnen.map(function (st) { return linieY[st.id]; })) + 18;
 
     var svg = '<svg width="' + breite + '" height="' + hoehe + '" class="ub-svg" aria-hidden="true">';
-    var kopf = "", duenn = "", dick = "", quer = "";
-    D.meilensteine.forEach(function (x) {
-      if (x.i >= m.i) return;
-      var gx = xGrenze(x.i);
-      svg += '<line x1="' + gx + '" y1="22" x2="' + gx + '" y2="' + (hoehe - 4) + '" class="ub-grenze"/>';
-      kopf += '<div class="ub-grenze-name" style="left:' + gx + 'px">Stufe ' + x.nr + " &middot; " + esc(msName(x)) + "</div>";
-    });
+    var duenn = "", dick = "", quer = "", halte = "", namen = "", durch = "";
     function strecke(pkte, farbe, gegangen, schwach) {
-      var f = schwach ? hell(farbe, 0.88) : gegangen ? farbe : hell(farbe, 0.55);
-      var html = '<path d="' + rund(pkte) + '" stroke="' + f + '" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="' + (gegangen ? 9 : 4) + '"/>';
+      var f = schwach ? hell(farbe, 0.86) : farbe;
+      var html = '<path d="' + rund(pkte) + '" stroke="' + f + '" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="' + (gegangen ? 10 : 5) + '"/>';
       if (gegangen) dick += html; else duenn += html;
     }
-    // Weg zwischen zwei Halten derselben Linie: Abzweig in der Lücke vor dem Ziel, Rückkehr in der Lücke danach
     function weg(x1, y1, x2, y2, rueck) {
       if (Math.abs(y1 - y2) < 1) return [[x1, y1], [x2, y2]];
       var xs = rueck ? x1 + ABST / 2 : x2 - ABST / 2;
       return [[x1, y1], [xs, y1], [xs, y2], [x2, y2]];
     }
-    bahnen.forEach(function (st) {
-      var eig = liste.filter(function (s) { return s.strang === st.id; }), y = linieY[st.id];
-      // Einlauf aus der Spalte bis zu den ersten Halten
-      eig.filter(function (s) { return !(s.braucht || []).some(function (b) { return imPlan[b] && S[b].strang === st.id; }); }).forEach(function (s) {
-        strecke(weg(0, y, xVon(s), yVon(s), false), st.farbe, s.status !== "offen", blass(s.id));
-      });
-      // Auslauf: in die Endhaltestelle, wenn die Linie einfließt – sonst endet sie an der Stufengrenze
-      var rein = zielBahnen.indexOf(st) > -1;
-      eig.filter(function (s) { return !liste.some(function (n) { return n.strang === st.id && (n.braucht || []).indexOf(s.id) > -1; }); }).forEach(function (s) {
-        var ende = rein && fokus[s.id] ? zielX : xGrenze(m.i) - 6;
-        strecke(weg(xVon(s), yVon(s), ende, y, true), st.farbe, false, !(rein && fokus[s.id]));
-      });
-    });
+    // Woher kommt eine Strecke in den Halt? aus der eigenen Linie, aus einem Stufenhalt – oder frei
     liste.forEach(function (s) {
+      var f = STR[s.strang].farbe, x2 = xVon(s), y2 = yVon(s), linieRein = false;
       (s.braucht || []).forEach(function (b) {
-        if (!imPlan[b]) return;
-        var v = S[b], x1 = xVon(v), y1 = yVon(v), x2 = xVon(s), y2 = yVon(s);
+        if (MS[b]) {                                             // startet, sobald eine Stufe erreicht ist
+          var hx = imBlick[b] ? xHalt(b) + 13 : vorStufe ? 34 : 0;   // aus dem Stufenhalt – nie links daran vorbei
+          strecke(weg(hx, linieY[s.strang], x2, y2, false), f, stufeErreicht(b), blass(s.id)); linieRein = true; return;
+        }
+        if (!imPlan[b]) {                                        // Vorarbeit aus einer früheren Stufe: kommt aus dem Starthalt
+          if (!linieRein) strecke(weg(vorStufe ? 34 : 0, linieY[s.strang], x2, y2, false), f, fertig(b), blass(s.id));
+          linieRein = true; return;
+        }
+        var v = S[b], x1 = xVon(v), y1 = yVon(v);
         if (v.strang === s.strang) {
           var pk = weg(x1, y1, x2, y2, unter[b] > unter[s.id]);
-          // Wo die Hauptlinie ohnehin weiterläuft, zeichnet die Nebenstrecke nur ihren eigenen Abschnitt –
-          // doppelt gezeichnete Strecken wirken sonst an den Kanten dunkler
           var nachMain = function (id) { return liste.some(function (n) { return n.strang === s.strang && unter[n.id] === 0 && (n.braucht || []).indexOf(id) > -1; }); };
           var vorMain = function (n) { return (n.braucht || []).some(function (x) { return imPlan[x] && S[x].strang === n.strang && unter[x] === 0; }); };
           if (pk.length === 4 && unter[b] === 0 && unter[s.id] > 0 && nachMain(b)) pk = pk.slice(1);
           else if (pk.length === 4 && unter[b] > 0 && unter[s.id] === 0 && vorMain(s)) pk = pk.slice(0, 3);
-          strecke(pk, STR[s.strang].farbe, v.status === "erreicht", blass(s.id) || blass(b));
+          // läuft über eine Stufengrenze hinweg: direkte Verbindung – wird über dem Stufenhalt gezeichnet
+          if (v.meilenstein !== s.meilenstein) {
+            var fd = (blass(s.id) || blass(b)) ? hell(f, 0.86) : f;
+            durch += '<path d="' + rund(pk) + '" stroke="' + fd + '" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="' + (v.status === "erreicht" ? 10 : 5) + '"/>';
+          } else strecke(pk, f, v.status === "erreicht", blass(s.id) || blass(b));
+          linieRein = true;
         } else {
-          // Umstieg: senkrecht aus dem Halt, kurz vor der Ziellinie waagerecht, senkrecht in den Halt –
-          // läuft nie auf einer Strecke entlang
           var dir = y2 > y1 ? 1 : -1, yk = y2 - dir * 26;
           quer += '<path d="' + rund([[x1, y1], [x1, yk], [x2, yk], [x2, y2]]) + '" stroke="' + (blass(s.id) ? "#dedad4" : "#8a857d") + '" stroke-width="2" fill="none" stroke-dasharray="3 5"/>';
         }
       });
+      // frei startend: kurzer Einlauf ohne Verbindung nach hinten
+      if (!linieRein) {
+        var band0 = START + bandStart[s.meilenstein] * ABST + bandNr[s.meilenstein] * HALT;
+        strecke(weg(Math.max(band0 - (bandNr[s.meilenstein] ? 8 : 26), 0) + (bandNr[s.meilenstein] ? 12 : 0), linieY[s.strang], x2, y2, false), f, s.status !== "offen", blass(s.id));
+      }
+      // Auslauf: Halt ohne Nachfolger auf der eigenen Linie endet im Stufenhalt seiner Stufe, wenn er einfließt
+      var weiter = D.schritte.some(function (n) { return n.strang === s.strang && imPlan[n.id] && (n.braucht || []).indexOf(s.id) > -1; });
+      if (!weiter) {
+        var ms = MS[s.meilenstein], rein = fokus[s.id] && vorlauf(ms.braucht || [])[s.id] && !zustandUI.station;
+        var ende = rein ? xHalt(ms.id) : xVon(s) + ABST / 2;
+        strecke(weg(x2, y2, ende, linieY[s.strang], true), f, false, !rein && blass(s.id));
+      }
     });
-    svg += quer + duenn + dick;
-    // Endhaltestelle
-    if (zielBahnen.length) {
-      var ys = zielBahnen.map(function (st) { return linieY[st.id]; }), oben = Math.min.apply(null, ys) - 16, unten = Math.max.apply(null, ys) + 16;
-      svg += '<rect x="' + (zielX - 4) + '" y="' + oben + '" width="30" height="' + (unten - oben) + '" rx="15" fill="#fff" stroke="#111" stroke-width="6"/>';
+    // Stufenhalte: Balken über alle Linien; der gewählte bzw. letzte kräftig, Zwischenhalte etwas schmaler
+    function balken(x, stark, grau) {
+      return '<rect x="' + x + '" y="' + obenAlle + '" width="26" height="' + (untenAlle - obenAlle) + '" rx="13" fill="#fff" stroke="' + (grau ? "#a39e96" : "#111") + '" stroke-width="' + (stark ? 6 : 4) + '"/>';
     }
-    // Halte
-    var namen = "";
+    stufenImBlick.forEach(function (x) {
+      var hx = xHalt(x.id), letzter = x.id === letzte.id;
+      halte += balken(hx, letzter, false);
+      namen += '<div class="ub-halt-name' + (letzter ? " ub-halt-name--ende" : "") + '" style="left:' + (letzter ? hx + 36 : hx + 13) + "px;top:" + (letzter ? (obenAlle + untenAlle) / 2 : 4) + 'px"><b>' +
+        esc(msName(x)) + "</b><small>" + (stufeErreicht(x.id) ? "erreicht" : "Stufe " + x.nr + " &middot; " + esc(x.termin)) + "</small></div>";
+    });
+    if (vorStufe) {
+      halte += balken(8, false, true);
+      namen += '<div class="ub-halt-name ub-halt-name--start" style="left:8px;top:4px"><small>Voraussetzung: ' + esc(msName(vorStufe)) + (stufeErreicht(vorStufe.id) ? " (erreicht)" : " (noch offen)") + "</small></div>";
+    }
+    svg += quer + duenn + dick;
+    var punkte = "";   // Halte zuletzt, damit keine Linie sie überdeckt
     liste.forEach(function (s) {
       var z = zustand(s), f = STR[s.strang].farbe, cx = xVon(s), cy = yVon(s), schwach = blass(s.id), sel = zustandUI.station === s.id;
       var umstieg = (s.braucht || []).some(function (b) { return imPlan[b] && S[b].strang !== s.strang; });
-      // Rangfolge der Aufmerksamkeit: in Arbeit stark, erledigt klein und ruhig, künftig grau
       var r = z === "aktiv" ? 10 : z === "erreicht" ? 6 : (umstieg ? 9 : 7);
       if (sel) r += 2;
-      var g = z === "erreicht" ? '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="' + (schwach ? hell(f, 0.8) : f) + '" stroke="#fff" stroke-width="2"/>'
+      punkte += z === "erreicht" ? '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="' + (schwach ? hell(f, 0.8) : f) + '" stroke="#fff" stroke-width="2"/>'
         : z === "aktiv" ? '<circle cx="' + cx + '" cy="' + cy + '" r="' + (r + 6) + '" fill="' + hell(f, schwach ? 0.93 : 0.8) + '"/><circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="#fff" stroke="' + (schwach ? hell(f, 0.8) : f) + '" stroke-width="5"/>'
         : '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="#fff" stroke="' + (schwach ? "#e2ded8" : "#a39e96") + '" stroke-width="' + (umstieg ? 3.5 : 2.5) + '"/>';
-      if (s.kritisch) g += '<circle cx="' + (cx + r + 3) + '" cy="' + (cy - r - 3) + '" r="7" fill="' + (schwach ? "#f6c9bf" : "#E8553A") + '"/><text x="' + (cx + r + 3) + '" y="' + (cy - r + 0.6) + '" text-anchor="middle" class="ub-ausruf">!</text>';
-      svg += g;
+      if (s.kritisch) punkte += '<circle cx="' + (cx + r + 3) + '" cy="' + (cy - r - 3) + '" r="7" fill="' + (schwach ? "#f6c9bf" : "#E8553A") + '"/><text x="' + (cx + r + 3) + '" y="' + (cy - r + 0.6) + '" text-anchor="middle" class="ub-ausruf">!</text>';
       var vonOben = (s.braucht || []).some(function (b) { return imPlan[b] && S[b].strang !== s.strang && yVon(S[b]) < cy; });
       var obenL = unter[s.id] === 0 && !vonOben;
       namen += '<button type="button" class="ub-name ub-name--' + z + (obenL ? " ub-name--oben" : "") + (schwach ? " ub-name--blass" : "") +
         '" data-station="' + s.id + '" style="left:' + (cx - (ABST - 14) / 2) + "px;top:" + (obenL ? cy - r - 8 : cy + r + 8) + "px;width:" + (ABST - 14) + 'px">' + esc(s.titel) + "</button>";
       namen += '<button type="button" class="ub-treffer" data-station="' + s.id + '" aria-label="' + esc(s.titel) + '" style="left:' + (cx - 16) + "px;top:" + (cy - 16) + 'px"></button>';
     });
-    svg += "</svg>";
-    if (zielBahnen.length) {
-      var my = zielBahnen.reduce(function (a, st) { return a + linieY[st.id]; }, 0) / zielBahnen.length;
-      namen += '<div class="ub-endhalt" style="left:' + (zielX + 38) + "px;top:" + my + 'px"><b>' + esc(msName(m)) + "</b><small>" + esc(m.termin) + "</small></div>";
-    }
+    svg += halte + durch + punkte + "</svg>";
     var spalte = bahnen.map(function (st) {
       return '<div class="ub-bahn" style="top:' + (linieY[st.id] - 15) + 'px"><span class="ub-linie" style="background:' + st.farbe + '">' + esc(st.kurz) + "</span><div><b>" + esc(st.label) + "</b><small>" + esc(st.verantwortung) + "</small></div></div>";
     }).join("");
-    planEl.innerHTML = '<div class="ub-rahmen"><div class="ub-spalte" style="height:' + hoehe + 'px">' + spalte + '</div><div class="ub-scroll"><div class="ub-flaeche" style="width:' + breite + "px;height:" + hoehe + 'px">' + svg + kopf + namen + "</div></div></div>";
+    planEl.innerHTML = '<div class="ub-rahmen"><div class="ub-spalte" style="height:' + hoehe + 'px">' + spalte + '</div><div class="ub-scroll"><div class="ub-flaeche" style="width:' + breite + "px;height:" + hoehe + 'px">' + svg + namen + "</div></div></div>";
     planEl.querySelectorAll("[data-station]").forEach(function (b) {
       b.addEventListener("click", function () {
         var id = b.getAttribute("data-station");
