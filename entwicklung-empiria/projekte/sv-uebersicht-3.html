@@ -345,13 +345,13 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
         <h1 class="u3-h1">SV Akademie.</h1>
         <p class="u3-satz">Wir schaffen die beste Akademie der Versicherungsbranche und stellen die menschliche Wettbewerbsf&auml;higkeit im KI-Zeitalter sicher. <span class="u3-stand">Stand: 22.10.2026</span></p>
         <div class="u3-umschalter" role="tablist" aria-label="Variante">
-          <button type="button" role="tab" data-ziel="a" aria-selected="true"><span>A</span>Stand je Strang</button>
-          <button type="button" role="tab" data-ziel="b" aria-selected="false"><span>B</span>Plan</button>
+          <button type="button" role="tab" data-ziel="a" aria-selected="false"><span>A</span>Stand je Strang</button>
+          <button type="button" role="tab" data-ziel="b" aria-selected="true"><span>B</span>Plan</button>
         </div>
       </header>
 
       <!-- Variante A: aktuelles Level, je Strang in Sätzen, rechts die Termine -->
-      <section class="ue-block u3-variante" data-v="a" aria-label="Wo wir stehen">
+      <section class="ue-block u3-variante" data-v="a" aria-label="Wo wir stehen" hidden>
         <div class="u3-level" data-level-kopf></div>
         <div class="u3-a-raster">
           <div class="u3-straenge" id="u3-straenge"></div>
@@ -365,7 +365,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
       </section>
 
       <!-- Variante B: der Plan des aktuellen Levels, darunter die Termine -->
-      <section class="ue-block u3-variante" data-v="b" aria-label="Wo wir stehen" hidden>
+      <section class="ue-block u3-variante" data-v="b" aria-label="Wo wir stehen">
         <div class="u3-level" data-level-kopf></div>
         <div class="u3-b-legende">
         <div class="ub-legende-zeile" aria-label="Legende">
@@ -932,7 +932,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   }
   knoepfe.forEach(function (b) { b.addEventListener("click", function () { zeige(b.getAttribute("data-ziel")); }); });
   var h = location.hash.replace("#", "");
-  zeige(h === "b" ? h : "a");
+  zeige(h === "a" ? h : "b");
 })();
 </script>
 <script src="../script.js"></script>
