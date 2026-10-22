@@ -53,11 +53,11 @@
     D.meilensteine.forEach(function (x) {
       h += '<div role="tab" tabindex="0" class="ub-kasten" data-ms="' + x.id + '" aria-selected="' + (x.id === zustandUI.ms) + '">' +
         '<small>Stufe ' + x.nr + " &middot; " + esc(x.termin) + "</small><b>" + esc(kastenText(x)) + "</b>" +
-        '<button type="button" class="ub-kasten-info" data-info-ms="' + x.id + '" aria-label="Erreicht, wenn …">i</button></div>';
+        '<button type="button" class="ub-kasten-info" data-info-ms="' + x.id + '" aria-label="Erreicht, wenn …">+</button></div>';
     });
     h += '<div role="tab" tabindex="0" class="ub-kasten ub-kasten--ziel" data-ms="ziel" aria-selected="' + (zustandUI.ms === "ziel") + '">' +
       "<small>Ziel &middot; alle Stufen</small><b>Gesamtplan</b>" +
-      '<button type="button" class="ub-kasten-info" data-info-ms="ziel" aria-label="Zielbild">i</button></div></div>';
+      '<button type="button" class="ub-kasten-info" data-info-ms="ziel" aria-label="Zielbild">+</button></div></div>';
     stufenEl.innerHTML = h;
     stufenEl.querySelectorAll("[data-ms]").forEach(function (k) {
       function waehlen() {
