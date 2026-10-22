@@ -86,6 +86,10 @@ def bauen(rel):
     # 1. absolute Pfade relativ
     s = re.sub(r'((?:href|src|action|poster|data-[a-z-]+)=")/(?!/)', r'\1' + zur_wurzel, s)
 
+    # 1b. Favicon der SV Akademie (Rakete) aus dem Wurzelverzeichnis des Repos
+    s = re.sub(r'\s*<link rel="(?:icon|apple-touch-icon)"[^>]*>', '', s)
+    s = s.replace('<meta name="viewport"', '<link rel="icon" href="%sfavicon.ico" sizes="32x32">\n<link rel="icon" href="%sfavicon.svg" type="image/svg+xml">\n<link rel="apple-touch-icon" href="%sapple-touch-icon.png">\n<meta name="viewport"' % (zum_repo, zum_repo, zum_repo), 1)
+
     # 2. Logo → Projektübersicht
     uebersicht = ("" if tiefe else "projekte/") + "sv-akademie.html"
     s = re.sub(r'<a class="brand" href="[^"]*" aria-label="[^"]*">',

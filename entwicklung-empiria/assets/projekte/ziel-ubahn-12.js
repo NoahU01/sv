@@ -131,6 +131,8 @@
     var e = pkte[pkte.length - 1];
     return d + " L" + e[0] + "," + e[1];
   }
+  var MONATE = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
+  function monatsName(mo) { var t = String(mo).split("-"); return MONATE[+t[1] - 1] + " " + t[0]; }
   function plan() {
     var m = msVon(zustandUI.ms);
     // Ausschnitt: eine Stufe zeigt nur ihre eigenen Halte; der Gesamtplan zeigt alle
@@ -149,6 +151,25 @@
       return (tiefe[id] = v.length ? 1 + Math.max.apply(null, v.map(t)) : 0);
     }
     liste.forEach(function (s) { t(s.id); });
+    // Zeitachse: Haben alle Schritte eines Levels einen geplanten Monat, stehen sie in der Spalte ihres Monats;
+    // innerhalb eines Monats bleibt die Reihenfolge der Abhängigkeiten. Monatsblöcke werden als dezente Linien gezeichnet.
+    var monatsBloecke = [];
+    stufenImBlick.forEach(function (x) {
+      var ss = liste.filter(function (s) { return s.meilenstein === x.id; });
+      if (!ss.length || !ss.every(function (s) { return s.monat; })) return;
+      var lt = {};
+      function l(id) {
+        if (lt[id] != null) return lt[id];
+        var s = S[id], v = (s.braucht || []).filter(function (b) { return imPlan[b] && S[b].meilenstein === s.meilenstein && S[b].monat === s.monat; });
+        return (lt[id] = v.length ? 1 + Math.max.apply(null, v.map(l)) : 0);
+      }
+      var monate = [], breite = {};
+      ss.forEach(function (s) { if (monate.indexOf(s.monat) < 0) monate.push(s.monat); breite[s.monat] = Math.max(breite[s.monat] || 1, l(s.id) + 1); });
+      monate.sort();
+      var off = 0, ab = {};
+      monate.forEach(function (mo) { ab[mo] = off; monatsBloecke.push({ ms: x.id, monat: mo, ab: off, breite: breite[mo] }); off += breite[mo]; });
+      ss.forEach(function (s) { tiefe[s.id] = ab[s.monat] + l(s.id); });
+    });
     var bandStart = {}, bandBreite = {}, lauf = 0, nr = 0, bandNr = {};
     stufenImBlick.forEach(function (x) {
       var w = 1; liste.forEach(function (s) { if (s.meilenstein === x.id) w = Math.max(w, tiefe[s.id] + 1); });
@@ -168,7 +189,7 @@
       tiefsteZeile[s.strang] = Math.max(tiefsteZeile[s.strang] || 0, unter[s.id]);
     });
     var bahnen = D.straenge.filter(function (st) { return liste.some(function (s) { return s.strang === st.id; }); });
-    var linieY = {}, y0 = nr > 1 ? 46 : 8;   // oben eine Zeile für die Namen der Stufenhalte (nur im Gesamtplan)
+    var linieY = {}, y0 = (nr > 1 ? 46 : 8) + (monatsBloecke.length ? 26 : 0);   // oben eine Zeile für die Namen der Stufenhalte (nur im Gesamtplan)
     bahnen.forEach(function (st) { linieY[st.id] = y0 + UEBER; y0 += UEBER + tiefsteZeile[st.id] * ZH + (tiefsteZeile[st.id] ? UNTER + 34 : UNTER); });
     var hoehe = y0 + 6 + (vorStufe ? 22 : 0);   // unten Platz für „Voraussetzung: …“
     function yVon(s) { return linieY[s.strang] + unter[s.id] * ZH; }
@@ -178,6 +199,12 @@
     var untenAlle = Math.max.apply(null, bahnen.map(function (st) { return linieY[st.id]; })) + 18;
 
     var svg = '<svg width="' + breite + '" height="' + hoehe + '" class="ub-svg" aria-hidden="true">';
+    var monatsNamen = "";
+    monatsBloecke.forEach(function (b) {
+      var xa = START + (bandStart[b.ms] + b.ab) * ABST + bandNr[b.ms] * HALT, yo = nr > 1 ? 46 : 8;
+      svg += '<line x1="' + xa + '" y1="' + (yo + 20) + '" x2="' + xa + '" y2="' + hoehe + '" stroke="#ebe7e1" stroke-width="1"/>';
+      monatsNamen += '<div class="ub-monat" style="left:' + (xa + b.breite * ABST / 2) + "px;top:" + yo + 'px">' + monatsName(b.monat) + "</div>";
+    });
     var duenn = "", dick = "", quer = "", halte = "", namen = "", durch = "";
     function strecke(pkte, farbe, gegangen, schwach) {
       // gleiche Dicke: gefahren in Linienfarbe, noch nicht gefahren hellgrau (blass: noch heller)
@@ -217,8 +244,11 @@
           strecke(pk, f, s.status !== "offen", blass(s.id) || blass(b));
           linieRein = true;
         } else {
-          var dir = y2 > y1 ? 1 : -1, yk = y2 - dir * 26;
-          quer += '<path d="' + rund([[x1, y1], [x1, yk], [x2, yk], [x2, y2]]) + '" stroke="' + (blass(s.id) ? "#dedad4" : "#8a857d") + '" stroke-width="2" fill="none" stroke-dasharray="3 5"/>';
+          var dir = y2 > y1 ? 1 : -1, yk = y2 - dir * 26, pq = [[x1, y1], [x1, yk], [x2, yk], [x2, y2]];
+          // steht ein anderer Halt genau auf der senkrechten Strecke, weicht die Abhängigkeit in die Lücke davor aus
+          var imWeg = liste.some(function (n) { var nx = xVon(n), ny = yVon(n); return n.id !== s.id && n.id !== b && Math.abs(nx - x1) < 2 && (ny - y1) * dir > 0 && (yk - ny) * dir > 0; });
+          if (imWeg && x2 - x1 > ABST / 2) { var xm = x2 - ABST / 2, ya = y1 + dir * 13; pq = [[x1, y1], [x1, ya], [xm, ya], [xm, yk], [x2, yk], [x2, y2]]; }
+          quer += '<path d="' + rund(pq) + '" stroke="' + (blass(s.id) ? "#dedad4" : "#8a857d") + '" stroke-width="2" fill="none" stroke-dasharray="3 5"/>';
         }
       });
       // frei startend: eigene kurze Strecke mit Kopfbahnhof (Querstrich) – „kann sofort los“
@@ -271,7 +301,7 @@
     var spalte = bahnen.map(function (st) {
       return '<div class="ub-bahn" style="top:' + (linieY[st.id] - 15) + 'px"><span class="ub-linie" style="background:' + st.farbe + '">' + esc(st.kurz) + "</span><div><b>" + esc(st.label) + "</b><small>" + esc(st.verantwortung) + "</small></div></div>";
     }).join("");
-    planEl.innerHTML = '<div class="ub-rahmen"><div class="ub-spalte" style="height:' + hoehe + 'px">' + spalte + '</div><div class="ub-scroll"><div class="ub-flaeche" style="width:' + breite + "px;height:" + hoehe + 'px">' + svg + namen + "</div></div></div>";
+    planEl.innerHTML = '<div class="ub-rahmen"><div class="ub-spalte" style="height:' + hoehe + 'px">' + spalte + '</div><div class="ub-scroll"><div class="ub-flaeche" style="width:' + breite + "px;height:" + hoehe + 'px">' + svg + monatsNamen + namen + "</div></div></div>";
     planEl.querySelectorAll("[data-station]").forEach(function (b) {
       b.addEventListener("click", function () {
         var id = b.getAttribute("data-station");
@@ -312,7 +342,7 @@
     var punkt = planEl.querySelector('.ub-treffer[data-station="' + id + '"]'), flaeche = planEl.querySelector(".ub-flaeche");
     if (!punkt || !flaeche) return;
     var vor = (s.braucht || []).filter(function (b) { return S[b] && S[b].status !== "erreicht"; }).map(function (b) { return S[b].titel; });
-    var meta = [st.verantwortung + (s.wer ? " (" + s.wer + ")" : ""), ZTEXT[z]].concat(s.termin ? [s.termin] : []);
+    var meta = [st.verantwortung + (s.wer ? " (" + s.wer + ")" : ""), ZTEXT[z]].concat(s.termin ? [s.termin] : s.monat ? [monatsName(s.monat)] : []);
     var h = '<p class="ub-pop-titel">' + esc(s.titel) + '</p><p class="ub-pop-meta">' + meta.map(esc).join(" &middot; ") + "</p>";
     if (s.ergebnis) h += "<p>" + esc(s.ergebnis) + "</p>";
     if (s.kritisch) h += "<p>Kritisch: " + esc(s.kritisch.grund) + "</p>";

@@ -121,7 +121,8 @@
         "Ideen zur Umsetzung des KI-Assistenten Lea"
       ],
       "offen": [],
-      "wer": ""
+      "wer": "",
+      "monat": "2026-09"
     },
     {
       "id": "t1-1-copilot",
@@ -143,7 +144,8 @@
         "grund": "Wie lange die Pilotierung läuft, ist offen.",
         "blockiert": "Davon hängt ab, wann die Entwicklung des KI-Assistenten Lea starten kann – und mit ihr die Kette bis zur Webseite."
       },
-      "termin": "ab 11/2026"
+      "termin": "",
+      "monat": "2026-10"
     },
     {
       "id": "t1-1-lea",
@@ -158,7 +160,8 @@
       ],
       "details": [],
       "offen": [],
-      "wer": ""
+      "wer": "",
+      "monat": "2026-10"
     },
     {
       "id": "t1-1-webseite",
@@ -175,7 +178,8 @@
         "Voraussichtlich innerhalb des SharePoints"
       ],
       "offen": [],
-      "wer": ""
+      "wer": "",
+      "monat": "2026-11"
     },
     {
       "id": "t1-2-mak",
@@ -281,7 +285,8 @@
       "braucht": [],
       "details": [],
       "offen": [],
-      "wer": ""
+      "wer": "",
+      "monat": "2026-11"
     },
     {
       "id": "t2-2-produkte",
@@ -393,7 +398,8 @@
       "braucht": [],
       "details": [],
       "offen": [],
-      "wer": "GLs"
+      "wer": "GLs",
+      "monat": "2026-09"
     },
     {
       "id": "sa-1-hal",
@@ -408,7 +414,8 @@
       ],
       "details": [],
       "offen": [],
-      "wer": "AL"
+      "wer": "AL",
+      "monat": "2026-10"
     },
     {
       "id": "sa-1-pw7",
@@ -423,7 +430,8 @@
       ],
       "details": [],
       "offen": [],
-      "wer": ""
+      "wer": "",
+      "monat": "2026-10"
     },
     {
       "id": "sa-1-puls",
@@ -436,7 +444,8 @@
       "braucht": [],
       "details": [],
       "offen": [],
-      "wer": ""
+      "wer": "",
+      "monat": "2026-10"
     },
     {
       "id": "sa-1-abteilung",
@@ -453,7 +462,8 @@
       ],
       "details": [],
       "offen": [],
-      "wer": ""
+      "wer": "",
+      "monat": "2026-11"
     },
     {
       "id": "sa-1-golive",
@@ -468,7 +478,8 @@
       ],
       "details": [],
       "offen": [],
-      "wer": ""
+      "wer": "",
+      "monat": "2026-12"
     },
     {
       "id": "sa-2-kommunikation",
@@ -537,5 +548,6 @@
   ],
   "personen": {},
   "hinweis_braucht": "meilensteine[].braucht: die Ergebnisse, die der Meilenstein unmittelbar braucht (Daniel, 22.10.2026). Was davor einfließt, folgt aus schritte[].braucht. m1: Annahme Big Bang = GoLive. schritte[].braucht darf auch eine Ergebnisstufe nennen (z. B. \"m2\"): der Schritt startet, sobald die Stufe erreicht ist – ohne direkte Verbindung zu einzelnen Schritten davor (Stufe 3, Beispiel 22.10.2026). Testfall 22.10.2026: SV-Pulskanal ohne Abhängigkeit von der Abstimmung HAL (eigenständiger Start), inhaltlich noch zu klären. Testfall 22.10.2026: MAK ohne Vorlauf aus Stufe 1 (beginnt eigenständig), inhaltlich noch zu klären.",
-  "hinweis_stand": "Stand 22.10.2026 abgeglichen mit der gebauten Seite sv-meilensteine-fein.html (Stand 01.10.2026 aus empiria): Copilot-Pilotierung, Zustände, wer."
+  "hinweis_stand": "Stand 22.10.2026 abgeglichen mit der gebauten Seite sv-meilensteine-fein.html (Stand 01.10.2026 aus empiria): Copilot-Pilotierung, Zustände, wer.",
+  "hinweis_monat": "monat = geplanter Monat (JJJJ-MM), in dem der Schritt erledigt ist. Level 1 von Daniel am 22.10.2026 festgelegt; Copilot-Pilotierung dabei auf 10/2026 gesetzt (vorher „ab 11/2026“)."
 }

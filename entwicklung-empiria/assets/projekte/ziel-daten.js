@@ -121,7 +121,8 @@ window.ZIEL_DATEN = {
    ],
    "wer": "",
    "kritisch": null,
-   "termin": null
+   "termin": null,
+   "monat": "2026-09"
   },
   {
    "id": "t1-1-copilot",
@@ -141,7 +142,8 @@ window.ZIEL_DATEN = {
     "grund": "Wie lange die Pilotierung läuft, ist offen.",
     "blockiert": "Davon hängt ab, wann die Entwicklung des KI-Assistenten Lea starten kann – und mit ihr die Kette bis zur Webseite."
    },
-   "termin": "ab 11/2026"
+   "termin": "",
+   "monat": "2026-10"
   },
   {
    "id": "t1-1-lea",
@@ -156,7 +158,8 @@ window.ZIEL_DATEN = {
    "details": [],
    "wer": "",
    "kritisch": null,
-   "termin": null
+   "termin": null,
+   "monat": "2026-10"
   },
   {
    "id": "t1-1-webseite",
@@ -173,7 +176,8 @@ window.ZIEL_DATEN = {
    ],
    "wer": "",
    "kritisch": null,
-   "termin": null
+   "termin": null,
+   "monat": "2026-11"
   },
   {
    "id": "t1-2-mak",
@@ -189,7 +193,8 @@ window.ZIEL_DATEN = {
    ],
    "wer": "",
    "kritisch": null,
-   "termin": null
+   "termin": null,
+   "monat": null
   },
   {
    "id": "t1-2-leos",
@@ -206,7 +211,8 @@ window.ZIEL_DATEN = {
    ],
    "wer": "",
    "kritisch": null,
-   "termin": null
+   "termin": null,
+   "monat": null
   },
   {
    "id": "t1-2-auftrag",
@@ -221,7 +227,8 @@ window.ZIEL_DATEN = {
    "details": [],
    "wer": "",
    "kritisch": null,
-   "termin": null
+   "termin": null,
+   "monat": null
   },
   {
    "id": "t1-3",
@@ -236,7 +243,8 @@ window.ZIEL_DATEN = {
    "details": [],
    "wer": "",
    "kritisch": null,
-   "termin": null
+   "termin": null,
+   "monat": null
   },
   {
    "id": "t1-4",
@@ -251,7 +259,8 @@ window.ZIEL_DATEN = {
    "details": [],
    "wer": "",
    "kritisch": null,
-   "termin": null
+   "termin": null,
+   "monat": null
   },
   {
    "id": "t1-5",
@@ -266,7 +275,8 @@ window.ZIEL_DATEN = {
    "details": [],
    "wer": "",
    "kritisch": null,
-   "termin": null
+   "termin": null,
+   "monat": null
   },
   {
    "id": "t2-1-brainstorming",
@@ -279,7 +289,8 @@ window.ZIEL_DATEN = {
    "details": [],
    "wer": "",
    "kritisch": null,
-   "termin": null
+   "termin": null,
+   "monat": "2026-11"
   },
   {
    "id": "t2-2-produkte",
@@ -298,7 +309,8 @@ window.ZIEL_DATEN = {
    ],
    "wer": "",
    "kritisch": null,
-   "termin": null
+   "termin": null,
+   "monat": null
   },
   {
    "id": "t2-2-lernen",
@@ -316,7 +328,8 @@ window.ZIEL_DATEN = {
    ],
    "wer": "",
    "kritisch": null,
-   "termin": null
+   "termin": null,
+   "monat": null
   },
   {
    "id": "t2-2-brainstorming",
@@ -332,7 +345,8 @@ window.ZIEL_DATEN = {
    "details": [],
    "wer": "",
    "kritisch": null,
-   "termin": null
+   "termin": null,
+   "monat": null
   },
   {
    "id": "t2-3",
@@ -347,7 +361,8 @@ window.ZIEL_DATEN = {
    "details": [],
    "wer": "",
    "kritisch": null,
-   "termin": null
+   "termin": null,
+   "monat": null
   },
   {
    "id": "t2-4",
@@ -362,7 +377,8 @@ window.ZIEL_DATEN = {
    "details": [],
    "wer": "",
    "kritisch": null,
-   "termin": null
+   "termin": null,
+   "monat": null
   },
   {
    "id": "t2-5",
@@ -377,7 +393,8 @@ window.ZIEL_DATEN = {
    "details": [],
    "wer": "",
    "kritisch": null,
-   "termin": null
+   "termin": null,
+   "monat": null
   },
   {
    "id": "sa-1-team",
@@ -390,7 +407,8 @@ window.ZIEL_DATEN = {
    "details": [],
    "wer": "GLs",
    "kritisch": null,
-   "termin": null
+   "termin": null,
+   "monat": "2026-09"
   },
   {
    "id": "sa-1-hal",
@@ -405,7 +423,8 @@ window.ZIEL_DATEN = {
    "details": [],
    "wer": "AL",
    "kritisch": null,
-   "termin": null
+   "termin": null,
+   "monat": "2026-10"
   },
   {
    "id": "sa-1-pw7",
@@ -420,7 +439,8 @@ window.ZIEL_DATEN = {
    "details": [],
    "wer": "",
    "kritisch": null,
-   "termin": null
+   "termin": null,
+   "monat": "2026-10"
   },
   {
    "id": "sa-1-puls",
@@ -433,7 +453,8 @@ window.ZIEL_DATEN = {
    "details": [],
    "wer": "",
    "kritisch": null,
-   "termin": null
+   "termin": null,
+   "monat": "2026-10"
   },
   {
    "id": "sa-1-abteilung",
@@ -450,7 +471,8 @@ window.ZIEL_DATEN = {
    "details": [],
    "wer": "",
    "kritisch": null,
-   "termin": null
+   "termin": null,
+   "monat": "2026-11"
   },
   {
    "id": "sa-1-golive",
@@ -465,7 +487,8 @@ window.ZIEL_DATEN = {
    "details": [],
    "wer": "",
    "kritisch": null,
-   "termin": null
+   "termin": null,
+   "monat": "2026-12"
   },
   {
    "id": "sa-2-kommunikation",
@@ -484,7 +507,8 @@ window.ZIEL_DATEN = {
    ],
    "wer": "",
    "kritisch": null,
-   "termin": null
+   "termin": null,
+   "monat": null
   },
   {
    "id": "sa-3",
@@ -499,7 +523,8 @@ window.ZIEL_DATEN = {
    "details": [],
    "wer": "",
    "kritisch": null,
-   "termin": null
+   "termin": null,
+   "monat": null
   },
   {
    "id": "sa-4",
@@ -514,7 +539,8 @@ window.ZIEL_DATEN = {
    "details": [],
    "wer": "",
    "kritisch": null,
-   "termin": null
+   "termin": null,
+   "monat": null
   },
   {
    "id": "sa-5",
@@ -529,7 +555,8 @@ window.ZIEL_DATEN = {
    "details": [],
    "wer": "",
    "kritisch": null,
-   "termin": null
+   "termin": null,
+   "monat": null
   }
  ]
 };
