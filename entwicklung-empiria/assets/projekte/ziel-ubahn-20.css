@@ -139,3 +139,14 @@
 .ub-termin:hover span,.ub-termin:focus-visible span{text-decoration:underline;text-underline-offset:3px}
 .ub-pop--termin{width:260px}
 .ub-pop--termin a{color:#111}
+/* Kopf: Subheadline und Headline wie in der Übersicht, ohne Marker */
+.ub-kopf{margin:6px 0 20px}
+.ub-kicker{display:flex;align-items:center;gap:12px;margin:0 0 10px;font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#111}
+.ub-kicker::before{content:"";width:28px;height:3px;background:#111}
+.ub-h1{font-family:var(--font-serif);font-weight:700;font-size:clamp(2rem,3.4vw,2.8rem);line-height:1.08;letter-spacing:-.01em;margin:0}
+/* Größe des Plans einstellbar */
+.ub-zoom{display:flex;align-items:center;justify-content:flex-end;gap:6px;margin:0 0 8px;font-size:.74rem;color:#8a857d}
+.ub-zoom button{width:26px;height:26px;border-radius:50%;border:1px solid #d9d5ce;background:#fff;color:#111;font:500 .95rem/1 Poppins,sans-serif;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0 0 1px}
+.ub-zoom button:hover:not(:disabled){border-color:#111}
+.ub-zoom button:disabled{opacity:.35;cursor:default}
+.ub-zoom output{min-width:40px;text-align:center;color:#111}

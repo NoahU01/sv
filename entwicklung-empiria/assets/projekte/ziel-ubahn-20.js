@@ -457,5 +457,27 @@
     zustandUI.station = null; plan(); detail();
   });
 
+  // Größe des Plans: kleiner, um mehr auf einmal zu sehen – in Stufen zwischen 60 und 120 Prozent, je Gerät gemerkt
+  var STUFEN = [60, 70, 80, 90, 100, 110, 120], groesse = 100;
+  try { var gm = +localStorage.getItem("sv-plan-groesse"); if (STUFEN.indexOf(gm) > -1) groesse = gm; } catch (e) {}
+  var zoomEl = document.createElement("div");
+  zoomEl.className = "ub-zoom";
+  zoomEl.innerHTML = '<span>Größe</span><button type="button" data-z="-1" aria-label="Plan kleiner">&minus;</button><output aria-live="polite"></output><button type="button" data-z="1" aria-label="Plan größer">+</button>';
+  planEl.parentNode.insertBefore(zoomEl, planEl);
+  function setzeGroesse(g) {
+    groesse = g;
+    planEl.style.zoom = g / 100;
+    zoomEl.querySelector("output").textContent = g + " %";
+    zoomEl.querySelector('[data-z="-1"]').disabled = g === STUFEN[0];
+    zoomEl.querySelector('[data-z="1"]').disabled = g === STUFEN[STUFEN.length - 1];
+    try { localStorage.setItem("sv-plan-groesse", String(g)); } catch (e) {}
+  }
+  zoomEl.addEventListener("click", function (e) {
+    var b = e.target.closest("[data-z]"); if (!b) return;
+    var i = STUFEN.indexOf(groesse) + (+b.getAttribute("data-z"));
+    if (i < 0 || i >= STUFEN.length) return;
+    setzeGroesse(STUFEN[i]); plan(); detail();   // neu zeichnen: kleiner heißt auch mehr Breite für die Spalten
+  });
+  setzeGroesse(groesse);
   stufen(); plan(); detail();
 })();
