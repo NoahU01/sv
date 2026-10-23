@@ -52,41 +52,49 @@
   // Ergebnisstufen als Kästen: oben „Stufe n · Datum“, darunter Titel oder Kern des Ergebnisses (höchstens zwei Zeilen).
   // Ein Klick auf den Kasten wechselt die Stufe; das ⓘ im Kasten öffnet „Erreicht, wenn …“ direkt darunter.
   function kastenText(x) { return x.titel || ((x.ergebnis || [])[0] || "Level " + x.nr).split(":")[0].replace(/\.$/, ""); }
+  // Kopf mit den Ergebnisleveln – drei Darstellungen zum Vergleich (body data-kopf="1|2|3"):
+  // 1 Fokus: gewähltes Level groß, rechts Ziffern zur Auswahl · 2 Route: Haltepunkte auf einer Linie · 3 Kapitel: große Ziffern als Reiter
+  function stufenText(id) {
+    if (id === "ziel") return { meta: "Alle Level · bis 31.12.2028", titel: "Gesamtplan", wenn: "Alle Stoßrichtungen über alle Level bis zum Zielbild." };
+    var x = MS[id];
+    return { meta: "Level " + x.nr + " von " + D.meilensteine.length + " · " + x.termin + (stufeErreicht(id) ? " · erreicht" : ""), titel: kastenText(x), wenn: "Erreicht, wenn: " + (x.ergebnis || []).join(" ") };
+  }
   function stufen() {
-    var h = '<div class="ub-kaesten" role="tablist">';
-    D.meilensteine.forEach(function (x) {
-      h += '<div role="tab" tabindex="0" class="ub-kasten" data-ms="' + x.id + '" aria-selected="' + (x.id === zustandUI.ms) + '">' +
-        '<small>Level ' + x.nr + " &middot; " + esc(x.termin) + "</small><b>" + esc(kastenText(x)) + "</b>" +
-        '<button type="button" class="ub-kasten-info" data-info-ms="' + x.id + '" aria-label="Erreicht, wenn …">+</button></div>';
-    });
-    h += '<div role="tab" tabindex="0" class="ub-kasten ub-kasten--ziel" data-ms="ziel" aria-selected="' + (zustandUI.ms === "ziel") + '">' +
-      "<small>Ziel &middot; alle Level</small><b>Gesamtplan</b>" +
-      '<button type="button" class="ub-kasten-info" data-info-ms="ziel" aria-label="Zielbild">+</button></div></div>';
+    var art = document.body.getAttribute("data-kopf") || "1", sel = zustandUI.ms, tx = stufenText(sel), h = "";
+    var alle = D.meilensteine.map(function (x) { return x.id; }).concat(["ziel"]);
+    if (art === "2") {
+      h = '<div class="ub-route" role="tablist">';
+      alle.forEach(function (id) {
+        var z = id === "ziel", x = MS[id], an = id === sel;
+        h += '<button type="button" role="tab" class="ub-route-halt' + (an ? " ist-an" : "") + (!z && stufeErreicht(id) ? " ist-erreicht" : "") + (z ? " ist-ziel" : "") + '" data-ms="' + id + '" aria-selected="' + an + '">' +
+          '<span class="ub-route-titel">' + esc(z ? "Gesamtplan" : kastenText(x)) + '</span><span class="ub-route-punkt"></span>' +
+          '<span class="ub-route-datum">' + esc(z ? "Ziel" : "Level " + x.nr + " · " + x.termin) + "</span></button>";
+      });
+      h += '</div><p class="ub-kopf-wenn">' + esc(tx.wenn) + "</p>";
+    } else if (art === "3") {
+      h = '<div class="ub-kapitel" role="tablist">';
+      alle.forEach(function (id) {
+        var z = id === "ziel", x = MS[id], an = id === sel;
+        h += '<button type="button" role="tab" class="ub-kapitel-reiter' + (an ? " ist-an" : "") + '" data-ms="' + id + '" aria-selected="' + an + '">' +
+          '<span class="ub-kapitel-nr">' + (z ? "Alle" : x.nr) + '</span><span class="ub-kapitel-titel">' + esc(z ? "Gesamtplan" : kastenText(x)) + "</span>" +
+          '<span class="ub-kapitel-datum">' + esc(z ? "bis zum Zielbild" : x.termin) + "</span></button>";
+      });
+      h += '</div><p class="ub-kopf-wenn">' + esc(tx.wenn) + "</p>";
+    } else {
+      h = '<div class="ub-fokus"><div class="ub-fokus-text"><p class="ub-fokus-meta">' + esc(tx.meta) + '</p><p class="ub-fokus-titel">' + esc(tx.titel) + '</p><p class="ub-kopf-wenn">' + esc(tx.wenn) + "</p></div>" +
+        '<div class="ub-fokus-wahl" role="tablist" aria-label="Level wählen">';
+      alle.forEach(function (id) {
+        var z = id === "ziel", an = id === sel;
+        h += '<button type="button" role="tab" class="ub-fokus-knopf' + (z ? " ist-ziel" : "") + (an ? " ist-an" : "") + (!z && stufeErreicht(id) ? " ist-erreicht" : "") + '" data-ms="' + id + '" aria-selected="' + an + '" title="' + esc(z ? "Gesamtplan" : "Level " + MS[id].nr + ": " + kastenText(MS[id])) + '">' + (z ? "Alle" : MS[id].nr) + "</button>";
+      });
+      h += "</div></div>";
+    }
     stufenEl.innerHTML = h;
     stufenEl.querySelectorAll("[data-ms]").forEach(function (k) {
-      function waehlen() {
+      k.addEventListener("click", function () {
         zustandUI.ms = k.getAttribute("data-ms"); zustandUI.station = null;
-        history.replaceState(null, "", "#" + zustandUI.ms);
+        history.replaceState(null, "", location.search + "#" + zustandUI.ms);
         infoZu(); stufen(); plan(); detail();
-      }
-      k.addEventListener("click", waehlen);
-      k.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); waehlen(); } });
-    });
-    stufenEl.querySelectorAll("[data-info-ms]").forEach(function (b) {
-      b.addEventListener("click", function (e) {
-        e.stopPropagation();
-        var id = b.getAttribute("data-info-ms"), offen = infoPop && infoPop.getAttribute("data-fuer") === id;
-        infoZu();
-        if (offen) return;
-        var kasten = b.closest(".ub-kasten");
-        infoPop = document.createElement("div");
-        infoPop.className = "ub-pop ub-pop--info";
-        infoPop.setAttribute("data-fuer", id);
-        infoPop.innerHTML = infoInhalt(id);
-        stufenEl.appendChild(infoPop);
-        infoPop.style.left = Math.min(kasten.offsetLeft, stufenEl.offsetWidth - infoPop.offsetWidth) + "px";
-        infoPop.style.top = (kasten.offsetTop + kasten.offsetHeight + 8) + "px";
-        b.setAttribute("aria-expanded", "true");
       });
     });
   }
@@ -464,13 +472,24 @@
   var IC_EIN = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   var karte = planEl.parentNode;
   var zoomEl = document.createElement("div");
-  var platz = document.querySelector("[data-zoom-platz]");   // eigener Kasten neben der Legende (Übersicht), sonst Ecke im Plan
-  zoomEl.className = "ub-zoom" + (platz ? " ub-zoom--hoch" : "");
-  zoomEl.innerHTML = platz
-    ? '<button type="button" data-z="1" aria-label="Plan größer">+</button><output aria-live="polite"></output><button type="button" data-z="-1" aria-label="Plan kleiner">&minus;</button><span class="ub-zoom-trenner" aria-hidden="true"></span><button type="button" data-ein aria-label="Plan ins Fenster einpassen" title="Einpassen">' + IC_EIN + "</button>"
-    : '<button type="button" data-z="-1" aria-label="Plan kleiner">&minus;</button><output aria-live="polite"></output>' +
-      '<button type="button" data-z="1" aria-label="Plan größer">+</button><span class="ub-zoom-trenner" aria-hidden="true"></span><button type="button" data-ein aria-label="Plan ins Fenster einpassen" title="Einpassen">' + IC_EIN + "</button>";
+  var platz = document.querySelector("[data-zoom-platz]");   // Leiste oben rechts (Übersicht, Weg zum Ergebnis), sonst Ecke im Plan
+  var quelle = document.querySelector("[data-legende-quelle]");
+  zoomEl.className = "ub-zoom" + (platz ? " ub-zoom--leiste" : "");
+  zoomEl.innerHTML = '<button type="button" data-z="-1" aria-label="Plan kleiner">&minus;</button><output aria-live="polite"></output>' +
+    '<button type="button" data-z="1" aria-label="Plan größer">+</button><span class="ub-zoom-trenner" aria-hidden="true"></span><button type="button" data-ein aria-label="Plan ins Fenster einpassen" title="Einpassen">' + IC_EIN + "</button>" +
+    (quelle ? '<span class="ub-zoom-trenner" aria-hidden="true"></span><button type="button" class="ub-leg-knopf" data-leg aria-expanded="false">Legende</button>' : "");
   (platz || karte).appendChild(zoomEl);
+  if (quelle) {
+    var legPop = document.createElement("div");
+    legPop.className = "ub-pop ub-pop--legende"; legPop.hidden = true;
+    legPop.innerHTML = '<p class="ub-pop-titel">Legende</p>' + quelle.innerHTML;
+    zoomEl.appendChild(legPop);
+    var legKnopf = zoomEl.querySelector("[data-leg]");
+    var legZu = function () { legPop.hidden = true; legKnopf.setAttribute("aria-expanded", "false"); };
+    legKnopf.addEventListener("click", function (e) { e.stopPropagation(); var auf = legPop.hidden; legPop.hidden = !auf; legKnopf.setAttribute("aria-expanded", auf ? "true" : "false"); });
+    document.addEventListener("click", function (e) { if (!legPop.hidden && !e.target.closest(".ub-pop--legende")) legZu(); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") legZu(); });
+  }
   if (getComputedStyle(karte).position === "static") karte.style.position = "relative";
   function setzeGroesse(g) {
     groesse = g;

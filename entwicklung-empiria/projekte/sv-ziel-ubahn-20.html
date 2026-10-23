@@ -238,26 +238,22 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
     <div class="container">
 
       <header class="ub-kopf">
+        <div>
           <p class="ub-kicker">Projekt &middot; SV Akademie</p>
           <h1 class="ub-h1">Weg zum Ergebnis.</h1>
+        </div>
+        <div class="ub-varianten-wahl" role="group" aria-label="Darstellung der Ergebnislevel">
+          <span>Variante</span><button type="button" data-kopf-wahl="1">1</button><button type="button" data-kopf-wahl="2">2</button><button type="button" data-kopf-wahl="3">3</button>
+        </div>
       </header>
 
       <section class="ub-steuerung" aria-label="Steuerung">
         <div class="ub-steuer-kopf">
           <h2>Ergebnislevel</h2>
+          <div data-zoom-platz></div>
         </div>
         <div id="ub-stufen"></div>
-        <div class="ub-legende-zeile" aria-label="Legende">
-          <span><svg width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="11" r="8.75" fill="#fff" stroke="#111" stroke-width="4.5"/></svg>in Arbeit</span>
-          <span><svg width="14" height="22" viewBox="0 0 14 22"><circle cx="7" cy="11" r="6" fill="#111"/></svg>erledigt</span>
-          <span><svg width="20" height="22" viewBox="0 0 20 22"><circle cx="10" cy="11" r="8.5" fill="#fff" stroke="#a39e96" stroke-width="3"/></svg>kommt noch</span>
-          <span><svg width="30" height="10"><line x1="4" y1="5" x2="26" y2="5" stroke="#111" stroke-width="8" stroke-linecap="round"/></svg>erledigt</span>
-          <span><svg width="30" height="10"><line x1="4" y1="5" x2="26" y2="5" stroke="#dedad4" stroke-width="8" stroke-linecap="round"/></svg>offen</span>
-          <span><svg width="26" height="20"><line x1="3" y1="3" x2="3" y2="17" stroke="#111" stroke-width="4" stroke-linecap="round"/><line x1="3" y1="10" x2="24" y2="10" stroke="#111" stroke-width="4" stroke-linecap="round"/></svg>beginnt eigenst&auml;ndig</span>
-          <span><svg width="30" height="10"><line x1="2" y1="5" x2="28" y2="5" stroke="#8a857d" stroke-width="2" stroke-dasharray="3 5"/></svg>Abh&auml;ngigkeit</span>
-          <span><svg width="14" height="14"><rect x="3" y="3" width="8" height="8" fill="#111" transform="rotate(45 7 7)"/></svg>Termin</span>
-          <span><svg width="16" height="24"><rect x="3" y="3" width="10" height="18" rx="5" fill="#fff" stroke="#111" stroke-width="3"/></svg>Ergebnislevel</span>
-        </div>
+        <div data-legende-quelle hidden><ul class="ub-leg"><li><span class="ub-leg-ic"><svg width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="11" r="8.75" fill="#fff" stroke="#111" stroke-width="4.5"/></svg></span>in Arbeit</li><li><span class="ub-leg-ic"><svg width="14" height="22" viewBox="0 0 14 22"><circle cx="7" cy="11" r="6" fill="#111"/></svg></span>erledigt</li><li><span class="ub-leg-ic"><svg width="20" height="22" viewBox="0 0 20 22"><circle cx="10" cy="11" r="8.5" fill="#fff" stroke="#a39e96" stroke-width="3"/></svg></span>kommt noch</li><li><span class="ub-leg-ic"><svg width="30" height="10"><line x1="4" y1="5" x2="26" y2="5" stroke="#111" stroke-width="8" stroke-linecap="round"/></svg></span>Strecke erledigt</li><li><span class="ub-leg-ic"><svg width="30" height="10"><line x1="4" y1="5" x2="26" y2="5" stroke="#dedad4" stroke-width="8" stroke-linecap="round"/></svg></span>Strecke offen</li><li><span class="ub-leg-ic"><svg width="30" height="10"><line x1="2" y1="5" x2="28" y2="5" stroke="#8a857d" stroke-width="2" stroke-dasharray="3 5"/></svg></span>Abh&auml;ngigkeit</li><li><span class="ub-leg-ic"><svg width="26" height="20"><line x1="3" y1="3" x2="3" y2="17" stroke="#111" stroke-width="4" stroke-linecap="round"/><line x1="3" y1="10" x2="24" y2="10" stroke="#111" stroke-width="4" stroke-linecap="round"/></svg></span>beginnt eigenst&auml;ndig</li><li><span class="ub-leg-ic"><svg width="14" height="14"><rect x="3" y="3" width="8" height="8" fill="#111" transform="rotate(45 7 7)"/></svg></span>Termin</li><li><span class="ub-leg-ic"><svg width="16" height="24"><rect x="3" y="3" width="10" height="18" rx="5" fill="#fff" stroke="#111" stroke-width="3"/></svg></span>Ergebnislevel</li></ul></div>
       </section>
       <section class="ub-cockpit ub-plan-karte" aria-label="Weg zum Ergebnis">
         <div id="ub-plan"></div>
@@ -277,6 +273,17 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 
 <script src="../script.js"></script>
 <script src="../assets/projekte/ziel-daten.js"></script>
+<script>
+/* Vergleich der Kopf-Varianten: ?kopf=1|2|3 (1 Fokus, 2 Route, 3 Kapitel) */
+(function () {
+  var v = (location.search.match(/kopf=([123])/) || [])[1] || "1";
+  document.body.setAttribute("data-kopf", v);
+  document.querySelectorAll("[data-kopf-wahl]").forEach(function (b) {
+    b.setAttribute("aria-pressed", b.getAttribute("data-kopf-wahl") === v ? "true" : "false");
+    b.addEventListener("click", function () { location.href = "?kopf=" + b.getAttribute("data-kopf-wahl") + location.hash; });
+  });
+})();
+</script>
 <script src="../assets/projekte/ziel-ubahn-20.js"></script>
 </body>
 </html>
