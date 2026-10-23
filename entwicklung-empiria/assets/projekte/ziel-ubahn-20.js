@@ -458,15 +458,15 @@
   });
 
   // Größe des Plans: kleiner, um mehr auf einmal zu sehen – in Stufen zwischen 60 und 120 Prozent, je Gerät gemerkt.
-  // Regler schwebend unten rechts im Plan, wie bei Karten-Apps.
+  // Regler fest in der Ecke über den Stoßrichtungen: bleibt an seiner Stelle, man kann schnell mehrfach klicken.
   var STUFEN = [60, 70, 80, 90, 100, 110, 120], groesse = 100;
   try { var gm = +localStorage.getItem("sv-plan-groesse"); if (STUFEN.indexOf(gm) > -1) groesse = gm; } catch (e) {}
   var IC_EIN = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   var karte = planEl.parentNode;
   var zoomEl = document.createElement("div");
   zoomEl.className = "ub-zoom";
-  zoomEl.innerHTML = '<button type="button" data-z="1" aria-label="Plan größer">+</button><output aria-live="polite"></output>' +
-    '<button type="button" data-z="-1" aria-label="Plan kleiner">&minus;</button><button type="button" data-ein aria-label="Plan ins Fenster einpassen" title="Einpassen">' + IC_EIN + "</button>";
+  zoomEl.innerHTML = '<button type="button" data-z="-1" aria-label="Plan kleiner">&minus;</button><output aria-live="polite"></output>' +
+    '<button type="button" data-z="1" aria-label="Plan größer">+</button><span class="ub-zoom-trenner" aria-hidden="true"></span><button type="button" data-ein aria-label="Plan ins Fenster einpassen" title="Einpassen">' + IC_EIN + "</button>";
   karte.appendChild(zoomEl);
   if (getComputedStyle(karte).position === "static") karte.style.position = "relative";
   function setzeGroesse(g) {
