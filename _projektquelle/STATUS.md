@@ -122,7 +122,6 @@ falls in einem neuen Chat weitergearbeitet wird.
   - `pdf-projekt/seiten_drucken.py` – Druckfassungen der Projektseiten (A3/A1)
   - `pdf-agenda/agenda_pdf.py` – Agenda als PDF (liest sv-abstimmung-hal.html); Vorschaubild über
     `werkzeuge/pdf-vorlage` im empiria-Repo (muss unter ~/Projekte/empiria liegen)
-  - `sv_plan_marken.py` – Marken im Meilensteinplan (setzt in die Originale, danach neu bauen)
 - Design mit festem Stand (Entscheidung A, Daniel 22.10.2026): `_projektquelle/cd/empiria-design.json`
   hält Stildatei, Skript, Logos und Schriften aus empiria main fest. `cd_abgleich.py` zeigt, ob empiria
   einen neuen Stand hat; übernommen wird nur nach Daniels Ja (`--uebernehmen`).
