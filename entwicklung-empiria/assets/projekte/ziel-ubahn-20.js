@@ -464,10 +464,13 @@
   var IC_EIN = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   var karte = planEl.parentNode;
   var zoomEl = document.createElement("div");
-  zoomEl.className = "ub-zoom";
-  zoomEl.innerHTML = '<button type="button" data-z="-1" aria-label="Plan kleiner">&minus;</button><output aria-live="polite"></output>' +
-    '<button type="button" data-z="1" aria-label="Plan größer">+</button><span class="ub-zoom-trenner" aria-hidden="true"></span><button type="button" data-ein aria-label="Plan ins Fenster einpassen" title="Einpassen">' + IC_EIN + "</button>";
-  karte.appendChild(zoomEl);
+  var platz = document.querySelector("[data-zoom-platz]");   // eigener Kasten neben der Legende (Übersicht), sonst Ecke im Plan
+  zoomEl.className = "ub-zoom" + (platz ? " ub-zoom--hoch" : "");
+  zoomEl.innerHTML = platz
+    ? '<button type="button" data-z="1" aria-label="Plan größer">+</button><output aria-live="polite"></output><button type="button" data-z="-1" aria-label="Plan kleiner">&minus;</button><span class="ub-zoom-trenner" aria-hidden="true"></span><button type="button" data-ein aria-label="Plan ins Fenster einpassen" title="Einpassen">' + IC_EIN + "</button>"
+    : '<button type="button" data-z="-1" aria-label="Plan kleiner">&minus;</button><output aria-live="polite"></output>' +
+      '<button type="button" data-z="1" aria-label="Plan größer">+</button><span class="ub-zoom-trenner" aria-hidden="true"></span><button type="button" data-ein aria-label="Plan ins Fenster einpassen" title="Einpassen">' + IC_EIN + "</button>";
+  (platz || karte).appendChild(zoomEl);
   if (getComputedStyle(karte).position === "static") karte.style.position = "relative";
   function setzeGroesse(g) {
     groesse = g;

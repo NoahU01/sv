@@ -153,3 +153,6 @@
 .ub-zoom button svg{width:14px;height:14px}
 .ub-zoom output{min-width:38px;text-align:center}
 .ub-kopf{display:block}
+.ub-zoom--hoch{position:static;flex-direction:column;gap:2px;border:0;padding:0;background:none}
+.ub-zoom--hoch .ub-zoom-trenner{width:16px;height:1px;margin:3px 0}
+.ub-zoom--hoch output{min-width:0;font-size:.7rem;color:#555;padding:2px 0}
