@@ -457,27 +457,55 @@
     zustandUI.station = null; plan(); detail();
   });
 
-  // Größe des Plans: kleiner, um mehr auf einmal zu sehen – in Stufen zwischen 60 und 120 Prozent, je Gerät gemerkt
+  // Größe des Plans: kleiner, um mehr auf einmal zu sehen – in Stufen zwischen 60 und 120 Prozent, je Gerät gemerkt.
+  // Drei Darstellungen des Reglers zum Vergleich (body data-regler="1|2|3"): 1 Ecke oben links, 2 schwebend unten rechts, 3 in der Legende.
   var STUFEN = [60, 70, 80, 90, 100, 110, 120], groesse = 100;
   try { var gm = +localStorage.getItem("sv-plan-groesse"); if (STUFEN.indexOf(gm) > -1) groesse = gm; } catch (e) {}
+  var IC_EIN = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var IC_LUPE = function (k) { return '<svg viewBox="0 0 16 16" aria-hidden="true" class="ub-lupe' + (k ? " ub-lupe--klein" : "") + '"><circle cx="7" cy="7" r="4.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10.4 10.4L14 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>'; };
+  var regler = document.body.getAttribute("data-regler") || "1";
+  var karte = planEl.parentNode, legende = document.querySelector(".ub-legende-zeile");
   var zoomEl = document.createElement("div");
-  zoomEl.className = "ub-zoom";
-  zoomEl.innerHTML = '<span>Größe</span><button type="button" data-z="-1" aria-label="Plan kleiner">&minus;</button><output aria-live="polite"></output><button type="button" data-z="1" aria-label="Plan größer">+</button>';
-  planEl.parentNode.insertBefore(zoomEl, planEl);
+  zoomEl.className = "ub-zoom ub-zoom--" + regler;
+  if (regler === "3") {
+    zoomEl.innerHTML = '<span class="ub-zoom-trenner" aria-hidden="true"></span>' + IC_LUPE(true) +
+      '<input type="range" min="0" max="' + (STUFEN.length - 1) + '" step="1" aria-label="Größe des Plans">' + IC_LUPE(false) + '<output aria-live="polite"></output>';
+    (legende || karte).appendChild(zoomEl);
+  } else if (regler === "2") {
+    zoomEl.innerHTML = '<button type="button" data-z="1" aria-label="Plan größer">+</button><output aria-live="polite"></output>' +
+      '<button type="button" data-z="-1" aria-label="Plan kleiner">&minus;</button><button type="button" data-ein aria-label="Plan ins Fenster einpassen" title="Einpassen">' + IC_EIN + "</button>";
+    karte.appendChild(zoomEl);
+  } else {
+    zoomEl.innerHTML = '<button type="button" data-z="-1" aria-label="Plan kleiner">&minus;</button><output aria-live="polite"></output>' +
+      '<button type="button" data-z="1" aria-label="Plan größer">+</button><span class="ub-zoom-trenner" aria-hidden="true"></span><button type="button" data-ein aria-label="Plan ins Fenster einpassen" title="Einpassen">' + IC_EIN + "</button>";
+    karte.appendChild(zoomEl);
+  }
+  if (getComputedStyle(karte).position === "static") karte.style.position = "relative";
   function setzeGroesse(g) {
     groesse = g;
     planEl.style.zoom = g / 100;
     zoomEl.querySelector("output").textContent = g + " %";
-    zoomEl.querySelector('[data-z="-1"]').disabled = g === STUFEN[0];
-    zoomEl.querySelector('[data-z="1"]').disabled = g === STUFEN[STUFEN.length - 1];
+    var k = zoomEl.querySelector('[data-z="-1"]'), gr = zoomEl.querySelector('[data-z="1"]'), sl = zoomEl.querySelector('input[type="range"]');
+    if (k) k.disabled = g === STUFEN[0];
+    if (gr) gr.disabled = g === STUFEN[STUFEN.length - 1];
+    if (sl) sl.value = STUFEN.indexOf(g);
     try { localStorage.setItem("sv-plan-groesse", String(g)); } catch (e) {}
   }
+  function neu(g) { if (g === groesse) return; setzeGroesse(g); plan(); detail(); }   // neu zeichnen: kleiner heißt auch mehr Breite für die Spalten
+  function einpassen() {   // größte Stufe, bei der der Plan in die Fensterhöhe passt
+    var hoehe100 = planEl.scrollHeight / (groesse / 100), platz = window.innerHeight - 120, wahl = STUFEN[0];
+    STUFEN.forEach(function (st) { if (hoehe100 * st / 100 <= platz) wahl = st; });
+    neu(Math.min(wahl, 100));
+    var r = karte.getBoundingClientRect(); window.scrollBy({ top: r.top - 16, behavior: "smooth" });
+  }
   zoomEl.addEventListener("click", function (e) {
+    if (e.target.closest("[data-ein]")) { einpassen(); return; }
     var b = e.target.closest("[data-z]"); if (!b) return;
     var i = STUFEN.indexOf(groesse) + (+b.getAttribute("data-z"));
-    if (i < 0 || i >= STUFEN.length) return;
-    setzeGroesse(STUFEN[i]); plan(); detail();   // neu zeichnen: kleiner heißt auch mehr Breite für die Spalten
+    if (i >= 0 && i < STUFEN.length) neu(STUFEN[i]);
   });
+  var sl0 = zoomEl.querySelector('input[type="range"]');
+  if (sl0) sl0.addEventListener("input", function () { neu(STUFEN[+sl0.value]); });
   setzeGroesse(groesse);
   stufen(); plan(); detail();
 })();

@@ -238,8 +238,13 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
     <div class="container">
 
       <header class="ub-kopf">
-        <p class="ub-kicker">Projekt &middot; SV Akademie</p>
-        <h1 class="ub-h1">Weg zum Ergebnis.</h1>
+        <div>
+          <p class="ub-kicker">Projekt &middot; SV Akademie</p>
+          <h1 class="ub-h1">Weg zum Ergebnis.</h1>
+        </div>
+        <div class="ub-regler-wahl" role="group" aria-label="Darstellung des Größenreglers">
+          <span>Regler</span><button type="button" data-regler-wahl="1">1</button><button type="button" data-regler-wahl="2">2</button><button type="button" data-regler-wahl="3">3</button>
+        </div>
       </header>
 
       <section class="ub-steuerung" aria-label="Steuerung">
@@ -277,6 +282,17 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 
 <script src="../script.js"></script>
 <script src="../assets/projekte/ziel-daten.js"></script>
+<script>
+/* Vergleich der Reglervarianten: Auswahl über ?regler=1|2|3, die Seite lädt dafür neu */
+(function () {
+  var v = (location.search.match(/regler=([123])/) || [])[1] || "1";
+  document.body.setAttribute("data-regler", v);
+  document.querySelectorAll("[data-regler-wahl]").forEach(function (b) {
+    b.setAttribute("aria-pressed", b.getAttribute("data-regler-wahl") === v ? "true" : "false");
+    b.addEventListener("click", function () { location.search = "?regler=" + b.getAttribute("data-regler-wahl"); });
+  });
+})();
+</script>
 <script src="../assets/projekte/ziel-ubahn-20.js"></script>
 </body>
 </html>
