@@ -125,6 +125,7 @@ window.ZIEL_DATEN = {
    "wer": "",
    "kritisch": null,
    "termin": null,
+   "von": null,
    "monat": "2026-09"
   },
   {
@@ -146,6 +147,7 @@ window.ZIEL_DATEN = {
     "blockiert": "Davon hängt ab, wann die Entwicklung des KI-Assistenten Lea starten kann – und mit ihr die Kette bis zur Webseite."
    },
    "termin": "",
+   "von": null,
    "monat": "2026-10"
   },
   {
@@ -162,7 +164,8 @@ window.ZIEL_DATEN = {
    "wer": "",
    "kritisch": null,
    "termin": null,
-   "monat": "2026-10"
+   "von": "2026-10",
+   "monat": "2026-11"
   },
   {
    "id": "t1-1-webseite",
@@ -180,6 +183,7 @@ window.ZIEL_DATEN = {
    "wer": "",
    "kritisch": null,
    "termin": null,
+   "von": null,
    "monat": "2026-11"
   },
   {
@@ -197,6 +201,7 @@ window.ZIEL_DATEN = {
    "wer": "",
    "kritisch": null,
    "termin": null,
+   "von": null,
    "monat": null
   },
   {
@@ -215,6 +220,7 @@ window.ZIEL_DATEN = {
    "wer": "",
    "kritisch": null,
    "termin": null,
+   "von": null,
    "monat": null
   },
   {
@@ -231,6 +237,7 @@ window.ZIEL_DATEN = {
    "wer": "",
    "kritisch": null,
    "termin": null,
+   "von": null,
    "monat": null
   },
   {
@@ -247,6 +254,7 @@ window.ZIEL_DATEN = {
    "wer": "",
    "kritisch": null,
    "termin": null,
+   "von": null,
    "monat": null
   },
   {
@@ -263,6 +271,7 @@ window.ZIEL_DATEN = {
    "wer": "",
    "kritisch": null,
    "termin": null,
+   "von": null,
    "monat": null
   },
   {
@@ -279,6 +288,7 @@ window.ZIEL_DATEN = {
    "wer": "",
    "kritisch": null,
    "termin": null,
+   "von": null,
    "monat": null
   },
   {
@@ -293,6 +303,7 @@ window.ZIEL_DATEN = {
    "wer": "",
    "kritisch": null,
    "termin": null,
+   "von": null,
    "monat": "2026-11"
   },
   {
@@ -313,6 +324,7 @@ window.ZIEL_DATEN = {
    "wer": "",
    "kritisch": null,
    "termin": null,
+   "von": null,
    "monat": null
   },
   {
@@ -332,6 +344,7 @@ window.ZIEL_DATEN = {
    "wer": "",
    "kritisch": null,
    "termin": null,
+   "von": null,
    "monat": null
   },
   {
@@ -349,6 +362,7 @@ window.ZIEL_DATEN = {
    "wer": "",
    "kritisch": null,
    "termin": null,
+   "von": null,
    "monat": null
   },
   {
@@ -365,6 +379,7 @@ window.ZIEL_DATEN = {
    "wer": "",
    "kritisch": null,
    "termin": null,
+   "von": null,
    "monat": null
   },
   {
@@ -381,6 +396,7 @@ window.ZIEL_DATEN = {
    "wer": "",
    "kritisch": null,
    "termin": null,
+   "von": null,
    "monat": null
   },
   {
@@ -397,6 +413,7 @@ window.ZIEL_DATEN = {
    "wer": "",
    "kritisch": null,
    "termin": null,
+   "von": null,
    "monat": null
   },
   {
@@ -411,6 +428,7 @@ window.ZIEL_DATEN = {
    "wer": "GLs",
    "kritisch": null,
    "termin": null,
+   "von": null,
    "monat": "2026-09"
   },
   {
@@ -427,6 +445,7 @@ window.ZIEL_DATEN = {
    "wer": "AL",
    "kritisch": null,
    "termin": null,
+   "von": null,
    "monat": "2026-10"
   },
   {
@@ -443,6 +462,7 @@ window.ZIEL_DATEN = {
    "wer": "",
    "kritisch": null,
    "termin": null,
+   "von": null,
    "monat": "2026-10"
   },
   {
@@ -457,6 +477,7 @@ window.ZIEL_DATEN = {
    "wer": "",
    "kritisch": null,
    "termin": null,
+   "von": null,
    "monat": "2026-10"
   },
   {
@@ -475,6 +496,7 @@ window.ZIEL_DATEN = {
    "wer": "",
    "kritisch": null,
    "termin": null,
+   "von": null,
    "monat": "2026-11"
   },
   {
@@ -491,6 +513,7 @@ window.ZIEL_DATEN = {
    "wer": "",
    "kritisch": null,
    "termin": null,
+   "von": null,
    "monat": "2026-12"
   },
   {
@@ -511,6 +534,7 @@ window.ZIEL_DATEN = {
    "wer": "",
    "kritisch": null,
    "termin": null,
+   "von": null,
    "monat": null
   },
   {
@@ -527,6 +551,7 @@ window.ZIEL_DATEN = {
    "wer": "",
    "kritisch": null,
    "termin": null,
+   "von": null,
    "monat": null
   },
   {
@@ -543,6 +568,7 @@ window.ZIEL_DATEN = {
    "wer": "",
    "kritisch": null,
    "termin": null,
+   "von": null,
    "monat": null
   },
   {
@@ -559,6 +585,7 @@ window.ZIEL_DATEN = {
    "wer": "",
    "kritisch": null,
    "termin": null,
+   "von": null,
    "monat": null
   }
  ]

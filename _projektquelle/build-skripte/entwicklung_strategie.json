@@ -164,7 +164,8 @@
       "details": [],
       "offen": [],
       "wer": "",
-      "monat": "2026-10"
+      "monat": "2026-11",
+      "von": "2026-10"
     },
     {
       "id": "t1-1-webseite",
@@ -552,5 +553,5 @@
   "personen": {},
   "hinweis_braucht": "meilensteine[].braucht: die Ergebnisse, die der Meilenstein unmittelbar braucht (Daniel, 22.10.2026). Was davor einfließt, folgt aus schritte[].braucht. m1: Annahme Big Bang = GoLive. schritte[].braucht darf auch eine Ergebnisstufe nennen (z. B. \"m2\"): der Schritt startet, sobald die Stufe erreicht ist – ohne direkte Verbindung zu einzelnen Schritten davor (Stufe 3, Beispiel 22.10.2026). Testfall 22.10.2026: SV-Pulskanal ohne Abhängigkeit von der Abstimmung HAL (eigenständiger Start), inhaltlich noch zu klären. Testfall 22.10.2026: MAK ohne Vorlauf aus Stufe 1 (beginnt eigenständig), inhaltlich noch zu klären.",
   "hinweis_stand": "Stand 22.10.2026 abgeglichen mit der gebauten Seite sv-meilensteine-fein.html (Stand 01.10.2026 aus empiria): Copilot-Pilotierung, Zustände, wer.",
-  "hinweis_monat": "monat = geplanter Monat (JJJJ-MM), in dem der Schritt erledigt ist. Level 1 von Daniel am 22.10.2026 festgelegt; Copilot-Pilotierung dabei auf 10/2026 gesetzt (vorher „ab 11/2026“)."
+  "hinweis_monat": "monat = geplanter Monat (JJJJ-MM), in dem der Schritt erledigt ist. Level 1 von Daniel am 22.10.2026 festgelegt; Copilot-Pilotierung dabei auf 10/2026 gesetzt (vorher „ab 11/2026“). von = Startmonat bei Themen über einen Zeitraum (Lea Oktober bis November, Daniel 23.10.2026)."
 }
