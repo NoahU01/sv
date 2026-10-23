@@ -75,11 +75,6 @@
 /* Ergebnisse entlang des Strategiemodells: eine Kette aus vier Karten */
 .u3-modell{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
 .u3-modell > li{display:flex;flex-direction:column;position:relative}
-.u3-schritt{display:flex;align-items:center;gap:10px;margin:0 0 12px;position:relative}
-.u3-modell > li:not(:last-child) .u3-schritt::after{content:"";position:absolute;left:36px;right:-18px;top:13px;height:2px;background:#e8e5e0}
-.u3-nr{width:26px;height:26px;border-radius:50%;border:2px solid #111;background:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:600;position:relative;z-index:1}
-.ist-fertig .u3-nr{background:#111;color:#fff}
-.u3-zustand{font-size:.88rem;color:#8a857d;background:#fff;padding-right:8px;position:relative;z-index:1}
 .u3-bild{display:block;aspect-ratio:16/10;border-radius:12px;overflow:hidden;background:#f3f1ed;border:1px solid #e8e5e0;transition:border-color .15s}
 .u3-bild:hover{border-color:#111}
 .u3-bild img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
@@ -114,7 +109,6 @@
 .u3-methode small{font-size:.88rem;color:#8a857d;line-height:1.45}
 @media (max-width:1000px){
  .u3-modell{grid-template-columns:repeat(2,minmax(0,1fr))}
- .u3-modell > li .u3-schritt::after{display:none}
  .u3-ziel-punkte{grid-template-columns:1fr;gap:14px}
  .u3-methoden{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
@@ -405,21 +399,18 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
         <p class="ue-unter">Entlang des Strategiemodells, nach dem wir vorgehen.</p>
         <ol class="u3-modell">
           <li class="ist-fertig">
-            <p class="u3-schritt"><span class="u3-nr">1</span><span class="u3-zustand">abgeschlossen</span></p>
             <a class="u3-bild" href="../projekte/sv-selbstverstaendnis.html"><img src="../assets/projekte/sv-akademie-selbstverstaendnis-1.webp" alt="Leitbild der SV Akademie" loading="lazy"></a>
             <h3 class="u3-k-titel">Selbstverst&auml;ndnis</h3>
             <p class="u3-frage">Wof&uuml;r stehen wir?</p>
             <ul class="u3-liste"><li><a href="../projekte/sv-selbstverstaendnis.html">Das Selbstverst&auml;ndnis</a></li><li><a href="../assets/projekte/sv-akademie-selbstverstaendnis.pdf" target="_blank" rel="noopener">Leitbild als PDF</a></li></ul>
           </li>
           <li class="ist-dran">
-            <p class="u3-schritt"><span class="u3-nr">2</span><span class="u3-zustand">in Arbeit</span></p>
             <a class="u3-bild" href="../projekte/sv-vision.html"><img src="../assets/projekte/sv-akademie-homepage.webp" alt="SharePoint der SV Akademie" loading="lazy"></a>
             <h3 class="u3-k-titel">Vision</h3>
             <p class="u3-frage">Wie wollen wir wahrgenommen werden?</p>
             <ul class="u3-liste"><li><a href="../projekte/sv-vision.html">Die Vision</a></li><li><a href="../../index.html" target="_blank" rel="noopener">SharePoint SV Akademie</a></li></ul>
           </li>
           <li class="ist-dran">
-            <p class="u3-schritt"><span class="u3-nr">3</span><span class="u3-zustand">in Arbeit</span></p>
             <a class="u3-bild" href="../projekte/sv-strategie-stossrichtungen.html"><span class="u3-bild-grafik"><svg viewBox="0 0 320 200" role="img" aria-label="Drei Stoßrichtungen laufen im Ergebnis zusammen">
                   <g fill="none" stroke-width="9" stroke-linecap="round"><path d="M40 52 H252" stroke="#C51F5D"/><path d="M40 100 H252" stroke="#8613A1"/><path d="M40 148 H252" stroke="#0B9FBD"/></g>
                   <g fill="#fff" stroke-width="4"><circle cx="110" cy="52" r="8" stroke="#C51F5D"/><circle cx="180" cy="52" r="8" stroke="#C51F5D"/><circle cx="140" cy="100" r="8" stroke="#8613A1"/><circle cx="96" cy="148" r="8" stroke="#0B9FBD"/><circle cx="196" cy="148" r="8" stroke="#0B9FBD"/></g>
@@ -430,7 +421,6 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
             <ul class="u3-liste"><li><a href="../projekte/sv-strategie.html">Die Strategie</a></li><li><a href="../projekte/sv-strategie-ist.html">Ist-Situation</a></li><li><a href="../projekte/sv-strategie-stossrichtungen.html">Sto&szlig;richtungen</a></li></ul>
           </li>
           <li class="ist-dran">
-            <p class="u3-schritt"><span class="u3-nr">4</span><span class="u3-zustand">l&auml;uft</span></p>
             <a class="u3-bild" href="../projekte/sv-ziel-ubahn-20.html"><img src="../assets/projekte/sv-weg-zum-ergebnis-vorschau.webp" alt="Weg zum Ergebnis" loading="lazy" style="object-position:left top"></a>
             <h3 class="u3-k-titel">Umsetzung</h3>
             <p class="u3-frage">Wie sichern wir die Zielerreichung?</p>
