@@ -185,8 +185,8 @@
 .ub-route-halt.ist-ziel .ub-route-punkt{border-radius:6px;width:10px;height:16px;border-color:#111;margin:2px 0}
 .ub-route-datum{font-size:.74rem}
 .ub-route-halt:hover .ub-route-titel{color:#111}
-.ub-route-halt.ist-an .ub-route-titel{color:#111;font-weight:700;font-family:var(--font-serif);font-size:1.05rem;padding-top:0;line-height:1.25}
-.ub-route-halt.ist-an .ub-route-punkt{width:20px;height:20px;background:#111;border:4px solid #fff;box-shadow:0 0 0 2px #111;margin:0}
+.ub-route-halt.ist-an .ub-route-titel{color:#111;font-weight:600}
+.ub-route-halt.ist-an .ub-route-punkt{width:13px;height:13px;background:#fff;border:4.5px solid #111;margin:0 0 1px}
 .ub-route-halt.ist-an .ub-route-datum{color:#111}
 /* 3 Kapitel */
 .ub-kapitel{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0;border-bottom:1px solid #e8e5e0;margin:4px 0 16px}
@@ -205,3 +205,4 @@
 .ub-varianten-wahl button[aria-pressed="true"]{background:#111;color:#fff}
 .ub-zurueck{margin:0 0 18px}
 .ub-halt-name--ende{width:124px}
+.ub-route-aktuell{margin-top:-4px;font-size:.66rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#111}

@@ -45,7 +45,9 @@
   // „ziel“ = Gesamtplan: alle Stufen bis zum Zielbild, nichts wird blass
   var ZIEL = { id: "ziel", i: D.meilensteine.length - 1, nr: "", titel: D.zielbild.kurz || "Zielbild", termin: "Ende des Projekts", braucht: null, gesamt: true };
   function msVon(id) { return id === "ziel" ? ZIEL : MS[id]; }
-  var zustandUI = { ms: (function () { var h = location.hash.replace("#", ""); return MS[h] || h === "ziel" ? h : D.meilensteine[0].id; })(), station: null };
+  // aktuelles Level: das erste, das noch nicht erreicht ist – damit öffnet die Seite, solange kein Level gewählt ist
+  var AKTUELL = (D.meilensteine.filter(function (x) { return !stufeErreicht(x.id); })[0] || D.meilensteine[D.meilensteine.length - 1]).id;
+  var zustandUI = { ms: (function () { var h = location.hash.replace("#", ""); return MS[h] || h === "ziel" ? h : AKTUELL; })(), station: null };
   var stufenEl = document.getElementById("ub-stufen"), planEl = document.getElementById("ub-plan"), detailEl = document.getElementById("ub-detail");
 
   /* ---------- Ergebnisstufen als Reiter, Erklärung und Legende als kleines Fenster ---------- */
@@ -68,7 +70,8 @@
         var z = id === "ziel", x = MS[id], an = id === sel;
         h += '<button type="button" role="tab" class="ub-route-halt' + (an ? " ist-an" : "") + (!z && stufeErreicht(id) ? " ist-erreicht" : "") + (z ? " ist-ziel" : "") + '" data-ms="' + id + '" aria-selected="' + an + '">' +
           '<span class="ub-route-titel">' + esc(z ? "Gesamtplan" : kastenText(x)) + '</span><span class="ub-route-punkt"></span>' +
-          '<span class="ub-route-datum">' + esc(z ? "Ziel" : "Level " + x.nr + " · " + x.termin) + "</span></button>";
+          '<span class="ub-route-datum">' + esc(z ? "Ziel" : "Level " + x.nr + " · " + x.termin) + "</span>" +
+          (id === AKTUELL ? '<span class="ub-route-aktuell">aktuell</span>' : "") + "</button>";
       });
       h += '</div><p class="ub-kopf-wenn">' + esc(tx.wenn) + "</p>";
     } else if (art === "3") {
