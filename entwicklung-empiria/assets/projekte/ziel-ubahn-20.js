@@ -84,6 +84,7 @@
   // Eine Nebenstrecke zweigt in der Lücke vor ihrem Halt ab und kehrt in der Lücke danach zurück.
   // Endhaltestelle: senkrechter Balken, in den jede beteiligte Linie waagerecht auf ihrer Höhe einläuft.
   // Keine Transparenz: helle Töne sind echte Mischfarben mit Weiß, damit Überlagerungen nicht dunkler werden.
+  var MASS = 1;   // Größe des Plans (1 = 100 %), skaliert Linien und Schrift gemeinsam
   var ABST = 136, ZH = 72, UEBER = 64, UNTER = 58, LUECKE = 40, EINLAUF = 26, SPALTE = 200;
   function hell(hex, t) {   // Farbe mit Weiß mischen, t = Anteil Weiß
     var n = parseInt(hex.slice(1), 16), r = n >> 16, g = (n >> 8) & 255, b = n & 255;
@@ -159,7 +160,7 @@
     });
     var HALT = 64;                               // Platz für einen Stufenhalt zwischen zwei Bändern
     var START = vorStufe ? 70 : EINLAUF;         // links: Starthalt der Stufe davor
-    var verfuegbar = planEl.clientWidth - SPALTE;
+    var verfuegbar = planEl.clientWidth / MASS - SPALTE;   // Breite in Plan-Einheiten (MASS = gewählte Größe)
     ABST = Math.max(87, Math.min(140, (verfuegbar - 14 - START - HALT * (nr - 1) - 172) / lauf));
     function xVon(s) { var x = MS[s.meilenstein]; return START + (bandStart[x.id] + tiefe[s.id]) * ABST + bandNr[x.id] * HALT + ABST / 2; }
     function xStart(s) { if (tiefeA[s.id] == null) return xVon(s); var x = MS[s.meilenstein]; return START + (bandStart[x.id] + tiefeA[s.id]) * ABST + bandNr[x.id] * HALT + ABST / 2; }
@@ -309,7 +310,8 @@
     var spalte = bahnen.map(function (st) {
       return '<button type="button" class="ub-bahn" data-strang="' + st.id + '" aria-label="' + esc(st.label) + ': worum es in dieser Stoßrichtung geht" style="top:' + (linieY[st.id] - 15) + 'px"><span class="ub-linie" style="background:' + st.farbe + '">' + esc(st.kurz) + "</span><span><b>" + esc(st.label) + '</b><small>' + esc(st.verantwortung) + "</small></span></button>";
     }).join("");
-    planEl.innerHTML = '<div class="ub-rahmen"><div class="ub-spalte" style="height:' + hoehe + 'px">' + spalte + '</div><div class="ub-scroll"><div class="ub-flaeche" style="width:' + breite + "px;height:" + hoehe + 'px">' + svg + monatsNamen + namen + "</div></div></div>";
+    planEl.innerHTML = '<div class="ub-rahmen" style="width:' + (planEl.clientWidth / MASS) + "px;transform:scale(" + MASS + ');transform-origin:0 0"><div class="ub-spalte" style="height:' + hoehe + 'px">' + spalte + '</div><div class="ub-scroll"><div class="ub-flaeche" style="width:' + breite + "px;height:" + hoehe + 'px">' + svg + monatsNamen + namen + "</div></div></div>";
+    planEl.style.height = Math.ceil(planEl.firstChild.offsetHeight * MASS) + "px";   // transform nimmt keinen Platz ein: Höhe nachführen
     planEl.querySelectorAll("[data-station]").forEach(function (b) {
       b.addEventListener("click", function () {
         var id = b.getAttribute("data-station");
@@ -395,6 +397,7 @@
     var vor = (s.braucht || []).filter(function (b) { return S[b] && S[b].status !== "erreicht"; }).map(function (b) { return S[b].titel; });
     var meta = [st.verantwortung + (s.wer ? " (" + s.wer + ")" : ""), ZTEXT[z]].concat(s.termin ? [s.termin] : zeitraum(s) ? [monatsName(s.von).split(" ")[0] + " bis " + monatsName(s.monat)] : s.monat ? [monatsName(s.monat)] : []);
     var h = '<p class="ub-pop-titel">' + esc(s.titel) + '</p><p class="ub-pop-meta">' + meta.map(esc).join(" &middot; ") + "</p>";
+    if (s.beschreibung) h += "<p>" + esc(s.beschreibung) + "</p>";
     if (s.ergebnis) h += "<p>" + esc(s.ergebnis) + "</p>";
     if (s.kritisch) h += "<p>Kritisch: " + esc(s.kritisch.grund) + "</p>";
     if (vor.length) h += '<p class="ub-pop-meta">Braucht vorher: ' + vor.map(esc).join(", ") + "</p>";
@@ -455,7 +458,7 @@
   }
   function setzeGroesse(g) {
     groesse = g;
-    planEl.style.zoom = g / 100;
+    MASS = g / 100;
     zoomEl.querySelector("output").textContent = g + " %";
     zoomEl.querySelector('[data-z="-1"]').disabled = g === STUFEN[0];
     zoomEl.querySelector('[data-z="1"]').disabled = g === STUFEN[STUFEN.length - 1];

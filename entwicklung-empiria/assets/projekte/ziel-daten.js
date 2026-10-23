@@ -137,6 +137,7 @@ window.ZIEL_DATEN = {
    "strang": "t1",
    "meilenstein": "m1",
    "titel": "Taskforce KI: Ideen für Lea",
+   "beschreibung": null,
    "status": "erreicht",
    "braucht": [],
    "ergebnis": "Die Taskforce KI hat Ideen zur Umsetzung des KI-Assistenten Lea entwickelt.",
@@ -155,6 +156,7 @@ window.ZIEL_DATEN = {
    "strang": "t1",
    "meilenstein": "m1",
    "titel": "Pilotierung Copilot Pro",
+   "beschreibung": null,
    "status": "aktiv",
    "braucht": [
     "t1-1-taskforce"
@@ -177,6 +179,7 @@ window.ZIEL_DATEN = {
    "strang": "t1",
    "meilenstein": "m1",
    "titel": "Entwicklung KI-Assistent Lea",
+   "beschreibung": null,
    "status": "offen",
    "braucht": [
     "t1-1-copilot"
@@ -194,6 +197,7 @@ window.ZIEL_DATEN = {
    "strang": "t1",
    "meilenstein": "m1",
    "titel": "Webseite umsetzen und live schalten",
+   "beschreibung": null,
    "status": "offen",
    "braucht": [
     "t1-1-lea"
@@ -213,6 +217,7 @@ window.ZIEL_DATEN = {
    "strang": "t1",
    "meilenstein": "m2",
    "titel": "MAK",
+   "beschreibung": null,
    "status": "offen",
    "braucht": [],
    "ergebnis": "",
@@ -231,6 +236,7 @@ window.ZIEL_DATEN = {
    "strang": "t1",
    "meilenstein": "m2",
    "titel": "LEOS 2.0",
+   "beschreibung": null,
    "status": "offen",
    "braucht": [
     "t1-2-mak"
@@ -250,6 +256,7 @@ window.ZIEL_DATEN = {
    "strang": "t1",
    "meilenstein": "m2",
    "titel": "Sicherstellung Auftrag Dr. Jan: „1 Akademie“",
+   "beschreibung": null,
    "status": "offen",
    "braucht": [
     "t1-2-leos"
@@ -267,6 +274,7 @@ window.ZIEL_DATEN = {
    "strang": "t1",
    "meilenstein": "m3",
    "titel": "T1 · Stufe 3",
+   "beschreibung": null,
    "status": "offen",
    "braucht": [
     "m2"
@@ -284,6 +292,7 @@ window.ZIEL_DATEN = {
    "strang": "t1",
    "meilenstein": "m4",
    "titel": "T1 · Stufe 4",
+   "beschreibung": null,
    "status": "offen",
    "braucht": [
     "t1-3"
@@ -301,6 +310,7 @@ window.ZIEL_DATEN = {
    "strang": "t1",
    "meilenstein": "m5",
    "titel": "T1 · Stufe 5",
+   "beschreibung": null,
    "status": "offen",
    "braucht": [
     "t1-4"
@@ -317,7 +327,8 @@ window.ZIEL_DATEN = {
    "id": "t2-1-brainstorming",
    "strang": "t2",
    "meilenstein": "m1",
-   "titel": "Brainstorming Zukunftskompetenzen und Lernen der Zukunft",
+   "titel": "Brainstorming Zukunftskompetenzen",
+   "beschreibung": "Brainstorming zu Zukunftskompetenzen und zum Lernen der Zukunft.",
    "status": "offen",
    "braucht": [],
    "ergebnis": "",
@@ -333,6 +344,7 @@ window.ZIEL_DATEN = {
    "strang": "t2",
    "meilenstein": "m2",
    "titel": "Produkte und Leistungssystem",
+   "beschreibung": null,
    "status": "offen",
    "braucht": [
     "t2-1-brainstorming"
@@ -354,6 +366,7 @@ window.ZIEL_DATEN = {
    "strang": "t2",
    "meilenstein": "m2",
    "titel": "Lernen der Zukunft: Tools, Formate und Medien",
+   "beschreibung": null,
    "status": "offen",
    "braucht": [
     "t2-1-brainstorming"
@@ -374,6 +387,7 @@ window.ZIEL_DATEN = {
    "strang": "t2",
    "meilenstein": "m2",
    "titel": "Brainstorming zu den drei Ebenen und zur Rolle Trainer der Zukunft",
+   "beschreibung": null,
    "status": "offen",
    "braucht": [
     "t2-2-produkte",
@@ -392,6 +406,7 @@ window.ZIEL_DATEN = {
    "strang": "t2",
    "meilenstein": "m3",
    "titel": "T2 · Stufe 3",
+   "beschreibung": null,
    "status": "offen",
    "braucht": [
     "m2"
@@ -409,6 +424,7 @@ window.ZIEL_DATEN = {
    "strang": "t2",
    "meilenstein": "m4",
    "titel": "T2 · Stufe 4",
+   "beschreibung": null,
    "status": "offen",
    "braucht": [
     "t2-3"
@@ -426,6 +442,7 @@ window.ZIEL_DATEN = {
    "strang": "t2",
    "meilenstein": "m5",
    "titel": "T2 · Stufe 5",
+   "beschreibung": null,
    "status": "offen",
    "braucht": [
     "t2-4"
@@ -443,6 +460,7 @@ window.ZIEL_DATEN = {
    "strang": "sa",
    "meilenstein": "m1",
    "titel": "Team abholen",
+   "beschreibung": null,
    "status": "aktiv",
    "braucht": [],
    "ergebnis": "",
@@ -458,6 +476,7 @@ window.ZIEL_DATEN = {
    "strang": "sa",
    "meilenstein": "m1",
    "titel": "Abstimmung HAL M.S.",
+   "beschreibung": null,
    "status": "aktiv",
    "braucht": [
     "sa-1-team"
@@ -475,6 +494,7 @@ window.ZIEL_DATEN = {
    "strang": "sa",
    "meilenstein": "m1",
    "titel": "PW7-Radio",
+   "beschreibung": null,
    "status": "offen",
    "braucht": [
     "sa-1-hal"
@@ -492,6 +512,7 @@ window.ZIEL_DATEN = {
    "strang": "sa",
    "meilenstein": "m1",
    "titel": "SV-Pulskanal",
+   "beschreibung": null,
    "status": "offen",
    "braucht": [],
    "ergebnis": "",
@@ -507,6 +528,7 @@ window.ZIEL_DATEN = {
    "strang": "sa",
    "meilenstein": "m1",
    "titel": "Abteilungsbesprechung 11/2026",
+   "beschreibung": null,
    "status": "offen",
    "braucht": [
     "sa-1-pw7",
@@ -526,6 +548,7 @@ window.ZIEL_DATEN = {
    "strang": "sa",
    "meilenstein": "m1",
    "titel": "GoLive",
+   "beschreibung": null,
    "status": "offen",
    "braucht": [
     "sa-1-abteilung"
@@ -543,6 +566,7 @@ window.ZIEL_DATEN = {
    "strang": "sa",
    "meilenstein": "m2",
    "titel": "Kommunikationskonzept 2.0",
+   "beschreibung": null,
    "status": "offen",
    "braucht": [
     "sa-1-golive"
@@ -564,6 +588,7 @@ window.ZIEL_DATEN = {
    "strang": "sa",
    "meilenstein": "m3",
    "titel": "SA · Stufe 3",
+   "beschreibung": null,
    "status": "offen",
    "braucht": [
     "m2"
@@ -581,6 +606,7 @@ window.ZIEL_DATEN = {
    "strang": "sa",
    "meilenstein": "m4",
    "titel": "SA · Stufe 4",
+   "beschreibung": null,
    "status": "offen",
    "braucht": [
     "sa-3"
@@ -598,6 +624,7 @@ window.ZIEL_DATEN = {
    "strang": "sa",
    "meilenstein": "m5",
    "titel": "SA · Stufe 5",
+   "beschreibung": null,
    "status": "offen",
    "braucht": [
     "sa-4"

@@ -283,14 +283,15 @@
       "strang": "t2",
       "meilenstein": "m1",
       "aufwand": "",
-      "titel": "Brainstorming Zukunftskompetenzen und Lernen der Zukunft",
+      "titel": "Brainstorming Zukunftskompetenzen",
       "ergebnis": "",
       "status": "offen",
       "braucht": [],
       "details": [],
       "offen": [],
       "wer": "",
-      "monat": "2026-11"
+      "monat": "2026-11",
+      "beschreibung": "Brainstorming zu Zukunftskompetenzen und zum Lernen der Zukunft."
     },
     {
       "id": "t2-2-produkte",
@@ -576,5 +577,6 @@
       "schritt": null
     }
   ],
-  "hinweis_termine": "termine = feste Projekttermine (eine Quelle für Übersicht, Verlaufsplan und Terminliste). schritt = Verweis, wenn der Termin zugleich ein Schritt im Plan ist; tag = Tag im Monat für die Lage im Plan."
+  "hinweis_termine": "termine = feste Projekttermine (eine Quelle für Übersicht, Verlaufsplan und Terminliste). schritt = Verweis, wenn der Termin zugleich ein Schritt im Plan ist; tag = Tag im Monat für die Lage im Plan.",
+  "hinweis_titel": "titel = kurzer Titel im Plan (höchstens drei Wörter); beschreibung = weitere Angaben im Fenster beim Anklicken."
 }
