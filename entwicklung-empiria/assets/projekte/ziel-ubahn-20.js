@@ -239,7 +239,8 @@
     var duenn = "", dick = "", quer = "", halte = "", namen = "", durch = "";
     function strecke(pkte, farbe, gegangen, schwach) {
       // gleiche Dicke: gefahren in Linienfarbe, noch nicht gefahren hellgrau (blass: noch heller)
-      var f = gegangen ? (schwach ? hell(farbe, 0.8) : farbe) : (schwach ? "#f0ede9" : "#dedad4");
+      // ist ein Halt angeklickt, wird der offene Weg dorthin dunkler (Grau der offenen Halte), alles andere tritt hell zurück
+      var f = gegangen ? (schwach ? hell(farbe, 0.8) : farbe) : (schwach ? "#f0ede9" : zustandUI.station ? "#a39e96" : "#dedad4");
       var html = '<path d="' + rund(pkte) + '" stroke="' + f + '" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="8"/>';
       if (gegangen) dick += html; else duenn += html;
     }
@@ -293,7 +294,7 @@
       if (!weiter) {
         var ms = MS[s.meilenstein], rein = fokus[s.id] && vorlauf(ms.braucht || [])[s.id] && !zustandUI.station;
         var ende = rein ? xHalt(ms.id) : xVon(s) + ABST / 2;
-        strecke(weg(x2, y2, ende, linieY[s.strang], true), f, false, !rein && blass(s.id));
+        strecke(weg(x2, y2, ende, linieY[s.strang], true), f, false, !rein && (blass(s.id) || !!zustandUI.station));
       }
     });
     // Stufenhalte: Balken über alle Linien; der gewählte bzw. letzte kräftig, Zwischenhalte etwas schmaler
