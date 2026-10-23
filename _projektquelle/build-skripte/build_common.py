@@ -88,12 +88,10 @@ DEV_KATEGORIEN = [
             ]),
             (_EMP + "sv-projektplanung.html", "PP", "Projektplanung", "Termine, Agenden und der Meilensteinplan"),
         ]),
-        (_EMP + "sv-uebersicht-2.html", "2.0", "Übersicht 2.0", "Neue Fassung · im Aufbau", "Darunter", [
-            (_EMP + "sv-ziel-ubahn-11.html", "1.1", "Weg zum Ergebnis · Sicht 1.1", "vereinfacht"),
-            (_EMP + "sv-ziel-ubahn-12.html", "1.2", "Weg zum Ergebnis · Sicht 1.2", "nah am U-Bahn-Plan"),
-            (_EMP + "sv-ziel-ubahn-20.html", "2.0", "Weg zum Ergebnis · Sicht 2.0", "Themen über einen Zeitraum"),
+        (_EMP + "sv-uebersicht-2.html", "2.0", "Übersicht 2.0", "Neue Fassung · im Aufbau"),
+        (_EMP + "sv-uebersicht-3.html", "3.0", "Übersicht 3.0", "Stand oben in zwei Varianten · Ergebnisse nach dem Strategiemodell", "Darunter", [
+            (_EMP + "sv-ziel-ubahn-20.html", "WE", "Weg zum Ergebnis", "Sicht 2.0 · Themen über einen Zeitraum"),
         ]),
-        (_EMP + "sv-uebersicht-3.html", "3.0", "Übersicht 3.0", "Stand oben in zwei Varianten · Ergebnisse nach dem Strategiemodell"),
         (_EMP + "sitemap.html", "\u25a6", "Sitemap", "Alle Seiten der SV Akademie · mit Vorschau"),
     ]),
     # Die Homepage der SV Akademie – Sprungziel aus dem Projekt, hier wird sie weiterentwickelt
