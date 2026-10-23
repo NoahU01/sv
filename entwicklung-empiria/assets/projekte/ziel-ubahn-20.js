@@ -309,9 +309,12 @@
       if (sel) r += 2;
       // Halte weiß wie im Liniennetzplan: erledigt klein mit Rand in Linienfarbe, in Arbeit groß mit schwarzem Rand, kommt noch grau
       var rand = z === "erreicht" ? [schwach ? hell(f, 0.8) : f, 2.5] : z === "aktiv" ? [schwach ? "#c9c5bf" : "#111", 4.5] : [schwach ? "#e8e5e0" : "#a39e96", umstieg ? 3.5 : 3];
+      // erledigt wie in Sicht 1.1: klein und vollflächig in der Linienfarbe, mit weißem Rand
+      var fuell = "#fff";
+      if (z === "erreicht") { fuell = schwach ? hell(f, 0.8) : f; rand = ["#fff", 2]; }
       punkte += lang > 1
-        ? '<rect x="' + (xs - r) + '" y="' + (cy - r) + '" width="' + (lang + 2 * r) + '" height="' + (2 * r) + '" rx="' + r + '" fill="#fff" stroke="' + rand[0] + '" stroke-width="' + rand[1] + '"/>'
-        : '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="#fff" stroke="' + rand[0] + '" stroke-width="' + rand[1] + '"/>';
+        ? '<rect x="' + (xs - r) + '" y="' + (cy - r) + '" width="' + (lang + 2 * r) + '" height="' + (2 * r) + '" rx="' + r + '" fill="' + fuell + '" stroke="' + rand[0] + '" stroke-width="' + rand[1] + '"/>'
+        : '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="' + fuell + '" stroke="' + rand[0] + '" stroke-width="' + rand[1] + '"/>';
       if (s.kritisch) punkte += '<circle cx="' + (cx + r + 3) + '" cy="' + (cy - r - 3) + '" r="7" fill="' + (schwach ? "#f6c9bf" : "#E8553A") + '"/><text x="' + (cx + r + 3) + '" y="' + (cy - r + 0.6) + '" text-anchor="middle" class="ub-ausruf">!</text>';
       var vonOben = (s.braucht || []).some(function (b) { return imPlan[b] && S[b].strang !== s.strang && yVon(S[b]) < cy; });
       var obenL = unter[s.id] === 0 && !vonOben;
