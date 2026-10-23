@@ -389,9 +389,9 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
       </section>
 
       <!-- Ergebnisse entlang des Strategiemodells: je Baustein ein Bild und die vorhandenen Stücke -->
-      <section class="ue-block" id="ergebnisse" aria-labelledby="u3-erg-h" style="scroll-margin-top:90px">
-        <h2 id="u3-erg-h">Ergebnisse</h2>
-        <p class="ue-unter u3-erg-unter">Entlang des Strategiemodells, nach dem wir vorgehen.</p>
+      <details class="ue-block u3-vorgehen" id="ergebnisse" style="scroll-margin-top:90px">
+        <summary><span><span class="u3-sum-h">Ergebnisse</span><span class="u3-sum-unter">Entlang des Strategiemodells, nach dem wir vorgehen</span></span><span class="u3-pfeil" aria-hidden="true"></span></summary>
+        <div class="u3-vorgehen-raster">
         <ol class="u3-modell">
           <li class="ist-fertig">
             <a class="u3-bild" href="../projekte/sv-selbstverstaendnis.html"><img src="../assets/projekte/sv-akademie-selbstverstaendnis-1.webp" alt="Leitbild der SV Akademie" loading="lazy"></a>
@@ -422,7 +422,8 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
             <ul class="u3-liste"><li><a href="#weg">Weg zum Ergebnis</a></li><li><a href="../projekte/sv-projektplanung.html">Termine</a></li></ul>
           </li>
         </ol>
-      </section>
+        </div>
+      </details>
 
       <!-- Wissensdatenbank: Ziel und Methoden – zugeklappt -->
       <details class="ue-block u3-vorgehen">
@@ -883,6 +884,13 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   }
   if (schmal.addEventListener) schmal.addEventListener("change", zeige); else schmal.addListener(zeige);
   zeige();
+})();
+</script>
+<script>
+/* Sprung zu einem zugeklappten Kasten (z. B. #ergebnisse von der Vision-Seite) klappt ihn auf */
+(function () {
+  function auf() { var z = document.getElementById(location.hash.slice(1)); if (z && z.tagName === "DETAILS") { z.open = true; z.scrollIntoView(); } }
+  window.addEventListener("hashchange", auf); if (location.hash) auf();
 })();
 </script>
 <script src="../script.js"></script>
