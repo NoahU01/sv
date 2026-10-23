@@ -79,10 +79,11 @@
 .u3-bild-grafik svg{width:78%;height:auto}
 .u3-k-titel{font-family:var(--font-serif);font-weight:700;font-size:1.15rem;margin:14px 0 2px}
 .u3-frage{min-height:2.9em;margin:0 0 12px;font-size:.88rem;color:#8a857d;line-height:1.45}
-.u3-liste{list-style:none;margin:0;padding:10px 0 0;border-top:1px solid #efece7;display:grid;gap:7px}
-.u3-liste a{display:flex;justify-content:flex-start;align-items:baseline;gap:8px;font-size:.95rem;color:#111;text-decoration:none}
+.u3-liste{list-style:none;margin:0 0 0 -8px;padding:0;display:grid;gap:2px}
+.u3-liste a{display:flex;justify-content:flex-start;align-items:baseline;gap:8px;padding:4px 8px;border-radius:8px;transition:background .15s;font-size:.95rem;color:#111;text-decoration:none}
 .u3-liste a::before{content:"\203A";color:#8a857d;font-size:1.05rem;line-height:1}
-.u3-liste a:hover{text-decoration:underline;text-underline-offset:3px}
+.u3-liste a:hover,.u3-liste a:focus-visible{background:#f3f1ed}
+.u3-erg-unter{margin-bottom:34px}
 /* So gehen wir vor: Ziel mit Rakete, Methoden als Kacheln */
 .u3-vorgehen summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:20px;cursor:pointer}
 .u3-vorgehen summary::-webkit-details-marker{display:none}
@@ -727,7 +728,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
       <!-- Ergebnisse entlang des Strategiemodells: je Baustein ein Bild und die vorhandenen Stücke -->
       <section class="ue-block" id="ergebnisse" aria-labelledby="u3-erg-h" style="scroll-margin-top:90px">
         <h2 id="u3-erg-h">Ergebnisse</h2>
-        <p class="ue-unter">Entlang des Strategiemodells, nach dem wir vorgehen.</p>
+        <p class="ue-unter u3-erg-unter">Entlang des Strategiemodells, nach dem wir vorgehen.</p>
         <ol class="u3-modell">
           <li class="ist-fertig">
             <a class="u3-bild" href="/projekte/sv-selbstverstaendnis.html"><img src="/assets/projekte/sv-akademie-selbstverstaendnis-1.webp" alt="Leitbild der SV Akademie" loading="lazy"></a>
