@@ -119,7 +119,7 @@
   // Eine Nebenstrecke zweigt in der Lücke vor ihrem Halt ab und kehrt in der Lücke danach zurück.
   // Endhaltestelle: senkrechter Balken, in den jede beteiligte Linie waagerecht auf ihrer Höhe einläuft.
   // Keine Transparenz: helle Töne sind echte Mischfarben mit Weiß, damit Überlagerungen nicht dunkler werden.
-  var ABST = 136, ZH = 72, UEBER = 64, UNTER = 58, LUECKE = 40, EINLAUF = 26, SPALTE = 214;
+  var ABST = 136, ZH = 72, UEBER = 64, UNTER = 58, LUECKE = 40, EINLAUF = 26, SPALTE = 200;
   function hell(hex, t) {   // Farbe mit Weiß mischen, t = Anteil Weiß
     var n = parseInt(hex.slice(1), 16), r = n >> 16, g = (n >> 8) & 255, b = n & 255;
     function m(c) { return Math.round(c + (255 - c) * t); }
@@ -195,7 +195,7 @@
     var HALT = 64;                               // Platz für einen Stufenhalt zwischen zwei Bändern
     var START = vorStufe ? 70 : EINLAUF;         // links: Starthalt der Stufe davor
     var verfuegbar = planEl.clientWidth - SPALTE;
-    ABST = Math.max(100, Math.min(140, (verfuegbar - START - HALT * (nr - 1) - 190) / lauf));
+    ABST = Math.max(87, Math.min(140, (verfuegbar - 14 - START - HALT * (nr - 1) - 172) / lauf));
     function xVon(s) { var x = MS[s.meilenstein]; return START + (bandStart[x.id] + tiefe[s.id]) * ABST + bandNr[x.id] * HALT + ABST / 2; }
     function xStart(s) { if (tiefeA[s.id] == null) return xVon(s); var x = MS[s.meilenstein]; return START + (bandStart[x.id] + tiefeA[s.id]) * ABST + bandNr[x.id] * HALT + ABST / 2; }
     function xHalt(mid) { return START + (bandStart[mid] + bandBreite[mid]) * ABST + bandNr[mid] * HALT + 14; }   // Stufenhalt nach dem Band
@@ -214,7 +214,7 @@
     var hoehe = y0 + 6 + (vorStufe ? 22 : 0);   // unten Platz für „Voraussetzung: …“
     function yVon(s) { return linieY[s.strang] + unter[s.id] * ZH; }
     var letzte = stufenImBlick[stufenImBlick.length - 1];
-    var breite = xHalt(letzte.id) + 190;
+    var breite = xHalt(letzte.id) + 172;
     var obenAlle = Math.min.apply(null, bahnen.map(function (st) { return linieY[st.id]; })) - 18;
     var untenAlle = Math.max.apply(null, bahnen.map(function (st) { return linieY[st.id]; })) + 18;
 

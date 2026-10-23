@@ -61,9 +61,14 @@
 .u3-b-kopf{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:28px;align-items:start;margin-bottom:28px}
 .u3-b-kopf .u3-level{margin:0}
 .u3-b-kopf .u3-wenn{max-width:520px}
+.u3-b-kopf{align-items:center;margin-bottom:18px}
+.u3-b-h2{margin:0;font-family:var(--font-serif);font-weight:700;font-size:clamp(1.25rem,2vw,1.5rem)}
+.u3-b-stufen{margin-bottom:26px}
 .u3-b-steuer{padding-top:2px}
 @media (max-width:900px){.u3-b-kopf{grid-template-columns:1fr}}
-.u3-b-plan{margin:0 calc(-1 * clamp(20px,3vw,34px));border-bottom:1px solid #efece7}
+.u3-b-plan{margin:0;border-bottom:1px solid #efece7}
+.u3-b-plan .ub-bahn{left:0}
+.u3-b-plan .ub-rahmen{padding-top:0}
 .u3-b-plan .ub-pop{z-index:5}
 .u3-b-fuss{margin-top:22px}
 .u3-termine--quer{grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px 32px}
@@ -132,7 +137,7 @@
 </style>
 <style>/* Projekt-Repository SV – mit Vorrang, weil die Menüregeln von empiria im Seitenkörper stehen */.site-header .nav,.site-header .wrap{justify-content:flex-start!important;gap:0!important}.site-header .brand{margin-right:0!important}.site-header .dev-dd-long,.site-header .dev-dd-short{display:none!important}.site-header .dev-dd{margin-left:.4rem!important;position:relative!important;right:auto!important;top:auto!important;bottom:auto!important;display:inline-flex!important;align-items:center}.site-header .dev-dd-toggle{padding:6px!important;border-radius:6px;gap:0!important}.site-header .dev-dd-toggle:hover,.site-header .dev-dd.is-open .dev-dd-toggle{background:rgba(0,0,0,.05)}.site-header .dev-dd-chev{width:14px;height:14px}.site-header .dev-dd .dev-dd-panel{left:-14px!important;right:auto!important}.site-header .dev-dd--corner .dev-dd-flyout{left:100%!important;right:auto!important;padding-left:10px!important;padding-right:0!important}.dev-dd-empty{margin:0 8px 4px;padding:6px 0;font-size:13px;color:var(--grey-50,#8a8a8a)}@media (max-width:900px){.site-header .dev-dd .dev-dd-panel{position:fixed!important;left:16px!important;right:16px!important;top:72px!important;width:auto!important;max-height:calc(100vh - 88px);overflow:auto}.site-header .dev-dd .dev-dd-flyout{position:static!important;opacity:1!important;visibility:visible!important;padding:0!important}.site-header .dev-dd .dev-dd-flyout-panel{width:auto;padding:0 0 0 12px;margin:2px 0 6px 20px;background:none;border:0;border-left:2px solid #eee;border-radius:0;box-shadow:none}.site-header .dev-dd a.dev-dd-link--parent::after{display:none}}</style>
 </head>
-<body>
+<body data-kopf="2">
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
 <!-- Eigene Strichzeichen fuer die Methoden. Bewusst keine CD-Formen
@@ -371,22 +376,20 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
             <a class="u3-link" href="../projekte/sv-projektplanung.html">Gesamter Zeitplan <span aria-hidden="true">&#8594;</span></a>
           </aside>
         </div>
-        <a class="ue-zeile" href="../projekte/sv-ziel-ubahn-20.html"><span><b>Weg zum Ergebnis</b><small>Alle Ergebnislevel mit allen Schritten und Abh&auml;ngigkeiten</small></span><span aria-hidden="true">&#8594;</span></a>
       </section>
 
       <!-- Variante B: der Plan des aktuellen Levels, darunter die Termine -->
-      <section class="ue-block u3-variante" data-v="b" aria-label="Wo wir stehen">
+      <section class="ue-block u3-variante" data-v="b" id="weg" aria-label="Weg zum Ergebnis" style="scroll-margin-top:90px">
         <div class="u3-b-kopf">
-          <div class="u3-level" data-level-kopf></div>
+          <h2 class="u3-b-h2">Weg zum Ergebnis</h2>
           <div class="u3-b-steuer"><div data-zoom-platz></div><div data-legende-quelle hidden><ul class="ub-leg"><li><span class="ub-leg-ic"><svg width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="11" r="8.75" fill="#fff" stroke="#111" stroke-width="4.5"/></svg></span>in Arbeit</li><li><span class="ub-leg-ic"><svg width="14" height="22" viewBox="0 0 14 22"><circle cx="7" cy="11" r="6" fill="#111"/></svg></span>erledigt</li><li><span class="ub-leg-ic"><svg width="20" height="22" viewBox="0 0 20 22"><circle cx="10" cy="11" r="8.5" fill="#fff" stroke="#a39e96" stroke-width="3"/></svg></span>kommt noch</li><li><span class="ub-leg-ic"><svg width="30" height="10"><line x1="4" y1="5" x2="26" y2="5" stroke="#111" stroke-width="8" stroke-linecap="round"/></svg></span>Strecke erledigt</li><li><span class="ub-leg-ic"><svg width="30" height="10"><line x1="4" y1="5" x2="26" y2="5" stroke="#dedad4" stroke-width="8" stroke-linecap="round"/></svg></span>Strecke offen</li><li><span class="ub-leg-ic"><svg width="30" height="10"><line x1="2" y1="5" x2="28" y2="5" stroke="#8a857d" stroke-width="2" stroke-dasharray="3 5"/></svg></span>Abh&auml;ngigkeit</li><li><span class="ub-leg-ic"><svg width="26" height="20"><line x1="3" y1="3" x2="3" y2="17" stroke="#111" stroke-width="4" stroke-linecap="round"/><line x1="3" y1="10" x2="24" y2="10" stroke="#111" stroke-width="4" stroke-linecap="round"/></svg></span>beginnt eigenst&auml;ndig</li><li><span class="ub-leg-ic"><svg width="14" height="14"><rect x="3" y="3" width="8" height="8" fill="#111" transform="rotate(45 7 7)"/></svg></span>Termin</li><li><span class="ub-leg-ic"><svg width="16" height="24"><rect x="3" y="3" width="10" height="18" rx="5" fill="#fff" stroke="#111" stroke-width="3"/></svg></span>Ergebnislevel</li></ul></div></div>
         </div>
-        <div id="ub-stufen" hidden></div>
+        <div id="ub-stufen" class="u3-b-stufen"></div>
         <div class="u3-b-plan"><div id="ub-plan" data-skript="../assets/projekte/ziel-ubahn-20.js"></div></div>
         <div class="u3-b-fuss">
           <h3 class="u3-h3">Termine</h3>
           <ul class="u3-termine u3-termine--quer" data-termine></ul>
         </div>
-        <a class="ue-zeile" href="../projekte/sv-ziel-ubahn-20.html"><span><b>Weg zum Ergebnis</b><small>Alle Ergebnislevel mit allen Schritten und Abh&auml;ngigkeiten</small></span><span aria-hidden="true">&#8594;</span></a>
       </section>
 
       <!-- Ergebnisse entlang des Strategiemodells: je Baustein ein Bild und die vorhandenen Stücke -->
@@ -417,10 +420,10 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
             <ul class="u3-liste"><li><a href="../projekte/sv-strategie.html">Die Strategie</a></li><li><a href="../projekte/sv-strategie-ist.html">Ist-Situation</a></li><li><a href="../projekte/sv-strategie-stossrichtungen.html">Sto&szlig;richtungen</a></li></ul>
           </li>
           <li class="ist-dran">
-            <a class="u3-bild" href="../projekte/sv-ziel-ubahn-20.html"><img src="../assets/projekte/sv-weg-zum-ergebnis-vorschau.webp" alt="Weg zum Ergebnis" loading="lazy" style="object-position:left top"></a>
+            <a class="u3-bild" href="#weg"><img src="../assets/projekte/sv-weg-zum-ergebnis-vorschau.webp" alt="Weg zum Ergebnis" loading="lazy" style="object-position:left top"></a>
             <h3 class="u3-k-titel">Umsetzung</h3>
             <p class="u3-frage">Wie sichern wir die Zielerreichung?</p>
-            <ul class="u3-liste"><li><a href="../projekte/sv-ziel-ubahn-20.html">Weg zum Ergebnis</a></li><li><a href="../projekte/sv-projektplanung.html">Termine</a></li></ul>
+            <ul class="u3-liste"><li><a href="#weg">Weg zum Ergebnis</a></li><li><a href="../projekte/sv-projektplanung.html">Termine</a></li></ul>
           </li>
         </ol>
       </section>

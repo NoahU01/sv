@@ -36,7 +36,7 @@
 
 /* Plan */
 .ub-rahmen{display:flex;align-items:flex-start;padding:10px 0 0}
-.ub-spalte{flex:none;width:214px;position:relative;border-right:1px solid #efece7}
+.ub-spalte{flex:none;width:200px;position:relative;border-right:1px solid #efece7}
 .ub-bahn{position:absolute;left:18px;right:10px;display:flex;align-items:center;gap:10px}
 .ub-linie{flex:none;min-width:32px;height:28px;padding:0 6px;border-radius:7px;color:#fff;font-weight:600;font-size:.74rem;display:flex;align-items:center;justify-content:center}
 .ub-bahn b{display:block;font-size:.84rem;font-weight:600;line-height:1.25}
@@ -131,7 +131,7 @@
 .ub-bahn > span:nth-child(2){flex:1;min-width:0}
 .ub-bahn:hover b,.ub-bahn[aria-expanded="true"] b{text-decoration:underline;text-underline-offset:3px}
 .ub-spalte{z-index:3}
-.ub-pop--strang{left:200px;width:280px}
+.ub-pop--strang{left:186px;width:280px}
 .ub-strang-treffer{position:absolute;left:0;height:18px;padding:0;border:0;background:transparent;cursor:pointer}
 .ub-beispiel{margin:-4px 0 12px;font-size:.84rem;color:#8a857d}
 .ub-legende-zeile svg{flex-shrink:0}
@@ -203,3 +203,5 @@
 .ub-varianten-wahl > span{padding:0 8px 0 10px}
 .ub-varianten-wahl button{width:30px;height:30px;border-radius:50%;border:0;background:#fff;color:#111;font:600 .8rem/1 Poppins,sans-serif;cursor:pointer}
 .ub-varianten-wahl button[aria-pressed="true"]{background:#111;color:#fff}
+.ub-zurueck{margin:0 0 18px}
+.ub-halt-name--ende{width:124px}
