@@ -7,7 +7,7 @@ Fuß bleiben empiria. Angepasst wird nur, was sonst in die empiria-Homepage
 führen würde – das Projekt-Repository steht für sich:
 
 - absolute Pfade (/styles.css, /assets/…) werden relativ
-- Logo und „Zur Startseite“ führen zur Projektübersicht (projekte/sv-akademie.html)
+- Logo und „Zur Startseite“ führen zur Projektübersicht (projekte/sv-uebersicht-3.html)
 - Hauptnavigation (Problem, Lösung, Leistungen), „Kontakt“ und Burger-Menü entfallen
 - Menü „/ Entwicklung /“ als Dreieck direkt neben dem Logo, ohne Wort
 - Menü „/ Entwicklung /“ zeigt nur das Projekt und die SV-Homepage

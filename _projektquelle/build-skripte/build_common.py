@@ -77,19 +77,16 @@ DEV_UNTERSEITEN = []
 _EMP = "entwicklung-empiria/projekte/"
 DEV_KATEGORIEN = [
     ("Steuerung", [
-        (_EMP + "sv-akademie.html", "SV", "Übersicht", "Projektübersicht · drei Module", "Die Module", [
+        (_EMP + "sv-uebersicht-3.html", "SV", "Übersicht", "Weg zum Ergebnis, Ergebnisse und Vorgehen", "Die Seiten", [
             (_EMP + "sv-selbstverstaendnis.html", "1", "Selbstverständnis", "Wofür stehen wir?"),
             (_EMP + "sv-vision.html", "2", "Vision", "Wie wollen wir wahrgenommen werden?"),
             (_EMP + "sv-strategie.html", "3", "Strategie", "Wie kommen wir dorthin?", "Darunter", [
                 (_EMP + "sv-strategie-ist.html", "IS", "Ist-Situation", "SWOT-Logik und was einfließt"),
                 (_EMP + "sv-strategie-stossrichtungen.html", "ST", "Stoßrichtungen", "Herkunft, Auswahl, Nachweis"),
-                (_EMP + "sv-meilensteine.html", "MS", "Meilensteinplan", "Drei Stränge · fein, hell, dunkel"),
                 (_EMP + "sv-abstimmung-hal.html", "AG", "Agenda Vision & Strategie", "Workshop mit dem Hauptabteilungsleiter"),
             ]),
-            (_EMP + "sv-projektplanung.html", "PP", "Projektplanung", "Termine, Agenden und der Meilensteinplan"),
+            (_EMP + "sv-projektplanung.html", "TE", "Termine", "Alle Termine mit Agenda und Protokoll"),
         ]),
-        (_EMP + "sv-uebersicht-2.html", "2.0", "Übersicht 2.0", "Neue Fassung · im Aufbau"),
-        (_EMP + "sv-uebersicht-3.html", "3.0", "Übersicht 3.0", "Weg zum Ergebnis, Ergebnisse und Vorgehen"),
         (_EMP + "sitemap.html", "\u25a6", "Sitemap", "Alle Seiten der SV Akademie · mit Vorschau"),
     ]),
     # Die Homepage der SV Akademie – Sprungziel aus dem Projekt, hier wird sie weiterentwickelt

@@ -54,66 +54,28 @@
   // Ergebnisstufen als Kästen: oben „Stufe n · Datum“, darunter Titel oder Kern des Ergebnisses (höchstens zwei Zeilen).
   // Ein Klick auf den Kasten wechselt die Stufe; das ⓘ im Kasten öffnet „Erreicht, wenn …“ direkt darunter.
   function kastenText(x) { return x.titel || ((x.ergebnis || [])[0] || "Level " + x.nr).split(":")[0].replace(/\.$/, ""); }
-  // Kopf mit den Ergebnisleveln – drei Darstellungen zum Vergleich (body data-kopf="1|2|3"):
-  // 1 Fokus: gewähltes Level groß, rechts Ziffern zur Auswahl · 2 Route: Haltepunkte auf einer Linie · 3 Kapitel: große Ziffern als Reiter
+  // Kopf mit den Ergebnisleveln als Route: Haltepunkte auf einer Linie, darunter das Ergebnis des gewählten Levels
   function stufenText(id) {
-    if (id === "ziel") return { meta: "Alle Level · bis 31.12.2028", titel: "Gesamtplan", wenn: "Alle Stoßrichtungen über alle Level bis zum Zielbild." };
-    var x = MS[id];
-    return { meta: "Level " + x.nr + " von " + D.meilensteine.length + " · " + x.termin + (stufeErreicht(id) ? " · erreicht" : ""), titel: kastenText(x), wenn: "Erreicht, wenn: " + (x.ergebnis || []).join(" ") };
+    if (id === "ziel") return "Alle Stoßrichtungen über alle Level bis zum Zielbild.";
+    return (MS[id].ergebnis || []).join(" ");
   }
   function stufen() {
-    var art = document.body.getAttribute("data-kopf") || "1", sel = zustandUI.ms, tx = stufenText(sel), h = "";
-    var alle = D.meilensteine.map(function (x) { return x.id; }).concat(["ziel"]);
-    if (art === "2") {
-      h = '<div class="ub-route" role="tablist">';
-      alle.forEach(function (id) {
-        var z = id === "ziel", x = MS[id], an = id === sel;
-        h += '<button type="button" role="tab" class="ub-route-halt' + (an ? " ist-an" : "") + (!z && stufeErreicht(id) ? " ist-erreicht" : "") + (z ? " ist-ziel" : "") + '" data-ms="' + id + '" aria-selected="' + an + '">' +
-          '<span class="ub-route-titel">' + esc(z ? "Gesamtplan" : kastenText(x)) + '</span><span class="ub-route-punkt"></span>' +
-          '<span class="ub-route-datum">' + esc(z ? "Ziel" : "Level " + x.nr + " · " + x.termin) + "</span>" +
-          (id === AKTUELL ? '<span class="ub-route-aktuell">aktuell</span>' : "") + "</button>";
-      });
-      h += '</div><p class="ub-kopf-wenn">' + esc(tx.wenn) + "</p>";
-    } else if (art === "3") {
-      h = '<div class="ub-kapitel" role="tablist">';
-      alle.forEach(function (id) {
-        var z = id === "ziel", x = MS[id], an = id === sel;
-        h += '<button type="button" role="tab" class="ub-kapitel-reiter' + (an ? " ist-an" : "") + '" data-ms="' + id + '" aria-selected="' + an + '">' +
-          '<span class="ub-kapitel-nr">' + (z ? "Alle" : x.nr) + '</span><span class="ub-kapitel-titel">' + esc(z ? "Gesamtplan" : kastenText(x)) + "</span>" +
-          '<span class="ub-kapitel-datum">' + esc(z ? "bis zum Zielbild" : x.termin) + "</span></button>";
-      });
-      h += '</div><p class="ub-kopf-wenn">' + esc(tx.wenn) + "</p>";
-    } else {
-      h = '<div class="ub-fokus"><div class="ub-fokus-text"><p class="ub-fokus-meta">' + esc(tx.meta) + '</p><p class="ub-fokus-titel">' + esc(tx.titel) + '</p><p class="ub-kopf-wenn">' + esc(tx.wenn) + "</p></div>" +
-        '<div class="ub-fokus-wahl" role="tablist" aria-label="Level wählen">';
-      alle.forEach(function (id) {
-        var z = id === "ziel", an = id === sel;
-        h += '<button type="button" role="tab" class="ub-fokus-knopf' + (z ? " ist-ziel" : "") + (an ? " ist-an" : "") + (!z && stufeErreicht(id) ? " ist-erreicht" : "") + '" data-ms="' + id + '" aria-selected="' + an + '" title="' + esc(z ? "Gesamtplan" : "Level " + MS[id].nr + ": " + kastenText(MS[id])) + '">' + (z ? "Alle" : MS[id].nr) + "</button>";
-      });
-      h += "</div></div>";
-    }
-    stufenEl.innerHTML = h;
+    var sel = zustandUI.ms, h = '<div class="ub-route" role="tablist">';
+    D.meilensteine.map(function (x) { return x.id; }).concat(["ziel"]).forEach(function (id) {
+      var z = id === "ziel", x = MS[id], an = id === sel;
+      h += '<button type="button" role="tab" class="ub-route-halt' + (an ? " ist-an" : "") + (!z && stufeErreicht(id) ? " ist-erreicht" : "") + (z ? " ist-ziel" : "") + '" data-ms="' + id + '" aria-selected="' + an + '">' +
+        '<span class="ub-route-titel">' + esc(z ? "Gesamtplan" : kastenText(x)) + '</span><span class="ub-route-punkt"></span>' +
+        '<span class="ub-route-datum">' + esc(z ? "Ziel" : "Level " + x.nr + " · " + x.termin) + "</span>" +
+        (id === AKTUELL ? '<span class="ub-route-aktuell">aktuell</span>' : "") + "</button>";
+    });
+    stufenEl.innerHTML = h + '</div><p class="ub-kopf-wenn">' + esc(stufenText(sel)) + "</p>";
     stufenEl.querySelectorAll("[data-ms]").forEach(function (k) {
       k.addEventListener("click", function () {
         zustandUI.ms = k.getAttribute("data-ms"); zustandUI.station = null;
         history.replaceState(null, "", location.search + "#" + zustandUI.ms);
-        infoZu(); stufen(); plan(); detail();
+        stufen(); plan(); detail();
       });
     });
-  }
-  function infoInhalt(id) {
-    if (id === "ziel") {
-      var zb = D.zielbild.text && D.zielbild.text.indexOf("Platzhalter") < 0 ? D.zielbild.text : "";
-      return '<p class="ub-pop-titel">' + esc(ZIEL.titel) + '</p><p class="ub-pop-meta">Zielbild</p><p>' + (zb ? esc(zb) : "Das Zielbild wird noch beschrieben.") + "</p>";
-    }
-    var m = MS[id];
-    return '<p class="ub-pop-titel">' + esc(msName(m)) + '</p><p class="ub-pop-meta">Level ' + m.nr + " &middot; " + esc(m.termin) + " &middot; erreicht, wenn</p><ul>" +
-      (m.ergebnis || []).map(function (e) { return "<li>" + esc(e) + "</li>"; }).join("") + "</ul>";
-  }
-  var infoPop = null;
-  function infoZu() {
-    if (infoPop) { infoPop.remove(); infoPop = null; }
-    document.querySelectorAll(".ub-kasten-info").forEach(function (b) { b.setAttribute("aria-expanded", "false"); });
   }
 
   /* ---------- Plan: U-Bahn ---------- */
@@ -461,7 +423,6 @@
   }
   // Klick irgendwo daneben löst die Auswahl
   document.addEventListener("click", function (e) {
-    if (infoPop && !e.target.closest(".ub-pop--info")) infoZu();
     if (strangOffen && !e.target.closest(".ub-pop--strang, .ub-bahn, .ub-strang-treffer")) strangInfo(null);
     if (terminOffen && !e.target.closest(".ub-pop--termin, .ub-termin")) terminInfo(null);
     if (!zustandUI.station) return;
@@ -470,19 +431,17 @@
   });
 
   // Größe des Plans: kleiner, um mehr auf einmal zu sehen – in Stufen zwischen 60 und 120 Prozent, je Gerät gemerkt.
-  // Regler fest in der Ecke über den Stoßrichtungen: bleibt an seiner Stelle, man kann schnell mehrfach klicken.
   var STUFEN = [60, 70, 80, 90, 100, 110, 120], groesse = 100;
   try { var gm = +localStorage.getItem("sv-plan-groesse"); if (STUFEN.indexOf(gm) > -1) groesse = gm; } catch (e) {}
-  var IC_EIN = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   var karte = planEl.parentNode;
   var zoomEl = document.createElement("div");
-  var platz = document.querySelector("[data-zoom-platz]");   // Leiste oben rechts (Übersicht, Weg zum Ergebnis), sonst Ecke im Plan
+  var platz = document.querySelector("[data-zoom-platz]") || karte;   // Leiste oben rechts im Kopf
   var quelle = document.querySelector("[data-legende-quelle]");
-  zoomEl.className = "ub-zoom" + (platz ? " ub-zoom--leiste" : "");
+  zoomEl.className = "ub-zoom";
   zoomEl.innerHTML = '<button type="button" data-z="-1" aria-label="Plan kleiner">&minus;</button><output aria-live="polite"></output>' +
     '<button type="button" data-z="1" aria-label="Plan größer">+</button>' +
     (quelle ? '<span class="ub-zoom-trenner" aria-hidden="true"></span><button type="button" class="ub-leg-knopf" data-leg aria-expanded="false">Legende</button>' : "");
-  (platz || karte).appendChild(zoomEl);
+  platz.appendChild(zoomEl);
   if (quelle) {
     var legPop = document.createElement("div");
     legPop.className = "ub-pop ub-pop--legende"; legPop.hidden = true;
@@ -494,7 +453,6 @@
     document.addEventListener("click", function (e) { if (!legPop.hidden && !e.target.closest(".ub-pop--legende")) legZu(); });
     document.addEventListener("keydown", function (e) { if (e.key === "Escape") legZu(); });
   }
-  if (getComputedStyle(karte).position === "static") karte.style.position = "relative";
   function setzeGroesse(g) {
     groesse = g;
     planEl.style.zoom = g / 100;
@@ -504,14 +462,7 @@
     try { localStorage.setItem("sv-plan-groesse", String(g)); } catch (e) {}
   }
   function neu(g) { if (g === groesse) return; setzeGroesse(g); plan(); detail(); }   // neu zeichnen: kleiner heißt auch mehr Breite für die Spalten
-  function einpassen() {   // größte Stufe, bei der der Plan in die Fensterhöhe passt
-    var hoehe100 = planEl.scrollHeight / (groesse / 100), platz = window.innerHeight - 120, wahl = STUFEN[0];
-    STUFEN.forEach(function (st) { if (hoehe100 * st / 100 <= platz) wahl = st; });
-    neu(Math.min(wahl, 100));
-    var r = karte.getBoundingClientRect(); window.scrollBy({ top: r.top - 16, behavior: "smooth" });
-  }
   zoomEl.addEventListener("click", function (e) {
-    if (e.target.closest("[data-ein]")) { einpassen(); return; }
     var b = e.target.closest("[data-z]"); if (!b) return;
     var i = STUFEN.indexOf(groesse) + (+b.getAttribute("data-z"));
     if (i >= 0 && i < STUFEN.length) neu(STUFEN[i]);

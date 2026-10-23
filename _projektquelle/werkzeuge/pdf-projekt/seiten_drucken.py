@@ -108,17 +108,6 @@ if (u) { var k = u.closest('.mk__box') || u.parentElement; (k || u).remove(); }
 """
 
 AUFTRAEGE = {
-    "projektmodule": dict(
-        seite="sv-akademie", blatt="A3", quer=False, rand=10, breite=1040,
-        zustand="", zustaende=[AKKORDEON % '["02"]', WERKZEUG_OFFEN],
-        seiten=2,
-        datei="SV-Akademie-Projektmodule-A3",
-        titel="SV Akademie – Projektmodule"),
-    "werkzeugkasten": dict(
-        seite="sv-akademie", blatt="A3", quer=True, rand=10, breite=980,
-        zustand=NUR_WERKZEUG,
-        datei="SV-Akademie-Werkzeugkasten-A3-quer",
-        titel="SV Akademie – Werkzeugkasten"),
     "selbstverstaendnis": dict(
         seite="sv-selbstverstaendnis", blatt="A3", quer=False, rand=14,
         breite=900, zustand="",
@@ -134,16 +123,6 @@ AUFTRAEGE = {
         breite=900, zustand="",
         datei="SV-Akademie-Projektplanung-A3",
         titel="SV Akademie – Projektplanung und Termine"),
-    "meilensteine-fein": dict(
-        seite="sv-meilensteine-fein", blatt="A1", quer=True, rand=15,
-        breite=3750, zustand=STRAHL_AUF,
-        datei="SV-Akademie-Meilensteine-fein-A1-quer",
-        titel="SV Akademie – Meilensteine (fein)"),
-    "meilensteine-hell": dict(
-        seite="sv-meilensteine", blatt="A1", quer=True, rand=15,
-        breite=5200, zustand=STRAHL_AUF,
-        datei="SV-Akademie-Meilensteine-hell-A1-quer",
-        titel="SV Akademie – Meilensteine (hell)"),
 }
 
 # Dieses CSS wird in den Rahmen injiziert.
