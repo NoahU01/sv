@@ -479,7 +479,7 @@
   var quelle = document.querySelector("[data-legende-quelle]");
   zoomEl.className = "ub-zoom" + (platz ? " ub-zoom--leiste" : "");
   zoomEl.innerHTML = '<button type="button" data-z="-1" aria-label="Plan kleiner">&minus;</button><output aria-live="polite"></output>' +
-    '<button type="button" data-z="1" aria-label="Plan größer">+</button><span class="ub-zoom-trenner" aria-hidden="true"></span><button type="button" data-ein aria-label="Plan ins Fenster einpassen" title="Einpassen">' + IC_EIN + "</button>" +
+    '<button type="button" data-z="1" aria-label="Plan größer">+</button>' +
     (quelle ? '<span class="ub-zoom-trenner" aria-hidden="true"></span><button type="button" class="ub-leg-knopf" data-leg aria-expanded="false">Legende</button>' : "");
   (platz || karte).appendChild(zoomEl);
   if (quelle) {
