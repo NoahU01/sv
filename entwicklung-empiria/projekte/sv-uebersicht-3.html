@@ -72,43 +72,59 @@
 .u3-folge .ist-level .u3-punkt{border-radius:3px;width:6px;height:16px;border-width:3px;margin-top:2px;margin-left:2px}
 .u3-folge b{display:block;font-weight:600}
 .u3-folge small{display:block;color:#8a857d;font-size:.88rem}
-/* Ergebnisse nach dem Strategiemodell */
-.u3-modell{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
-.u3-modell > li{border:1px solid #e8e5e0;border-radius:14px;padding:18px 18px 16px;display:flex;flex-direction:column}
-.u3-modell-kopf{display:flex;align-items:center;gap:10px;margin:0 0 6px;font-size:1rem}
-.u3-modell-kopf b{font-weight:600}
-.u3-nr{width:26px;height:26px;border-radius:50%;border:1.5px solid #111;display:inline-flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:600}
+/* Ergebnisse entlang des Strategiemodells: eine Kette aus vier Karten */
+.u3-modell{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.u3-modell > li{display:flex;flex-direction:column;position:relative}
+.u3-schritt{display:flex;align-items:center;gap:10px;margin:0 0 12px;position:relative}
+.u3-modell > li:not(:last-child) .u3-schritt::after{content:"";position:absolute;left:36px;right:-18px;top:13px;height:2px;background:#e8e5e0}
+.u3-nr{width:26px;height:26px;border-radius:50%;border:2px solid #111;background:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:600;position:relative;z-index:1}
 .ist-fertig .u3-nr{background:#111;color:#fff}
-.u3-frage{min-height:2.9em;margin:0 0 4px;font-size:.88rem;color:#8a857d;line-height:1.45}
-.u3-zustand{margin:0 0 14px;font-size:.88rem;color:#8a857d}
-.u3-zustand::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;border:1.5px solid #111;margin-right:7px;vertical-align:1px}
-.ist-fertig .u3-zustand::before{background:#111}
-.u3-liste{list-style:none;margin:0;padding:12px 0 0;border-top:1px solid #efece7;display:grid;gap:8px}
+.u3-zustand{font-size:.88rem;color:#8a857d;background:#fff;padding-right:8px;position:relative;z-index:1}
+.u3-bild{display:block;aspect-ratio:16/10;border-radius:12px;overflow:hidden;background:#f3f1ed;border:1px solid #e8e5e0;transition:border-color .15s}
+.u3-bild:hover{border-color:#111}
+.u3-bild img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.u3-bild-grafik{display:flex;width:100%;height:100%;align-items:center;justify-content:center}
+.u3-bild-grafik svg{width:78%;height:auto}
+.u3-k-titel{font-family:var(--font-serif);font-weight:700;font-size:1.15rem;margin:14px 0 2px}
+.u3-frage{min-height:2.9em;margin:0 0 12px;font-size:.88rem;color:#8a857d;line-height:1.45}
+.u3-liste{list-style:none;margin:0;padding:10px 0 0;border-top:1px solid #efece7;display:grid;gap:7px}
 .u3-liste a{display:flex;justify-content:space-between;gap:10px;font-size:.95rem;color:#111;text-decoration:none}
 .u3-liste a::after{content:"\2192";color:#8a857d}
 .u3-liste a:hover{text-decoration:underline;text-underline-offset:3px}
-/* So gehen wir vor */
+/* So gehen wir vor: Ziel mit Rakete, Methoden als Kacheln */
 .u3-vorgehen summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:20px;cursor:pointer}
 .u3-vorgehen summary::-webkit-details-marker{display:none}
 .u3-sum-h{display:block;font-family:var(--font-serif);font-weight:700;font-size:clamp(1.25rem,2vw,1.5rem)}
 .u3-sum-unter{display:block;margin-top:4px;color:#555;font-size:.95rem}
 .u3-pfeil{width:12px;height:12px;border-right:2px solid #111;border-bottom:2px solid #111;transform:rotate(45deg);margin-right:6px;transition:transform .2s}
 .u3-vorgehen[open] .u3-pfeil{transform:rotate(-135deg)}
-.u3-vorgehen-raster{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(24px,3vw,44px);margin-top:26px;padding-top:24px;border-top:1px solid #efece7}
-.u3-text h3{font:600 .95rem/1.3 Poppins,sans-serif;margin:16px 0 6px}
-.u3-text h3:first-child{margin-top:0}
-.u3-text p,.u3-text li{font-size:.95rem;line-height:1.6;color:#555}
-.u3-text p{margin:0 0 10px}
-.u3-text .fl-ziel-liste{padding-left:18px;margin:0 0 10px}
-.u3-vorgehen .pj-methodenliste{margin-top:6px}
+.u3-vorgehen-raster{display:grid;gap:34px;margin-top:26px;padding-top:26px;border-top:1px solid #efece7}
+.u3-ziel{display:grid;grid-template-columns:96px 1fr;gap:28px;align-items:start}
+.u3-rakete{width:96px;height:auto;display:block}
+.u3-ziel-punkte{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+.u3-ziel-punkte b{display:block;font-weight:600;font-size:.95rem}
+.u3-ziel-punkte span{display:block;font-size:.95rem;line-height:1.55;color:#555}
+.u3-link--knopf{background:none;border:0;border-bottom:1px solid #cfcac2;padding:0;font:inherit;font-size:.9rem;cursor:pointer;margin-top:18px}
+.u3-methoden{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.u3-methode{width:100%;height:100%;display:flex;flex-direction:column;gap:4px;align-items:flex-start;text-align:left;background:#fff;border:1px solid #e8e5e0;border-radius:14px;padding:14px 16px;font:inherit;color:#111;cursor:pointer;transition:border-color .15s}
+.u3-methode:hover{border-color:#111}
+.u3-m-ic{margin-bottom:8px;width:38px;height:38px;border-radius:11px;background:#111;color:var(--hl,#ffed00);display:flex;align-items:center;justify-content:center}
+.u3-m-ic svg{width:19px;height:19px}
+.u3-methode b{font-weight:600;font-size:.95rem;line-height:1.3}
+.u3-methode small{font-size:.88rem;color:#8a857d;line-height:1.45}
 @media (max-width:1000px){
  .u3-modell{grid-template-columns:repeat(2,minmax(0,1fr))}
- .u3-vorgehen-raster{grid-template-columns:1fr}
+ .u3-modell > li .u3-schritt::after{display:none}
+ .u3-ziel-punkte{grid-template-columns:1fr;gap:14px}
+ .u3-methoden{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:760px){
  .u3-a-raster{grid-template-columns:1fr}
  .u3-termine-spalte{border-left:0;padding-left:0;border-top:1px solid #efece7;padding-top:18px}
  .u3-modell{grid-template-columns:1fr}
+ .u3-methoden{grid-template-columns:1fr}
+ .u3-ziel{grid-template-columns:72px 1fr}
+ .u3-rakete{width:72px}
  .u3-folge li{grid-template-columns:18px 1fr;gap:12px}
  .u3-folge .u3-wann{grid-column:2}
  .u3-folge .u3-punkt{grid-row:1 / span 2}
@@ -371,6 +387,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
           <span><svg width="26" height="20"><line x1="3" y1="3" x2="3" y2="17" stroke="#111" stroke-width="4" stroke-linecap="round"/><line x1="3" y1="10" x2="24" y2="10" stroke="#111" stroke-width="4" stroke-linecap="round"/></svg>beginnt eigenst&auml;ndig</span>
           <span><svg width="30" height="10"><line x1="2" y1="5" x2="28" y2="5" stroke="#8a857d" stroke-width="2" stroke-dasharray="3 5"/></svg>Abh&auml;ngigkeit</span>
           <span><svg width="40" height="22"><rect x="3" y="3" width="34" height="16" rx="8" fill="#fff" stroke="#a39e96" stroke-width="3"/></svg>Zeitraum</span>
+          <span><svg width="14" height="14"><rect x="3" y="3" width="8" height="8" fill="#111" transform="rotate(45 7 7)"/></svg>Termin</span>
           <span><svg width="16" height="24"><rect x="3" y="3" width="10" height="18" rx="5" fill="#fff" stroke="#111" stroke-width="3"/></svg>Ergebnislevel</span>
         </div>
         </div>
@@ -383,113 +400,71 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
         <a class="ue-zeile" href="../projekte/sv-ziel-ubahn-20.html"><span><b>Weg zum Ergebnis</b><small>Alle Ergebnislevel mit allen Schritten und Abh&auml;ngigkeiten</small></span><span aria-hidden="true">&#8594;</span></a>
       </section>
 
-      <!-- Ergebnisse, geordnet nach dem Strategiemodell -->
+      <!-- Ergebnisse entlang des Strategiemodells: je Baustein ein Bild und die vorhandenen Stücke -->
       <section class="ue-block" aria-labelledby="u3-erg-h">
         <h2 id="u3-erg-h">Ergebnisse</h2>
-        <p class="ue-unter">Geordnet nach dem Strategiemodell, nach dem wir vorgehen.</p>
+        <p class="ue-unter">Entlang des Strategiemodells, nach dem wir vorgehen.</p>
         <ol class="u3-modell">
           <li class="ist-fertig">
-            <p class="u3-modell-kopf"><span class="u3-nr">1</span><b>Selbstverst&auml;ndnis</b></p>
+            <p class="u3-schritt"><span class="u3-nr">1</span><span class="u3-zustand">abgeschlossen</span></p>
+            <a class="u3-bild" href="../projekte/sv-selbstverstaendnis.html"><img src="../assets/projekte/sv-akademie-selbstverstaendnis-1.webp" alt="Leitbild der SV Akademie" loading="lazy"></a>
+            <h3 class="u3-k-titel">Selbstverst&auml;ndnis</h3>
             <p class="u3-frage">Wof&uuml;r stehen wir?</p>
-            <p class="u3-zustand">abgeschlossen</p>
-            <ul class="u3-liste">
-              <li><a href="../projekte/sv-selbstverstaendnis.html">Das Selbstverst&auml;ndnis</a></li>
-              <li><a href="../assets/projekte/sv-akademie-selbstverstaendnis.pdf" target="_blank" rel="noopener">Leitbild als PDF</a></li>
-            </ul>
+            <ul class="u3-liste"><li><a href="../projekte/sv-selbstverstaendnis.html">Das Selbstverst&auml;ndnis</a></li><li><a href="../assets/projekte/sv-akademie-selbstverstaendnis.pdf" target="_blank" rel="noopener">Leitbild als PDF</a></li></ul>
           </li>
           <li class="ist-dran">
-            <p class="u3-modell-kopf"><span class="u3-nr">2</span><b>Vision</b></p>
+            <p class="u3-schritt"><span class="u3-nr">2</span><span class="u3-zustand">in Arbeit</span></p>
+            <a class="u3-bild" href="../projekte/sv-vision.html"><img src="../assets/projekte/sv-akademie-homepage.webp" alt="SharePoint der SV Akademie" loading="lazy"></a>
+            <h3 class="u3-k-titel">Vision</h3>
             <p class="u3-frage">Wie wollen wir wahrgenommen werden?</p>
-            <p class="u3-zustand">in Arbeit</p>
-            <ul class="u3-liste">
-              <li><a href="../projekte/sv-vision.html">Die Vision</a></li>
-              <li><a href="../../index.html" target="_blank" rel="noopener">SharePoint SV Akademie</a></li>
-            </ul>
+            <ul class="u3-liste"><li><a href="../projekte/sv-vision.html">Die Vision</a></li><li><a href="../../index.html" target="_blank" rel="noopener">SharePoint SV Akademie</a></li></ul>
           </li>
           <li class="ist-dran">
-            <p class="u3-modell-kopf"><span class="u3-nr">3</span><b>Strategie</b></p>
+            <p class="u3-schritt"><span class="u3-nr">3</span><span class="u3-zustand">in Arbeit</span></p>
+            <a class="u3-bild" href="../projekte/sv-strategie-stossrichtungen.html"><span class="u3-bild-grafik"><svg viewBox="0 0 320 200" role="img" aria-label="Drei Stoßrichtungen laufen im Ergebnis zusammen">
+                  <g fill="none" stroke-width="9" stroke-linecap="round"><path d="M40 52 H252" stroke="#C51F5D"/><path d="M40 100 H252" stroke="#8613A1"/><path d="M40 148 H252" stroke="#0B9FBD"/></g>
+                  <g fill="#fff" stroke-width="4"><circle cx="110" cy="52" r="8" stroke="#C51F5D"/><circle cx="180" cy="52" r="8" stroke="#C51F5D"/><circle cx="140" cy="100" r="8" stroke="#8613A1"/><circle cx="96" cy="148" r="8" stroke="#0B9FBD"/><circle cx="196" cy="148" r="8" stroke="#0B9FBD"/></g>
+                  <rect x="252" y="34" width="22" height="132" rx="11" fill="#fff" stroke="#111" stroke-width="6"/>
+                </svg></span></a>
+            <h3 class="u3-k-titel">Strategie</h3>
             <p class="u3-frage">Wie kommen wir dorthin?</p>
-            <p class="u3-zustand">in Arbeit</p>
-            <ul class="u3-liste">
-              <li><a href="../projekte/sv-strategie.html">Die Strategie</a></li>
-              <li><a href="../projekte/sv-strategie-ist.html">Ist-Situation</a></li>
-              <li><a href="../projekte/sv-strategie-stossrichtungen.html">Sto&szlig;richtungen</a></li>
-            </ul>
+            <ul class="u3-liste"><li><a href="../projekte/sv-strategie.html">Die Strategie</a></li><li><a href="../projekte/sv-strategie-ist.html">Ist-Situation</a></li><li><a href="../projekte/sv-strategie-stossrichtungen.html">Sto&szlig;richtungen</a></li></ul>
           </li>
           <li class="ist-dran">
-            <p class="u3-modell-kopf"><span class="u3-nr">4</span><b>Umsetzung</b></p>
+            <p class="u3-schritt"><span class="u3-nr">4</span><span class="u3-zustand">l&auml;uft</span></p>
+            <a class="u3-bild" href="../projekte/sv-ziel-ubahn-20.html"><img src="../assets/projekte/sv-weg-zum-ergebnis-vorschau.webp" alt="Weg zum Ergebnis" loading="lazy" style="object-position:left top"></a>
+            <h3 class="u3-k-titel">Umsetzung</h3>
             <p class="u3-frage">Wie sichern wir die Zielerreichung?</p>
-            <p class="u3-zustand">l&auml;uft</p>
-            <ul class="u3-liste">
-              <li><a href="../projekte/sv-ziel-ubahn-20.html">Weg zum Ergebnis</a></li>
-              <li><a href="../projekte/sv-meilensteine.html">Meilensteinplan</a></li>
-              <li><a href="../projekte/sv-projektplanung.html">Projektplanung</a></li>
-            </ul>
+            <ul class="u3-liste"><li><a href="../projekte/sv-ziel-ubahn-20.html">Weg zum Ergebnis</a></li><li><a href="../projekte/sv-projektplanung.html">Termine</a></li></ul>
           </li>
         </ol>
       </section>
 
-      <!-- Wissensdatenbank: Ziel, Modell, Methoden – zugeklappt -->
+      <!-- Wissensdatenbank: Ziel und Methoden – zugeklappt -->
       <details class="ue-block u3-vorgehen">
-        <summary><span><span class="u3-sum-h">So gehen wir vor</span><span class="u3-sum-unter">Ziel, Vorgehensmodell und Methoden zum Nachlesen</span></span><span class="u3-pfeil" aria-hidden="true"></span></summary>
+        <summary><span><span class="u3-sum-h">So gehen wir vor</span><span class="u3-sum-unter">Das Ziel und die Methoden, mit denen wir arbeiten</span></span><span class="u3-pfeil" aria-hidden="true"></span></summary>
         <div class="u3-vorgehen-raster">
-          <div class="u3-vorgehen-teil">
-            <h3 class="u3-h3">Das Ziel</h3>
-            <div class="u3-text">
-            <h3>USP Mensch</h3>
-                <p>In Zeiten von KI werden persönliche Beziehungen, Vertrauen und menschliche Nähe nicht nur im Vertrieb immer wichtiger. Sie werden zu einem zentralen USP der SV SparkassenVersicherung als klar positionierter Serviceversicherer. Wir schaffen die beste Akademie der Versicherungsbranche und stellen die menschliche Wettbewerbsfähigkeit im KI-Zeitalter sicher.</p>
-
-                <h3>Projekt-Scope</h3>
-                <p>Um dies zu realisieren, brauchen wir im Team, bei den Führungskräften und bei allen, die mit der Akademie arbeiten, ein gemeinsames Bild:</p>
-                <ul class="fl-ziel-liste">
-                  <li><b>Selbstverständnis</b> – Wofür stehen wir?</li>
-                  <li><b>Vision (klares Zielbild)</b> – Wie funktioniert die Akademie zukünftig?</li>
-                  <li><b>Strategie</b> – Wie kommen wir dorthin?</li>
-                </ul>
-
-                <h3>Kontinuierliche Umsetzung</h3>
-                <p>Selbstverständnis, Vision &amp; Strategie sind der Anfang, nicht der Projektabschluss. Alle Module werden mit Blick auf die Umsetzung im Alltag entwickelt.</p>
+          <div class="u3-ziel">
+            <img class="u3-rakete" src="../assets/projekte/sv-rakete.webp" alt="" width="300" height="420" loading="lazy">
+            <div>
+              <h3 class="u3-h3">Das Ziel</h3>
+              <ul class="u3-ziel-punkte">
+                <li><b>USP Mensch</b><span>Pers&ouml;nliche Beziehungen, Vertrauen und menschliche N&auml;he werden im KI-Zeitalter zum zentralen USP der SV SparkassenVersicherung.</span></li>
+                <li><b>Ein gemeinsames Bild</b><span>Team, F&uuml;hrungskr&auml;fte und alle, die mit der Akademie arbeiten, teilen Selbstverst&auml;ndnis, Vision und Strategie.</span></li>
+                <li><b>Kontinuierliche Umsetzung</b><span>Selbstverst&auml;ndnis, Vision und Strategie sind der Anfang, nicht der Projektabschluss.</span></li>
+              </ul>
+              <button type="button" class="u3-link u3-link--knopf" data-modal-target="ausgangslageModal">Womit das Projekt begonnen hat <span aria-hidden="true">&#8594;</span></button>
             </div>
           </div>
-          <div class="u3-vorgehen-teil">
-            <h3 class="u3-h3">Das Modell</h3>
-            <div class="u3-text">
-              <p>Wir gehen nach dem Strategiemodell von empiria vor: zuerst das Selbstverst&auml;ndnis, dann die Vision als konkretes Zielbild, dann die Strategie als Weg dorthin. Daraus folgen die Ergebnislevel und die Schritte der Umsetzung.</p>
-            </div>
-            <ul class="pj-methodenliste u3-knoepfe">
-              <li><button type="button" class="mk mk--klein" data-modal-target="ausgangslageModal"><span class="mk-text"><b>Womit das Projekt begonnen hat</b><small>Die Fragen, auf die das Projekt antwortet.</small></span><span class="mk-pfeil">&#8594;</span></button></li>
-            </ul>
-          </div>
-          <div class="u3-vorgehen-teil">
+          <div>
             <h3 class="u3-h3">Die Methoden</h3>
-            <div class="u3-text"><p>Diese Werkzeuge haben wir im Projekt angewandt.</p></div>
-            <ul class="pj-methodenliste">
-                <li><button type="button" class="mk mk--klein" data-modal-target="strategiemodellModal">
-                  <span class="mk-ic"><svg><use href="#mi-modell"/></svg></span>
-                  <span class="mk-text"><b>Strategiemodell</b><small>Die Reihenfolge, in der wir arbeiten.</small></span>
-                  <span class="mk-pfeil">&#8594;</span>
-                </button></li>
-                <li><button type="button" class="mk mk--klein" data-modal-target="mZielgruppeModal">
-                  <span class="mk-ic"><svg><use href="#mi-zielgruppe"/></svg></span>
-                  <span class="mk-text"><b>Zielgruppenanalyse</b><small>Wen beeinflussen wir und wer beeinflusst uns?</small></span>
-                  <span class="mk-pfeil">&#8594;</span>
-                </button></li>
-                <li><button type="button" class="mk mk--klein" data-modal-target="mNeugruendungModal">
-                  <span class="mk-ic"><svg><use href="#mi-werkstatt"/></svg></span>
-                  <span class="mk-text"><b>Gedankliche Neugründung</b><small>Wie würden wir heute gründen – ohne Altlasten?</small></span>
-                  <span class="mk-pfeil">&#8594;</span>
-                </button></li>
-                <li><button type="button" class="mk mk--klein" data-modal-target="swotModal">
-                  <span class="mk-ic"><svg><use href="#mi-protokoll"/></svg></span>
-                  <span class="mk-text"><b>SWOT-Analyse</b><small>Systematische Ableitung strategischer Stoßrichtungen</small></span>
-                  <span class="mk-pfeil">&#8594;</span>
-                </button></li>
-                <li><button type="button" class="mk mk--klein" data-modal-target="mGrundregelnModal">
-                  <span class="mk-ic"><svg><use href="#mi-regeln"/></svg></span>
-                  <span class="mk-text"><b>Grundregeln für erfolgreiche Kommunikation</b><small>Welche Bedeutung hat Dein Thema für die Zielgruppe?</small></span>
-                  <span class="mk-pfeil">&#8594;</span>
-                </button></li>
-                </ul>
+            <ul class="u3-methoden">
+            <li><button type="button" class="u3-methode" data-modal-target="strategiemodellModal"><span class="u3-m-ic"><svg><use href="#mi-modell"/></svg></span><b>Strategiemodell</b><small>Die Reihenfolge, in der wir arbeiten.</small></button></li>
+            <li><button type="button" class="u3-methode" data-modal-target="mZielgruppeModal"><span class="u3-m-ic"><svg><use href="#mi-zielgruppe"/></svg></span><b>Zielgruppenanalyse</b><small>Wen beeinflussen wir und wer beeinflusst uns?</small></button></li>
+            <li><button type="button" class="u3-methode" data-modal-target="mNeugruendungModal"><span class="u3-m-ic"><svg><use href="#mi-werkstatt"/></svg></span><b>Gedankliche Neugr&uuml;ndung</b><small>Wie w&uuml;rden wir heute gr&uuml;nden &ndash; ohne Altlasten?</small></button></li>
+            <li><button type="button" class="u3-methode" data-modal-target="swotModal"><span class="u3-m-ic"><svg><use href="#mi-protokoll"/></svg></span><b>SWOT-Analyse</b><small>Systematische Ableitung strategischer Sto&szlig;richtungen</small></button></li>
+            <li><button type="button" class="u3-methode" data-modal-target="mGrundregelnModal"><span class="u3-m-ic"><svg><use href="#mi-regeln"/></svg></span><b>Grundregeln f&uuml;r erfolgreiche Kommunikation</b><small>Welche Bedeutung hat Dein Thema f&uuml;r die Zielgruppe?</small></button></li>
+            </ul>
           </div>
         </div>
       </details>
@@ -871,10 +846,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   var STR = {}; D.straenge.forEach(function (s) { STR[s.id] = s; });
   var MSNR = {}; D.meilensteine.forEach(function (m) { MSNR[m.id] = m.nr; });
   // Termine im Projekt (wie in Übersicht 2.0)
-  var TERMINE = [
-    { wann: "November 2026", zusatz: "Termin folgt", was: "Abteilungsbesprechung SV Akademie (PW7)", info: "Einbindung des Teams" },
-    { wann: "08./09.12.2026", zusatz: "zwei Tage", was: "Strategieklausur", info: "Hotel Rössle" }
-  ];
+  var TERMINE = (D.termine || []).map(function (t) { return { wann: t.wann, zusatz: t.zusatz, was: t.titel, info: t.info }; });
   // Aktuelles Level: das erste, in dem noch nicht alles erreicht ist
   var akt = null;
   D.meilensteine.forEach(function (m) {

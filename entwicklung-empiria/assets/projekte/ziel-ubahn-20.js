@@ -199,7 +199,9 @@
       tiefsteZeile[s.strang] = Math.max(tiefsteZeile[s.strang] || 0, unter[s.id]);
     });
     var bahnen = D.straenge.filter(function (st) { return liste.some(function (s) { return s.strang === st.id; }); });
-    var linieY = {}, y0 = (nr > 1 ? 46 : 8) + (monatsBloecke.length ? 44 : 0);   // oben eine Zeile für die Namen der Stufenhalte (nur im Gesamtplan)
+    // Termine (Klausur, Workshops): eigene Zeile unter den Monaten; Termine, die zugleich ein Schritt sind, stehen dort als Halt
+    var termineImPlan = (D.termine || []).filter(function (t) { return !t.schritt && monatsBloecke.some(function (b) { return b.monat === t.monat; }); });
+    var linieY = {}, y0 = (nr > 1 ? 46 : 8) + (monatsBloecke.length ? 44 : 0) + (termineImPlan.length ? 30 : 0);   // oben eine Zeile für die Namen der Stufenhalte (nur im Gesamtplan)
     bahnen.forEach(function (st) { linieY[st.id] = y0 + UEBER; y0 += UEBER + tiefsteZeile[st.id] * ZH + (tiefsteZeile[st.id] ? UNTER + 34 : UNTER); });
     var hoehe = y0 + 6 + (vorStufe ? 22 : 0);   // unten Platz für „Voraussetzung: …“
     function yVon(s) { return linieY[s.strang] + unter[s.id] * ZH; }
@@ -215,6 +217,13 @@
       monatsNamen += '<div class="ub-monat" style="left:' + (xa + b.breite * ABST / 2) + "px;top:" + yo + 'px">' + monatsName(b.monat) + "</div>";
       if (!b.ab) return;   // keine Linie vor dem ersten Monat: links steht schon die Grenze der Spalte
       svg += '<line x1="' + xa + '" y1="' + (yo + 26) + '" x2="' + xa + '" y2="' + hoehe + '" stroke="#ebe7e1" stroke-width="1"/>';
+    });
+    termineImPlan.forEach(function (t) {
+      var b = monatsBloecke.filter(function (x) { return x.monat === t.monat; })[0];
+      var xa = START + (bandStart[b.ms] + b.ab) * ABST + bandNr[b.ms] * HALT, bw = b.breite * ABST;
+      var tx = xa + Math.max(10, Math.min(bw - 10, bw * ((t.tag || 15) - 0.5) / 31)), ty = (nr > 1 ? 46 : 8) + 44;
+      svg += '<rect x="' + (tx - 5) + '" y="' + (ty - 5) + '" width="10" height="10" fill="#111" transform="rotate(45 ' + tx + " " + ty + ')"/>';
+      monatsNamen += '<button type="button" class="ub-termin" data-termin="' + esc(t.id) + '" style="left:' + (tx - 9) + "px;top:" + (ty - 11) + 'px"><span>' + esc(t.titel) + " &middot; " + esc(t.wann.replace(/\.20\d\d$/, ".")) + "</span></button>";
     });
     var duenn = "", dick = "", quer = "", halte = "", namen = "", durch = "";
     function strecke(pkte, farbe, gegangen, schwach) {
@@ -331,6 +340,10 @@
         plan(); detail();
       });
     });
+    planEl.querySelectorAll("[data-termin]").forEach(function (b) {
+      b.addEventListener("click", function (e) { e.stopPropagation(); terminInfo(b.getAttribute("data-termin") === terminOffen ? null : b.getAttribute("data-termin")); });
+    });
+    terminInfo(terminOffen);
     planEl.querySelectorAll("[data-strang]").forEach(function (b) {
       b.addEventListener("click", function (e) { e.stopPropagation(); strangInfo(b.getAttribute("data-strang") === strangOffen ? null : b.getAttribute("data-strang")); });
     });
@@ -357,6 +370,23 @@
     zug.sc = sc;
     sc.addEventListener("mousedown", function (e) { if (e.button !== 0) return; zug.start = { x: e.clientX, l: sc.scrollLeft }; zug.bewegt = false; });
     sc.addEventListener("click", function (e) { if (zug.bewegt) { e.stopPropagation(); e.preventDefault(); zug.bewegt = false; } }, true);
+  }
+
+  /* ---------- Fenster am Termin: was, wann, wo – und der Weg zur Terminübersicht ---------- */
+  var terminOffen = null;
+  function terminInfo(id) {
+    var alt = planEl.querySelector(".ub-pop--termin"); if (alt) alt.remove();
+    terminOffen = id;
+    if (!id) return;
+    var t = (D.termine || []).filter(function (x) { return x.id === id; })[0], knopf = planEl.querySelector('.ub-termin[data-termin="' + id + '"]'), fl = planEl.querySelector(".ub-flaeche");
+    if (!t || !knopf || !fl) return;
+    var pop = document.createElement("div");
+    pop.className = "ub-pop ub-pop--termin";
+    pop.innerHTML = '<p class="ub-pop-titel">' + esc(t.titel) + '</p><p class="ub-pop-meta">' + [t.wann, t.zusatz, t.info].filter(Boolean).map(esc).join(" &middot; ") + "</p>" +
+      '<p><a href="sv-projektplanung.html">Zur Terminübersicht &#8594;</a></p>';
+    fl.appendChild(pop);
+    pop.style.left = Math.min(Math.max(4, parseFloat(knopf.style.left) - 120), fl.offsetWidth - pop.offsetWidth - 4) + "px";
+    pop.style.top = (parseFloat(knopf.style.top) + 28) + "px";
   }
 
   /* ---------- Fenster am Strang: worum es geht, wer verantwortet ---------- */
@@ -418,6 +448,7 @@
   document.addEventListener("click", function (e) {
     if (infoPop && !e.target.closest(".ub-pop--info")) infoZu();
     if (strangOffen && !e.target.closest(".ub-pop--strang, .ub-bahn, .ub-strang-treffer")) strangInfo(null);
+    if (terminOffen && !e.target.closest(".ub-pop--termin, .ub-termin")) terminInfo(null);
     if (!zustandUI.station) return;
     if (e.target.closest(".ub-name, .ub-treffer, .ub-pop")) return;
     zustandUI.station = null; plan(); detail();

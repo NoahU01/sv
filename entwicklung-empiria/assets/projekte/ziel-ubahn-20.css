@@ -135,3 +135,7 @@
 .ub-strang-treffer{position:absolute;left:0;height:18px;padding:0;border:0;background:transparent;cursor:pointer}
 .ub-beispiel{margin:-4px 0 12px;font-size:.84rem;color:#8a857d}
 .ub-legende-zeile svg{flex-shrink:0}
+.ub-termin{position:absolute;display:flex;align-items:center;height:22px;padding:0 0 0 22px;border:0;background:none;font:500 .74rem/1 Poppins,sans-serif;color:#111;white-space:nowrap;cursor:pointer;z-index:2}
+.ub-termin:hover span,.ub-termin:focus-visible span{text-decoration:underline;text-underline-offset:3px}
+.ub-pop--termin{width:260px}
+.ub-pop--termin a{color:#111}

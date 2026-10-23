@@ -553,5 +553,28 @@
   "personen": {},
   "hinweis_braucht": "meilensteine[].braucht: die Ergebnisse, die der Meilenstein unmittelbar braucht (Daniel, 22.10.2026). Was davor einfließt, folgt aus schritte[].braucht. m1: Annahme Big Bang = GoLive. schritte[].braucht darf auch eine Ergebnisstufe nennen (z. B. \"m2\"): der Schritt startet, sobald die Stufe erreicht ist – ohne direkte Verbindung zu einzelnen Schritten davor (Stufe 3, Beispiel 22.10.2026). Testfall 22.10.2026: SV-Pulskanal ohne Abhängigkeit von der Abstimmung HAL (eigenständiger Start), inhaltlich noch zu klären. Testfall 22.10.2026: MAK ohne Vorlauf aus Stufe 1 (beginnt eigenständig), inhaltlich noch zu klären.",
   "hinweis_stand": "Stand 22.10.2026 abgeglichen mit der gebauten Seite sv-meilensteine-fein.html (Stand 01.10.2026 aus empiria): Copilot-Pilotierung, Zustände, wer.",
-  "hinweis_monat": "monat = geplanter Monat (JJJJ-MM), in dem der Schritt erledigt ist. Level 1 von Daniel am 22.10.2026 festgelegt; Copilot-Pilotierung dabei auf 10/2026 gesetzt (vorher „ab 11/2026“). von = Startmonat bei Themen über einen Zeitraum (Lea Oktober bis November, Daniel 23.10.2026)."
+  "hinweis_monat": "monat = geplanter Monat (JJJJ-MM), in dem der Schritt erledigt ist. Level 1 von Daniel am 22.10.2026 festgelegt; Copilot-Pilotierung dabei auf 10/2026 gesetzt (vorher „ab 11/2026“). von = Startmonat bei Themen über einen Zeitraum (Lea Oktober bis November, Daniel 23.10.2026).",
+  "termine": [
+    {
+      "id": "t-abteilung-11-2026",
+      "titel": "Abteilungsbesprechung SV Akademie (PW7)",
+      "monat": "2026-11",
+      "tag": null,
+      "wann": "November 2026",
+      "zusatz": "Termin folgt",
+      "info": "Einbindung des Teams",
+      "schritt": "sa-1-abteilung"
+    },
+    {
+      "id": "t-klausur-12-2026",
+      "titel": "Strategieklausur",
+      "monat": "2026-12",
+      "tag": 8,
+      "wann": "08./09.12.2026",
+      "zusatz": "zwei Tage",
+      "info": "Hotel Rössle",
+      "schritt": null
+    }
+  ],
+  "hinweis_termine": "termine = feste Projekttermine (eine Quelle für Übersicht, Verlaufsplan und Terminliste). schritt = Verweis, wenn der Termin zugleich ein Schritt im Plan ist; tag = Tag im Monat für die Lage im Plan."
 }

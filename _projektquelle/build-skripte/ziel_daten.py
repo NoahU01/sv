@@ -15,6 +15,7 @@ daten = {
     # Farben wie im Meilensteinplan (empiria-Fassung, Sekundärfarben im CD)
     "straenge": [dict({k: s.get(k) for k in ("id", "kurz", "label", "frage", "beschreibung", "verantwortung")}, farbe=FARBE.get(s["id"], s.get("farbe"))) for s in d["straenge"]],
     "meilensteine": [{k: m.get(k) for k in ("id", "nr", "termin", "titel", "ergebnis", "braucht")} for m in d["meilensteine"]],
+    "termine": d.get("termine", []),
     "schritte": [{k: s.get(k) for k in ("id", "strang", "meilenstein", "titel", "status", "braucht", "ergebnis", "details", "wer", "kritisch", "termin", "von", "monat")} for s in d["schritte"]],
 }
 ziel = os.path.join(ROOT, "entwicklung-empiria", "assets", "projekte", "ziel-daten.js")

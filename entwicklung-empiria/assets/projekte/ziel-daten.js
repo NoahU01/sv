@@ -109,6 +109,28 @@ window.ZIEL_DATEN = {
    ]
   }
  ],
+ "termine": [
+  {
+   "id": "t-abteilung-11-2026",
+   "titel": "Abteilungsbesprechung SV Akademie (PW7)",
+   "monat": "2026-11",
+   "tag": null,
+   "wann": "November 2026",
+   "zusatz": "Termin folgt",
+   "info": "Einbindung des Teams",
+   "schritt": "sa-1-abteilung"
+  },
+  {
+   "id": "t-klausur-12-2026",
+   "titel": "Strategieklausur",
+   "monat": "2026-12",
+   "tag": 8,
+   "wann": "08./09.12.2026",
+   "zusatz": "zwei Tage",
+   "info": "Hotel Rössle",
+   "schritt": null
+  }
+ ],
  "schritte": [
   {
    "id": "t1-1-taskforce",
