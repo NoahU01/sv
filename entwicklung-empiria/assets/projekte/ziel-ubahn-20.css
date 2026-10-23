@@ -144,32 +144,11 @@
 .ub-kicker{display:flex;align-items:center;gap:12px;margin:0 0 10px;font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#111}
 .ub-kicker::before{content:"";width:28px;height:3px;background:#111}
 .ub-h1{font-family:var(--font-serif);font-weight:700;font-size:clamp(2rem,3.4vw,2.8rem);line-height:1.08;letter-spacing:-.01em;margin:0}
-/* Größe des Plans – drei Darstellungen zum Vergleich */
-.ub-zoom{display:flex;align-items:center;gap:4px;font:500 .74rem/1 Poppins,sans-serif;color:#111;z-index:6}
+/* Größe des Plans: Regler schwebend unten rechts im Plan */
+.ub-zoom{position:absolute;right:16px;bottom:16px;z-index:6;display:flex;flex-direction:column;align-items:center;gap:2px;background:#fff;border:1px solid #e0dcd5;border-radius:14px;padding:6px 4px;box-shadow:0 6px 18px rgba(0,0,0,.06);font:500 .66rem/1 Poppins,sans-serif;color:#8a857d}
 .ub-zoom button{width:26px;height:26px;border-radius:50%;border:0;background:none;color:#111;font:500 .95rem/1 Poppins,sans-serif;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0 0 1px;transition:background .15s}
 .ub-zoom button:hover:not(:disabled){background:#f3f1ed}
 .ub-zoom button:disabled{opacity:.3;cursor:default}
 .ub-zoom button svg{width:14px;height:14px}
-.ub-zoom output{min-width:36px;text-align:center}
-.ub-zoom-trenner{width:1px;height:16px;background:#e0dcd5;margin:0 4px}
-/* 1 – Pille in der leeren Ecke über den Stoßrichtungen */
-.ub-zoom--1{position:absolute;left:16px;top:12px;background:#fff;border:1px solid #e0dcd5;border-radius:999px;padding:3px 6px}
-/* 2 – schwebend unten rechts wie bei Karten */
-.ub-zoom--2{position:absolute;right:16px;bottom:16px;flex-direction:column;gap:2px;background:#fff;border:1px solid #e0dcd5;border-radius:14px;padding:6px 4px;box-shadow:0 6px 18px rgba(0,0,0,.06)}
-.ub-zoom--2 output{min-width:0;font-size:.66rem;color:#8a857d;padding:2px 0}
-/* 3 – in der Legendenleiste, Schieberegler */
-.ub-zoom--3{gap:8px;color:#8a857d;white-space:nowrap}
-.ub-zoom--3 .ub-zoom-trenner{margin:0 6px 0 2px}
-.ub-zoom--3 .ub-lupe{width:15px;height:15px}
-.ub-zoom--3 .ub-lupe--klein{width:11px;height:11px}
-.ub-zoom--3 output{color:#111;min-width:34px;text-align:left}
-.ub-zoom--3 input[type=range]{-webkit-appearance:none;appearance:none;width:96px;height:2px;background:#d9d5ce;border-radius:2px;margin:0}
-.ub-zoom--3 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:#111;border:2px solid #fff;box-shadow:0 0 0 1px #111;cursor:pointer}
-.ub-zoom--3 input[type=range]::-moz-range-thumb{width:12px;height:12px;border-radius:50%;background:#111;border:2px solid #fff;cursor:pointer}
-/* Umschalter der Reglervarianten im Kopf */
-.ub-kopf{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap}
-.ub-regler-wahl{display:inline-flex;align-items:center;gap:4px;padding:4px;background:#e9e6e1;border-radius:999px;font:500 .78rem/1 Poppins,sans-serif;color:#555}
-.ub-regler-wahl > span{padding:0 8px 0 10px}
-.ub-regler-wahl button{width:30px;height:30px;border-radius:50%;border:0;background:#fff;color:#111;font:600 .8rem/1 Poppins,sans-serif;cursor:pointer}
-.ub-regler-wahl button[aria-pressed="true"]{background:#111;color:#fff}
-body[data-regler="3"] .ub-steuerung .ub-legende-zeile{flex-wrap:wrap;row-gap:12px}
+.ub-zoom output{padding:2px 0}
+.ub-kopf{display:block}
