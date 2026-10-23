@@ -91,7 +91,7 @@ def bauen(rel):
     s = s.replace('<meta name="viewport"', '<link rel="icon" href="%sfavicon.ico" sizes="32x32">\n<link rel="icon" href="%sfavicon.svg" type="image/svg+xml">\n<link rel="apple-touch-icon" href="%sapple-touch-icon.png">\n<meta name="viewport"' % (zum_repo, zum_repo, zum_repo), 1)
 
     # 2. Logo → Projektübersicht
-    uebersicht = ("" if tiefe else "projekte/") + "sv-akademie.html"
+    uebersicht = ("" if tiefe else "projekte/") + "sv-uebersicht-3.html"   # aktuelle Projektübersicht
     s = re.sub(r'<a class="brand" href="[^"]*" aria-label="[^"]*">',
                '<a class="brand" href="%s" aria-label="Projekt SV Akademie">' % uebersicht, s)
     s = re.sub(r'<a href="[^"]*" class="brand" aria-label="[^"]*">',
