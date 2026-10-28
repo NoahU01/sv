@@ -167,16 +167,22 @@
     function xHalt(mid) { return START + (bandStart[mid] + bandBreite[mid]) * ABST + bandNr[mid] * HALT + 14; }   // Stufenhalt nach dem Band
 
     var unter = {}, gruppen = {}, tiefsteZeile = {};
+    // Zeile je Halt: die oberste Zeile seiner Linie, in der er keinen anderen Halt überdeckt – so rücken
+    // Schritte in derselben Spalte und eigenständig startende Zeiträume (z. B. Webseite neben Lea) eine Zeile tiefer
+    var belegt = {};
     liste.forEach(function (s) {
-      var k = s.strang + "|" + s.meilenstein + "|" + tiefe[s.id];
-      gruppen[k] = (gruppen[k] || 0); unter[s.id] = gruppen[k]++;
+      var k = s.strang + "|" + s.meilenstein, a = tiefeA[s.id] != null ? tiefeA[s.id] : tiefe[s.id], e = tiefe[s.id], z = 0;
+      var frei = (s.braucht || []).every(function (b) { return !imPlan[b] || S[b].strang !== s.strang; });
+      belegt[k] = belegt[k] || [];
+      while (belegt[k].some(function (x) { return x.z === z && x.a <= e && a <= x.e && (frei || x.a === a || x.e === e || a === e); })) z++;
+      belegt[k].push({ z: z, a: a, e: e }); unter[s.id] = z; gruppen[k] = Math.max(gruppen[k] || 0, z + 1);
       tiefsteZeile[s.strang] = Math.max(tiefsteZeile[s.strang] || 0, unter[s.id]);
     });
     var bahnen = D.straenge.filter(function (st) { return liste.some(function (s) { return s.strang === st.id; }); });
     // Termine (Klausur, Workshops): eigene Zeile unter den Monaten; Termine, die zugleich ein Schritt sind, stehen dort als Halt
     var termineImPlan = (D.termine || []).filter(function (t) { return !t.schritt && monatsBloecke.some(function (b) { return b.monat === t.monat; }); });
     var linieY = {}, y0 = (nr > 1 ? 46 : 8) + (monatsBloecke.length ? 44 : 0) + (termineImPlan.length ? 30 : 0);   // oben eine Zeile für die Namen der Stufenhalte (nur im Gesamtplan)
-    bahnen.forEach(function (st) { linieY[st.id] = y0 + UEBER; y0 += UEBER + tiefsteZeile[st.id] * ZH + (tiefsteZeile[st.id] ? UNTER + 34 : UNTER); });
+    bahnen.forEach(function (st) { linieY[st.id] = y0 + UEBER; y0 += UEBER + tiefsteZeile[st.id] * ZH + (tiefsteZeile[st.id] ? UNTER + 56 : UNTER); });
     var hoehe = y0 + 6 + (vorStufe ? 22 : 0);   // unten Platz für „Voraussetzung: …“
     function yVon(s) { return linieY[s.strang] + unter[s.id] * ZH; }
     var letzte = stufenImBlick[stufenImBlick.length - 1];
@@ -257,7 +263,9 @@
       if (!weiter) {
         var ms = MS[s.meilenstein], rein = fokus[s.id] && vorlauf(ms.braucht || [])[s.id] && !zustandUI.station;
         var ende = rein ? xHalt(ms.id) : xVon(s) + ABST / 2;
-        strecke(weg(x2, y2, ende, linieY[s.strang], true), f, false, !rein && (blass(s.id) || !!zustandUI.station));
+        // eigenständig startender Nebenstrang (eigene Zeile, kein Nachfolger): läuft auf seiner Zeile bis zum Stufenhalt
+        var eigeneZeile = unter[s.id] > 0 && freiStart(s);
+        strecke(weg(xVon(s), y2, ende, eigeneZeile ? y2 : linieY[s.strang], true), f, false, !rein && (blass(s.id) || !!zustandUI.station));
       }
     });
     // Stufenhalte: Balken über alle Linien; der gewählte bzw. letzte kräftig, Zwischenhalte etwas schmaler

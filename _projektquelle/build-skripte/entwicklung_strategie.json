@@ -45,7 +45,9 @@
         "Zielbild und Strategie werden von Michael Sauerbrunn und dem Team der SV Akademie voll unterstützt."
       ],
       "braucht": [
-        "sa-1-golive"
+        "sa-1-golive",
+        "t1-1-lea",
+        "t2-1-brainstorming"
       ]
     },
     {
@@ -165,7 +167,8 @@
       "offen": [],
       "wer": "",
       "monat": "2026-11",
-      "von": "2026-10"
+      "von": "2026-10",
+      "termin": "Oktober bis 24.11.2026"
     },
     {
       "id": "t1-1-webseite",
@@ -175,9 +178,7 @@
       "titel": "Webseite umsetzen und live schalten",
       "ergebnis": "Die Webseite ist umgesetzt und live – voraussichtlich innerhalb des SharePoints.",
       "status": "offen",
-      "braucht": [
-        "t1-1-lea"
-      ],
+      "braucht": [],
       "details": [
         "Voraussichtlich innerhalb des SharePoints"
       ],

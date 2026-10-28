@@ -45,7 +45,9 @@ window.ZIEL_DATEN = {
     "Zielbild und Strategie werden von Michael Sauerbrunn und dem Team der SV Akademie voll unterstützt."
    ],
    "braucht": [
-    "sa-1-golive"
+    "sa-1-golive",
+    "t1-1-lea",
+    "t2-1-brainstorming"
    ]
   },
   {
@@ -210,7 +212,7 @@ window.ZIEL_DATEN = {
    "details": [],
    "wer": "",
    "kritisch": null,
-   "termin": null,
+   "termin": "Oktober bis 24.11.2026",
    "von": "2026-10",
    "monat": "2026-11",
    "zeitraum": null
@@ -222,9 +224,7 @@ window.ZIEL_DATEN = {
    "titel": "Webseite umsetzen und live schalten",
    "beschreibung": null,
    "status": "offen",
-   "braucht": [
-    "t1-1-lea"
-   ],
+   "braucht": [],
    "ergebnis": "Die Webseite ist umgesetzt und live – voraussichtlich innerhalb des SharePoints.",
    "details": [
     "Voraussichtlich innerhalb des SharePoints"
