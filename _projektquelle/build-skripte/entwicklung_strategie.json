@@ -41,7 +41,7 @@
       "titel": "Big Bang",
       "ergebnis": [
         "Die Webseite ist live.",
-        "Der KI-Assistent Lea läuft.",
+        "Der KI-Assistent LEA läuft.",
         "Zielbild und Strategie werden von Michael Sauerbrunn und dem Team der SV Akademie voll unterstützt."
       ],
       "braucht": [
@@ -117,13 +117,13 @@
       "strang": "t1",
       "meilenstein": "m1",
       "aufwand": "",
-      "titel": "Taskforce KI: Ideen für Lea",
-      "ergebnis": "Die Taskforce KI hat Ideen zur Umsetzung des KI-Assistenten Lea entwickelt.",
+      "titel": "Taskforce KI: Ideen für LEA",
+      "ergebnis": "Die Taskforce KI hat Ideen zur Umsetzung des KI-Assistenten LEA entwickelt.",
       "status": "erreicht",
       "braucht": [],
       "details": [
         "Taskforce KI wird tätig",
-        "Ideen zur Umsetzung des KI-Assistenten Lea"
+        "Ideen zur Umsetzung des KI-Assistenten LEA"
       ],
       "offen": [],
       "wer": "",
@@ -147,7 +147,7 @@
       "wer": "",
       "kritisch": {
         "grund": "Wie lange die Pilotierung läuft, ist offen.",
-        "blockiert": "Davon hängt ab, wann die Entwicklung des KI-Assistenten Lea starten kann – und mit ihr die Kette bis zur Webseite."
+        "blockiert": "Davon hängt ab, wann die Entwicklung des KI-Assistenten LEA starten kann – und mit ihr die Kette bis zur Webseite."
       },
       "termin": "",
       "monat": "2026-10"
@@ -157,8 +157,8 @@
       "strang": "t1",
       "meilenstein": "m1",
       "aufwand": "",
-      "titel": "Entwicklung KI-Assistent Lea",
-      "ergebnis": "Der KI-Assistent Lea ist entwickelt.",
+      "titel": "Entwicklung KI-Assistent LEA",
+      "ergebnis": "Der KI-Assistent LEA ist entwickelt.",
       "status": "offen",
       "braucht": [
         "t1-1-copilot"
@@ -463,7 +463,7 @@
       "aufwand": "",
       "titel": "Abteilungsbesprechung 11/2026",
       "ergebnis": "",
-      "status": "offen",
+      "status": "aktiv",
       "braucht": [
         "sa-1-pw7",
         "sa-1-puls"
@@ -478,7 +478,7 @@
       "strang": "sa",
       "meilenstein": "m1",
       "aufwand": "",
-      "titel": "GoLive: Schulungsinfotag Vertrieb",
+      "titel": "GoLive",
       "ergebnis": "",
       "status": "offen",
       "braucht": [
@@ -489,7 +489,7 @@
       "offen": [],
       "wer": "",
       "monat": "2026-12",
-      "beschreibung": "Information der Vertriebsführungskräfte zu den Schulungen 2027. Vorstellung Homepage, Quickchecks und Lea (KI-Assistent).",
+      "beschreibung": "GoLive: Schulungsinfotag Vertrieb. Information der Vertriebsführungskräfte zu den Schulungen 2027. Vorstellung Homepage, Quickchecks und LEA (KI-Assistent).",
       "termin": "04.12.2026"
     },
     {
@@ -560,7 +560,7 @@
   "personen": {},
   "hinweis_braucht": "meilensteine[].braucht: die Ergebnisse, die der Meilenstein unmittelbar braucht (Daniel, 22.10.2026). Was davor einfließt, folgt aus schritte[].braucht. m1: Annahme Big Bang = GoLive. schritte[].braucht darf auch eine Ergebnisstufe nennen (z. B. \"m2\"): der Schritt startet, sobald die Stufe erreicht ist – ohne direkte Verbindung zu einzelnen Schritten davor (Stufe 3, Beispiel 22.10.2026). Testfall 22.10.2026: SV-Pulskanal ohne Abhängigkeit von der Abstimmung HAL (eigenständiger Start), inhaltlich noch zu klären. Testfall 22.10.2026: MAK ohne Vorlauf aus Stufe 1 (beginnt eigenständig), inhaltlich noch zu klären.",
   "hinweis_stand": "Stand 22.10.2026 abgeglichen mit der gebauten Seite sv-meilensteine-fein.html (Stand 01.10.2026 aus empiria): Copilot-Pilotierung, Zustände, wer.",
-  "hinweis_monat": "monat = geplanter Monat (JJJJ-MM), in dem der Schritt erledigt ist. Level 1 von Daniel am 22.10.2026 festgelegt; Copilot-Pilotierung dabei auf 10/2026 gesetzt (vorher „ab 11/2026“). von = Startmonat bei Themen über einen Zeitraum (Lea Oktober bis November, Daniel 23.10.2026).",
+  "hinweis_monat": "monat = geplanter Monat (JJJJ-MM), in dem der Schritt erledigt ist. Level 1 von Daniel am 22.10.2026 festgelegt; Copilot-Pilotierung dabei auf 10/2026 gesetzt (vorher „ab 11/2026“). von = Startmonat bei Themen über einen Zeitraum (LEA Oktober bis November, Daniel 23.10.2026).",
   "termine": [
     {
       "id": "t-abteilung-11-2026",
@@ -579,7 +579,7 @@
       "tag": 4,
       "wann": "04.12.2026",
       "zusatz": "",
-      "info": "Information der Vertriebsführungskräfte zu den Schulungen 2027. Vorstellung Homepage, Quickchecks und Lea (KI-Assistent).",
+      "info": "Information der Vertriebsführungskräfte zu den Schulungen 2027. Vorstellung Homepage, Quickchecks und LEA (KI-Assistent).",
       "schritt": "sa-1-golive"
     },
     {

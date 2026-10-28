@@ -41,7 +41,7 @@ window.ZIEL_DATEN = {
    "titel": "Big Bang",
    "ergebnis": [
     "Die Webseite ist live.",
-    "Der KI-Assistent Lea läuft.",
+    "Der KI-Assistent LEA läuft.",
     "Zielbild und Strategie werden von Michael Sauerbrunn und dem Team der SV Akademie voll unterstützt."
    ],
    "braucht": [
@@ -129,7 +129,7 @@ window.ZIEL_DATEN = {
    "tag": 4,
    "wann": "04.12.2026",
    "zusatz": "",
-   "info": "Information der Vertriebsführungskräfte zu den Schulungen 2027. Vorstellung Homepage, Quickchecks und Lea (KI-Assistent).",
+   "info": "Information der Vertriebsführungskräfte zu den Schulungen 2027. Vorstellung Homepage, Quickchecks und LEA (KI-Assistent).",
    "schritt": "sa-1-golive"
   },
   {
@@ -158,14 +158,14 @@ window.ZIEL_DATEN = {
    "id": "t1-1-taskforce",
    "strang": "t1",
    "meilenstein": "m1",
-   "titel": "Taskforce KI: Ideen für Lea",
+   "titel": "Taskforce KI: Ideen für LEA",
    "beschreibung": null,
    "status": "erreicht",
    "braucht": [],
-   "ergebnis": "Die Taskforce KI hat Ideen zur Umsetzung des KI-Assistenten Lea entwickelt.",
+   "ergebnis": "Die Taskforce KI hat Ideen zur Umsetzung des KI-Assistenten LEA entwickelt.",
    "details": [
     "Taskforce KI wird tätig",
-    "Ideen zur Umsetzung des KI-Assistenten Lea"
+    "Ideen zur Umsetzung des KI-Assistenten LEA"
    ],
    "wer": "",
    "kritisch": null,
@@ -191,7 +191,7 @@ window.ZIEL_DATEN = {
    "wer": "",
    "kritisch": {
     "grund": "Wie lange die Pilotierung läuft, ist offen.",
-    "blockiert": "Davon hängt ab, wann die Entwicklung des KI-Assistenten Lea starten kann – und mit ihr die Kette bis zur Webseite."
+    "blockiert": "Davon hängt ab, wann die Entwicklung des KI-Assistenten LEA starten kann – und mit ihr die Kette bis zur Webseite."
    },
    "termin": "",
    "von": null,
@@ -202,13 +202,13 @@ window.ZIEL_DATEN = {
    "id": "t1-1-lea",
    "strang": "t1",
    "meilenstein": "m1",
-   "titel": "Entwicklung KI-Assistent Lea",
+   "titel": "Entwicklung KI-Assistent LEA",
    "beschreibung": null,
    "status": "offen",
    "braucht": [
     "t1-1-copilot"
    ],
-   "ergebnis": "Der KI-Assistent Lea ist entwickelt.",
+   "ergebnis": "Der KI-Assistent LEA ist entwickelt.",
    "details": [],
    "wer": "",
    "kritisch": null,
@@ -570,7 +570,7 @@ window.ZIEL_DATEN = {
    "meilenstein": "m1",
    "titel": "Abteilungsbesprechung 11/2026",
    "beschreibung": null,
-   "status": "offen",
+   "status": "aktiv",
    "braucht": [
     "sa-1-pw7",
     "sa-1-puls"
@@ -588,8 +588,8 @@ window.ZIEL_DATEN = {
    "id": "sa-1-golive",
    "strang": "sa",
    "meilenstein": "m1",
-   "titel": "GoLive: Schulungsinfotag Vertrieb",
-   "beschreibung": "Information der Vertriebsführungskräfte zu den Schulungen 2027. Vorstellung Homepage, Quickchecks und Lea (KI-Assistent).",
+   "titel": "GoLive",
+   "beschreibung": "GoLive: Schulungsinfotag Vertrieb. Information der Vertriebsführungskräfte zu den Schulungen 2027. Vorstellung Homepage, Quickchecks und LEA (KI-Assistent).",
    "status": "offen",
    "braucht": [
     "sa-1-abteilung",
