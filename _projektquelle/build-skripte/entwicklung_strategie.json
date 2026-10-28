@@ -183,7 +183,10 @@
       ],
       "offen": [],
       "wer": "",
-      "monat": "2026-11"
+      "monat": "2026-11",
+      "von": "2026-11",
+      "zeitraum": true,
+      "termin": "09.11. bis 27.11.2026"
     },
     {
       "id": "t1-2-mak",
@@ -462,8 +465,7 @@
       "status": "offen",
       "braucht": [
         "sa-1-pw7",
-        "sa-1-puls",
-        "t1-1-webseite"
+        "sa-1-puls"
       ],
       "details": [],
       "offen": [],
@@ -479,7 +481,8 @@
       "ergebnis": "",
       "status": "offen",
       "braucht": [
-        "sa-1-abteilung"
+        "sa-1-abteilung",
+        "t1-1-webseite"
       ],
       "details": [],
       "offen": [],

@@ -169,7 +169,8 @@ window.ZIEL_DATEN = {
    "kritisch": null,
    "termin": null,
    "von": null,
-   "monat": "2026-09"
+   "monat": "2026-09",
+   "zeitraum": null
   },
   {
    "id": "t1-1-copilot",
@@ -192,7 +193,8 @@ window.ZIEL_DATEN = {
    },
    "termin": "",
    "von": null,
-   "monat": "2026-10"
+   "monat": "2026-10",
+   "zeitraum": null
   },
   {
    "id": "t1-1-lea",
@@ -210,7 +212,8 @@ window.ZIEL_DATEN = {
    "kritisch": null,
    "termin": null,
    "von": "2026-10",
-   "monat": "2026-11"
+   "monat": "2026-11",
+   "zeitraum": null
   },
   {
    "id": "t1-1-webseite",
@@ -228,9 +231,10 @@ window.ZIEL_DATEN = {
    ],
    "wer": "",
    "kritisch": null,
-   "termin": null,
-   "von": null,
-   "monat": "2026-11"
+   "termin": "09.11. bis 27.11.2026",
+   "von": "2026-11",
+   "monat": "2026-11",
+   "zeitraum": true
   },
   {
    "id": "t1-2-mak",
@@ -249,7 +253,8 @@ window.ZIEL_DATEN = {
    "kritisch": null,
    "termin": null,
    "von": null,
-   "monat": null
+   "monat": null,
+   "zeitraum": null
   },
   {
    "id": "t1-2-leos",
@@ -269,7 +274,8 @@ window.ZIEL_DATEN = {
    "kritisch": null,
    "termin": null,
    "von": null,
-   "monat": null
+   "monat": null,
+   "zeitraum": null
   },
   {
    "id": "t1-2-auftrag",
@@ -287,7 +293,8 @@ window.ZIEL_DATEN = {
    "kritisch": null,
    "termin": null,
    "von": null,
-   "monat": null
+   "monat": null,
+   "zeitraum": null
   },
   {
    "id": "t1-3",
@@ -305,7 +312,8 @@ window.ZIEL_DATEN = {
    "kritisch": null,
    "termin": null,
    "von": null,
-   "monat": null
+   "monat": null,
+   "zeitraum": null
   },
   {
    "id": "t1-4",
@@ -323,7 +331,8 @@ window.ZIEL_DATEN = {
    "kritisch": null,
    "termin": null,
    "von": null,
-   "monat": null
+   "monat": null,
+   "zeitraum": null
   },
   {
    "id": "t1-5",
@@ -341,7 +350,8 @@ window.ZIEL_DATEN = {
    "kritisch": null,
    "termin": null,
    "von": null,
-   "monat": null
+   "monat": null,
+   "zeitraum": null
   },
   {
    "id": "t2-1-brainstorming",
@@ -357,7 +367,8 @@ window.ZIEL_DATEN = {
    "kritisch": null,
    "termin": null,
    "von": null,
-   "monat": "2026-11"
+   "monat": "2026-11",
+   "zeitraum": null
   },
   {
    "id": "t2-2-produkte",
@@ -379,7 +390,8 @@ window.ZIEL_DATEN = {
    "kritisch": null,
    "termin": null,
    "von": null,
-   "monat": null
+   "monat": null,
+   "zeitraum": null
   },
   {
    "id": "t2-2-lernen",
@@ -400,7 +412,8 @@ window.ZIEL_DATEN = {
    "kritisch": null,
    "termin": null,
    "von": null,
-   "monat": null
+   "monat": null,
+   "zeitraum": null
   },
   {
    "id": "t2-2-brainstorming",
@@ -419,7 +432,8 @@ window.ZIEL_DATEN = {
    "kritisch": null,
    "termin": null,
    "von": null,
-   "monat": null
+   "monat": null,
+   "zeitraum": null
   },
   {
    "id": "t2-3",
@@ -437,7 +451,8 @@ window.ZIEL_DATEN = {
    "kritisch": null,
    "termin": null,
    "von": null,
-   "monat": null
+   "monat": null,
+   "zeitraum": null
   },
   {
    "id": "t2-4",
@@ -455,7 +470,8 @@ window.ZIEL_DATEN = {
    "kritisch": null,
    "termin": null,
    "von": null,
-   "monat": null
+   "monat": null,
+   "zeitraum": null
   },
   {
    "id": "t2-5",
@@ -473,7 +489,8 @@ window.ZIEL_DATEN = {
    "kritisch": null,
    "termin": null,
    "von": null,
-   "monat": null
+   "monat": null,
+   "zeitraum": null
   },
   {
    "id": "sa-1-team",
@@ -489,7 +506,8 @@ window.ZIEL_DATEN = {
    "kritisch": null,
    "termin": null,
    "von": null,
-   "monat": "2026-09"
+   "monat": "2026-09",
+   "zeitraum": null
   },
   {
    "id": "sa-1-hal",
@@ -507,7 +525,8 @@ window.ZIEL_DATEN = {
    "kritisch": null,
    "termin": null,
    "von": null,
-   "monat": "2026-10"
+   "monat": "2026-10",
+   "zeitraum": null
   },
   {
    "id": "sa-1-pw7",
@@ -525,7 +544,8 @@ window.ZIEL_DATEN = {
    "kritisch": null,
    "termin": null,
    "von": null,
-   "monat": "2026-10"
+   "monat": "2026-10",
+   "zeitraum": null
   },
   {
    "id": "sa-1-puls",
@@ -541,7 +561,8 @@ window.ZIEL_DATEN = {
    "kritisch": null,
    "termin": null,
    "von": null,
-   "monat": "2026-10"
+   "monat": "2026-10",
+   "zeitraum": null
   },
   {
    "id": "sa-1-abteilung",
@@ -552,8 +573,7 @@ window.ZIEL_DATEN = {
    "status": "offen",
    "braucht": [
     "sa-1-pw7",
-    "sa-1-puls",
-    "t1-1-webseite"
+    "sa-1-puls"
    ],
    "ergebnis": "",
    "details": [],
@@ -561,7 +581,8 @@ window.ZIEL_DATEN = {
    "kritisch": null,
    "termin": null,
    "von": null,
-   "monat": "2026-11"
+   "monat": "2026-11",
+   "zeitraum": null
   },
   {
    "id": "sa-1-golive",
@@ -571,7 +592,8 @@ window.ZIEL_DATEN = {
    "beschreibung": "Information der Vertriebsführungskräfte zu den Schulungen 2027. Vorstellung Homepage, Quickchecks und Lea (KI-Assistent).",
    "status": "offen",
    "braucht": [
-    "sa-1-abteilung"
+    "sa-1-abteilung",
+    "t1-1-webseite"
    ],
    "ergebnis": "",
    "details": [],
@@ -579,7 +601,8 @@ window.ZIEL_DATEN = {
    "kritisch": null,
    "termin": "04.12.2026",
    "von": null,
-   "monat": "2026-12"
+   "monat": "2026-12",
+   "zeitraum": null
   },
   {
    "id": "sa-2-kommunikation",
@@ -601,7 +624,8 @@ window.ZIEL_DATEN = {
    "kritisch": null,
    "termin": null,
    "von": null,
-   "monat": null
+   "monat": null,
+   "zeitraum": null
   },
   {
    "id": "sa-3",
@@ -619,7 +643,8 @@ window.ZIEL_DATEN = {
    "kritisch": null,
    "termin": null,
    "von": null,
-   "monat": null
+   "monat": null,
+   "zeitraum": null
   },
   {
    "id": "sa-4",
@@ -637,7 +662,8 @@ window.ZIEL_DATEN = {
    "kritisch": null,
    "termin": null,
    "von": null,
-   "monat": null
+   "monat": null,
+   "zeitraum": null
   },
   {
    "id": "sa-5",
@@ -655,7 +681,8 @@ window.ZIEL_DATEN = {
    "kritisch": null,
    "termin": null,
    "von": null,
-   "monat": null
+   "monat": null,
+   "zeitraum": null
   }
  ]
 };
