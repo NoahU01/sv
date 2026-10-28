@@ -475,7 +475,7 @@
       "strang": "sa",
       "meilenstein": "m1",
       "aufwand": "",
-      "titel": "GoLive",
+      "titel": "GoLive: Schulungsinfotag Vertrieb",
       "ergebnis": "",
       "status": "offen",
       "braucht": [
@@ -485,7 +485,7 @@
       "offen": [],
       "wer": "",
       "monat": "2026-12",
-      "beschreibung": "Am Schulungsinfotag Vertrieb (04.12.2026) werden die Führungskräfte des Vertriebs zu den Schulungen 2027 informiert (nicht der Innendienst). Bis dahin sind die Homepage im SharePoint, die Quickchecks und der KI-Assistent Lea live und präsentierbar – es muss alles funktionieren. Am 07.12.2026 gehen die Unterlagen an alle, auch an alle Vertriebseinheiten.",
+      "beschreibung": "Information der Vertriebsführungskräfte zu den Schulungen 2027. Vorstellung Homepage, Quickchecks und Lea (KI-Assistent).",
       "termin": "04.12.2026"
     },
     {
@@ -575,7 +575,7 @@
       "tag": 4,
       "wann": "04.12.2026",
       "zusatz": "",
-      "info": "Information der Vertriebsführungskräfte zu den Schulungen 2027 – Homepage, Quickchecks und KI-Assistent Lea sind live",
+      "info": "Information der Vertriebsführungskräfte zu den Schulungen 2027. Vorstellung Homepage, Quickchecks und Lea (KI-Assistent).",
       "schritt": "sa-1-golive"
     },
     {
