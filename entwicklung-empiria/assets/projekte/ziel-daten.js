@@ -114,11 +114,31 @@ window.ZIEL_DATEN = {
    "id": "t-abteilung-11-2026",
    "titel": "Abteilungsbesprechung SV Akademie (PW7)",
    "monat": "2026-11",
-   "tag": null,
-   "wann": "November 2026",
-   "zusatz": "Termin folgt",
+   "tag": 16,
+   "wann": "16.11.2026",
+   "zusatz": "",
    "info": "Einbindung des Teams",
    "schritt": "sa-1-abteilung"
+  },
+  {
+   "id": "t-schulungsinfotag-12-2026",
+   "titel": "Schulungsinfotag Vertrieb",
+   "monat": "2026-12",
+   "tag": 4,
+   "wann": "04.12.2026",
+   "zusatz": "",
+   "info": "Information der Vertriebsführungskräfte zu den Schulungen 2027 – Homepage, Quickchecks und KI-Assistent Lea sind live",
+   "schritt": "sa-1-golive"
+  },
+  {
+   "id": "t-versand-12-2026",
+   "titel": "Versand der Unterlagen",
+   "monat": "2026-12",
+   "tag": 7,
+   "wann": "07.12.2026",
+   "zusatz": "",
+   "info": "an alle Vertriebseinheiten",
+   "schritt": "sa-1-golive"
   },
   {
    "id": "t-klausur-12-2026",
@@ -548,7 +568,7 @@ window.ZIEL_DATEN = {
    "strang": "sa",
    "meilenstein": "m1",
    "titel": "GoLive",
-   "beschreibung": null,
+   "beschreibung": "Am Schulungsinfotag Vertrieb (04.12.2026) werden die Führungskräfte des Vertriebs zu den Schulungen 2027 informiert (nicht der Innendienst). Bis dahin sind die Homepage im SharePoint, die Quickchecks und der KI-Assistent Lea live und präsentierbar – es muss alles funktionieren. Am 07.12.2026 gehen die Unterlagen an alle, auch an alle Vertriebseinheiten.",
    "status": "offen",
    "braucht": [
     "sa-1-abteilung"
@@ -557,7 +577,7 @@ window.ZIEL_DATEN = {
    "details": [],
    "wer": "",
    "kritisch": null,
-   "termin": null,
+   "termin": "04.12.2026",
    "von": null,
    "monat": "2026-12"
   },
