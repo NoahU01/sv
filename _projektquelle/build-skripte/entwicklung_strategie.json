@@ -168,7 +168,8 @@
       "wer": "",
       "monat": "2026-11",
       "von": "2026-10",
-      "termin": "Oktober bis 24.11.2026"
+      "termin": "Oktober bis 24.11.2026",
+      "tag": 24
     },
     {
       "id": "t1-1-webseite",
@@ -187,7 +188,12 @@
       "monat": "2026-11",
       "von": "2026-11",
       "zeitraum": true,
-      "termin": "09.11. bis 27.11.2026"
+      "termin": "09.11. bis 27.11.2026",
+      "einfluss": [
+        "t1-1-lea"
+      ],
+      "tag": 27,
+      "tagVon": 9
     },
     {
       "id": "t1-2-mak",
@@ -295,7 +301,8 @@
       "offen": [],
       "wer": "",
       "monat": "2026-11",
-      "beschreibung": "Brainstorming zu Zukunftskompetenzen und zum Lernen der Zukunft."
+      "beschreibung": "Brainstorming zu Zukunftskompetenzen und zum Lernen der Zukunft.",
+      "tag": 2
     },
     {
       "id": "t2-2-produkte",
@@ -417,7 +424,7 @@
       "aufwand": "",
       "titel": "Abstimmung HAL M.S.",
       "ergebnis": "",
-      "status": "aktiv",
+      "status": "erreicht",
       "braucht": [
         "sa-1-team"
       ],
@@ -450,7 +457,9 @@
       "titel": "SV-Pulskanal",
       "ergebnis": "",
       "status": "offen",
-      "braucht": [],
+      "braucht": [
+        "sa-1-hal"
+      ],
       "details": [],
       "offen": [],
       "wer": "",
@@ -471,7 +480,8 @@
       "details": [],
       "offen": [],
       "wer": "",
-      "monat": "2026-11"
+      "monat": "2026-11",
+      "tag": 16
     },
     {
       "id": "sa-1-golive",
@@ -490,7 +500,8 @@
       "wer": "",
       "monat": "2026-12",
       "beschreibung": "GoLive: Schulungsinfotag Vertrieb. Information der Vertriebsführungskräfte zu den Schulungen 2027. Vorstellung Homepage, Quickchecks und LEA (KI-Assistent).",
-      "termin": "04.12.2026"
+      "termin": "04.12.2026",
+      "tag": 4
     },
     {
       "id": "sa-2-kommunikation",

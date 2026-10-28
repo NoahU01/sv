@@ -172,7 +172,10 @@ window.ZIEL_DATEN = {
    "termin": null,
    "von": null,
    "monat": "2026-09",
-   "zeitraum": null
+   "zeitraum": null,
+   "einfluss": null,
+   "tag": null,
+   "tagVon": null
   },
   {
    "id": "t1-1-copilot",
@@ -196,7 +199,10 @@ window.ZIEL_DATEN = {
    "termin": "",
    "von": null,
    "monat": "2026-10",
-   "zeitraum": null
+   "zeitraum": null,
+   "einfluss": null,
+   "tag": null,
+   "tagVon": null
   },
   {
    "id": "t1-1-lea",
@@ -215,7 +221,10 @@ window.ZIEL_DATEN = {
    "termin": "Oktober bis 24.11.2026",
    "von": "2026-10",
    "monat": "2026-11",
-   "zeitraum": null
+   "zeitraum": null,
+   "einfluss": null,
+   "tag": 24,
+   "tagVon": null
   },
   {
    "id": "t1-1-webseite",
@@ -234,7 +243,12 @@ window.ZIEL_DATEN = {
    "termin": "09.11. bis 27.11.2026",
    "von": "2026-11",
    "monat": "2026-11",
-   "zeitraum": true
+   "zeitraum": true,
+   "einfluss": [
+    "t1-1-lea"
+   ],
+   "tag": 27,
+   "tagVon": 9
   },
   {
    "id": "t1-2-mak",
@@ -254,7 +268,10 @@ window.ZIEL_DATEN = {
    "termin": null,
    "von": null,
    "monat": null,
-   "zeitraum": null
+   "zeitraum": null,
+   "einfluss": null,
+   "tag": null,
+   "tagVon": null
   },
   {
    "id": "t1-2-leos",
@@ -275,7 +292,10 @@ window.ZIEL_DATEN = {
    "termin": null,
    "von": null,
    "monat": null,
-   "zeitraum": null
+   "zeitraum": null,
+   "einfluss": null,
+   "tag": null,
+   "tagVon": null
   },
   {
    "id": "t1-2-auftrag",
@@ -294,7 +314,10 @@ window.ZIEL_DATEN = {
    "termin": null,
    "von": null,
    "monat": null,
-   "zeitraum": null
+   "zeitraum": null,
+   "einfluss": null,
+   "tag": null,
+   "tagVon": null
   },
   {
    "id": "t1-3",
@@ -313,7 +336,10 @@ window.ZIEL_DATEN = {
    "termin": null,
    "von": null,
    "monat": null,
-   "zeitraum": null
+   "zeitraum": null,
+   "einfluss": null,
+   "tag": null,
+   "tagVon": null
   },
   {
    "id": "t1-4",
@@ -332,7 +358,10 @@ window.ZIEL_DATEN = {
    "termin": null,
    "von": null,
    "monat": null,
-   "zeitraum": null
+   "zeitraum": null,
+   "einfluss": null,
+   "tag": null,
+   "tagVon": null
   },
   {
    "id": "t1-5",
@@ -351,7 +380,10 @@ window.ZIEL_DATEN = {
    "termin": null,
    "von": null,
    "monat": null,
-   "zeitraum": null
+   "zeitraum": null,
+   "einfluss": null,
+   "tag": null,
+   "tagVon": null
   },
   {
    "id": "t2-1-brainstorming",
@@ -368,7 +400,10 @@ window.ZIEL_DATEN = {
    "termin": null,
    "von": null,
    "monat": "2026-11",
-   "zeitraum": null
+   "zeitraum": null,
+   "einfluss": null,
+   "tag": 2,
+   "tagVon": null
   },
   {
    "id": "t2-2-produkte",
@@ -391,7 +426,10 @@ window.ZIEL_DATEN = {
    "termin": null,
    "von": null,
    "monat": null,
-   "zeitraum": null
+   "zeitraum": null,
+   "einfluss": null,
+   "tag": null,
+   "tagVon": null
   },
   {
    "id": "t2-2-lernen",
@@ -413,7 +451,10 @@ window.ZIEL_DATEN = {
    "termin": null,
    "von": null,
    "monat": null,
-   "zeitraum": null
+   "zeitraum": null,
+   "einfluss": null,
+   "tag": null,
+   "tagVon": null
   },
   {
    "id": "t2-2-brainstorming",
@@ -433,7 +474,10 @@ window.ZIEL_DATEN = {
    "termin": null,
    "von": null,
    "monat": null,
-   "zeitraum": null
+   "zeitraum": null,
+   "einfluss": null,
+   "tag": null,
+   "tagVon": null
   },
   {
    "id": "t2-3",
@@ -452,7 +496,10 @@ window.ZIEL_DATEN = {
    "termin": null,
    "von": null,
    "monat": null,
-   "zeitraum": null
+   "zeitraum": null,
+   "einfluss": null,
+   "tag": null,
+   "tagVon": null
   },
   {
    "id": "t2-4",
@@ -471,7 +518,10 @@ window.ZIEL_DATEN = {
    "termin": null,
    "von": null,
    "monat": null,
-   "zeitraum": null
+   "zeitraum": null,
+   "einfluss": null,
+   "tag": null,
+   "tagVon": null
   },
   {
    "id": "t2-5",
@@ -490,7 +540,10 @@ window.ZIEL_DATEN = {
    "termin": null,
    "von": null,
    "monat": null,
-   "zeitraum": null
+   "zeitraum": null,
+   "einfluss": null,
+   "tag": null,
+   "tagVon": null
   },
   {
    "id": "sa-1-team",
@@ -507,7 +560,10 @@ window.ZIEL_DATEN = {
    "termin": null,
    "von": null,
    "monat": "2026-09",
-   "zeitraum": null
+   "zeitraum": null,
+   "einfluss": null,
+   "tag": null,
+   "tagVon": null
   },
   {
    "id": "sa-1-hal",
@@ -515,7 +571,7 @@ window.ZIEL_DATEN = {
    "meilenstein": "m1",
    "titel": "Abstimmung HAL M.S.",
    "beschreibung": null,
-   "status": "aktiv",
+   "status": "erreicht",
    "braucht": [
     "sa-1-team"
    ],
@@ -526,7 +582,10 @@ window.ZIEL_DATEN = {
    "termin": null,
    "von": null,
    "monat": "2026-10",
-   "zeitraum": null
+   "zeitraum": null,
+   "einfluss": null,
+   "tag": null,
+   "tagVon": null
   },
   {
    "id": "sa-1-pw7",
@@ -545,7 +604,10 @@ window.ZIEL_DATEN = {
    "termin": null,
    "von": null,
    "monat": "2026-10",
-   "zeitraum": null
+   "zeitraum": null,
+   "einfluss": null,
+   "tag": null,
+   "tagVon": null
   },
   {
    "id": "sa-1-puls",
@@ -554,7 +616,9 @@ window.ZIEL_DATEN = {
    "titel": "SV-Pulskanal",
    "beschreibung": null,
    "status": "offen",
-   "braucht": [],
+   "braucht": [
+    "sa-1-hal"
+   ],
    "ergebnis": "",
    "details": [],
    "wer": "",
@@ -562,7 +626,10 @@ window.ZIEL_DATEN = {
    "termin": null,
    "von": null,
    "monat": "2026-10",
-   "zeitraum": null
+   "zeitraum": null,
+   "einfluss": null,
+   "tag": null,
+   "tagVon": null
   },
   {
    "id": "sa-1-abteilung",
@@ -582,7 +649,10 @@ window.ZIEL_DATEN = {
    "termin": null,
    "von": null,
    "monat": "2026-11",
-   "zeitraum": null
+   "zeitraum": null,
+   "einfluss": null,
+   "tag": 16,
+   "tagVon": null
   },
   {
    "id": "sa-1-golive",
@@ -602,7 +672,10 @@ window.ZIEL_DATEN = {
    "termin": "04.12.2026",
    "von": null,
    "monat": "2026-12",
-   "zeitraum": null
+   "zeitraum": null,
+   "einfluss": null,
+   "tag": 4,
+   "tagVon": null
   },
   {
    "id": "sa-2-kommunikation",
@@ -625,7 +698,10 @@ window.ZIEL_DATEN = {
    "termin": null,
    "von": null,
    "monat": null,
-   "zeitraum": null
+   "zeitraum": null,
+   "einfluss": null,
+   "tag": null,
+   "tagVon": null
   },
   {
    "id": "sa-3",
@@ -644,7 +720,10 @@ window.ZIEL_DATEN = {
    "termin": null,
    "von": null,
    "monat": null,
-   "zeitraum": null
+   "zeitraum": null,
+   "einfluss": null,
+   "tag": null,
+   "tagVon": null
   },
   {
    "id": "sa-4",
@@ -663,7 +742,10 @@ window.ZIEL_DATEN = {
    "termin": null,
    "von": null,
    "monat": null,
-   "zeitraum": null
+   "zeitraum": null,
+   "einfluss": null,
+   "tag": null,
+   "tagVon": null
   },
   {
    "id": "sa-5",
@@ -682,7 +764,10 @@ window.ZIEL_DATEN = {
    "termin": null,
    "von": null,
    "monat": null,
-   "zeitraum": null
+   "zeitraum": null,
+   "einfluss": null,
+   "tag": null,
+   "tagVon": null
   }
  ]
 };
