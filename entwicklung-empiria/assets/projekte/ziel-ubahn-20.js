@@ -177,7 +177,7 @@
         if (!zeitraum(s) || !s.tag) return;
         if (s.tagVon) tiefeA[s.id] = ab[s.von] + Math.max(0, lage(s.von, s.tagVon));
         // nie vor dem Vorgänger auf der eigenen Linie beginnen, nie vor dem eigenen Beginn enden
-        (s.braucht || []).forEach(function (b) { if (imPlan[b] && S[b].strang === s.strang && tiefe[b] != null) tiefeA[s.id] = Math.max(tiefeA[s.id], tiefe[b] + 0.7); });
+        (s.braucht || []).forEach(function (b) { if (imPlan[b] && S[b].strang === s.strang && S[b].meilenstein === s.meilenstein && tiefe[b] != null) tiefeA[s.id] = Math.max(tiefeA[s.id], tiefe[b] + 0.7); });
         tiefe[s.id] = Math.max(ab[s.monat] + lage(s.monat, s.tag), tiefeA[s.id] + 0.8);
       });
       bandMin[x.id] = off;
