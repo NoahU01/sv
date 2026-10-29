@@ -21,6 +21,26 @@
   D.schritte.forEach(function (s) { S[s.id] = s; });
   D.straenge.forEach(function (s, i) { s.i = i; STR[s.id] = s; });
   D.meilensteine.forEach(function (m, i) { m.i = i; MS[m.id] = m; });
+  // Jedes Level umfasst die Monate nach dem vorigen Meilenstein bis zu seinem eigenen (Daniel, 29.10.2026): ein Zeitraum,
+  // der schon im vorigen Level beginnt, läuft im Plan ab dem Level-Beginn – wie im empiria-Dashboard
+  function msMonat(m) {
+    var tx = (m && m.termin) || "", t = /(\d{2})\.(\d{2})\.(\d{4})/.exec(tx);
+    if (t) return t[3] + "-" + t[2];
+    t = /(Ende|Mitte)\s+(\d{4})/.exec(tx); return t ? t[2] + (t[1] === "Ende" ? "-12" : "-06") : null;
+  }
+  function naechsterMonat(mo) { var t = mo.split("-"), mm = +t[1] + 1, jj = +t[0]; if (mm > 12) { mm = 1; jj++; } return jj + "-" + ("0" + mm).slice(-2); }
+  D.meilensteine.forEach(function (m, i) { m.bis = msMonat(m); m.ab = i && msMonat(D.meilensteine[i - 1]) ? naechsterMonat(msMonat(D.meilensteine[i - 1])) : null; });
+  D.schritte.forEach(function (s) {
+    var m = MS[s.meilenstein];
+    if (m && m.ab && s.von && s.von < m.ab && (!s.monat || s.monat >= m.ab)) { s.von = m.ab; s.tagVon = 1; }
+  });
+  // Halte ohne Monat (wie im Dashboard): Monat des Vorgängers im selben Level, sonst der erste Monat des Levels
+  for (var runde = 0; runde < 6; runde++) D.schritte.forEach(function (s) {
+    if (s.monat && !s._mo) return;
+    var m = MS[s.meilenstein], k = [m && m.ab].concat((s.braucht || []).concat(s.einfluss || []).map(function (b) { var v = D.schritte.filter(function (x) { return x.id === b; })[0]; return v && v.meilenstein === s.meilenstein && v.monat; }));
+    k = k.filter(Boolean).sort();
+    if (k.length) { s.monat = k[k.length - 1]; s._mo = true; }
+  });
 
   function esc(t) { return String(t == null ? "" : t).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   function msName(m) { return m.titel || "Ergebnislevel " + m.nr; }
@@ -149,6 +169,13 @@
       function nimm(mo, sp) { if (monate.indexOf(mo) < 0) monate.push(mo); breite[mo] = Math.max(breite[mo] || 1, sp + 1); }
       ss.forEach(function (s) { nimm(s.monat, l(s.id)); if (zeitraum(s)) nimm(s.von, la_(s.id)); });
       monate.sort();
+      // lückenlose Monate bis zum Meilenstein: jeder Monat mindestens eine Spalte – gleichmäßige Monatslinien
+      if (monate.length) {
+        var voll = [], m0 = x.ab && x.ab < monate[0] ? x.ab : monate[0], m1 = x.bis && x.bis > monate[monate.length - 1] ? x.bis : monate[monate.length - 1];
+        while (m0 <= m1 && voll.length < 120) { voll.push(m0); m0 = naechsterMonat(m0); }
+        voll.forEach(function (mo) { if (!breite[mo]) breite[mo] = 1; });
+        monate = voll;
+      }
       // Datumstreue Zeiträume: Haben Halte ein Tagesdatum (tag), dienen die datierten Halte eines Monats als Stützpunkte –
       // Beginn und Ende eines Zeitraums liegen zwischen ihnen nach Datum (z. B. Webseite 09.–27.11. um die AL/GL-Runde am 11.11. herum)
       var stuetzen = {};
@@ -328,6 +355,10 @@
     }
     svg += quer + duenn + dick;
     var punkte = "";   // Halte zuletzt, damit keine Linie sie überdeckt
+    // Namen dürfen so breit werden, wie links und rechts auf ihrer Linie Platz ist (wie im empiria-Dashboard) – erst dann umbrechen
+    var mitten = {};
+    liste.forEach(function (s) { var y = Math.round(yVon(s)); (mitten[y] = mitten[y] || []).push((xStart(s) + xVon(s)) / 2); });
+    var xEnde = xHalt(stufenImBlick[stufenImBlick.length - 1].id);
     liste.forEach(function (s) {
       var z = zustand(s), f = STR[s.strang].farbe, cx = xVon(s), cy = yVon(s), schwach = blass(s.id), sel = zustandUI.station === s.id;
       var xs = xStart(s), lang = cx - xs;   // Zeitraum: Kapsel vom Beginn bis zum Ende
@@ -346,8 +377,16 @@
       var vonOben = (s.braucht || []).some(function (b) { return imPlan[b] && S[b].strang !== s.strang && yVon(S[b]) < cy; });
       var obenL = unter[s.id] === 0 && !vonOben;
       var mitte = (xs + cx) / 2, bn = Math.max(ABST - 14, lang + 2 * r);
+      // zum Nachbarn auf derselben Linie höchstens die halbe Strecke, zum Rand die ganze
+      var li = null, re = null;
+      (mitten[Math.round(cy)] || []).forEach(function (m) { if (m < mitte - 1) li = li == null ? m : Math.max(li, m); else if (m > mitte + 1) re = re == null ? m : Math.min(re, m); });
+      var links = li == null ? mitte : (mitte - li) / 2, rechts = re == null ? xEnde - mitte : (re - mitte) / 2;
+      var grenze = 2 * Math.min(links, rechts) - 8;
+      bn = Math.max(40, Math.min(Math.max(bn, Math.min(grenze, 210)), grenze));
+      var nl = mitte - bn / 2, rechtsBuendig = false;
+      if (re == null && li != null && links < 105 && rechts > links) { var bw = Math.min(210, links + rechts - 12); if (bw > bn) { bn = bw; nl = mitte - links + 4; rechtsBuendig = true; } }
       namen += '<button type="button" class="ub-name ub-name--' + z + (obenL ? " ub-name--oben" : "") + (schwach ? " ub-name--blass" : "") +
-        '" data-station="' + s.id + '" style="left:' + (mitte - bn / 2) + "px;top:" + (obenL ? cy - r - 8 : cy + r + 8) + "px;width:" + bn + 'px">' + esc(s.titel) + "</button>";
+        '" data-station="' + s.id + '" style="left:' + nl + "px;" + (rechtsBuendig ? "text-align:left;" : "") + "top:" + (obenL ? cy - r - 8 : cy + r + 8) + "px;width:" + bn + 'px">' + esc(s.titel) + "</button>";
       namen += '<button type="button" class="ub-treffer" data-station="' + s.id + '" aria-label="' + esc(s.titel) + '" style="left:' + (mitte - 16) + "px;top:" + (cy - 16) + "px" + (lang > 1 ? ";width:" + (lang + 32) + "px;margin-left:" + (-lang / 2) + "px" : "") + '"></button>';
     });
     svg += halte + durch + punkte + "</svg>";
