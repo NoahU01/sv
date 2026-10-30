@@ -106,6 +106,11 @@
   // Keine Transparenz: helle Töne sind echte Mischfarben mit Weiß, damit Überlagerungen nicht dunkler werden.
   var MASS = 1;   // Größe des Plans (1 = 100 %), skaliert Linien und Schrift gemeinsam
   var ABST = 136, ZH = 72, UEBER = 64, UNTER = 58, LUECKE = 40, EINLAUF = 26, SPALTE = 200;
+  // Stoßrichtung verdichten (Daniel, 30.10.2026, wie im empiria-Dashboard): „−“ blendet die Namen aus und rückt die Linien
+  // eng zusammen, Halte und Zeiträume bleiben (Klick zeigt die Details), „+“ zeigt wieder alles – je Stoßrichtung gemerkt
+  var KOMPAKT = {};
+  try { (JSON.parse(localStorage.getItem("ub-kompakt") || "[]") || []).forEach(function (id) { KOMPAKT[id] = true; }); } catch (e) {}
+  function zh(id) { return KOMPAKT[id] ? 30 : ZH; }
   function hell(hex, t) {   // Farbe mit Weiß mischen, t = Anteil Weiß
     var n = parseInt(hex.slice(1), 16), r = n >> 16, g = (n >> 8) & 255, b = n & 255;
     function m(c) { return Math.round(c + (255 - c) * t); }
@@ -240,13 +245,16 @@
     // Termine (Klausur, Workshops): eigene Zeile unter den Monaten; Termine, die zugleich ein Schritt sind, stehen dort als Halt
     var termineImPlan = (D.termine || []).filter(function (t) { return !t.schritt && monatsBloecke.some(function (b) { return b.monat === t.monat; }); });
     var linieY = {}, y0 = (nr > 1 ? 46 : 8) + (monatsBloecke.length ? 44 : 0) + (termineImPlan.length ? 30 : 0);   // oben eine Zeile für die Namen der Stufenhalte (nur im Gesamtplan)
-    bahnen.forEach(function (st) { linieY[st.id] = y0 + UEBER; y0 += UEBER + tiefsteZeile[st.id] * ZH + (tiefsteZeile[st.id] ? UNTER + 56 : UNTER); });
+    bahnen.forEach(function (st) {
+      var k = KOMPAKT[st.id], ue = k ? 30 : UEBER, un = k ? 30 : UNTER;
+      linieY[st.id] = y0 + ue; y0 += ue + tiefsteZeile[st.id] * zh(st.id) + (tiefsteZeile[st.id] && !k ? un + 56 : un);
+    });
     var hoehe = y0 + 6 + (vorStufe ? 22 : 0);   // unten Platz für „Voraussetzung: …“
-    function yVon(s) { return linieY[s.strang] + unter[s.id] * ZH; }
+    function yVon(s) { return linieY[s.strang] + unter[s.id] * zh(s.strang); }
     var letzte = stufenImBlick[stufenImBlick.length - 1];
     var breite = xHalt(letzte.id) + 172;
     var obenAlle = Math.min.apply(null, bahnen.map(function (st) { return linieY[st.id]; })) - 18;
-    var untenAlle = Math.max.apply(null, bahnen.map(function (st) { return linieY[st.id] + (tiefsteZeile[st.id] || 0) * ZH; })) + 18;   // auch die Nebenzeilen der letzten Bahn
+    var untenAlle = Math.max.apply(null, bahnen.map(function (st) { return linieY[st.id] + (tiefsteZeile[st.id] || 0) * zh(st.id); })) + 18;   // auch die Nebenzeilen der letzten Bahn
 
     var svg = '<svg width="' + breite + '" height="' + hoehe + '" class="ub-svg" aria-hidden="true">';
     var monatsNamen = "";
@@ -388,7 +396,7 @@
       bn = Math.max(40, Math.min(Math.max(bn, Math.min(grenze, 210)), grenze));
       var nl = mitte - bn / 2, rechtsBuendig = false;
       if (re == null && li != null && links < 105 && rechts > links) { var bw = Math.min(210, links + rechts - 12); if (bw > bn) { bn = bw; nl = mitte - links + 4; rechtsBuendig = true; } }
-      namen += '<button type="button" class="ub-name ub-name--' + z + (obenL ? " ub-name--oben" : "") + (schwach ? " ub-name--blass" : "") +
+      if (!KOMPAKT[s.strang]) namen += '<button type="button" class="ub-name ub-name--' + z + (obenL ? " ub-name--oben" : "") + (schwach ? " ub-name--blass" : "") +
         '" data-station="' + s.id + '" style="left:' + nl + "px;" + (rechtsBuendig ? "text-align:left;" : "") + "top:" + (obenL ? cy - r - 8 : cy + r + 8) + "px;width:" + bn + 'px">' + esc(s.titel) + "</button>";
       namen += '<button type="button" class="ub-treffer" data-station="' + s.id + '" aria-label="' + esc(s.titel) + '" style="left:' + (mitte - 16) + "px;top:" + (cy - 16) + "px" + (lang > 1 ? ";width:" + (lang + 32) + "px;margin-left:" + (-lang / 2) + "px" : "") + '"></button>';
     });
@@ -402,7 +410,9 @@
     });
     namen = treffer + namen;
     var spalte = bahnen.map(function (st) {
-      return '<button type="button" class="ub-bahn" data-strang="' + st.id + '" aria-label="' + esc(st.label) + ': worum es in dieser Stoßrichtung geht" style="top:' + (linieY[st.id] - 15) + 'px"><span class="ub-linie" style="background:' + st.farbe + '">' + esc(st.kurz) + "</span><span><b>" + esc(st.label) + '</b><small>' + esc(st.verantwortung) + "</small></span></button>";
+      var k = !!KOMPAKT[st.id];
+      return '<button type="button" class="ub-kompakt-knopf" data-kompakt="' + st.id + '" aria-pressed="' + k + '" aria-label="' + (k ? "Mehr zeigen: " : "Weniger zeigen: ") + esc(st.label) + '" title="' + (k ? "Mehr zeigen" : "Weniger zeigen") + '">' + (k ? "+" : "&minus;") + "</button>" +
+        '<button type="button" class="ub-bahn" data-strang="' + st.id + '" aria-label="' + esc(st.label) + ': worum es in dieser Stoßrichtung geht" style="top:' + (linieY[st.id] - 15) + 'px"><span class="ub-linie" style="background:' + st.farbe + '">' + esc(st.kurz) + "</span><span><b>" + esc(st.label) + '</b><small>' + esc(st.verantwortung) + "</small></span></button>";
     }).join("");
     // Scrollstand merken: Klick auf einen Halt zeichnet neu – der Plan bleibt dort stehen, wo man hingeschoben hat
     var altSc = planEl.querySelector(".ub-scroll"), altLinks = altSc && altSc.clientWidth && planEl.ubBlick === zustandUI.ms ? altSc.scrollLeft : null;   // nur, wenn der Plan schon sichtbar war
@@ -420,6 +430,18 @@
       b.addEventListener("click", function (e) { e.stopPropagation(); terminInfo(b.getAttribute("data-termin") === terminOffen ? null : b.getAttribute("data-termin")); });
     });
     terminInfo(terminOffen);
+    planEl.querySelectorAll("[data-kompakt]").forEach(function (b) {
+      // an die untere rechte Ecke des Kürzels setzen – aus der wirklichen Lage, egal wie viele Zeilen der Name hat
+      var sp = planEl.querySelector(".ub-spalte"), li = planEl.querySelector('.ub-bahn[data-strang="' + b.getAttribute("data-kompakt") + '"] .ub-linie');
+      if (sp && li) { var rs = sp.getBoundingClientRect(), rl = li.getBoundingClientRect(); b.style.top = ((rl.bottom - rs.top) / MASS - 11) + "px"; b.style.left = ((rl.right - rs.left) / MASS - 11) + "px"; }
+      b.addEventListener("click", function (e) {
+        e.stopPropagation();
+        var id = b.getAttribute("data-kompakt");
+        if (KOMPAKT[id]) delete KOMPAKT[id]; else KOMPAKT[id] = true;
+        try { localStorage.setItem("ub-kompakt", JSON.stringify(Object.keys(KOMPAKT))); } catch (x) {}
+        plan(); detail();
+      });
+    });
     planEl.querySelectorAll("[data-strang]").forEach(function (b) {
       b.addEventListener("click", function (e) { e.stopPropagation(); strangInfo(b.getAttribute("data-strang") === strangOffen ? null : b.getAttribute("data-strang")); });
     });

@@ -77,3 +77,6 @@ html.ub-weit-offen{overflow:hidden}
 .ub-zoom.ub-zoom--weit{position:fixed;top:16px;right:32px;z-index:2147483001}
 .ub-weit-knopf svg{display:block}
 html.ub-weit-offen .site-header{display:none!important}   /* Kopfleiste der Seite tritt in der vollen Breite zurück */
+/* Stoßrichtung verdichten: kleiner Knopf an der unteren rechten Ecke des Kürzels (wie im empiria-Dashboard) */
+.ub-kompakt-knopf{position:absolute;width:17px;height:17px;padding:0 0 1px;border:1.5px solid #fff;box-shadow:0 0 0 1px #d6d1c9;border-radius:50%;background:#fff;color:#111;font:600 .78rem/1 Poppins,sans-serif;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:4}
+.ub-kompakt-knopf:hover{background:#f3f1ed}
