@@ -217,7 +217,7 @@
     var HALT = 64;                               // Platz für einen Stufenhalt zwischen zwei Bändern
     var START = vorStufe ? 70 : EINLAUF;         // links: Starthalt der Stufe davor
     var verfuegbar = planEl.clientWidth / MASS - SPALTE;   // Breite in Plan-Einheiten (MASS = gewählte Größe)
-    ABST = Math.max(87, Math.min(140, (verfuegbar - 14 - START - HALT * (nr - 1) - 172) / lauf));
+    ABST = Math.max(73, Math.min(140, (verfuegbar - 14 - START - HALT * (nr - 1) - 172) / lauf));
     function xVon(s) { var x = MS[s.meilenstein]; return START + (bandStart[x.id] + tiefe[s.id]) * ABST + bandNr[x.id] * HALT + ABST / 2; }
     function xStart(s) { if (tiefeA[s.id] == null) return xVon(s); var x = MS[s.meilenstein]; return START + (bandStart[x.id] + tiefeA[s.id]) * ABST + bandNr[x.id] * HALT + ABST / 2; }
     function xHalt(mid) { return START + (bandStart[mid] + bandBreite[mid]) * ABST + bandNr[mid] * HALT + 14; }   // Stufenhalt nach dem Band
