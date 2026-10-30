@@ -231,13 +231,15 @@
     // Zeile je Halt: die oberste Zeile seiner Linie, in der er keinen anderen Halt überdeckt – so rücken
     // Schritte in derselben Spalte und eigenständig startende Zeiträume (z. B. Webseite neben Lea) eine Zeile tiefer
     var belegt = {};
+    // innerhalb jeder Gruppe nach Beginn: wer früher beginnt, bekommt die obere Zeile (Markensichtbarkeit vor Besuch von Messen)
+    function nachBeginn(l) { return l.map(function (s, i) { return [s, i]; }).sort(function (x, y) { var ax = tiefeA[x[0].id] != null ? tiefeA[x[0].id] : tiefe[x[0].id], ay = tiefeA[y[0].id] != null ? tiefeA[y[0].id] : tiefe[y[0].id]; return ax - ay || x[1] - y[1]; }).map(function (x) { return x[0]; }); }
     function freiZ(s) { return (s.braucht || []).every(function (b) { return !imPlan[b] || S[b].strang !== s.strang; }); }
     // erst die Halte der durchgehenden Linie, dann die frei startenden – so bleibt die Hauptlinie oben
-    liste.filter(function (s) { return !freiZ(s); }).concat(liste.filter(freiZ)).forEach(function (s) {
+    nachBeginn(liste.filter(function (s) { return !freiZ(s); })).concat(nachBeginn(liste.filter(freiZ))).forEach(function (s) {
       var k = s.strang + "|" + s.meilenstein, a = tiefeA[s.id] != null ? tiefeA[s.id] : tiefe[s.id], e = tiefe[s.id], z = 0;
       var frei = (s.braucht || []).every(function (b) { return !imPlan[b] || S[b].strang !== s.strang; });
       belegt[k] = belegt[k] || [];
-      while (belegt[k].some(function (x) { return x.z === z && x.a <= e && a <= x.e && (frei || x.a === a || x.e === e || a === e); })) z++;
+      while (belegt[k].some(function (x) { return x.z === z && x.a <= e && a <= x.e && (frei || x.a === a || x.e === e || a === e || x.a === x.e); })) z++;
       belegt[k].push({ z: z, a: a, e: e }); unter[s.id] = z; gruppen[k] = Math.max(gruppen[k] || 0, z + 1);
       tiefsteZeile[s.strang] = Math.max(tiefsteZeile[s.strang] || 0, unter[s.id]);
     });
