@@ -71,3 +71,9 @@
 .ub-halt-name--ende{width:124px}
 .ub-route-aktuell{margin-top:-4px;font-size:.66rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#111}
 .ub-zoom{position:relative;z-index:6;display:flex;align-items:center;gap:2px;background:#fff;border:1px solid #e0dcd5;border-radius:999px;padding:3px 5px;font:500 .72rem/1 Poppins,sans-serif;color:#111}
+/* Volle Breite (Daniel, 30.10.2026): Plan über die ganze Seite – wie im empiria-Dashboard */
+.ub-weit{position:fixed;inset:0;z-index:2147483000;margin:0!important;max-width:none!important;width:auto!important;border-radius:0!important;background:#fff;overflow:auto;padding:24px 32px 32px;box-sizing:border-box}
+html.ub-weit-offen{overflow:hidden}
+.ub-zoom.ub-zoom--weit{position:fixed;top:16px;right:32px;z-index:2147483001}
+.ub-weit-knopf svg{display:block}
+html.ub-weit-offen .site-header{display:none!important}   /* Kopfleiste der Seite tritt in der vollen Breite zurück */
