@@ -295,7 +295,7 @@
     }
     // Wo eine gestrichelte Vorarbeit waagerecht ankommt: am Anfang der kurzen Strecke eines Halts ohne eigene Linie
     function eingang(s, x2) {
-      var eigeneLinie = (s.braucht || []).some(function (b) { return MS[b] || (S[b] && gleich(S[b], s)); });
+      var eigeneLinie = (s.braucht || []).some(function (b) { return MS[b] || (S[b] && S[b].strang === s.strang); });
       return eigeneLinie ? -Infinity : x2 - ABST * 0.42;   // mit eigener Linie (z. B. GoLive): von oben in den Halt wie bisher
     }
     // Woher kommt eine Strecke in den Halt? aus der eigenen Linie, aus einem Stufenhalt – oder frei
