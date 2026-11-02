@@ -412,6 +412,14 @@
       bn = Math.max(40, Math.min(Math.max(bn, Math.min(grenze, 210)), grenze));
       var nl = mitte - bn / 2, rechtsBuendig = false;
       if (re == null && li != null && links < 105 && rechts > links) { var bw = Math.min(210, links + rechts - 12); if (bw > bn) { bn = bw; nl = mitte - links + 4; rechtsBuendig = true; } }
+      // Name nie über einem Meilenstein-Balken (Balken 26 px breit, Strich 3 px nach außen) – sonst schneidet sein
+      // weißer Hintergrund den Balken waagerecht durch (Daniel, 02.11.2026; wie im empiria-Dashboard)
+      stufenImBlick.forEach(function (x) {
+        var b0 = xHalt(x.id) - 4, b1 = xHalt(x.id) + 30;
+        if (nl + bn <= b0 || nl >= b1) return;
+        if (b0 + 13 < mitte) { bn -= b1 - nl; nl = b1; rechtsBuendig = false; } else bn = b0 - nl;
+        if (bn < 40) bn = 40;
+      });
       if (!KOMPAKT[s.strang]) namen += '<button type="button" class="ub-name ub-name--' + z + (obenL ? " ub-name--oben" : "") + (schwach ? " ub-name--blass" : "") +
         '" data-station="' + s.id + '" style="left:' + nl + "px;" + (rechtsBuendig ? "text-align:left;" : "") + "top:" + (obenL ? cy - r - 8 : cy + r + 8) + "px;width:" + bn + 'px">' + esc(s.titel) + "</button>";
       namen += '<button type="button" class="ub-treffer" data-station="' + s.id + '" aria-label="' + esc(s.titel) + '" style="left:' + (mitte - 16) + "px;top:" + (cy - 16) + "px" + (lang > 1 ? ";width:" + (lang + 32) + "px;margin-left:" + (-lang / 2) + "px" : "") + '"></button>';
