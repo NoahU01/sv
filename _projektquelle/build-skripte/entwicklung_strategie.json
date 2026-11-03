@@ -193,7 +193,8 @@
         "t1-1-lea"
       ],
       "tag": 27,
-      "tagVon": 9
+      "tagVon": 9,
+      "beschreibung": "Ein kompletter Entwurf auf HTML-Basis liegt bereits vor. Er kann voraussichtlich direkt integriert werden, da SharePoint HTML-Code aufnehmen kann."
     },
     {
       "id": "t1-2-mak",

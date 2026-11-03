@@ -241,7 +241,7 @@ window.ZIEL_DATEN = {
    "strang": "t1",
    "meilenstein": "m1",
    "titel": "Webseite umsetzen und live schalten",
-   "beschreibung": null,
+   "beschreibung": "Ein kompletter Entwurf auf HTML-Basis liegt bereits vor. Er kann voraussichtlich direkt integriert werden, da SharePoint HTML-Code aufnehmen kann.",
    "status": "offen",
    "braucht": [],
    "ergebnis": "Die Webseite ist umgesetzt und live – voraussichtlich innerhalb des SharePoints.",
