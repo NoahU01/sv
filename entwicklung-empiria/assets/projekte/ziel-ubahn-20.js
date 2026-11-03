@@ -550,7 +550,11 @@
     var vor = (s.braucht || []).filter(function (b) { return S[b] && S[b].status !== "erreicht"; }).map(function (b) { return S[b].titel; });
     var meta = [st.verantwortung + (s.wer ? " (" + s.wer + ")" : ""), ZTEXT[z]].concat(s.termin ? [s.termin] : zeitraum(s) ? [monatsName(s.von).split(" ")[0] + " bis " + monatsName(s.monat)] : s.monat ? [monatsName(s.monat)] : []);
     var h = '<p class="ub-pop-titel">' + esc(s.titel) + '</p><p class="ub-pop-meta">' + meta.map(esc).join(" &middot; ") + "</p>";
-    if (s.beschreibung) h += "<p>" + esc(s.beschreibung) + "</p>";
+    // Beschreibung mit Zeilen und Aufzählungspunkten (•) wie im empiria-Dashboard (Daniel, 03.11.2026)
+    if (s.beschreibung) { var li = []; String(s.beschreibung).split("\n").forEach(function (z) { z = z.trim(); if (!z) return;
+      if (/^[•\-–]\s*/.test(z)) { li.push("<li>" + esc(z.replace(/^[•\-–]\s*/, "")) + "</li>"); return; }
+      if (li.length) { h += "<ul>" + li.join("") + "</ul>"; li = []; } h += "<p>" + esc(z) + "</p>"; });
+      if (li.length) h += "<ul>" + li.join("") + "</ul>"; }
     if (s.ergebnis) h += "<p>" + esc(s.ergebnis) + "</p>";
     if (s.kritisch) h += "<p>Kritisch: " + esc(s.kritisch.grund) + "</p>";
     if (vor.length) h += '<p class="ub-pop-meta">Braucht vorher: ' + vor.map(esc).join(", ") + "</p>";

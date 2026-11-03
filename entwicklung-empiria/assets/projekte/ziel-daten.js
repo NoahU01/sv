@@ -219,7 +219,7 @@ window.ZIEL_DATEN = {
    "strang": "t1",
    "meilenstein": "m1",
    "titel": "Entwicklung KI-Assistent LEA",
-   "beschreibung": null,
+   "beschreibung": "Das kann LEA bis zum Go-Live am 04.12.2026:\n• LEA greift auf alle Informationen zu Weiterbildungsmaßnahmen zu, die für Anwender bestimmt sind: Weiterbildungskatalog, Checklisten für den Innendienst, Karrieremodelle ZSVM und GVM sowie das Erste-Hilfe-Webseminar.\n• LEA enthält die Funktionalitäten und Bedienungsanleitungen von LEOS – alles, was es zu LEOS an Erklärungen gibt.\n• In LEA sind die Ansprechpartner der SV Akademie hinterlegt.",
    "status": "offen",
    "braucht": [
     "t1-1-copilot"
