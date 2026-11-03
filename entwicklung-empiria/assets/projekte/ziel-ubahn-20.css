@@ -86,3 +86,4 @@ html.ub-weit-offen .site-header{display:none!important}   /* Kopfleiste der Seit
 .ub-pop p.ub-pop-zw + p{margin-top:2px}
 .ub-pop-luecke{height:10px}
 .ub-pop .ub-pop-luecke + p, .ub-pop .ub-pop-luecke + ul{margin-top:0}
+.ub-heute{position:absolute;transform:translate(-50%,-50%);padding:2px 7px;border-radius:999px;background:#111;color:#fff;font:600 .62rem/1.2 Poppins,sans-serif;letter-spacing:.04em;white-space:nowrap;pointer-events:none;z-index:3}   /* Marke über der Heute-Linie (wie im Dashboard) */
