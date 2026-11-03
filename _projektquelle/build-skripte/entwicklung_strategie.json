@@ -444,18 +444,20 @@
     {
       "id": "sa-1-puls",
       "strang": "sa",
-      "meilenstein": "m1",
+      "meilenstein": "m2",
       "aufwand": "",
       "titel": "SV-Pulskanal",
       "ergebnis": "",
-      "status": "offen",
-      "braucht": [
-        "sa-1-hal"
-      ],
+      "status": "aktiv",
+      "braucht": [],
       "details": [],
       "offen": [],
       "wer": "",
-      "monat": "2026-10"
+      "monat": "2027-01",
+      "von": "2026-10",
+      "tagVon": 12,
+      "tag": 31,
+      "termin": "12.10.2026 bis 31.01.2027"
     },
     {
       "id": "sa-1-abteilung",
@@ -466,7 +468,7 @@
       "ergebnis": "",
       "status": "aktiv",
       "braucht": [
-        "sa-1-puls"
+        "sa-1-hal"
       ],
       "details": [],
       "offen": [],

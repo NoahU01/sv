@@ -578,24 +578,22 @@ window.ZIEL_DATEN = {
   {
    "id": "sa-1-puls",
    "strang": "sa",
-   "meilenstein": "m1",
+   "meilenstein": "m2",
    "titel": "SV-Pulskanal",
    "beschreibung": null,
-   "status": "offen",
-   "braucht": [
-    "sa-1-hal"
-   ],
+   "status": "aktiv",
+   "braucht": [],
    "ergebnis": "",
    "details": [],
    "wer": "",
    "kritisch": null,
-   "termin": null,
-   "von": null,
-   "monat": "2026-10",
+   "termin": "12.10.2026 bis 31.01.2027",
+   "von": "2026-10",
+   "monat": "2027-01",
    "zeitraum": null,
    "einfluss": null,
-   "tag": null,
-   "tagVon": null
+   "tag": 31,
+   "tagVon": 12
   },
   {
    "id": "sa-1-abteilung",
@@ -605,7 +603,7 @@ window.ZIEL_DATEN = {
    "beschreibung": null,
    "status": "aktiv",
    "braucht": [
-    "sa-1-puls"
+    "sa-1-hal"
    ],
    "ergebnis": "",
    "details": [],
