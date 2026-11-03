@@ -12,7 +12,7 @@
       "frage": "Rollen, Prozesse, KI etc.",
       "verantwortung": "Lukas Euring",
       "farbe": "#EE0000",
-      "beschreibung": "Transformation 1 stellt sicher, dass das gesamte Leistungssystem der SV Akademie abläuft – aus Sicht von Rolle, Prozess und technischer Unterstützung.\n\nZukunftskompetenzen\nTransformation 1 unterstützt das systematische Abbilden und die regelmäßigen Analysen technisch. Den Inhalt verantwortet Transformation 2.\n\nBeratung und echte Problemlösung\nDazu gehören zwei Werkzeuge:\n• Quick-Check Bedarfsklärung: Mit wenigen Leitfragen ist der Bedarf geklärt, der Termin wird direkt gebucht.\n• KI-Lernassistent: jederzeit erreichbarer Zugang zu den Weiterbildungsangeboten mit zielgenauen Vorschlägen.\n\nOrganisation der Weiterbildung\nModerne Tools, zeitgemäße Medien und Formate sowie ein professionelles Buchungsmanagement. Dazu das Portal 24/7:\n• LEOS-Zugang\n• SLKs\n• Seminarbuchung inkl. Erinnerungen\n• Hotelverwaltung inkl. Erinnerungen\n• zentrale Teilnehmerkommunikation\n• Trainereinsatzplanung"
+      "beschreibung": "Transformation 1 stellt sicher, dass das gesamte Leistungssystem der SV Akademie abläuft – aus Sicht von Rolle, Prozess und technischer Unterstützung.\n\nZukunftskompetenzen\nTransformation 1 unterstützt das systematische Abbilden und die regelmäßigen Analysen technisch. Den Inhalt verantwortet Transformation 2.\n\nBeratung und echte Problemlösung\nDazu gehören zwei Werkzeuge:\n• Quick-Check Bedarfsklärung: Mit wenigen Leitfragen ist der Bedarf geklärt, der Termin wird direkt gebucht.\n• KI-Lernassistent: jederzeit erreichbarer Zugang zu den Weiterbildungsangeboten mit zielgenauen Vorschlägen.\n\nOrganisation der Weiterbildung\nModerne Tools, geile Medien und Formate sowie ein professionelles Buchungsmanagement. Dazu das Portal 24/7:\n• LEOS-Zugang\n• SLKs\n• Seminarbuchung inkl. Erinnerungen\n• Hotelverwaltung inkl. Erinnerungen\n• zentrale Teilnehmerkommunikation\n• Trainereinsatzplanung"
     },
     {
       "id": "t2",
@@ -75,7 +75,7 @@
         "Angebote, Kanäle und Formate laufen im Alltag."
       ],
       "braucht": [
-        "t1-3",
+        "t1-2-leos",
         "t2-3",
         "sa-3"
       ]
@@ -222,7 +222,7 @@
     {
       "id": "t1-2-leos",
       "strang": "t1",
-      "meilenstein": "m2",
+      "meilenstein": "m3",
       "aufwand": "",
       "titel": "LEOS 2.0",
       "ergebnis": "",
@@ -235,7 +235,12 @@
       "wer": "",
       "einfluss": [
         "t1-2-mak"
-      ]
+      ],
+      "von": "2027-07",
+      "monat": "2027-12",
+      "tagVon": 1,
+      "tag": 31,
+      "termin": "Juli bis Dezember 2027"
     },
     {
       "id": "t1-2-auftrag",
@@ -251,22 +256,12 @@
       "details": [],
       "offen": [],
       "wer": "",
-      "beschreibung": "Es gibt eine klare Aussage und einen klaren Auftrag des VdV Dr. Jahn: In der SV soll es bewusst eine zentrale Weiterbildungsakademie geben, die alle Themen der Weiterbildung und Personalentwicklung bündelt. So sollen im Unternehmen keine Satellitenorganisationen entstehen, die unabgestimmt handeln."
-    },
-    {
-      "id": "t1-3",
-      "strang": "t1",
-      "meilenstein": "m3",
-      "aufwand": "",
-      "titel": "T1 · Stufe 3",
-      "ergebnis": "Platzhalter – Details folgen.",
-      "status": "offen",
-      "braucht": [
-        "m2"
-      ],
-      "details": [],
-      "offen": [],
-      "wer": ""
+      "beschreibung": "Es gibt eine klare Aussage und einen klaren Auftrag des VdV Dr. Jahn: In der SV soll es bewusst eine zentrale Weiterbildungsakademie geben, die alle Themen der Weiterbildung und Personalentwicklung bündelt. So sollen im Unternehmen keine Satellitenorganisationen entstehen, die unabgestimmt handeln.",
+      "von": "2027-03",
+      "monat": "2027-06",
+      "tagVon": 1,
+      "tag": 30,
+      "termin": "März bis Juni 2027"
     },
     {
       "id": "t1-4",
@@ -277,7 +272,7 @@
       "ergebnis": "Platzhalter – Details folgen.",
       "status": "offen",
       "braucht": [
-        "t1-3"
+        "t1-2-leos"
       ],
       "details": [],
       "offen": [],
