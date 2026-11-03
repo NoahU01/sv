@@ -275,13 +275,13 @@ window.ZIEL_DATEN = {
    ],
    "wer": "",
    "kritisch": null,
-   "termin": null,
-   "von": null,
-   "monat": null,
-   "zeitraum": null,
+   "termin": "01.02. bis 26.02.2027",
+   "von": "2027-02",
+   "monat": "2027-02",
+   "zeitraum": true,
    "einfluss": null,
-   "tag": null,
-   "tagVon": null
+   "tag": 26,
+   "tagVon": 1
   },
   {
    "id": "t1-2-leos",
@@ -311,11 +311,11 @@ window.ZIEL_DATEN = {
    "id": "t1-2-auftrag",
    "strang": "t1",
    "meilenstein": "m2",
-   "titel": "Sicherstellung Auftrag Dr. Jan: „1 Akademie“",
-   "beschreibung": null,
+   "titel": "Sicherstellung 1 Akademie",
+   "beschreibung": "Es gibt eine klare Aussage und einen klaren Auftrag des VdV Dr. Jahn: In der SV soll es bewusst eine zentrale Weiterbildungsakademie geben, die alle Themen der Weiterbildung und Personalentwicklung bündelt. So sollen im Unternehmen keine Satellitenorganisationen entstehen, die unabgestimmt handeln.",
    "status": "offen",
    "braucht": [
-    "t1-2-leos"
+    "t1-2-mak"
    ],
    "ergebnis": "",
    "details": [],

@@ -211,7 +211,13 @@
         "Zukünftige Ausstattung"
       ],
       "offen": [],
-      "wer": ""
+      "wer": "",
+      "von": "2027-02",
+      "monat": "2027-02",
+      "tagVon": 1,
+      "tag": 26,
+      "zeitraum": true,
+      "termin": "01.02. bis 26.02.2027"
     },
     {
       "id": "t1-2-leos",
@@ -235,15 +241,16 @@
       "strang": "t1",
       "meilenstein": "m2",
       "aufwand": "",
-      "titel": "Sicherstellung Auftrag Dr. Jan: „1 Akademie“",
+      "titel": "Sicherstellung 1 Akademie",
       "ergebnis": "",
       "status": "offen",
       "braucht": [
-        "t1-2-leos"
+        "t1-2-mak"
       ],
       "details": [],
       "offen": [],
-      "wer": ""
+      "wer": "",
+      "beschreibung": "Es gibt eine klare Aussage und einen klaren Auftrag des VdV Dr. Jahn: In der SV soll es bewusst eine zentrale Weiterbildungsakademie geben, die alle Themen der Weiterbildung und Personalentwicklung bündelt. So sollen im Unternehmen keine Satellitenorganisationen entstehen, die unabgestimmt handeln."
     },
     {
       "id": "t1-3",
