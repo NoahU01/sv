@@ -534,11 +534,34 @@
     var pop = document.createElement("div");
     pop.className = "ub-pop ub-pop--strang";
     pop.innerHTML = '<p class="ub-pop-titel">' + esc(st.label) + '</p><p class="ub-pop-meta">Stoßrichtung &middot; verantwortlich: ' + esc(st.verantwortung) + "</p>" +
-      "<p>" + (text ? "Worum es geht: " + esc(text) : "Die Beschreibung des Strangs folgt.") + "</p>";
+      (text ? textHtml(text) : "<p>Die Beschreibung des Strangs folgt.</p>");
     sp.appendChild(pop);
     pop.style.top = (parseFloat(knopf.style.top) - 6) + "px";
+    // langes Fenster (z. B. Beschreibung einer Stoßrichtung): nach oben ausweichen, notfalls im Fenster scrollen – nie abgeschnitten (Daniel, 03.11.2026)
+    (function () { var H = pop.offsetParent ? pop.offsetParent.clientHeight : 0, t = parseFloat(pop.style.top) || 0;
+      if (H && t + pop.offsetHeight > H - 8) { pop.style.top = Math.max(4, H - 8 - pop.offsetHeight) + "px";
+        if (pop.offsetHeight > H - 12) { pop.style.top = "4px"; pop.style.maxHeight = (H - 12) + "px"; pop.style.overflowY = "auto"; } } })();
   }
 
+  // Texte in Fenstern: Absätze, Zwischenüberschriften, Aufzählungen (•) – wie im empiria-Dashboard (Daniel, 03.11.2026)
+  function textHtml(t) {
+    var h = "", liste = [], z0 = String(t).split("\n").map(function (z) { return z.trim(); });
+    var abschnitte = z0.some(function (z, i) { return !z && i > 0 && i < z0.length - 1; });
+    function zu() { if (liste.length) { h += "<ul>" + liste.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>"; liste = []; } }
+    var luecke = false;   // Leerzeile im Text = sichtbarer Abstand (Daniel, 01.11.2026)
+    z0.forEach(function (z, i) {
+      if (!z) { if (h || liste.length) luecke = true; return; }
+      if (luecke) { zu(); h += '<div class="ub-pop-luecke"></div>'; luecke = false; }
+      if (/^[•\-–]\s*/.test(z)) { liste.push(z.replace(/^[•\-–]\s*/, "")); return; }
+      zu();
+      // Zwischenüberschrift (Daniel, 01.11.2026): nur in Texten mit Leerzeilen-Abschnitten – kurze Zeile ohne Satzzeichen
+      // am Anfang eines Abschnitts, darunter folgt ein Absatz (z. B. „Tragfähigkeit“)
+      var zw = abschnitte && z.length <= 40 && !/[.,;:!?)…“"]$/.test(z) && (i === 0 || !z0[i - 1]) && z0[i + 1] && !/^[•\-–]/.test(z0[i + 1]);
+      h += (zw ? '<p class="ub-pop-zw">' : "<p>") + esc(z) + "</p>";
+    });
+    zu();
+    return h;
+  }
   /* ---------- Fenster an der Station: knapp, eine Schrift, zwei Größen, zwei Farben ---------- */
   function detail() {
     var alt = planEl.querySelector(".ub-pop"); if (alt) alt.remove();
@@ -550,11 +573,7 @@
     var vor = (s.braucht || []).filter(function (b) { return S[b] && S[b].status !== "erreicht"; }).map(function (b) { return S[b].titel; });
     var meta = [st.verantwortung + (s.wer ? " (" + s.wer + ")" : ""), ZTEXT[z]].concat(s.termin ? [s.termin] : zeitraum(s) ? [monatsName(s.von).split(" ")[0] + " bis " + monatsName(s.monat)] : s.monat ? [monatsName(s.monat)] : []);
     var h = '<p class="ub-pop-titel">' + esc(s.titel) + '</p><p class="ub-pop-meta">' + meta.map(esc).join(" &middot; ") + "</p>";
-    // Beschreibung mit Zeilen und Aufzählungspunkten (•) wie im empiria-Dashboard (Daniel, 03.11.2026)
-    if (s.beschreibung) { var li = []; String(s.beschreibung).split("\n").forEach(function (z) { z = z.trim(); if (!z) return;
-      if (/^[•\-–]\s*/.test(z)) { li.push("<li>" + esc(z.replace(/^[•\-–]\s*/, "")) + "</li>"); return; }
-      if (li.length) { h += "<ul>" + li.join("") + "</ul>"; li = []; } h += "<p>" + esc(z) + "</p>"; });
-      if (li.length) h += "<ul>" + li.join("") + "</ul>"; }
+    if (s.beschreibung) h += textHtml(s.beschreibung);   // Absätze und Aufzählungen wie im Dashboard
     if (s.ergebnis) h += "<p>" + esc(s.ergebnis) + "</p>";
     if (s.kritisch) h += "<p>Kritisch: " + esc(s.kritisch.grund) + "</p>";
     if (vor.length) h += '<p class="ub-pop-meta">Braucht vorher: ' + vor.map(esc).join(", ") + "</p>";
