@@ -113,14 +113,24 @@ window.ZIEL_DATEN = {
  ],
  "termine": [
   {
+   "id": "t-algl-11-2026",
+   "titel": "AL/GL-Runde",
+   "monat": "2026-11",
+   "tag": 11,
+   "wann": "11.11.2026",
+   "zusatz": "",
+   "info": "",
+   "schritt": null
+  },
+  {
    "id": "t-abteilung-11-2026",
-   "titel": "Abteilungsbesprechung SV Akademie (PW7)",
+   "titel": "Abteilungsbesprechung",
    "monat": "2026-11",
    "tag": 16,
    "wann": "16.11.2026",
    "zusatz": "",
    "info": "Einbindung des Teams",
-   "schritt": "sa-1-abteilung"
+   "schritt": null
   },
   {
    "id": "t-schulungsinfotag-12-2026",
@@ -150,6 +160,16 @@ window.ZIEL_DATEN = {
    "wann": "08./09.12.2026",
    "zusatz": "zwei Tage",
    "info": "Hotel Rössle",
+   "schritt": null
+  },
+  {
+   "id": "t-algl-12-2026",
+   "titel": "AL/GL-Runde",
+   "monat": "2026-12",
+   "tag": 11,
+   "wann": "11.12.2026",
+   "zusatz": "",
+   "info": "",
    "schritt": null
   }
  ],
