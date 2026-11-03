@@ -290,9 +290,7 @@ window.ZIEL_DATEN = {
    "titel": "LEOS 2.0",
    "beschreibung": null,
    "status": "offen",
-   "braucht": [
-    "t1-2-mak"
-   ],
+   "braucht": [],
    "ergebnis": "",
    "details": [
     "Konzeption unseres zukünftigen zentralen Systems"
@@ -303,7 +301,9 @@ window.ZIEL_DATEN = {
    "von": null,
    "monat": null,
    "zeitraum": null,
-   "einfluss": null,
+   "einfluss": [
+    "t1-2-mak"
+   ],
    "tag": null,
    "tagVon": null
   },

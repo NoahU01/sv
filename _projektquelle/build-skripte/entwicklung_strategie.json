@@ -227,14 +227,15 @@
       "titel": "LEOS 2.0",
       "ergebnis": "",
       "status": "offen",
-      "braucht": [
-        "t1-2-mak"
-      ],
+      "braucht": [],
       "details": [
         "Konzeption unseres zukünftigen zentralen Systems"
       ],
       "offen": [],
-      "wer": ""
+      "wer": "",
+      "einfluss": [
+        "t1-2-mak"
+      ]
     },
     {
       "id": "t1-2-auftrag",
