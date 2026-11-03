@@ -202,7 +202,7 @@
       "strang": "t1",
       "meilenstein": "m2",
       "aufwand": "",
-      "titel": "MAK",
+      "titel": "MAK-Planung",
       "ergebnis": "",
       "status": "offen",
       "braucht": [],
@@ -302,9 +302,12 @@
       "details": [],
       "offen": [],
       "wer": "",
-      "monat": "2026-11",
+      "monat": "2026-12",
       "beschreibung": "Brainstorming zu Zukunftskompetenzen und zum Lernen der Zukunft.",
-      "tag": 2
+      "tag": 18,
+      "von": "2026-11",
+      "tagVon": 16,
+      "termin": "16.11. bis 18.12.2026"
     },
     {
       "id": "t2-2-produkte",

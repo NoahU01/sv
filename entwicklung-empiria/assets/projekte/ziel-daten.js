@@ -264,7 +264,7 @@ window.ZIEL_DATEN = {
    "id": "t1-2-mak",
    "strang": "t1",
    "meilenstein": "m2",
-   "titel": "MAK",
+   "titel": "MAK-Planung",
    "beschreibung": null,
    "status": "offen",
    "braucht": [],
@@ -407,13 +407,13 @@ window.ZIEL_DATEN = {
    "details": [],
    "wer": "",
    "kritisch": null,
-   "termin": null,
-   "von": null,
-   "monat": "2026-11",
+   "termin": "16.11. bis 18.12.2026",
+   "von": "2026-11",
+   "monat": "2026-12",
    "zeitraum": null,
    "einfluss": null,
-   "tag": 2,
-   "tagVon": null
+   "tag": 18,
+   "tagVon": 16
   },
   {
    "id": "t2-2-produkte",
