@@ -576,28 +576,6 @@ window.ZIEL_DATEN = {
    "tagVon": null
   },
   {
-   "id": "sa-1-pw7",
-   "strang": "sa",
-   "meilenstein": "m1",
-   "titel": "PW7-Radio",
-   "beschreibung": null,
-   "status": "offen",
-   "braucht": [
-    "sa-1-hal"
-   ],
-   "ergebnis": "",
-   "details": [],
-   "wer": "",
-   "kritisch": null,
-   "termin": null,
-   "von": null,
-   "monat": "2026-10",
-   "zeitraum": null,
-   "einfluss": null,
-   "tag": null,
-   "tagVon": null
-  },
-  {
    "id": "sa-1-puls",
    "strang": "sa",
    "meilenstein": "m1",
@@ -627,7 +605,6 @@ window.ZIEL_DATEN = {
    "beschreibung": null,
    "status": "aktiv",
    "braucht": [
-    "sa-1-pw7",
     "sa-1-puls"
    ],
    "ergebnis": "",
@@ -670,26 +647,22 @@ window.ZIEL_DATEN = {
    "strang": "sa",
    "meilenstein": "m2",
    "titel": "Kommunikationskonzept 2.0",
-   "beschreibung": null,
+   "beschreibung": "Definition der Kommunikationskanäle inklusive Zielgruppen, Ziele und Inhalte:\n• Community-Formate\n• SV-Puls\n• PW7-Radio\n• Roadshow vor den Kantinen\n• und so weiter",
    "status": "offen",
    "braucht": [
     "sa-1-golive"
    ],
    "ergebnis": "",
-   "details": [
-    "Festlegung und Analyse von Zielgruppen",
-    "Kanäle, die wir nutzen wollen",
-    "Community-Formate"
-   ],
+   "details": [],
    "wer": "",
    "kritisch": null,
-   "termin": null,
-   "von": null,
-   "monat": null,
+   "termin": "Februar bis Mitte Juni 2027",
+   "von": "2027-02",
+   "monat": "2027-06",
    "zeitraum": null,
    "einfluss": null,
-   "tag": null,
-   "tagVon": null
+   "tag": 15,
+   "tagVon": 1
   },
   {
    "id": "sa-3",

@@ -442,22 +442,6 @@
       "monat": "2026-10"
     },
     {
-      "id": "sa-1-pw7",
-      "strang": "sa",
-      "meilenstein": "m1",
-      "aufwand": "",
-      "titel": "PW7-Radio",
-      "ergebnis": "",
-      "status": "offen",
-      "braucht": [
-        "sa-1-hal"
-      ],
-      "details": [],
-      "offen": [],
-      "wer": "",
-      "monat": "2026-10"
-    },
-    {
       "id": "sa-1-puls",
       "strang": "sa",
       "meilenstein": "m1",
@@ -482,7 +466,6 @@
       "ergebnis": "",
       "status": "aktiv",
       "braucht": [
-        "sa-1-pw7",
         "sa-1-puls"
       ],
       "details": [],
@@ -522,13 +505,15 @@
       "braucht": [
         "sa-1-golive"
       ],
-      "details": [
-        "Festlegung und Analyse von Zielgruppen",
-        "Kanäle, die wir nutzen wollen",
-        "Community-Formate"
-      ],
+      "details": [],
       "offen": [],
-      "wer": ""
+      "wer": "",
+      "beschreibung": "Definition der Kommunikationskanäle inklusive Zielgruppen, Ziele und Inhalte:\n• Community-Formate\n• SV-Puls\n• PW7-Radio\n• Roadshow vor den Kantinen\n• und so weiter",
+      "von": "2027-02",
+      "monat": "2027-06",
+      "tagVon": 1,
+      "tag": 15,
+      "termin": "Februar bis Mitte Juni 2027"
     },
     {
       "id": "sa-3",
