@@ -622,16 +622,6 @@
       "zusatz": "zwei Tage",
       "info": "Hotel Rössle",
       "schritt": null
-    },
-    {
-      "id": "t-algl-12-2026",
-      "titel": "AL/GL-Runde",
-      "monat": "2026-12",
-      "tag": 11,
-      "wann": "11.12.2026",
-      "zusatz": "",
-      "info": "",
-      "schritt": null
     }
   ],
   "hinweis_termine": "termine = feste Projekttermine (eine Quelle für Übersicht, Verlaufsplan und Terminliste). schritt = Verweis, wenn der Termin zugleich ein Schritt im Plan ist; tag = Tag im Monat für die Lage im Plan.",

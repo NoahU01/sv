@@ -161,16 +161,6 @@ window.ZIEL_DATEN = {
    "zusatz": "zwei Tage",
    "info": "Hotel Rössle",
    "schritt": null
-  },
-  {
-   "id": "t-algl-12-2026",
-   "titel": "AL/GL-Runde",
-   "monat": "2026-12",
-   "tag": 11,
-   "wann": "11.12.2026",
-   "zusatz": "",
-   "info": "",
-   "schritt": null
   }
  ],
  "schritte": [
