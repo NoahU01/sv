@@ -159,6 +159,13 @@
 .zg-punkte b{color:#1a1817}
 .zg-punkt{width:14px;height:14px;border-radius:50%;margin-top:4px}
 .zg-punkt--gruen{background:#059669}.zg-punkt--blau{background:#0B9FBD}.zg-punkt--rot{background:#C51F5D}
+/* Gedankliche Neugründung: Pitch in zehn Feldern (empiria-CD: Schwarz, Weiß, Gelb) */
+.pj-modal-text .pi-raster{list-style:none;margin:6px 0 22px;padding:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(5,auto);grid-auto-flow:column;gap:10px 14px}
+.pj-modal-text .pi-raster li{display:flex;align-items:flex-start;gap:12px;margin:0;padding:14px 16px;border:1px solid #e8e5e0;border-radius:12px;background:#fff;line-height:1.4}
+.pi-nr{flex:none;display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:7px;background:#1a1817;color:#ffed00;font:700 .85rem/1 Poppins,sans-serif}
+.pi-raster b{display:block;padding-top:5px;font-size:.92rem;font-weight:600;color:#1a1817}
+.pi-unter{display:block;margin-top:6px;font-size:.82rem;font-weight:400;line-height:1.5;color:#6b665f}
+@media (max-width:700px){.pj-modal-text .pi-raster{grid-template-columns:1fr;grid-template-rows:none;grid-auto-flow:row}}
 .zg-x-mobil{display:none}
 @media (max-width:700px){
   .zg-matrix{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;padding:40px 0 40px;margin-bottom:10px}
@@ -1203,9 +1210,9 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 </div>
 
 <div class="modal-overlay" id="mNeugruendungModal" data-generic>
-  <div class="modal-wrap">
+  <div class="modal-wrap zg-wrap">
     <button class="modal-close" aria-label="Schließen">&times;</button>
-    <div class="modal">
+    <div class="modal zg-modal">
       <div class="modal-structure-head">
         <h3>Gedankliche Neugründung</h3>
         <p>Methode &middot; für Führungskräfte zum Nachmachen</p>
@@ -1227,6 +1234,19 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
         <p><b>Die Probe.</b> Wie sähe die Homepage dieses Unternehmens aus? Eine Seite lässt
           keine Unschärfe zu – was sich dort nicht in einem Satz erklären lässt, ist noch nicht
           geklärt.</p>
+        <p><b>Der Pitch.</b> Aus der Probe wird ein Pitch: Zehn Felder bringen die Antworten in eine feste Struktur und beschreiben zusammen das zukünftige Geschäftsmodell.</p>
+        <ol class="pi-raster">
+          <li><span class="pi-nr">1</span><b>Welches Problem lösen wir?</b></li>
+          <li><span class="pi-nr">2</span><b>Welcher Mehrwert wird für die Zielgruppe geschaffen?</b></li>
+          <li><span class="pi-nr">3</span><b>&raquo;Underlying Magic&laquo; &ndash; Was macht uns einzigartig?</b></li>
+          <li><span class="pi-nr">4</span><b>Business Model &ndash; Wie verdienen wir Geld?</b></li>
+          <li><span class="pi-nr">5</span><b>Go-to-Market-Plan</b></li>
+          <li><span class="pi-nr">6</span><b>Marktanalyse</b></li>
+          <li><span class="pi-nr">7</span><b>Management-Team<span class="pi-unter">Philosophie und Grundverständnis &middot; Team und Selbstvorstellung: Warum können wir das? &middot; Erfahrung: Welche Erfahrung haben wir?</span></b></li>
+          <li><span class="pi-nr">8</span><b>Finanzplan und zentrale Kennzahlen</b></li>
+          <li><span class="pi-nr">9</span><b>Risikoanalyse</b></li>
+          <li><span class="pi-nr">10</span><b>Status quo und Meilensteinplan</b></li>
+        </ol>
         <p class="pj-hinweis">In diesem Projekt ist daraus der Entwurf der Akademie-Startseite
           entstanden.</p>
       </div>
