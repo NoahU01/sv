@@ -166,6 +166,33 @@
 .pi-raster b{display:block;padding-top:5px;font-size:.92rem;font-weight:600;color:#1a1817}
 .pi-unter{display:block;margin-top:6px;font-size:.82rem;font-weight:400;line-height:1.5;color:#6b665f}
 @media (max-width:700px){.pj-modal-text .pi-raster{grid-template-columns:1fr;grid-template-rows:none;grid-auto-flow:row}}
+/* SWOT-Methode: Matrix im empiria-CD – Schritt 1 in den Grundfeldern, Schritt 2 in den Kombinationen */
+.sw-matrix{display:grid;grid-template-columns:28px 150px minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto auto auto auto;gap:8px;margin:6px 0 18px}
+.sw-sicht{font:700 .68rem/1.3 Poppins,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#6b665f}
+.sw-sicht--aussen{grid-column:3 / 5;grid-row:1;padding:0 0 6px;border-bottom:2px solid #1a1817;text-align:center}
+.sw-sicht--innen{grid-column:1;grid-row:3 / 5;writing-mode:vertical-rl;transform:rotate(180deg);text-align:center;padding:0 6px 0 0;border-left:2px solid #1a1817}
+.sw-leer{grid-column:2;grid-row:2}
+.sw-kopf{position:relative;display:flex;flex-direction:column;justify-content:center;gap:2px;padding:14px 16px;border-radius:10px;background:#f3f1ed}
+.sw-kopf b{font-size:.95rem;font-weight:700;color:#1a1817}
+.sw-kopf small,.sw-feld small{font-size:.74rem;color:#6b665f}
+.sw-feld{position:relative;display:flex;flex-direction:column;gap:3px;padding:14px 16px;border:1.5px solid #1a1817;border-radius:10px;background:#fff}
+.sw-feld b{font-family:var(--font-serif,Lora,serif);font-weight:700;font-size:1.05rem;color:#1a1817}
+.sw-feld span{font-size:.84rem;line-height:1.45;color:#555}
+.sw-schritt{position:absolute;top:-8px;right:-8px;display:flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:#1a1817;color:#ffed00;font:700 .72rem/1 Poppins,sans-serif;font-style:normal}
+.sw-matrix > :nth-child(4),.sw-matrix > :nth-child(5){grid-row:2}
+.sw-matrix > :nth-child(4){grid-column:3}.sw-matrix > :nth-child(5){grid-column:4}
+.sw-matrix > :nth-child(6){grid-column:2;grid-row:3}.sw-matrix > :nth-child(7){grid-column:3;grid-row:3}.sw-matrix > :nth-child(8){grid-column:4;grid-row:3}
+.sw-matrix > :nth-child(9){grid-column:2;grid-row:4}.sw-matrix > :nth-child(10){grid-column:3;grid-row:4}.sw-matrix > :nth-child(11){grid-column:4;grid-row:4}
+.sw-regel{margin:0 0 22px;padding:14px 18px;border-radius:10px;background:#1a1817;color:#fff;font-size:.95rem;font-weight:600;line-height:1.5}
+@media (max-width:700px){
+  .sw-matrix{grid-template-columns:18px 76px minmax(0,1fr) minmax(0,1fr);gap:6px}
+  .sw-kopf,.sw-feld{padding:10px 8px}
+  .sw-kopf b{font-size:.74rem}.sw-feld b{font-size:.84rem}
+  .sw-matrix{grid-template-columns:18px 82px minmax(0,1fr) minmax(0,1fr)}
+  .sw-feld span{display:none}
+  .sw-kopf small,.sw-feld small{font-size:.66rem;hyphens:auto;-webkit-hyphens:auto}
+  .sw-sicht{font-size:.6rem}
+}
 .zg-x-mobil{display:none}
 @media (max-width:700px){
   .zg-matrix{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;padding:40px 0 40px;margin-bottom:10px}
@@ -1255,9 +1282,9 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 </div>
 
 <div class="modal-overlay" id="swotModal" data-generic>
-  <div class="modal-wrap">
+  <div class="modal-wrap zg-wrap">
     <button class="modal-close" aria-label="Schließen">&times;</button>
-    <div class="modal">
+    <div class="modal zg-modal">
       <div class="modal-structure-head">
         <h3>SWOT-Analyse</h3>
         <p>Vier Felder, zwei Achsen – mehr ist es nicht.</p>
@@ -1271,9 +1298,39 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
           <li><b>Chancen</b> – extern und hilfreich. Was verändert sich im Umfeld zu unseren Gunsten?</li>
           <li><b>Risiken</b> – extern und hinderlich. Was könnte uns das Geschäft kosten?</li>
         </ul>
-        <p>Der Wert liegt nicht in der Liste, sondern in den Kombinationen: Eine Stärke, die auf
-          eine Chance trifft, ergibt eine Stoßrichtung. Eine Schwäche, die auf ein Risiko
-          trifft, ergibt eine Baustelle, die man nicht liegen lassen darf.</p>
+      </div>
+
+      <div class="sw-matrix" role="img" aria-label="SWOT-Matrix: Schritt 1 sammelt in Stärken, Schwächen, Chancen und Risiken, Schritt 2 kombiniert sie zu vier Stoßrichtungen">
+        <span class="sw-sicht sw-sicht--aussen">Außensicht &middot; Unternehmensumwelt und Rahmenbedingungen</span>
+        <span class="sw-sicht sw-sicht--innen">Innensicht &middot; eigenes Unternehmen</span>
+        <span class="sw-leer" aria-hidden="true"></span>
+        <div class="sw-kopf"><i class="sw-schritt">1</i><b>Chancen</b><small>extern &middot; hilfreich</small></div>
+        <div class="sw-kopf"><i class="sw-schritt">1</i><b>Risiken</b><small>extern &middot; hinderlich</small></div>
+        <div class="sw-kopf"><i class="sw-schritt">1</i><b>Stärken</b><small>intern &middot; hilfreich</small></div>
+        <div class="sw-feld"><i class="sw-schritt">2</i><small>Stärken &times; Chancen</small><b>Ausbauen</b><span>Stärken nutzen, um Chancen zu ergreifen.</span></div>
+        <div class="sw-feld"><i class="sw-schritt">2</i><small>Stärken &times; Risiken</small><b>Absichern</b><span>Stärken nutzen, um Risiken abzuwehren.</span></div>
+        <div class="sw-kopf"><i class="sw-schritt">1</i><b>Schwächen</b><small>intern &middot; hinderlich</small></div>
+        <div class="sw-feld"><i class="sw-schritt">2</i><small>Schwächen &times; Chancen</small><b>Aufholen</b><span>Schwächen abbauen, um Chancen zu nutzen.</span></div>
+        <div class="sw-feld"><i class="sw-schritt">2</i><small>Schwächen &times; Risiken</small><b>Vermeiden</b><span>Baustellen schließen, bevor Risiken sie treffen.</span></div>
+      </div>
+
+      <p class="sw-regel">Interne und externe Faktoren bleiben strikt getrennt &ndash; sonst trägt die Analyse nicht.</p>
+
+      <div class="zg-runden">
+        <div class="zg-runde">
+          <p class="zg-runde__nr">Schritt 1</p>
+          <p class="zg-runde__titel">Sammeln</p>
+          <p>Stärken, Schwächen, Chancen und Risiken werden gesammelt &ndash; ausschließlich in die vier Grundfelder, nicht in die Kombinationsfelder.</p>
+          <p>Stärken und Schwächen beschreiben die Innensicht: den Blick in das eigene Unternehmen und die eigenen Bereiche. Chancen und Risiken beschreiben die Außensicht: die Unternehmensumwelt und die Rahmenbedingungen um uns herum.</p>
+        </div>
+        <div class="zg-runde">
+          <p class="zg-runde__nr">Schritt 2</p>
+          <p class="zg-runde__titel">Stoßrichtungen ableiten</p>
+          <p>Die gesammelten Felder werden miteinander kombiniert. Jede Kombination wirft eine Frage auf, aus der strategische Stoßrichtungen entstehen &ndash; zum Beispiel: Welche Stoßrichtung ergibt sich, wenn unsere Stärken auf die Chancen treffen? Und was folgt, wenn Schwächen und Risiken zusammenkommen?</p>
+        </div>
+      </div>
+
+      <div class="pj-modal-text">
         <p class="pj-hinweis">Deshalb ist die SWOT bei uns kein Selbstzweck – sie ist der
           Zwischenschritt zwischen Ist-Analyse und Strategie.</p>
       </div>
