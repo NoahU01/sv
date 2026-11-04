@@ -128,94 +128,6 @@
  .u3-folge .u3-wann{grid-column:2}
  .u3-folge .u3-punkt{grid-row:1 / span 2}
 }
-/* Zielgruppenanalyse: Stakeholder-Matrix im empiria-CD (Schwarz, Weiß, Gelb; Farbe nur für die Klebepunkte) */
-.modal-wrap.zg-wrap{max-width:900px}
-.modal.zg-modal{max-width:none;width:100%}
-.modal.zg-modal .modal-structure-head{max-width:none}
-.zg-achsen{list-style:none;padding-left:0!important}
-.zg-matrix{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:8px 0 28px;padding:44px 74px 44px 74px}
-.zg-achse{position:absolute;background:#1a1817}
-.zg-achse--y{left:50%;top:22px;bottom:22px;width:2px;margin-left:-1px}
-.zg-achse--x{top:50%;left:62px;right:62px;height:2px;margin-top:-1px}
-.zg-etikett{position:absolute;z-index:1;padding:4px 10px;border-radius:4px;background:#e8e5e0;color:#1a1817;font:700 .7rem/1.2 Poppins,sans-serif;letter-spacing:.08em;text-transform:uppercase}
-.zg-etikett--hoch{background:#1a1817;color:#ffed00}
-.zg-oben{top:6px;left:50%;transform:translateX(-50%)}
-.zg-unten{bottom:6px;left:50%;transform:translateX(-50%)}
-.zg-links{left:0;top:50%;transform:translateY(-50%)}
-.zg-rechts{right:0;top:50%;transform:translateY(-50%)}
-.zg-achsname{position:absolute;z-index:1;font:600 .72rem/1.2 Poppins,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#6b665f}
-.zg-achsname--y{top:10px;left:calc(50% + 46px)}
-.zg-achsname--x{right:0;bottom:10px}
-.zg-feld{position:relative;z-index:1;display:flex;flex-direction:column;gap:8px;padding:20px 22px;border-radius:12px;background:#f3f1ed;text-align:center}
-.zg-feld b{font-family:var(--font-serif,Lora,serif);font-weight:700;font-size:1.08rem;line-height:1.25;color:#1a1817}
-.zg-feld span{font-size:.86rem;line-height:1.55;color:#555;text-wrap:balance}
-.zg-runden{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:0 0 24px}
-.zg-runde{border:1px solid #e8e5e0;border-radius:14px;padding:20px 22px}
-.zg-runde p{margin:0 0 10px;font-size:.92rem;line-height:1.6;color:#555}
-.zg-runde .zg-runde__nr{margin:0 0 4px;font:700 .72rem/1.2 Poppins,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#1a1817}
-.zg-runde .zg-runde__titel{margin:0 0 10px;font-family:var(--font-serif,Lora,serif);font-weight:700;font-size:1.12rem;color:#1a1817}
-.zg-punkte{list-style:none;margin:0;padding:0;display:grid;gap:10px}
-.zg-punkte li{display:grid;grid-template-columns:18px 1fr;gap:10px;align-items:start;font-size:.9rem;line-height:1.55;color:#555}
-.zg-punkte b{color:#1a1817}
-.zg-punkt{width:14px;height:14px;border-radius:50%;margin-top:4px}
-.zg-punkt--gruen{background:#059669}.zg-punkt--blau{background:#0B9FBD}.zg-punkt--rot{background:#C51F5D}
-/* Gedankliche Neugründung: Pitch in zehn Feldern (empiria-CD: Schwarz, Weiß, Gelb) */
-.pj-modal-text .pi-raster{list-style:none;margin:6px 0 22px;padding:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(5,auto);grid-auto-flow:column;gap:10px 14px}
-.pj-modal-text .pi-raster li{display:flex;align-items:flex-start;gap:12px;margin:0;padding:14px 16px;border:1px solid #e8e5e0;border-radius:12px;background:#fff;line-height:1.4}
-.pi-nr{flex:none;display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:7px;background:#1a1817;color:#ffed00;font:700 .85rem/1 Poppins,sans-serif}
-.pi-raster b{display:block;padding-top:5px;font-size:.92rem;font-weight:600;color:#1a1817}
-.pi-unter{display:block;margin-top:6px;font-size:.82rem;font-weight:400;line-height:1.5;color:#6b665f}
-@media (max-width:700px){.pj-modal-text .pi-raster{grid-template-columns:1fr;grid-template-rows:none;grid-auto-flow:row}}
-/* SWOT-Methode: Matrix im empiria-CD – Schritt 1 in den Grundfeldern, Schritt 2 in den Kombinationen */
-.sw-matrix{display:grid;grid-template-columns:28px 150px minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto auto auto auto;gap:8px;margin:6px 0 18px}
-.sw-sicht{font:700 .68rem/1.3 Poppins,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#6b665f}
-.sw-sicht--aussen{grid-column:3 / 5;grid-row:1;padding:0 0 6px;border-bottom:2px solid #1a1817;text-align:center}
-.sw-sicht--innen{grid-column:1;grid-row:3 / 5;writing-mode:vertical-rl;transform:rotate(180deg);text-align:center;padding:0 6px 0 0;border-left:2px solid #1a1817}
-.sw-leer{grid-column:2;grid-row:2}
-.sw-kopf{position:relative;display:flex;flex-direction:column;justify-content:center;gap:2px;padding:14px 16px;border-radius:10px;background:#f3f1ed}
-.sw-kopf b{font-size:.95rem;font-weight:700;color:#1a1817}
-.sw-kopf small,.sw-feld small{font-size:.74rem;color:#6b665f}
-.sw-feld{position:relative;display:flex;flex-direction:column;gap:3px;padding:14px 16px;border:1.5px solid #1a1817;border-radius:10px;background:#fff}
-.sw-feld b{font-family:var(--font-serif,Lora,serif);font-weight:700;font-size:1.05rem;color:#1a1817}
-.sw-feld span{font-size:.84rem;line-height:1.45;color:#555}
-.sw-schritt{position:absolute;top:-8px;right:-8px;display:flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:#1a1817;color:#ffed00;font:700 .72rem/1 Poppins,sans-serif;font-style:normal}
-.sw-matrix > :nth-child(4),.sw-matrix > :nth-child(5){grid-row:2}
-.sw-matrix > :nth-child(4){grid-column:3}.sw-matrix > :nth-child(5){grid-column:4}
-.sw-matrix > :nth-child(6){grid-column:2;grid-row:3}.sw-matrix > :nth-child(7){grid-column:3;grid-row:3}.sw-matrix > :nth-child(8){grid-column:4;grid-row:3}
-.sw-matrix > :nth-child(9){grid-column:2;grid-row:4}.sw-matrix > :nth-child(10){grid-column:3;grid-row:4}.sw-matrix > :nth-child(11){grid-column:4;grid-row:4}
-.sw-regel{margin:0 0 22px;padding:14px 18px;border-radius:10px;background:#1a1817;color:#fff;font-size:.95rem;font-weight:600;line-height:1.5}
-@media (max-width:700px){
-  .sw-matrix{grid-template-columns:18px 76px minmax(0,1fr) minmax(0,1fr);gap:6px}
-  .sw-kopf,.sw-feld{padding:10px 8px}
-  .sw-kopf b{font-size:.74rem}.sw-feld b{font-size:.84rem}
-  .sw-matrix{grid-template-columns:18px 82px minmax(0,1fr) minmax(0,1fr)}
-  .sw-feld span{display:none}
-  .sw-kopf small,.sw-feld small{font-size:.66rem;hyphens:auto;-webkit-hyphens:auto}
-  .sw-sicht{font-size:.6rem}
-}
-.zg-x-mobil{display:none}
-@media (max-width:700px){
-  .zg-matrix{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;padding:40px 0 40px;margin-bottom:10px}
-  .zg-achse--x{left:0;right:0}
-  .zg-links,.zg-rechts,.zg-achsname--x{display:none}
-  .zg-feld{padding:14px 10px;hyphens:auto;-webkit-hyphens:auto}
-  .zg-feld b{font-size:.95rem}
-  .zg-feld span{font-size:.78rem}
-  .zg-x-mobil{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 0 26px;font:600 .68rem/1.2 Poppins,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#6b665f}
-  .zg-x-mobil .zg-etikett{position:static}
-  .zg-runden{grid-template-columns:1fr}
-}
-/* Reverse Brainstorming: drei Schritte nebeneinander, Leitfrage als Zitat */
-.zg-runden.rb-schritte{grid-template-columns:repeat(3,minmax(0,1fr))}
-.pj-modal-text .rb-frage{margin:0 0 24px;font-family:var(--font-serif,Lora,serif);font-weight:700;font-size:1.25rem;line-height:1.35;color:#1a1817}
-@media (max-width:700px){.zg-runden.rb-schritte{grid-template-columns:1fr}}
-/* sechs Methoden: drei je Reihe */
-ul.u3-methoden{grid-template-columns:repeat(3,minmax(0,1fr))}
-@media (max-width:1000px){ul.u3-methoden{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:760px){ul.u3-methoden{grid-template-columns:1fr}}
-/* helle Fenster dieser Methoden: Überschrift dunkel */
-.zg-modal .modal-structure-head h3{color:#1a1817}
-.zg-modal .modal-structure-head p{color:#6b665f}
 </style>
 <style>
 /* Weg zum Ergebnis zuklappbar wie die übrigen Kästen (Daniel, 04.11.2026) – Titel steht in der Zeile zum Aufklappen */
@@ -230,33 +142,11 @@ details#weg.ub-weit .u3-weg-inhalt{margin:0;padding:0;border:0}
 details#weg.ub-weit .u3-b-h2{display:block}
 details#weg.ub-weit .u3-b-kopf{grid-template-columns:minmax(0,1fr) auto}   /* Pfeil bleibt gleich groß, auch wenn der Untertitel umbricht */
 </style>
+<link rel="stylesheet" href="../assets/methoden/methoden.css?v=1">
 </head>
 <body data-kopf="2">
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-<!-- Eigene Strichzeichen fuer die Methoden. Bewusst keine CD-Formen
-     (Forward, Kreuz, Raute, Kreis, Quadrat) - die stehen fuer die
-     Leistungen des Hauses und sind belegt. -->
-<symbol id="mi-modell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M4.5 18.5h15"/><path d="M6.5 13.5h11"/><path d="M8.5 8.5h7"/><path d="M12 3.5v1.6"/>
-</symbol>
-<symbol id="mi-regeln" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M20.5 14.5a2 2 0 0 1-2 2H9l-4.5 3.5v-3.5h-1a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2h15a2 2 0 0 1 2 2z"/>
-  <path d="M8 9.8l2.6 2.6L16 7"/>
-</symbol>
-<symbol id="mi-zielgruppe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-  <circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.4"/><circle cx="12" cy="12" r=".9" fill="currentColor" stroke="none"/>
-</symbol>
-<symbol id="mi-werkstatt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M4 19.5 10.5 13"/><path d="M14.5 3.5a4.5 4.5 0 0 0-3.9 6.7L4 16.8 7.2 20l6.6-6.6a4.5 4.5 0 0 0 6.7-3.9l-2.8 2.8-3.2-.9-.9-3.2z"/>
-</symbol>
-<symbol id="mi-protokoll" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M6 3.5h9l4 4V20a.5.5 0 0 1-.5.5h-12A.5.5 0 0 1 6 20V4a.5.5 0 0 1 .5-.5z"/>
-  <path d="M14.5 3.5V8h4.2"/><path d="M9 12.5h6M9 16h4"/>
-</symbol>
-<symbol id="mi-rueckblick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M3.5 12a8.5 8.5 0 1 0 2.5-6"/><path d="M3.5 3.5V8H8"/><path d="M12 7.5V12l3 2"/>
-</symbol>
 <symbol id="zi-fundament" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
   <path d="M4 20h16"/><path d="M6.5 20v-6.5h11V20"/><path d="M12 3.5 19 9H5l7-5.5z"/>
 </symbol>
@@ -881,14 +771,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
           </div>
           <div>
             <h3 class="u3-h3">Die Methoden</h3>
-            <ul class="u3-methoden">
-            <li><button type="button" class="u3-methode" data-modal-target="strategiemodellModal"><span class="u3-m-ic"><svg><use href="#mi-modell"/></svg></span><b>Strategiemodell</b><small>Die Reihenfolge, in der wir arbeiten.</small></button></li>
-            <li><button type="button" class="u3-methode" data-modal-target="mZielgruppeModal"><span class="u3-m-ic"><svg><use href="#mi-zielgruppe"/></svg></span><b>Zielgruppenanalyse</b><small>Wen beeinflussen wir und wer beeinflusst uns?</small></button></li>
-            <li><button type="button" class="u3-methode" data-modal-target="mNeugruendungModal"><span class="u3-m-ic"><svg><use href="#mi-werkstatt"/></svg></span><b>Gedankliche Neugr&uuml;ndung</b><small>Wie w&uuml;rden wir heute gr&uuml;nden &ndash; ohne Altlasten?</small></button></li>
-            <li><button type="button" class="u3-methode" data-modal-target="swotModal"><span class="u3-m-ic"><svg><use href="#mi-protokoll"/></svg></span><b>SWOT-Analyse</b><small>Systematische Ableitung strategischer Sto&szlig;richtungen</small></button></li>
-            <li><button type="button" class="u3-methode" data-modal-target="mGrundregelnModal"><span class="u3-m-ic"><svg><use href="#mi-regeln"/></svg></span><b>Grundregeln f&uuml;r erfolgreiche Kommunikation</b><small>Welche Bedeutung hat Dein Thema f&uuml;r die Zielgruppe?</small></button></li>
-            <li><button type="button" class="u3-methode" data-modal-target="mReverseModal"><span class="u3-m-ic"><svg><use href="#mi-rueckblick"/></svg></span><b>Reverse Brainstorming</b><small>Warum haben wir unser Ziel verfehlt &ndash; und wer verhindert es heute?</small></button></li>
-            </ul>
+            <ul class="u3-methoden" data-mk-kacheln></ul>
           </div>
         </div>
       </details>
@@ -898,6 +781,8 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 
 </main>
 
+
+<div data-mk-fenster></div>
 
 <footer class="site-footer">
   <div class="container footer-row">
@@ -953,40 +838,6 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   </div>
 </div>
 
-<div class="modal-overlay" id="mGrundregelnModal" data-generic>
-  <div class="modal-wrap modal-wrap--structure">
-    <button class="modal-close" aria-label="Schließen">&times;</button>
-    <div class="modal modal--structure modal--breit">
-      <div class="modal-structure-head">
-        <h3>Grundregeln für erfolgreiche Kommunikation</h3>
-        <p>Zwei Roll-ups aus dem Methodenkoffer &middot; für Gespräche mit Entscheidern</p>
-      </div>
-      <div class="pj-rollups">
-        <div class="pj-rollup">
-          <a class="pj-rollup-bild" href="/assets/downloads/EMP_01_rollup_golden_rules.pdf" target="_blank" rel="noopener">
-            <img src="/assets/downloads/rollup-golden-rules-thumb.jpg"
-                 alt="Roll-up: Die 3 goldenen Regeln für erfolgreiche Gespräche mit Entscheidern" loading="lazy">
-          </a>
-          <b>Die 3 goldenen Regeln</b>
-          <small>Mache Deine Zielgruppe erfolgreich. Spare ihr Arbeit. Zeige den nächsten
-            Schritt auf.</small>
-          <a class="btn btn--dark btn--sm" href="/assets/downloads/EMP_01_rollup_golden_rules.pdf" download>PDF herunterladen</a>
-        </div>
-        <div class="pj-rollup">
-          <a class="pj-rollup-bild" href="/assets/downloads/EMP_02_rollup_umsetzung.pdf" target="_blank" rel="noopener">
-            <img src="/assets/downloads/rollup-umsetzung-thumb.jpg"
-                 alt="Roll-up: Das gewünschte Ziel bei den Entscheidern in 15 Minuten erreichen" loading="lazy">
-          </a>
-          <b>In 15 Minuten zum Ziel</b>
-          <small>Auftragsklärung, Storyboard, Abbildung in der Präsentation, der Termin
-            selbst – in vier Schritten.</small>
-          <a class="btn btn--dark btn--sm" href="/assets/downloads/EMP_02_rollup_umsetzung.pdf" download>PDF herunterladen</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="modal-overlay" id="svHomepageModal" data-generic>
   <div class="modal-wrap modal-wrap--structure">
     <button class="modal-close" aria-label="Schließen">&times;</button>
@@ -1006,373 +857,6 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   </div>
 </div>
 
-<div class="modal-overlay" id="strategiemodellModal" data-generic>
-  <div class="modal-wrap modal-wrap--structure">
-    <button class="modal-close" aria-label="Schließen">&times;</button>
-    <div class="modal modal--structure modal--strategiemodell">
-      <div class="modal-structure-head">
-        <h3>Unser Strategiemodell</h3>
-        <p>Vom Selbstverständnis bis in den Alltag deines Bereichs.</p>
-      </div>
-      <div class="modal-structure-layout">
-        <div class="modal-structure-frame" style="width:min(90vw, calc(66vh * 0.849)); aspect-ratio:900/1060">
-<svg viewBox="0 0 900 1060" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Strategiemodell: vom Selbstverständnis über Ausgangssituation, Vision und Strategie bis in den Alltag">
-<rect x="20" y="20" width="860" height="230" rx="16" fill="rgba(255,255,255,.025)" stroke="rgba(255,255,255,.28)" stroke-width="1.3" stroke-dasharray="5 5"/>
-<text x="450" y="50" text-anchor="middle" font-family="var(--font-sans)" font-size="11" font-weight="700" letter-spacing="1.2" fill="rgba(255,255,255,.85)">WOFÜR STEHEN WIR?</text>
-<text x="110" y="88" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="600" fill="rgba(255,255,255,.72)">Unternehmens-</text>
-<text x="110" y="103" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="600" fill="rgba(255,255,255,.72)">strategie</text>
-<rect x="72" y="130" width="76" height="90" rx="4" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.3)" stroke-width="1.2"/>
-<rect x="80" y="140.0" width="60.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<rect x="80" y="158.5" width="49.2" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<rect x="80" y="177.0" width="38.4" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<rect x="80" y="195.5" width="60.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<text x="270" y="88" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="600" fill="rgba(255,255,255,.72)">Führungs-</text>
-<text x="270" y="103" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="600" fill="rgba(255,255,255,.72)">verständnis</text>
-<rect x="232" y="130" width="76" height="90" rx="4" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.3)" stroke-width="1.2"/>
-<rect x="240" y="140.0" width="60.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<rect x="240" y="158.5" width="49.2" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<rect x="240" y="177.0" width="38.4" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<rect x="240" y="195.5" width="60.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<text x="440" y="88" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="600" fill="rgba(255,255,255,.72)">Zielgruppe:</text>
-<text x="440" y="103" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="600" fill="rgba(255,255,255,.72)">„What's in for me?“</text>
-<rect x="402" y="130" width="76" height="90" rx="4" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.3)" stroke-width="1.2"/>
-<rect x="410" y="140.0" width="60.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<rect x="410" y="158.5" width="49.2" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<rect x="410" y="177.0" width="38.4" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<rect x="410" y="195.5" width="60.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<circle cx="440" cy="175" r="0" fill="none"/>
-<line x1="540" y1="175" x2="610" y2="175" stroke="#fff400" stroke-width="2.2"/>
-<path d="M610,175 L598.8,179.8 L598.8,170.2Z" fill="#fff400"/>
-<circle cx="540" cy="175" r="4" fill="#fff400"/>
-<rect x="640" y="60" width="230" height="180" rx="12" fill="rgba(255,255,255,.06)"/>
-<rect x="658" y="90" width="70" height="110" rx="4" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.3)" stroke-width="1.2"/>
-<rect x="666" y="100.0" width="54.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<rect x="666" y="115.66666666666667" width="44.3" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<rect x="666" y="131.33333333333334" width="34.6" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<rect x="666" y="147.0" width="54.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<rect x="666" y="162.66666666666666" width="44.3" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<rect x="666" y="178.33333333333331" width="34.6" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<text x="802" y="142" text-anchor="middle" font-family="var(--font-serif)" font-size="19" font-weight="700" fill="rgba(255,255,255,.95)">Selbst-</text>
-<text x="802" y="166" text-anchor="middle" font-family="var(--font-serif)" font-size="19" font-weight="700" fill="rgba(255,255,255,.95)">verständnis</text>
-<circle cx="711" cy="240" r="4" fill="#fff400"/>
-<line x1="711" y1="240" x2="711" y2="300" stroke="#fff400" stroke-width="2.2"/>
-<path d="M711,300 L706.2,288.8 L715.8,288.8Z" fill="#fff400"/>
-<rect x="20" y="310" width="540" height="730" rx="16" fill="rgba(255,255,255,.025)" stroke="rgba(255,255,255,.28)" stroke-width="1.3" stroke-dasharray="5 5"/>
-<rect x="580" y="310" width="300" height="730" rx="16" fill="rgba(255,255,255,.025)" stroke="rgba(255,255,255,.28)" stroke-width="1.3" stroke-dasharray="5 5"/>
-<text x="290" y="340" text-anchor="middle" font-family="var(--font-sans)" font-size="11" font-weight="700" letter-spacing="1.2" fill="rgba(255,255,255,.85)">WIE KOMMEN WIR DORTHIN?</text>
-<text x="730" y="340" text-anchor="middle" font-family="var(--font-sans)" font-size="11" font-weight="700" letter-spacing="1.2" fill="rgba(255,255,255,.85)">WIE WOLLEN WIR</text>
-<text x="730" y="355" text-anchor="middle" font-family="var(--font-sans)" font-size="11" font-weight="700" letter-spacing="1.2" fill="rgba(255,255,255,.85)">WAHRGENOMMEN WERDEN?</text>
-<circle cx="730" cy="410" r="22" fill="none" stroke="#fff400" stroke-width="2.4"/>
-<text x="730" y="416" text-anchor="middle" font-family="var(--font-sans)" font-size="17" font-weight="700" fill="#fff">2</text>
-<text x="730" y="470" text-anchor="middle" font-family="var(--font-serif)" font-size="19" font-weight="700" fill="rgba(255,255,255,.95)">Vision</text>
-<circle cx="140" cy="530" r="22" fill="none" stroke="#fff400" stroke-width="2.4"/>
-<text x="140" y="536" text-anchor="middle" font-family="var(--font-sans)" font-size="17" font-weight="700" fill="#fff">1</text>
-<text x="140" y="590" text-anchor="middle" font-family="var(--font-serif)" font-size="19" font-weight="700" fill="rgba(255,255,255,.95)">Ausgangssituation</text>
-<line x1="170" y1="515" x2="700" y2="402" stroke="rgba(255,255,255,.8)" stroke-width="1.8"/>
-<path d="M700,402 L690.0,409.0 L688.0,399.6Z" fill="rgba(255,255,255,.8)"/>
-<line x1="700" y1="424" x2="425" y2="482.6" stroke="rgba(255,255,255,.8)" stroke-width="1.8"/>
-<path d="M425,482.6 L435.0,475.6 L437.0,485.0Z" fill="rgba(255,255,255,.8)"/>
-<circle cx="390" cy="470" r="28" fill="#000"/>
-<circle cx="390" cy="470" r="22" fill="#000" stroke="#fff400" stroke-width="2.4"/>
-<text x="390" y="476" text-anchor="middle" font-family="var(--font-sans)" font-size="17" font-weight="700" fill="#fff">3</text>
-<text x="390" y="530" text-anchor="middle" font-family="var(--font-serif)" font-size="19" font-weight="700" fill="rgba(255,255,255,.95)">Strategie</text>
-<text x="585" y="480" text-anchor="middle" font-family="var(--font-sans)" font-size="12" font-weight="700" letter-spacing="0.6" fill="rgba(255,255,255,.5)">Mission</text>
-<text x="140" y="625" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="600" fill="rgba(255,255,255,.72)">Heutiges Geschäfts- und</text>
-<text x="140" y="640" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="600" fill="rgba(255,255,255,.72)">Organisationsmodell</text>
-<text x="390" y="570" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="600" fill="rgba(255,255,255,.72)">Stoßrichtungen &</text>
-<text x="390" y="585" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="600" fill="rgba(255,255,255,.72)">Handlungsfelder</text>
-<line x1="730" y1="485" x2="730" y2="590" stroke="rgba(255,255,255,.35)" stroke-width="1.3"/>
-<text x="730" y="625" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="600" fill="rgba(255,255,255,.72)">Zukünftiges Geschäfts- und</text>
-<text x="730" y="640" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="600" fill="rgba(255,255,255,.72)">Organisationsmodell</text>
-<rect x="100" y="660" width="80" height="56" rx="4" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.3)" stroke-width="1.2"/>
-<rect x="108" y="670.0" width="64.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<rect x="108" y="680.0" width="52.5" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<rect x="108" y="690.0" width="41.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<rect x="108" y="700.0" width="64.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<rect x="350" y="610" width="80" height="56" rx="4" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.3)" stroke-width="1.2"/>
-<rect x="358" y="620.0" width="64.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<rect x="358" y="630.0" width="52.5" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<rect x="358" y="640.0" width="41.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<rect x="358" y="650.0" width="64.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<rect x="690" y="660" width="80" height="56" rx="4" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.3)" stroke-width="1.2"/>
-<rect x="698" y="670.0" width="64.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<rect x="698" y="680.0" width="52.5" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<rect x="698" y="690.0" width="41.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<rect x="698" y="700.0" width="64.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<line x1="390" y1="675" x2="390" y2="715" stroke="rgba(255,255,255,.35)" stroke-width="1.3"/>
-<text x="390" y="735" text-anchor="middle" font-family="var(--font-sans)" font-size="12.5" font-weight="700" fill="rgba(255,255,255,.85)">Detaillierung der Strategie</text>
-<line x1="390" y1="748" x2="390" y2="770" stroke="rgba(255,255,255,.35)" stroke-width="1.3"/>
-<line x1="165" y1="770" x2="415" y2="770" stroke="rgba(255,255,255,.35)" stroke-width="1.3"/>
-<line x1="165" y1="770" x2="165" y2="790" stroke="rgba(255,255,255,.35)" stroke-width="1.3"/>
-<line x1="415" y1="770" x2="415" y2="790" stroke="rgba(255,255,255,.35)" stroke-width="1.3"/>
-<text x="165" y="812" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="600" fill="rgba(255,255,255,.72)">Führungs- und</text>
-<text x="165" y="827" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="600" fill="rgba(255,255,255,.72)">Arbeitsalltag</text>
-<text x="415" y="812" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="600" fill="rgba(255,255,255,.72)">Strategie-</text>
-<text x="415" y="827" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="600" fill="rgba(255,255,255,.72)">kommunikation</text>
-<line x1="730" y1="730" x2="730" y2="790" stroke="rgba(255,255,255,.35)" stroke-width="1.3"/>
-<text x="730" y="812" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="600" fill="rgba(255,255,255,.72)">Positionierung</text>
-<text x="730" y="827" text-anchor="middle" font-family="var(--font-sans)" font-size="11.5" font-weight="600" fill="rgba(255,255,255,.72)">& Pitch</text>
-<rect x="108" y="848" width="32" height="32" rx="6" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="1.2"/>
-<rect x="148" y="848" width="32" height="32" rx="6" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="1.2"/>
-<rect x="188" y="848" width="32" height="32" rx="6" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="1.2"/>
-<rect x="390" y="840" width="50" height="68" rx="4" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.3)" stroke-width="1.2"/>
-<rect x="398" y="850.0" width="34.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<rect x="398" y="860.4" width="27.9" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<rect x="398" y="870.8" width="21.8" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<rect x="398" y="881.2" width="34.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<rect x="398" y="891.6" width="27.9" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<rect x="686" y="840" width="40" height="68" rx="4" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.3)" stroke-width="1.2"/>
-<rect x="694" y="850.0" width="24.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<rect x="694" y="860.4" width="19.7" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<rect x="694" y="870.8" width="15.4" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<rect x="694" y="881.2" width="24.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<rect x="694" y="891.6" width="19.7" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<rect x="734" y="840" width="40" height="68" rx="4" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.3)" stroke-width="1.2"/>
-<rect x="742" y="850.0" width="24.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<rect x="742" y="860.4" width="19.7" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<rect x="742" y="870.8" width="15.4" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<rect x="742" y="881.2" width="24.0" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<rect x="742" y="891.6" width="19.7" height="4" rx="2" fill="rgba(255,255,255,.28)"/>
-<path d="M147,930 L183,930 L165,944Z" fill="#fff400"/>
-<text x="165" y="970" text-anchor="middle" font-family="var(--font-sans)" font-size="12.5" font-weight="700" fill="#fff400">Wie sichern wir die</text>
-<text x="165" y="987" text-anchor="middle" font-family="var(--font-sans)" font-size="12.5" font-weight="700" fill="#fff400">Zielerreichung?</text>
-<path d="M397,930 L433,930 L415,944Z" fill="#fff400"/>
-<text x="415" y="970" text-anchor="middle" font-family="var(--font-sans)" font-size="12.5" font-weight="700" fill="#fff400">Wie erklären wir die</text>
-<text x="415" y="987" text-anchor="middle" font-family="var(--font-sans)" font-size="12.5" font-weight="700" fill="#fff400">Strategie intern?</text>
-<path d="M712,930 L748,930 L730,944Z" fill="#fff400"/>
-<text x="730" y="970" text-anchor="middle" font-family="var(--font-sans)" font-size="12.5" font-weight="700" fill="#fff400">Welches Problem lösen wir</text>
-<text x="730" y="987" text-anchor="middle" font-family="var(--font-sans)" font-size="12.5" font-weight="700" fill="#fff400">– und was macht uns</text>
-<text x="730" y="1004" text-anchor="middle" font-family="var(--font-sans)" font-size="12.5" font-weight="700" fill="#fff400">einzigartig?</text>
-</svg>
-        </div>
-        <div class="modal-structure-note-wrap">
-          <p class="modal-structure-note">Am Anfang steht die Frage, wofür dein Bereich steht. Die Antwort ist euer Selbstverständnis – die Basis für alles Weitere.</p>
-          <p class="modal-structure-note">Dann der Blick nach vorn: Wie wollt ihr wahrgenommen werden? Das ist die Vision. Der ehrliche Abgleich mit der Ausgangssituation zeigt, welche Strategie dorthin führt.</p>
-          <p class="modal-structure-note">Zum Schluss wird es konkret: im Führungs- und Arbeitsalltag, in der Kommunikation nach innen und in der Positionierung nach außen.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal-overlay" id="mReverseModal" data-generic>
-  <div class="modal-wrap zg-wrap">
-    <button class="modal-close" aria-label="Schließen">&times;</button>
-    <div class="modal zg-modal">
-      <div class="modal-structure-head zg-kopf">
-        <h3>Reverse Brainstorming</h3>
-        <p>Methode &middot; vom Scheitern her denken</p>
-      </div>
-      <div class="pj-modal-text">
-        <p><b>Wofür.</b> Statt zu fragen, wie wir unser Ziel erreichen, fragen wir, woran wir scheitern würden. So werden Risiken sichtbar, die beim Planen leicht übersehen werden &ndash; und der Blick richtet sich auf die Punkte, die wirklich zählen.</p>
-        <p><b>Die Ausgangslage.</b> Wir versetzen uns an einen Zeitpunkt in der Zukunft &ndash; je nach betrachtetem Zeitraum in drei oder in fünf Jahren. Das Szenario: Was wir uns vorgenommen haben, hat nicht funktioniert, das Ziel ist verfehlt. Die Leitfrage lautet:</p>
-        <p class="rb-frage">„Warum haben wir unser Ziel verfehlt?“</p>
-      </div>
-      <div class="zg-runden rb-schritte">
-        <div class="zg-runde">
-          <p class="zg-runde__nr">Schritt 1</p>
-          <p class="zg-runde__titel">Gründe sammeln</p>
-          <p>Alle Gründe, warum es nicht funktioniert hat, werden gesammelt &ndash; ohne Bewertung und ohne Rücksicht auf Zuständigkeiten.</p>
-        </div>
-        <div class="zg-runde">
-          <p class="zg-runde__nr">Schritt 2</p>
-          <p class="zg-runde__titel">Bewerten</p>
-          <p>Gemeinsam wird bewertet, welche Gründe die gravierendsten und wichtigsten sind.</p>
-        </div>
-        <div class="zg-runde">
-          <p class="zg-runde__nr">Schritt 3</p>
-          <p class="zg-runde__titel">Verantwortung festlegen</p>
-          <p>Für jeden wichtigen Grund wird festgelegt, wer heute dafür verantwortlich ist, dass er nicht eintritt.</p>
-        </div>
-      </div>
-      <div class="pj-modal-text">
-        <p class="pj-hinweis">Das Ergebnis: Der Fokus liegt auf den wichtigsten Punkten &ndash; und ein Scheitern wird gezielt vermieden.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal-overlay" id="mZielgruppeModal" data-generic>
-  <div class="modal-wrap zg-wrap">
-    <button class="modal-close" aria-label="Schließen">&times;</button>
-    <div class="modal zg-modal">
-      <div class="modal-structure-head zg-kopf">
-        <h3>Zielgruppenanalyse</h3>
-        <p>Methode &middot; Stakeholder-Matrix in zwei Runden</p>
-      </div>
-      <div class="pj-modal-text">
-        <p><b>Wofür.</b> Stakeholder sind Menschen oder Gruppen, die unsere Arbeit beeinflussen oder von ihr beeinflusst werden. Bevor wir beschreiben, wofür wir stehen, ist klar, für wen &ndash; und wer über unseren Erfolg mitentscheidet.</p>
-        <p><b>Die Matrix.</b> Jede Gruppe wird nach zwei Fragen eingeordnet:</p>
-        <ul class="zg-achsen">
-          <li><b>Impact</b> (senkrecht) &ndash; Wie stark wirkt unsere Arbeit auf die jeweilige Gruppe?</li>
-          <li><b>Entscheidungsmacht</b> (waagerecht) &ndash; Wie stark kann die jeweilige Gruppe auf uns Einfluss nehmen?</li>
-        </ul>
-      </div>
-
-      <div class="zg-matrix" role="img" aria-label="Stakeholder-Matrix: senkrecht Impact, waagerecht Entscheidungsmacht, vier Quadranten">
-        <span class="zg-achse zg-achse--y" aria-hidden="true"></span>
-        <span class="zg-achse zg-achse--x" aria-hidden="true"></span>
-        <span class="zg-etikett zg-etikett--hoch zg-oben">Hoch</span>
-        <span class="zg-etikett zg-unten">Niedrig</span>
-        <span class="zg-etikett zg-links">Niedrig</span>
-        <span class="zg-etikett zg-etikett--hoch zg-rechts">Hoch</span>
-        <span class="zg-achsname zg-achsname--y">Impact</span>
-        <span class="zg-achsname zg-achsname--x">Entscheidungsmacht</span>
-        <div class="zg-feld"><b>Einseitig betroffen</b><span>Unsere Arbeit wirkt auf diese Gruppe, sie selbst kann unsere Entscheidungen aber nur wenig beeinflussen.</span></div>
-        <div class="zg-feld"><b>Schlüsselbeziehungen</b><span>Unsere Handlungen und Entscheidungen wirken auf diese Gruppe, und sie kann im Gegenzug gezielt auf uns Einfluss nehmen.</span></div>
-        <div class="zg-feld"><b>Relevante Schnittstellen</b><span>Mit diesen Gruppen arbeiten wir kontinuierlich zusammen. Für die strategische Ausrichtung ist der gegenseitige Einfluss jedoch begrenzt.</span></div>
-        <div class="zg-feld"><b>Einfluss auf uns</b><span>Sie bestimmen mit, was für uns möglich ist &ndash; auch wenn unsere Arbeit für sie nur eine geringe direkte Bedeutung hat.</span></div>
-      </div>
-      <p class="zg-x-mobil" aria-hidden="true"><span class="zg-etikett">Niedrig</span>Entscheidungsmacht<span class="zg-etikett zg-etikett--hoch">Hoch</span></p>
-
-      <div class="zg-runden">
-        <div class="zg-runde">
-          <p class="zg-runde__nr">Runde 1</p>
-          <p class="zg-runde__titel">Sammeln und zuordnen</p>
-          <p>Gemeinsam an einer Metaplanwand entsteht eine Übersicht der wichtigsten Personengruppen, mit denen wir im Alltag zu tun haben. Jede Gruppe kommt auf eine eigene Karte und wird nach Impact und Entscheidungsmacht in die Matrix eingeordnet.</p>
-        </div>
-        <div class="zg-runde">
-          <p class="zg-runde__nr">Runde 2</p>
-          <p class="zg-runde__titel">Bewerten mit Klebepunkten</p>
-          <p>Jede und jeder erhält je drei Punkte pro Farbe und klebt sie für sich auf die Karten &ndash; auch mehrere Punkte auf eine Karte:</p>
-          <ul class="zg-punkte">
-            <li><i class="zg-punkt zg-punkt--gruen" aria-hidden="true"></i><span><b>Grün</b> &ndash; An diesen Gruppen richten wir aus, wie wir wahrgenommen werden wollen.</span></li>
-            <li><i class="zg-punkt zg-punkt--blau" aria-hidden="true"></i><span><b>Blau</b> &ndash; Diese Gruppen brauchen wir, um erfolgreich zu sein.</span></li>
-            <li><i class="zg-punkt zg-punkt--rot" aria-hidden="true"></i><span><b>Rot</b> &ndash; Diese Gruppen haben wir bislang zu wenig beachtet.</span></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="pj-modal-text zg-danach">
-        <p><b>Danach: die grünen Stakeholder.</b> Die Gruppen mit den meisten grünen Punkten sind der Maßstab. An ihnen richten wir aus, wie wir wahrgenommen werden wollen &ndash; und beantworten mit ihnen im Blick zwei Leitfragen:</p>
-        <ul>
-          <li><b>Wofür stehen wir?</b></li>
-          <li><b>Welche Probleme lösen wir konkret?</b></li>
-        </ul>
-        <p class="pj-hinweis">Die Antworten sind die Grundlage für das Selbstverständnis.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal-overlay" id="mNeugruendungModal" data-generic>
-  <div class="modal-wrap zg-wrap">
-    <button class="modal-close" aria-label="Schließen">&times;</button>
-    <div class="modal zg-modal">
-      <div class="modal-structure-head">
-        <h3>Gedankliche Neugründung</h3>
-        <p>Methode &middot; für Führungskräfte zum Nachmachen</p>
-      </div>
-      <div class="pj-modal-text">
-        <p><b>Wofür.</b> Stell Dir vor, Dein Bereich würde morgen als eigenes Unternehmen
-          gegründet. Keine gewachsenen Zuständigkeiten, kein „das haben wir immer so gemacht“ –
-          nur die Frage, wofür es ihn überhaupt gäbe. Wer so denkt, hört auf, das Bestehende
-          zu verteidigen, und fängt an, es zu begründen.</p>
-        <p><b>Wie.</b> Man stellt sich vor, der Bereich würde morgen als eigenes Unternehmen
-          gegründet – ohne Altlasten, ohne Besitzstände. Dann beantwortet man fünf Fragen:</p>
-        <ul>
-          <li>Welche Zielgruppe sprechen wir an?</li>
-          <li>Welches konkrete Problem lösen wir?</li>
-          <li>Welcher Nutzen entsteht daraus?</li>
-          <li>Was macht uns einzigartig?</li>
-          <li>Wie läuft die Zusammenarbeit ab?</li>
-        </ul>
-        <p><b>Die Probe.</b> Wie sähe die Homepage dieses Unternehmens aus? Eine Seite lässt
-          keine Unschärfe zu – was sich dort nicht in einem Satz erklären lässt, ist noch nicht
-          geklärt.</p>
-        <p><b>Der Pitch.</b> Aus der Probe wird ein Pitch: Zehn Felder bringen die Antworten in eine feste Struktur und beschreiben zusammen das zukünftige Geschäftsmodell.</p>
-        <ol class="pi-raster">
-          <li><span class="pi-nr">1</span><b>Welches Problem lösen wir?</b></li>
-          <li><span class="pi-nr">2</span><b>Welcher Mehrwert wird für die Zielgruppe geschaffen?</b></li>
-          <li><span class="pi-nr">3</span><b>&raquo;Underlying Magic&laquo; &ndash; Was macht uns einzigartig?</b></li>
-          <li><span class="pi-nr">4</span><b>Business Model &ndash; Wie verdienen wir Geld?</b></li>
-          <li><span class="pi-nr">5</span><b>Go-to-Market-Plan</b></li>
-          <li><span class="pi-nr">6</span><b>Marktanalyse</b></li>
-          <li><span class="pi-nr">7</span><b>Management-Team<span class="pi-unter">Philosophie und Grundverständnis &middot; Team und Selbstvorstellung: Warum können wir das? &middot; Erfahrung: Welche Erfahrung haben wir?</span></b></li>
-          <li><span class="pi-nr">8</span><b>Finanzplan und zentrale Kennzahlen</b></li>
-          <li><span class="pi-nr">9</span><b>Risikoanalyse</b></li>
-          <li><span class="pi-nr">10</span><b>Status quo und Meilensteinplan</b></li>
-        </ol>
-        <p class="pj-hinweis">In diesem Projekt ist daraus der Entwurf der Akademie-Startseite
-          entstanden.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal-overlay" id="swotModal" data-generic>
-  <div class="modal-wrap zg-wrap">
-    <button class="modal-close" aria-label="Schließen">&times;</button>
-    <div class="modal zg-modal">
-      <div class="modal-structure-head">
-        <h3>SWOT-Analyse</h3>
-        <p>Vier Felder, zwei Achsen – mehr ist es nicht.</p>
-      </div>
-      <div class="pj-modal-text">
-        <p>Die SWOT sortiert, was über eine Organisation bekannt ist, entlang von zwei Fragen:
-          Kommt es von innen oder von außen? Und hilft es oder behindert es?</p>
-        <ul>
-          <li><b>Stärken</b> – intern und hilfreich. Was können wir, das andere nicht können?</li>
-          <li><b>Schwächen</b> – intern und hinderlich. Woran scheitern wir regelmäßig selbst?</li>
-          <li><b>Chancen</b> – extern und hilfreich. Was verändert sich im Umfeld zu unseren Gunsten?</li>
-          <li><b>Risiken</b> – extern und hinderlich. Was könnte uns das Geschäft kosten?</li>
-        </ul>
-      </div>
-
-      <div class="sw-matrix" role="img" aria-label="SWOT-Matrix: Schritt 1 sammelt in Stärken, Schwächen, Chancen und Risiken, Schritt 2 kombiniert sie zu vier Stoßrichtungen">
-        <span class="sw-sicht sw-sicht--aussen">Außensicht &middot; Unternehmensumwelt und Rahmenbedingungen</span>
-        <span class="sw-sicht sw-sicht--innen">Innensicht &middot; eigenes Unternehmen</span>
-        <span class="sw-leer" aria-hidden="true"></span>
-        <div class="sw-kopf"><i class="sw-schritt">1</i><b>Chancen</b><small>extern &middot; hilfreich</small></div>
-        <div class="sw-kopf"><i class="sw-schritt">1</i><b>Risiken</b><small>extern &middot; hinderlich</small></div>
-        <div class="sw-kopf"><i class="sw-schritt">1</i><b>Stärken</b><small>intern &middot; hilfreich</small></div>
-        <div class="sw-feld"><i class="sw-schritt">2</i><small>Stärken &times; Chancen</small><b>Ausbauen</b><span>Stärken nutzen, um Chancen zu ergreifen.</span></div>
-        <div class="sw-feld"><i class="sw-schritt">2</i><small>Stärken &times; Risiken</small><b>Absichern</b><span>Stärken nutzen, um Risiken abzuwehren.</span></div>
-        <div class="sw-kopf"><i class="sw-schritt">1</i><b>Schwächen</b><small>intern &middot; hinderlich</small></div>
-        <div class="sw-feld"><i class="sw-schritt">2</i><small>Schwächen &times; Chancen</small><b>Aufholen</b><span>Schwächen abbauen, um Chancen zu nutzen.</span></div>
-        <div class="sw-feld"><i class="sw-schritt">2</i><small>Schwächen &times; Risiken</small><b>Vermeiden</b><span>Baustellen schließen, bevor Risiken sie treffen.</span></div>
-      </div>
-
-      <p class="sw-regel">Interne und externe Faktoren bleiben strikt getrennt &ndash; sonst trägt die Analyse nicht.</p>
-
-      <div class="zg-runden">
-        <div class="zg-runde">
-          <p class="zg-runde__nr">Schritt 1</p>
-          <p class="zg-runde__titel">Sammeln</p>
-          <p>Stärken, Schwächen, Chancen und Risiken werden gesammelt &ndash; ausschließlich in die vier Grundfelder, nicht in die Kombinationsfelder.</p>
-          <p>Stärken und Schwächen beschreiben die Innensicht: den Blick in das eigene Unternehmen und die eigenen Bereiche. Chancen und Risiken beschreiben die Außensicht: die Unternehmensumwelt und die Rahmenbedingungen um uns herum.</p>
-        </div>
-        <div class="zg-runde">
-          <p class="zg-runde__nr">Schritt 2</p>
-          <p class="zg-runde__titel">Stoßrichtungen ableiten</p>
-          <p>Die gesammelten Felder werden miteinander kombiniert. Jede Kombination wirft eine Frage auf, aus der strategische Stoßrichtungen entstehen &ndash; zum Beispiel: Welche Stoßrichtung ergibt sich, wenn unsere Stärken auf die Chancen treffen? Und was folgt, wenn Schwächen und Risiken zusammenkommen?</p>
-        </div>
-      </div>
-
-      <div class="pj-modal-text">
-        <p class="pj-hinweis">Deshalb ist die SWOT bei uns kein Selbstzweck – sie ist der
-          Zwischenschritt zwischen Ist-Analyse und Strategie.</p>
-      </div>
-
-      <div class="pj-modal-dok">
-        <a class="pj-modal-dok-bild" href="/assets/projekte/sv-swot-arbeitsauftrag.pdf" target="_blank" rel="noopener">
-          <img src="/assets/projekte/sv-swot-vorschau.webp" alt="Erste Seite des Arbeitsauftrags zur SWOT-Analyse" loading="lazy">
-        </a>
-        <div class="pj-modal-dok-text">
-          <b>Arbeitsauftrag zur Einzelübung</b>
-          <small>Die vier Schritte als Vorlage, mit den Leitfragen zu Stärken, Schwächen,
-            Chancen und Risiken. Vorbereitend ausgefüllt – jede Führungskraft für sich, aus
-            ihrer eigenen Sicht auf die Akademie. Das ist der erste Schritt; die gemeinsame
-            Auswertung und die Ableitung der Stoßrichtungen folgen darauf.</small>
-          <span class="pj-modal-dok-knoepfe">
-            <a class="btn btn--dark btn--sm" href="/assets/projekte/sv-swot-arbeitsauftrag.pdf" target="_blank" rel="noopener">PDF öffnen</a>
-            <a class="btn btn--ghost btn--sm" href="/assets/projekte/sv-swot-arbeitsauftrag.pdf" download>Herunterladen</a>
-          </span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
 <script src="/assets/projekte/ziel-daten.js"></script>
 <script>
@@ -1446,6 +930,11 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   window.addEventListener("hashchange", auf); if (location.hash) auf();
 })();
 </script>
+<!-- Methoden aus dem Methodenkoffer des Dashboards (werkzeuge/methoden_uebernehmen.py) – vor script.js, damit die Fenster erkannt werden -->
+<script src="../assets/methoden/methoden.js?v=1"></script>
+<script src="../assets/methoden/auswahl.js?v=1"></script>
+<script src="../assets/methoden/methoden-render.js?v=1"></script>
+<script>MethodenKoffer.einsetzen({ kacheln: document.querySelector("[data-mk-kacheln]"), fenster: document.querySelector("[data-mk-fenster]"), auswahl: window.METHODEN_AUSWAHL, intern: false, dateien: "../assets/methoden/dateien/" });</script>
 <script src="/script.js"></script>
 </body>
 </html>
