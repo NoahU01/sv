@@ -131,6 +131,60 @@
  .u3-folge .u3-wann{grid-column:2}
  .u3-folge .u3-punkt{grid-row:1 / span 2}
 }
+/* Zielgruppenanalyse: Stakeholder-Matrix im empiria-CD (Schwarz, Weiß, Gelb; Farbe nur für die Klebepunkte) */
+.modal-wrap.zg-wrap{max-width:900px}
+.modal.zg-modal{max-width:none;width:100%}
+.modal.zg-modal .modal-structure-head{max-width:none}
+.zg-achsen{list-style:none;padding-left:0!important}
+.zg-matrix{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:8px 0 28px;padding:44px 74px 44px 74px}
+.zg-achse{position:absolute;background:#1a1817}
+.zg-achse--y{left:50%;top:22px;bottom:22px;width:2px;margin-left:-1px}
+.zg-achse--x{top:50%;left:62px;right:62px;height:2px;margin-top:-1px}
+.zg-etikett{position:absolute;z-index:1;padding:4px 10px;border-radius:4px;background:#e8e5e0;color:#1a1817;font:700 .7rem/1.2 Poppins,sans-serif;letter-spacing:.08em;text-transform:uppercase}
+.zg-etikett--hoch{background:#1a1817;color:#ffed00}
+.zg-oben{top:6px;left:50%;transform:translateX(-50%)}
+.zg-unten{bottom:6px;left:50%;transform:translateX(-50%)}
+.zg-links{left:0;top:50%;transform:translateY(-50%)}
+.zg-rechts{right:0;top:50%;transform:translateY(-50%)}
+.zg-achsname{position:absolute;z-index:1;font:600 .72rem/1.2 Poppins,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#6b665f}
+.zg-achsname--y{top:10px;left:calc(50% + 46px)}
+.zg-achsname--x{right:0;bottom:10px}
+.zg-feld{position:relative;z-index:1;display:flex;flex-direction:column;gap:8px;padding:20px 22px;border-radius:12px;background:#f3f1ed;text-align:center}
+.zg-feld b{font-family:var(--font-serif,Lora,serif);font-weight:700;font-size:1.08rem;line-height:1.25;color:#1a1817}
+.zg-feld span{font-size:.86rem;line-height:1.55;color:#555;text-wrap:balance}
+.zg-runden{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:0 0 24px}
+.zg-runde{border:1px solid #e8e5e0;border-radius:14px;padding:20px 22px}
+.zg-runde p{margin:0 0 10px;font-size:.92rem;line-height:1.6;color:#555}
+.zg-runde .zg-runde__nr{margin:0 0 4px;font:700 .72rem/1.2 Poppins,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#1a1817}
+.zg-runde .zg-runde__titel{margin:0 0 10px;font-family:var(--font-serif,Lora,serif);font-weight:700;font-size:1.12rem;color:#1a1817}
+.zg-punkte{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.zg-punkte li{display:grid;grid-template-columns:18px 1fr;gap:10px;align-items:start;font-size:.9rem;line-height:1.55;color:#555}
+.zg-punkte b{color:#1a1817}
+.zg-punkt{width:14px;height:14px;border-radius:50%;margin-top:4px}
+.zg-punkt--gruen{background:#059669}.zg-punkt--blau{background:#0B9FBD}.zg-punkt--rot{background:#C51F5D}
+.zg-x-mobil{display:none}
+@media (max-width:700px){
+  .zg-matrix{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;padding:40px 0 40px;margin-bottom:10px}
+  .zg-achse--x{left:0;right:0}
+  .zg-links,.zg-rechts,.zg-achsname--x{display:none}
+  .zg-feld{padding:14px 10px;hyphens:auto;-webkit-hyphens:auto}
+  .zg-feld b{font-size:.95rem}
+  .zg-feld span{font-size:.78rem}
+  .zg-x-mobil{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 0 26px;font:600 .68rem/1.2 Poppins,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#6b665f}
+  .zg-x-mobil .zg-etikett{position:static}
+  .zg-runden{grid-template-columns:1fr}
+}
+/* Reverse Brainstorming: drei Schritte nebeneinander, Leitfrage als Zitat */
+.zg-runden.rb-schritte{grid-template-columns:repeat(3,minmax(0,1fr))}
+.pj-modal-text .rb-frage{margin:0 0 24px;font-family:var(--font-serif,Lora,serif);font-weight:700;font-size:1.25rem;line-height:1.35;color:#1a1817}
+@media (max-width:700px){.zg-runden.rb-schritte{grid-template-columns:1fr}}
+/* sechs Methoden: drei je Reihe */
+ul.u3-methoden{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:1000px){ul.u3-methoden{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:760px){ul.u3-methoden{grid-template-columns:1fr}}
+/* helle Fenster dieser Methoden: Überschrift dunkel */
+.zg-modal .modal-structure-head h3{color:#1a1817}
+.zg-modal .modal-structure-head p{color:#6b665f}
 </style>
 <style>/* Projekt-Repository SV – mit Vorrang, weil die Menüregeln von empiria im Seitenkörper stehen */.site-header .nav,.site-header .wrap{justify-content:flex-start!important;gap:0!important}.site-header .brand{margin-right:0!important}.site-header .dev-dd-long,.site-header .dev-dd-short{display:none!important}.site-header .dev-dd{margin-left:.4rem!important;position:relative!important;right:auto!important;top:auto!important;bottom:auto!important;display:inline-flex!important;align-items:center}.site-header .dev-dd-toggle{padding:6px!important;border-radius:6px;gap:0!important}.site-header .dev-dd-toggle:hover,.site-header .dev-dd.is-open .dev-dd-toggle{background:rgba(0,0,0,.05)}.site-header .dev-dd-chev{width:14px;height:14px}.site-header .dev-dd .dev-dd-panel{left:-14px!important;right:auto!important}.site-header .dev-dd--corner .dev-dd-flyout{left:100%!important;right:auto!important;padding-left:10px!important;padding-right:0!important}.dev-dd-empty{margin:0 8px 4px;padding:6px 0;font-size:13px;color:var(--grey-50,#8a8a8a)}@media (max-width:900px){.site-header .dev-dd .dev-dd-panel{position:fixed!important;left:16px!important;right:16px!important;top:72px!important;width:auto!important;max-height:calc(100vh - 88px);overflow:auto}.site-header .dev-dd .dev-dd-flyout{position:static!important;opacity:1!important;visibility:visible!important;padding:0!important}.site-header .dev-dd .dev-dd-flyout-panel{width:auto;padding:0 0 0 12px;margin:2px 0 6px 20px;background:none;border:0;border-left:2px solid #eee;border-radius:0;box-shadow:none}.site-header .dev-dd a.dev-dd-link--parent::after{display:none}}</style>
 </head>
@@ -156,6 +210,9 @@
 <symbol id="mi-protokoll" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
   <path d="M6 3.5h9l4 4V20a.5.5 0 0 1-.5.5h-12A.5.5 0 0 1 6 20V4a.5.5 0 0 1 .5-.5z"/>
   <path d="M14.5 3.5V8h4.2"/><path d="M9 12.5h6M9 16h4"/>
+</symbol>
+<symbol id="mi-rueckblick" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M3.5 12a8.5 8.5 0 1 0 2.5-6"/><path d="M3.5 3.5V8H8"/><path d="M12 7.5V12l3 2"/>
 </symbol>
 <symbol id="zi-fundament" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
   <path d="M4 20h16"/><path d="M6.5 20v-6.5h11V20"/><path d="M12 3.5 19 9H5l7-5.5z"/>
@@ -446,6 +503,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
             <li><button type="button" class="u3-methode" data-modal-target="mNeugruendungModal"><span class="u3-m-ic"><svg><use href="#mi-werkstatt"/></svg></span><b>Gedankliche Neugr&uuml;ndung</b><small>Wie w&uuml;rden wir heute gr&uuml;nden &ndash; ohne Altlasten?</small></button></li>
             <li><button type="button" class="u3-methode" data-modal-target="swotModal"><span class="u3-m-ic"><svg><use href="#mi-protokoll"/></svg></span><b>SWOT-Analyse</b><small>Systematische Ableitung strategischer Sto&szlig;richtungen</small></button></li>
             <li><button type="button" class="u3-methode" data-modal-target="mGrundregelnModal"><span class="u3-m-ic"><svg><use href="#mi-regeln"/></svg></span><b>Grundregeln f&uuml;r erfolgreiche Kommunikation</b><small>Welche Bedeutung hat Dein Thema f&uuml;r die Zielgruppe?</small></button></li>
+            <li><button type="button" class="u3-methode" data-modal-target="mReverseModal"><span class="u3-m-ic"><svg><use href="#mi-rueckblick"/></svg></span><b>Reverse Brainstorming</b><small>Warum haben wir unser Ziel verfehlt &ndash; und wer verhindert es heute?</small></button></li>
             </ul>
           </div>
         </div>
@@ -713,31 +771,101 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   </div>
 </div>
 
-<div class="modal-overlay" id="mZielgruppeModal" data-generic>
-  <div class="modal-wrap">
+<div class="modal-overlay" id="mReverseModal" data-generic>
+  <div class="modal-wrap zg-wrap">
     <button class="modal-close" aria-label="Schließen">&times;</button>
-    <div class="modal">
-      <div class="modal-structure-head">
-        <h3>Zielgruppenanalyse</h3>
-        <p>Methode &middot; für Führungskräfte zum Nachmachen</p>
+    <div class="modal zg-modal">
+      <div class="modal-structure-head zg-kopf">
+        <h3>Reverse Brainstorming</h3>
+        <p>Methode &middot; vom Scheitern her denken</p>
       </div>
       <div class="pj-modal-text">
-        <p><b>Wofür.</b> Bevor man beschreibt, was ein Bereich anbietet, muss klar sein, für
-          wen. Die Zielgruppenanalyse zwingt dazu, von den Menschen her zu denken statt vom
-          eigenen Angebot.</p>
-        <p><b>Wie.</b> In drei Durchgängen:</p>
-        <ul>
-          <li><b>Trennen</b> – Wer gehört dazu? Nicht „alle Mitarbeitenden“, sondern
-            unterscheidbare Gruppen mit unterschiedlichem Bedarf.</li>
-          <li><b>Zuhören</b> – Was ist für diese Gruppe der Anlass, zu uns zu kommen? Und was
-            hält sie ab?</li>
-          <li><b>Zuspitzen</b> – Welchen Satz würde die Gruppe über uns sagen, wenn sie
-            zufrieden ist? Der Satz ist das Ziel.</li>
+        <p><b>Wofür.</b> Statt zu fragen, wie wir unser Ziel erreichen, fragen wir, woran wir scheitern würden. So werden Risiken sichtbar, die beim Planen leicht übersehen werden &ndash; und der Blick richtet sich auf die Punkte, die wirklich zählen.</p>
+        <p><b>Die Ausgangslage.</b> Wir versetzen uns an einen Zeitpunkt in der Zukunft &ndash; je nach betrachtetem Zeitraum in drei oder in fünf Jahren. Das Szenario: Was wir uns vorgenommen haben, hat nicht funktioniert, das Ziel ist verfehlt. Die Leitfrage lautet:</p>
+        <p class="rb-frage">„Warum haben wir unser Ziel verfehlt?“</p>
+      </div>
+      <div class="zg-runden rb-schritte">
+        <div class="zg-runde">
+          <p class="zg-runde__nr">Schritt 1</p>
+          <p class="zg-runde__titel">Gründe sammeln</p>
+          <p>Alle Gründe, warum es nicht funktioniert hat, werden gesammelt &ndash; ohne Bewertung und ohne Rücksicht auf Zuständigkeiten.</p>
+        </div>
+        <div class="zg-runde">
+          <p class="zg-runde__nr">Schritt 2</p>
+          <p class="zg-runde__titel">Bewerten</p>
+          <p>Gemeinsam wird bewertet, welche Gründe die gravierendsten und wichtigsten sind.</p>
+        </div>
+        <div class="zg-runde">
+          <p class="zg-runde__nr">Schritt 3</p>
+          <p class="zg-runde__titel">Verantwortung festlegen</p>
+          <p>Für jeden wichtigen Grund wird festgelegt, wer heute dafür verantwortlich ist, dass er nicht eintritt.</p>
+        </div>
+      </div>
+      <div class="pj-modal-text">
+        <p class="pj-hinweis">Das Ergebnis: Der Fokus liegt auf den wichtigsten Punkten &ndash; und ein Scheitern wird gezielt vermieden.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="mZielgruppeModal" data-generic>
+  <div class="modal-wrap zg-wrap">
+    <button class="modal-close" aria-label="Schließen">&times;</button>
+    <div class="modal zg-modal">
+      <div class="modal-structure-head zg-kopf">
+        <h3>Zielgruppenanalyse</h3>
+        <p>Methode &middot; Stakeholder-Matrix in zwei Runden</p>
+      </div>
+      <div class="pj-modal-text">
+        <p><b>Wofür.</b> Stakeholder sind Menschen oder Gruppen, die unsere Arbeit beeinflussen oder von ihr beeinflusst werden. Bevor wir beschreiben, wofür wir stehen, ist klar, für wen &ndash; und wer über unseren Erfolg mitentscheidet.</p>
+        <p><b>Die Matrix.</b> Jede Gruppe wird nach zwei Fragen eingeordnet:</p>
+        <ul class="zg-achsen">
+          <li><b>Impact</b> (senkrecht) &ndash; Wie stark wirkt unsere Arbeit auf die jeweilige Gruppe?</li>
+          <li><b>Entscheidungsmacht</b> (waagerecht) &ndash; Wie stark kann die jeweilige Gruppe auf uns Einfluss nehmen?</li>
         </ul>
-        <p><b>Woran man merkt, dass es getragen hat.</b> Man kann für jede Gruppe in einem
-          Satz sagen, was sie davon hat – ohne das eigene Angebot aufzuzählen.</p>
-        <p class="pj-hinweis">Übertragbar auf jeden Bereich: Die Frage „Für wen sind wir da?“
-          lässt sich überall stellen, wo eine Abteilung ihren Nutzen erklären muss.</p>
+      </div>
+
+      <div class="zg-matrix" role="img" aria-label="Stakeholder-Matrix: senkrecht Impact, waagerecht Entscheidungsmacht, vier Quadranten">
+        <span class="zg-achse zg-achse--y" aria-hidden="true"></span>
+        <span class="zg-achse zg-achse--x" aria-hidden="true"></span>
+        <span class="zg-etikett zg-etikett--hoch zg-oben">Hoch</span>
+        <span class="zg-etikett zg-unten">Niedrig</span>
+        <span class="zg-etikett zg-links">Niedrig</span>
+        <span class="zg-etikett zg-etikett--hoch zg-rechts">Hoch</span>
+        <span class="zg-achsname zg-achsname--y">Impact</span>
+        <span class="zg-achsname zg-achsname--x">Entscheidungsmacht</span>
+        <div class="zg-feld"><b>Einseitig betroffen</b><span>Unsere Arbeit wirkt auf diese Gruppe, sie selbst kann unsere Entscheidungen aber nur wenig beeinflussen.</span></div>
+        <div class="zg-feld"><b>Schlüsselbeziehungen</b><span>Unsere Handlungen und Entscheidungen wirken auf diese Gruppe, und sie kann im Gegenzug gezielt auf uns Einfluss nehmen.</span></div>
+        <div class="zg-feld"><b>Relevante Schnittstellen</b><span>Mit diesen Gruppen arbeiten wir kontinuierlich zusammen. Für die strategische Ausrichtung ist der gegenseitige Einfluss jedoch begrenzt.</span></div>
+        <div class="zg-feld"><b>Einfluss auf uns</b><span>Sie bestimmen mit, was für uns möglich ist &ndash; auch wenn unsere Arbeit für sie nur eine geringe direkte Bedeutung hat.</span></div>
+      </div>
+      <p class="zg-x-mobil" aria-hidden="true"><span class="zg-etikett">Niedrig</span>Entscheidungsmacht<span class="zg-etikett zg-etikett--hoch">Hoch</span></p>
+
+      <div class="zg-runden">
+        <div class="zg-runde">
+          <p class="zg-runde__nr">Runde 1</p>
+          <p class="zg-runde__titel">Sammeln und zuordnen</p>
+          <p>Gemeinsam an einer Metaplanwand entsteht eine Übersicht der wichtigsten Personengruppen, mit denen wir im Alltag zu tun haben. Jede Gruppe kommt auf eine eigene Karte und wird nach Impact und Entscheidungsmacht in die Matrix eingeordnet.</p>
+        </div>
+        <div class="zg-runde">
+          <p class="zg-runde__nr">Runde 2</p>
+          <p class="zg-runde__titel">Bewerten mit Klebepunkten</p>
+          <p>Jede und jeder erhält je drei Punkte pro Farbe und klebt sie für sich auf die Karten &ndash; auch mehrere Punkte auf eine Karte:</p>
+          <ul class="zg-punkte">
+            <li><i class="zg-punkt zg-punkt--gruen" aria-hidden="true"></i><span><b>Grün</b> &ndash; An diesen Gruppen richten wir aus, wie wir wahrgenommen werden wollen.</span></li>
+            <li><i class="zg-punkt zg-punkt--blau" aria-hidden="true"></i><span><b>Blau</b> &ndash; Diese Gruppen brauchen wir, um erfolgreich zu sein.</span></li>
+            <li><i class="zg-punkt zg-punkt--rot" aria-hidden="true"></i><span><b>Rot</b> &ndash; Diese Gruppen haben wir bislang zu wenig beachtet.</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pj-modal-text zg-danach">
+        <p><b>Danach: die grünen Stakeholder.</b> Die Gruppen mit den meisten grünen Punkten sind der Maßstab. An ihnen richten wir aus, wie wir wahrgenommen werden wollen &ndash; und beantworten mit ihnen im Blick zwei Leitfragen:</p>
+        <ul>
+          <li><b>Wofür stehen wir?</b></li>
+          <li><b>Welche Probleme lösen wir konkret?</b></li>
+        </ul>
+        <p class="pj-hinweis">Die Antworten sind die Grundlage für das Selbstverständnis.</p>
       </div>
     </div>
   </div>
