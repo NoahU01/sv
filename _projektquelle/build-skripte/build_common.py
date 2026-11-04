@@ -77,7 +77,7 @@ DEV_UNTERSEITEN = []
 _EMP = "entwicklung-empiria/projekte/"
 DEV_KATEGORIEN = [
     ("Steuerung", [
-        (_EMP + "sv-uebersicht-3.html", "SV", "Übersicht", "Weg zum Ergebnis, Ergebnisse und Vorgehen", "Die Seiten", [
+        (_EMP + "sv-uebersicht-3.html", "SV", "Übersicht", "Fahrplan, Arbeitsstände, Ziel und Methoden", "Die Seiten", [
             (_EMP + "sv-selbstverstaendnis.html", "1", "Selbstverständnis", "Wofür stehen wir?"),
             (_EMP + "sv-vision.html", "2", "Vision", "Wie wollen wir wahrgenommen werden?"),
             (_EMP + "sv-strategie.html", "3", "Strategie", "Wie kommen wir dorthin?", "Darunter", [

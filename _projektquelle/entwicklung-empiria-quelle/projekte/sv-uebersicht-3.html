@@ -223,7 +223,12 @@ ul.u3-methoden{grid-template-columns:repeat(3,minmax(0,1fr))}
 details#weg .u3-b-h2{display:none}
 details#weg .u3-b-kopf{grid-template-columns:1fr}
 details#weg .u3-b-steuer{justify-self:end}
-.u3-vorgehen .u3-pfeil{flex:none}   /* Pfeil bleibt gleich groß, auch wenn der Untertitel umbricht */
+.u3-vorgehen .u3-pfeil{flex:none}
+/* volle Breite: der Kasten legt sich über die Seite – ohne Aufklappzeile, mit Titel */
+details#weg.ub-weit > summary{display:none}
+details#weg.ub-weit .u3-weg-inhalt{margin:0;padding:0;border:0}
+details#weg.ub-weit .u3-b-h2{display:block}
+details#weg.ub-weit .u3-b-kopf{grid-template-columns:minmax(0,1fr) auto}   /* Pfeil bleibt gleich groß, auch wenn der Untertitel umbricht */
 </style>
 </head>
 <body data-kopf="2">
@@ -794,7 +799,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 
       <!-- Variante A: aktuelles Level, je Strang in Sätzen, rechts die Termine -->
       <details class="ue-block u3-vorgehen u3-variante" data-v="a" aria-label="Wo wir stehen" hidden>
-        <summary><span><span class="u3-sum-h">Weg zum Ergebnis</span><span class="u3-sum-unter">Wo wir stehen – je Stoßrichtung</span></span><span class="u3-pfeil" aria-hidden="true"></span></summary>
+        <summary><span><span class="u3-sum-h">Fahrplan</span><span class="u3-sum-unter">Wo wir stehen – je Stoßrichtung</span></span><span class="u3-pfeil" aria-hidden="true"></span></summary>
         <div class="u3-weg-inhalt">
         <div class="u3-level" data-level-kopf></div>
         <div class="u3-a-raster">
@@ -809,11 +814,11 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
       </details>
 
       <!-- Variante B: der Plan des aktuellen Levels, darunter die Termine -->
-      <details class="ue-block u3-vorgehen u3-variante" data-v="b" id="weg" aria-label="Weg zum Ergebnis" style="scroll-margin-top:90px">
-        <summary><span><span class="u3-sum-h">Weg zum Ergebnis</span><span class="u3-sum-unter">Der Plan mit Ergebnisstufen und Stoßrichtungen</span></span><span class="u3-pfeil" aria-hidden="true"></span></summary>
+      <details class="ue-block u3-vorgehen u3-variante" data-v="b" id="weg" aria-label="Fahrplan" style="scroll-margin-top:90px">
+        <summary><span><span class="u3-sum-h">Fahrplan</span><span class="u3-sum-unter">Der Plan mit Ergebnisstufen und Stoßrichtungen</span></span><span class="u3-pfeil" aria-hidden="true"></span></summary>
         <div class="u3-weg-inhalt">
         <div class="u3-b-kopf">
-          <h2 class="u3-b-h2">Weg zum Ergebnis</h2>
+          <h2 class="u3-b-h2">Fahrplan</h2>
           <div class="u3-b-steuer"><div data-zoom-platz></div><div data-legende-quelle hidden><ul class="ub-leg"><li><span class="ub-leg-ic"><svg width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="11" r="8.75" fill="#fff" stroke="#111" stroke-width="4.5"/></svg></span>in Arbeit</li><li><span class="ub-leg-ic"><svg width="14" height="22" viewBox="0 0 14 22"><circle cx="7" cy="11" r="6" fill="#111"/></svg></span>erledigt</li><li><span class="ub-leg-ic"><svg width="20" height="22" viewBox="0 0 20 22"><circle cx="10" cy="11" r="8.5" fill="#fff" stroke="#a39e96" stroke-width="3"/></svg></span>kommt noch</li><li><span class="ub-leg-ic"><svg width="30" height="10"><line x1="4" y1="5" x2="26" y2="5" stroke="#111" stroke-width="8" stroke-linecap="round"/></svg></span>Strecke erledigt</li><li><span class="ub-leg-ic"><svg width="30" height="10"><line x1="4" y1="5" x2="26" y2="5" stroke="#dedad4" stroke-width="8" stroke-linecap="round"/></svg></span>Strecke offen</li><li><span class="ub-leg-ic"><svg width="30" height="10"><line x1="2" y1="5" x2="28" y2="5" stroke="#8a857d" stroke-width="2" stroke-dasharray="3 5"/></svg></span>Abh&auml;ngigkeit</li><li><span class="ub-leg-ic"><svg width="26" height="20"><line x1="3" y1="3" x2="3" y2="17" stroke="#111" stroke-width="4" stroke-linecap="round"/><line x1="3" y1="10" x2="24" y2="10" stroke="#111" stroke-width="4" stroke-linecap="round"/></svg></span>beginnt eigenst&auml;ndig</li><li><span class="ub-leg-ic"><svg width="14" height="14"><rect x="3" y="3" width="8" height="8" fill="#111" transform="rotate(45 7 7)"/></svg></span>Termin</li><li><span class="ub-leg-ic"><svg width="16" height="24"><rect x="3" y="3" width="10" height="18" rx="5" fill="#fff" stroke="#111" stroke-width="3"/></svg></span>Ergebnislevel</li></ul></div></div>
         </div>
         <div id="ub-stufen" class="u3-b-stufen"></div>
@@ -823,7 +828,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 
       <!-- Ergebnisse entlang des Strategiemodells: je Baustein ein Bild und die vorhandenen Stücke -->
       <details class="ue-block u3-vorgehen" id="ergebnisse" style="scroll-margin-top:90px">
-        <summary><span><span class="u3-sum-h">Ergebnisse</span><span class="u3-sum-unter">Entlang des Strategiemodells, nach dem wir vorgehen</span></span><span class="u3-pfeil" aria-hidden="true"></span></summary>
+        <summary><span><span class="u3-sum-h">Arbeitsstände</span><span class="u3-sum-unter">Entlang des Strategiemodells, nach dem wir vorgehen</span></span><span class="u3-pfeil" aria-hidden="true"></span></summary>
         <div class="u3-vorgehen-raster">
         <ol class="u3-modell">
           <li class="ist-fertig">
@@ -849,10 +854,10 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
             <ul class="u3-liste"><li><a href="/projekte/sv-strategie.html">Die Strategie</a></li><li><a href="/projekte/sv-strategie-ist.html">Ist-Situation</a></li><li><a href="/projekte/sv-strategie-stossrichtungen.html">Sto&szlig;richtungen</a></li></ul>
           </li>
           <li class="ist-dran">
-            <a class="u3-bild" href="#weg"><img src="/assets/projekte/sv-weg-zum-ergebnis-vorschau.webp" alt="Weg zum Ergebnis" loading="lazy" style="object-position:left top"></a>
+            <a class="u3-bild" href="#weg"><img src="/assets/projekte/sv-weg-zum-ergebnis-vorschau.webp" alt="Fahrplan" loading="lazy" style="object-position:left top"></a>
             <h3 class="u3-k-titel">Umsetzung</h3>
             <p class="u3-frage">Wie sichern wir die Zielerreichung?</p>
-            <ul class="u3-liste"><li><a href="#weg">Weg zum Ergebnis</a></li><li><a href="/projekte/sv-projektplanung.html">Termine</a></li></ul>
+            <ul class="u3-liste"><li><a href="#weg">Fahrplan</a></li><li><a href="/projekte/sv-projektplanung.html">Termine</a></li></ul>
           </li>
         </ol>
         </div>
@@ -860,7 +865,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 
       <!-- Wissensdatenbank: Ziel und Methoden – zugeklappt -->
       <details class="ue-block u3-vorgehen">
-        <summary><span><span class="u3-sum-h">So gehen wir vor</span><span class="u3-sum-unter">Das Ziel und die Methoden, mit denen wir arbeiten</span></span><span class="u3-pfeil" aria-hidden="true"></span></summary>
+        <summary><span><span class="u3-sum-h">Ziel und Methoden</span><span class="u3-sum-unter">Was das Projekt erreichen will und wie wir dabei arbeiten</span></span><span class="u3-pfeil" aria-hidden="true"></span></summary>
         <div class="u3-vorgehen-raster">
           <div class="u3-ziel">
             <img class="u3-rakete" src="/assets/projekte/sv-rakete.webp" alt="" width="300" height="420" loading="lazy">

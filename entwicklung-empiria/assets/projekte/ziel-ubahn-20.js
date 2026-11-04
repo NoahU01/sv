@@ -650,7 +650,7 @@
     document.addEventListener("keydown", function (e) { if (e.key === "Escape") legZu(); });
   }
   // Volle Breite: der Abschnitt „Weg zum Ergebnis“ legt sich über die ganze Seite, Escape schließt
-  var weitEl = planEl.closest("section") || karte, zoomHeim = null;
+  var weitEl = planEl.closest("section, details#weg") || karte, zoomHeim = null;   // seit 04.11.2026 ist der Fahrplan ein aufklappbarer Kasten (details)
   var ICON_AUF = '<svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M1 5V1h4M9 1h4v4M13 9v4H9M5 13H1V9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   var ICON_ZU = '<svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M5 1v4H1M13 5H9V1M9 13V9h4M1 9h4v4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   var weitKnopf = zoomEl.querySelector("[data-weit]");
