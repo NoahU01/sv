@@ -8,18 +8,18 @@ window.ZIEL_DATEN = {
   {
    "id": "t1",
    "kurz": "T1",
-   "label": "Transformation 1",
+   "label": "Digitalisierung",
    "frage": "Rollen, Prozesse, KI etc.",
-   "beschreibung": "Transformation 1 stellt sicher, dass das gesamte Leistungssystem der SV Akademie abläuft – aus Sicht von Rolle, Prozess und technischer Unterstützung.\n\nZukunftskompetenzen\nTransformation 1 unterstützt das systematische Abbilden und die regelmäßigen Analysen technisch. Den Inhalt verantwortet Transformation 2.\n\nBeratung und echte Problemlösung\nDazu gehören zwei Werkzeuge:\n• Quick-Check Bedarfsklärung: Mit wenigen Leitfragen ist der Bedarf geklärt, der Termin wird direkt gebucht.\n• KI-Lernassistent: jederzeit erreichbarer Zugang zu den Weiterbildungsangeboten mit zielgenauen Vorschlägen.\n\nOrganisation der Weiterbildung\nModerne Tools, geile Medien und Formate sowie ein professionelles Buchungsmanagement. Dazu das Portal 24/7:\n• LEOS-Zugang\n• SLKs\n• Seminarbuchung inkl. Erinnerungen\n• Hotelverwaltung inkl. Erinnerungen\n• zentrale Teilnehmerkommunikation\n• Trainereinsatzplanung",
+   "beschreibung": "Digitalisierung stellt sicher, dass das gesamte Leistungssystem der SV Akademie abläuft – aus Sicht von Rolle, Prozess und technischer Unterstützung.\n\nZukunftskompetenzen\nDigitalisierung unterstützt das systematische Abbilden und die regelmäßigen Analysen technisch. Den Inhalt verantwortet USP Mensch.\n\nBeratung und echte Problemlösung\nDazu gehören zwei Werkzeuge:\n• Quick-Check Bedarfsklärung: Mit wenigen Leitfragen ist der Bedarf geklärt, der Termin wird direkt gebucht.\n• KI-Lernassistent: jederzeit erreichbarer Zugang zu den Weiterbildungsangeboten mit zielgenauen Vorschlägen.\n\nOrganisation der Weiterbildung\nModerne Tools, geile Medien und Formate sowie ein professionelles Buchungsmanagement. Dazu das Portal 24/7:\n• LEOS-Zugang\n• SLKs\n• Seminarbuchung inkl. Erinnerungen\n• Hotelverwaltung inkl. Erinnerungen\n• zentrale Teilnehmerkommunikation\n• Trainereinsatzplanung",
    "verantwortung": "Lukas Euring",
    "farbe": "#C51F5D"
   },
   {
    "id": "t2",
    "kurz": "T2",
-   "label": "Transformation 2",
+   "label": "USP Mensch",
    "frage": "USP Mensch, Zukunftskompetenzen, Lernen der Zukunft etc.",
-   "beschreibung": "Transformation 2 verantwortet die Inhalte: den USP Mensch, die Zukunftskompetenzen und das Lernen der Zukunft.\n\nZukunftskompetenzen\nWir behalten die zukünftig notwendigen Skills stets im Blick, schaffen dafür professionelle Weiterbildungsbedingungen und überführen sie in eine passgenaue, KI-gestützte Lernarchitektur. Der Kreislauf:\n• regelmäßige Analysen der zukünftigen Anforderungen an Mitarbeitende der SV\n• Ableitung notwendiger Skills und des zugehörigen Weiterbildungsbedarfs\n• Abgleich mit dem Weiterbildungsangebot und Vorschlag zur Anpassung\nErgebnis: Zielbilder und Weiterbildungsangebote sind laufend aktuell.\n\nLernbegleitung\nDas Lernen wird deutlich individualisierter ablaufen – auch durch den Einsatz digitaler, KI-gestützter Tools. Umso mehr fokussieren wir auf eine gezielte Begleitung durch echte Menschen. Das Drei-Stufen-Modell:\n• Stufe 1 – Basis: Grundlagentrainings; hoch technisch, geringer persönlicher Kontakt\n• Stufe 2 – Blended Learning: qualifizierte Weiterbildungen; viel Technik, immer wieder Einsatz von Trainern\n• Stufe 3 – Beratung und Coaching: Persönlichkeitstrainings u. Ä.; hoher Einsatz von Trainern\nTrainer werden weniger für reine Wissensvermittlung und mehr für die menschliche Begleitung eingesetzt.",
+   "beschreibung": "USP Mensch verantwortet die Inhalte: den USP Mensch, die Zukunftskompetenzen und das Lernen der Zukunft.\n\nZukunftskompetenzen\nWir behalten die zukünftig notwendigen Skills stets im Blick, schaffen dafür professionelle Weiterbildungsbedingungen und überführen sie in eine passgenaue, KI-gestützte Lernarchitektur. Der Kreislauf:\n• regelmäßige Analysen der zukünftigen Anforderungen an Mitarbeitende der SV\n• Ableitung notwendiger Skills und des zugehörigen Weiterbildungsbedarfs\n• Abgleich mit dem Weiterbildungsangebot und Vorschlag zur Anpassung\nErgebnis: Zielbilder und Weiterbildungsangebote sind laufend aktuell.\n\nLernbegleitung\nDas Lernen wird deutlich individualisierter ablaufen – auch durch den Einsatz digitaler, KI-gestützter Tools. Umso mehr fokussieren wir auf eine gezielte Begleitung durch echte Menschen. Das Drei-Stufen-Modell:\n• Stufe 1 – Basis: Grundlagentrainings; hoch technisch, geringer persönlicher Kontakt\n• Stufe 2 – Blended Learning: qualifizierte Weiterbildungen; viel Technik, immer wieder Einsatz von Trainern\n• Stufe 3 – Beratung und Coaching: Persönlichkeitstrainings u. Ä.; hoher Einsatz von Trainern\nTrainer werden weniger für reine Wissensvermittlung und mehr für die menschliche Begleitung eingesetzt.",
    "verantwortung": "Philip Dreyer & Stefanie Frank",
    "farbe": "#8613A1"
   },
@@ -61,7 +61,8 @@ window.ZIEL_DATEN = {
    ],
    "braucht": [
     "t1-2-auftrag",
-    "t2-2-brainstorming",
+    "t2-2-produkte",
+    "t2-2-lernen",
     "sa-2-kommunikation"
    ]
   },
@@ -377,12 +378,15 @@ window.ZIEL_DATEN = {
    "id": "t2-1-brainstorming",
    "strang": "t2",
    "meilenstein": "m1",
-   "titel": "Brainstorming Zukunftskompetenzen",
-   "beschreibung": "Brainstorming zu Zukunftskompetenzen und zum Lernen der Zukunft.",
+   "titel": "Lernen der Zukunft",
+   "beschreibung": "",
    "status": "offen",
    "braucht": [],
    "ergebnis": "",
-   "details": [],
+   "details": [
+    "Brainstorming zu Zukunftskompetenzen und zum Lernen der Zukunft.",
+    "Brainstorming zu den drei Ebenen und zur Rolle Trainer der Zukunft."
+   ],
    "wer": "",
    "kritisch": null,
    "termin": "16.11. bis 18.12.2026",
@@ -397,7 +401,7 @@ window.ZIEL_DATEN = {
    "id": "t2-2-produkte",
    "strang": "t2",
    "meilenstein": "m2",
-   "titel": "Produkte und Leistungssystem",
+   "titel": "Konzept Kompetenzentwicklung",
    "beschreibung": null,
    "status": "offen",
    "braucht": [
@@ -411,19 +415,19 @@ window.ZIEL_DATEN = {
    ],
    "wer": "",
    "kritisch": null,
-   "termin": null,
+   "termin": "ab 01.03.2027",
    "von": null,
-   "monat": null,
+   "monat": "2027-03",
    "zeitraum": null,
    "einfluss": null,
-   "tag": null,
+   "tag": 1,
    "tagVon": null
   },
   {
    "id": "t2-2-lernen",
    "strang": "t2",
    "meilenstein": "m2",
-   "titel": "Lernen der Zukunft: Tools, Formate und Medien",
+   "titel": "Tools, Formate und Medien",
    "beschreibung": null,
    "status": "offen",
    "braucht": [
@@ -436,35 +440,12 @@ window.ZIEL_DATEN = {
    ],
    "wer": "",
    "kritisch": null,
-   "termin": null,
+   "termin": "ab 01.04.2027",
    "von": null,
-   "monat": null,
+   "monat": "2027-04",
    "zeitraum": null,
    "einfluss": null,
-   "tag": null,
-   "tagVon": null
-  },
-  {
-   "id": "t2-2-brainstorming",
-   "strang": "t2",
-   "meilenstein": "m2",
-   "titel": "Brainstorming zu den drei Ebenen und zur Rolle Trainer der Zukunft",
-   "beschreibung": null,
-   "status": "offen",
-   "braucht": [
-    "t2-2-produkte",
-    "t2-2-lernen"
-   ],
-   "ergebnis": "",
-   "details": [],
-   "wer": "",
-   "kritisch": null,
-   "termin": null,
-   "von": null,
-   "monat": null,
-   "zeitraum": null,
-   "einfluss": null,
-   "tag": null,
+   "tag": 1,
    "tagVon": null
   },
   {
