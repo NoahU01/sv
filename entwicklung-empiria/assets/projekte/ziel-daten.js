@@ -7,7 +7,7 @@ window.ZIEL_DATEN = {
  "straenge": [
   {
    "id": "t1",
-   "kurz": "T1",
+   "kurz": "DI",
    "label": "Digitalisierung",
    "frage": "Rollen, Prozesse, KI etc.",
    "beschreibung": "Digitalisierung stellt sicher, dass das gesamte Leistungssystem der SV Akademie abläuft – aus Sicht von Rolle, Prozess und technischer Unterstützung.\n\nZukunftskompetenzen\nDigitalisierung unterstützt das systematische Abbilden und die regelmäßigen Analysen technisch. Den Inhalt verantwortet USP Mensch.\n\nBeratung und echte Problemlösung\nDazu gehören zwei Werkzeuge:\n• Quick-Check Bedarfsklärung: Mit wenigen Leitfragen ist der Bedarf geklärt, der Termin wird direkt gebucht.\n• KI-Lernassistent: jederzeit erreichbarer Zugang zu den Weiterbildungsangeboten mit zielgenauen Vorschlägen.\n\nOrganisation der Weiterbildung\nModerne Tools, geile Medien und Formate sowie ein professionelles Buchungsmanagement. Dazu das Portal 24/7:\n• LEOS-Zugang\n• SLKs\n• Seminarbuchung inkl. Erinnerungen\n• Hotelverwaltung inkl. Erinnerungen\n• zentrale Teilnehmerkommunikation\n• Trainereinsatzplanung",
@@ -16,7 +16,7 @@ window.ZIEL_DATEN = {
   },
   {
    "id": "t2",
-   "kurz": "T2",
+   "kurz": "UM",
    "label": "USP Mensch",
    "frage": "USP Mensch, Zukunftskompetenzen, Lernen der Zukunft etc.",
    "beschreibung": "USP Mensch verantwortet die Inhalte: den USP Mensch, die Zukunftskompetenzen und das Lernen der Zukunft.\n\nZukunftskompetenzen\nWir behalten die zukünftig notwendigen Skills stets im Blick, schaffen dafür professionelle Weiterbildungsbedingungen und überführen sie in eine passgenaue, KI-gestützte Lernarchitektur. Der Kreislauf:\n• regelmäßige Analysen der zukünftigen Anforderungen an Mitarbeitende der SV\n• Ableitung notwendiger Skills und des zugehörigen Weiterbildungsbedarfs\n• Abgleich mit dem Weiterbildungsangebot und Vorschlag zur Anpassung\nErgebnis: Zielbilder und Weiterbildungsangebote sind laufend aktuell.\n\nLernbegleitung\nDas Lernen wird deutlich individualisierter ablaufen – auch durch den Einsatz digitaler, KI-gestützter Tools. Umso mehr fokussieren wir auf eine gezielte Begleitung durch echte Menschen. Das Drei-Stufen-Modell:\n• Stufe 1 – Basis: Grundlagentrainings; hoch technisch, geringer persönlicher Kontakt\n• Stufe 2 – Blended Learning: qualifizierte Weiterbildungen; viel Technik, immer wieder Einsatz von Trainern\n• Stufe 3 – Beratung und Coaching: Persönlichkeitstrainings u. Ä.; hoher Einsatz von Trainern\nTrainer werden weniger für reine Wissensvermittlung und mehr für die menschliche Begleitung eingesetzt.",
@@ -56,7 +56,7 @@ window.ZIEL_DATEN = {
    "termin": "30.06.2027",
    "titel": "Das Fundament steht",
    "ergebnis": [
-    "Das Fundament steht: Produkte und Leistungssystem, Kommunikationskonzept 2.0 und LEOS 2.0 sind konzipiert.",
+    "Das Fundament steht: Konzept Kompetenzentwicklung, Kommunikationskonzept 2.0 und LEOS 2.0 sind konzipiert.",
     "Die grundlegende Außenwirkung als „beste Akademie“ ist angelegt."
    ],
    "braucht": [
@@ -415,13 +415,13 @@ window.ZIEL_DATEN = {
    ],
    "wer": "",
    "kritisch": null,
-   "termin": "ab 01.03.2027",
-   "von": null,
-   "monat": "2027-03",
+   "termin": "01.04. bis 30.06.2027",
+   "von": "2027-04",
+   "monat": "2027-06",
    "zeitraum": null,
    "einfluss": null,
-   "tag": 1,
-   "tagVon": null
+   "tag": 30,
+   "tagVon": 1
   },
   {
    "id": "t2-2-lernen",
@@ -440,13 +440,13 @@ window.ZIEL_DATEN = {
    ],
    "wer": "",
    "kritisch": null,
-   "termin": "ab 01.04.2027",
-   "von": null,
-   "monat": "2027-04",
+   "termin": "01.04. bis 30.06.2027",
+   "von": "2027-04",
+   "monat": "2027-06",
    "zeitraum": null,
    "einfluss": null,
-   "tag": 1,
-   "tagVon": null
+   "tag": 30,
+   "tagVon": 1
   },
   {
    "id": "t2-3",
