@@ -236,7 +236,7 @@ def blatt1():
                        f'<p class="no-b"><b>Level 2 am {d(g2["faellig_am"]).strftime("%d.%m.%Y")}:</b> {e(g2["titel"])}.</p>'))
     teile.append(notiz(xb[2] - 3.6, oben_, x1 - xb[2] - 6, 3, "Ende 2027 ist die „beste<br>Akademie“ sichtbar",
                        f'<p class="no-b"><b>Level 3 am {d(g3["faellig_am"]).strftime("%d.%m.%Y")}:</b> {e(g3["titel"])}.</p>'
-                       '<p class="no-b">Angebote, Kanäle und Formate laufen im Alltag. LEOS 2.0 ist von Juli bis Dezember 2027 umgesetzt.</p>'))
+                       '<p class="no-b">Angebote, Kanäle und Formate laufen im Alltag.</p>'))
     teile.append(notiz(x1 - 3.6, oben_, FW - x1 + 3.6, 1, "Das Ziel: die beste<br>Akademie der Branche",
                        f'<p class="no-b"><b>Bis {d(g5["faellig_am"]).strftime("%d.%m.%Y")}:</b> {e(g5["titel"])}. '
                        'Sie ist die beste Akademie der Versicherungsbranche und sichert die menschliche Wettbewerbsfähigkeit '
@@ -277,6 +277,8 @@ def plan_naechste():
         o.append(f'<line x1="{xm:.2f}" y1="30" x2="{xm:.2f}" y2="{H:.1f}" stroke="{RASTER}" stroke-width="0.3"/>')
         o.append(text(xm + 1.4, 33.5, f"{MON[m.month]} {m.year}", "monat"))
         m = (m.replace(day=28) + dt.timedelta(days=4)).replace(day=1)
+    # Heute-Linie wie im Dashboard, gestrichelt – im Hintergrund, damit sie Kapseln, Halte und Namen nicht überlagert (Daniel, 12.11.2026)
+    o.append(f'<line x1="{x(HEUTE):.2f}" y1="30" x2="{x(HEUTE):.2f}" y2="{TY - 3:.2f}" stroke="{SCHWARZ}" stroke-width="0.45" stroke-dasharray="1.4 1.4"/>')
     for s in fokus:
         o.append(stossrichtung(0, s["_kopf"], s))
     lane_y = {}
@@ -335,8 +337,7 @@ def plan_naechste():
     o.append(text(xb, 14, f"Level 1 · {d(g1['faellig_am']).strftime('%d.%m.%Y')}", "lvl", "middle"))
     o.append(text(xb, 19, g1["titel"], "mtit", "middle"))
     anker["m1"] = (xb, 9)
-    xh = x(HEUTE)                                    # Heute-Linie wie im Dashboard: gestrichelt, oben die Marke „Heute“
-    o.append(f'<line x1="{xh:.2f}" y1="30" x2="{xh:.2f}" y2="{TY - 3:.2f}" stroke="{SCHWARZ}" stroke-width="0.45" stroke-dasharray="1.4 1.4"/>')
+    xh = x(HEUTE)                                    # Marke „Heute“ oben; die gestrichelte Linie liegt im Hintergrund (siehe oben)
     o.append(f'<rect x="{xh - 5.4:.2f}" y="24.2" width="10.8" height="4" rx="2" fill="{SCHWARZ}"/>' + text(xh, 27.1, "Heute", "heute", "middle"))
     # Gremientermin als Raute; die Abteilungsbesprechung am 16.11. steht schon als Halt auf der Linie Kommunikation – keine zweite Marke
     xt = x(d("2026-12-08"))
@@ -365,8 +366,6 @@ def blatt2():
     x2 = W * s + 10
     teile.append(leitlinie([(x2, ly), (lx + 1.2, ly)]))
     teile.append(notiz(x2 - 3.6, ly - 3.4, FW - x2 + 3.6, 2, "Parallel: Was bedeutet<br>Lernen der Zukunft?",
-                       '<p class="no-b">Von November bis Ende Februar entsteht das Bild: Welche Zukunftskompetenzen braucht die SV, '
-                       'wie greifen die drei Ebenen ineinander, und welche Rolle hat der Trainer der Zukunft?</p>'
                        '<p class="no-b"><b>Ab April 2027</b> bauen darauf das Konzept Kompetenzentwicklung sowie Tools, Formate '
                        'und Medien auf.</p>'))
     return seite("Bis zur Jahresauftakttagung geht LEA live",
