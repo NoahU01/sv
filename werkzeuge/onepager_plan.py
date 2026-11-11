@@ -216,27 +216,33 @@ def blatt1():
     plan, W, H, a = plan_gesamt()
     s = 0.85
     oben_ = 6                                 # die drei Aussagen auf gleicher Höhe
-    oy = oben_ + 60 - a["oben"] * s           # Plan mit deutlichem Abstand unter den drei Aussagen
+    oy = oben_ + 68 - a["oben"] * s           # Plan mit deutlichem Abstand unter den drei Aussagen
     teile = [f'<g transform="translate(0 {oy:.2f}) scale({s})">{plan}</g>']
     xb = [v * s for v in a["bars"]]           # Level 1 bis 5
     x1 = xb[-1] + 30                          # das Ziel: rechts hinter dem Ende des Plans
     ny = oben_ + 3.4
     oberkante = oy + a["oben"] * s
     teile.append(leitlinie([(xb[0], ny + 3.6), (xb[0], oberkante)]))
-    teile.append(leitlinie([(xb[1], ny + 3.6), (xb[1], oberkante)]))
+    teile.append(leitlinie([(xb[2], ny + 3.6), (xb[2], oberkante)]))   # 3 steht auf Level 3 (Daniel, 11.11.2026)
     ym = oy + (oben[0]["_y"] + 13) * s        # 1: an der Nummer herunter, dann zum Ziel-Balken
     teile.append(leitlinie([(x1, ny + 3.6), (x1, ym), (xb[-1] + 2.6, ym)]))
-    g1, g2, g5 = gates[0], gates[1], gates[-1]
+    g1, g2, g3, g4, g5 = gates
     namen = ", ".join(name(s_) for s_ in oben[:-1]) + " sowie " + name(oben[-1])
-    teile.append(notiz(xb[0] - 3.6, oben_, xb[1] - xb[0] - 4, 2, "Der Weg dorthin führt<br>über klare Ergebnisstufen",
-                       '<p class="no-b">Jede Stufe beschreibt einen Zustand, der erreicht sein muss. Die Arbeitspakete der drei '
-                       f'Stoßrichtungen {e(namen)} sind in ihre Abhängigkeiten gebracht.</p>'
-                       f'<p class="no-b"><b>Level 1 am {d(g1["faellig_am"]).strftime("%d.%m.%Y")}:</b> {e(g1["titel"])}.</p>'))
-    teile.append(notiz(xb[1] - 3.6, oben_, x1 - xb[1] - 6, 3, f"Am {d(g2['faellig_am']).strftime('%d.%m.%Y')}<br>steht das Fundament",
-                       absaetze(g2["beschreibung"])))
+    teile.append(notiz(xb[0] - 3.6, oben_, xb[2] - xb[0] - 4, 2, "Der Weg dorthin führt<br>über fünf Ergebnisstufen",
+                       '<p class="no-b">Jede Stufe beschreibt einen Zustand, der erreicht ist. Die Arbeitspakete der drei '
+                       f'Stoßrichtungen {e(namen)} sind auf diese Stufen ausgerichtet und in ihre Abhängigkeiten gebracht.</p>'
+                       f'<p class="no-b"><b>Level 1 am {d(g1["faellig_am"]).strftime("%d.%m.%Y")}:</b> LEA geht auf der '
+                       'Jahresauftakttagung live.</p>'
+                       f'<p class="no-b"><b>Level 2 am {d(g2["faellig_am"]).strftime("%d.%m.%Y")}:</b> {e(g2["titel"])}.</p>'))
+    teile.append(notiz(xb[2] - 3.6, oben_, x1 - xb[2] - 6, 3, "Ende 2027 ist die „beste<br>Akademie“ sichtbar",
+                       f'<p class="no-b"><b>Level 3 am {d(g3["faellig_am"]).strftime("%d.%m.%Y")}:</b> {e(g3["titel"])}.</p>'
+                       '<p class="no-b">Angebote, Kanäle und Formate laufen im Alltag. LEOS 2.0 ist von Juli bis Dezember 2027 umgesetzt.</p>'))
     teile.append(notiz(x1 - 3.6, oben_, FW - x1 + 3.6, 1, "Das Ziel: die beste<br>Akademie der Branche",
-                       f'<p class="no-b"><b>Bis {d(g5["faellig_am"]).strftime("%d.%m.%Y")}:</b> {e(g5["titel"])}.</p>'
-                       + absaetze("\n".join(g5["beschreibung"].split("\n")[1:]))))
+                       f'<p class="no-b"><b>Bis {d(g5["faellig_am"]).strftime("%d.%m.%Y")}:</b> {e(g5["titel"])}. '
+                       'Sie ist die beste Akademie der Versicherungsbranche und sichert die menschliche Wettbewerbsfähigkeit '
+                       'im KI-Zeitalter – langfristig.</p>'
+                       f'<p class="no-b"><b>Level 4 am {d(g4["faellig_am"]).strftime("%d.%m.%Y")}:</b> {e(g4["titel"])} – '
+                       'Wirkung wird gemessen und belegt.</p>'))
     return seite("Das Ziel steht. Der Weg auch",
                  "Bis Ende 2028 ist die SV Akademie die beste Akademie der Branche. Der Weg dorthin ist in fünf Ergebnisstufen geplant.",
                  "".join(teile))
@@ -322,13 +328,13 @@ def plan_naechste():
             o.append(text((xa + xb) / 2, ly - 4.2 - (len(zeilen) - 1 - j) * 3.6, zl, cls, "middle"))
         if p["beginnt_am"]:
             o.append(text((xa + xb) / 2, ly + 6.4, dat, "pdat", "middle"))
-        if p["titel"].startswith("Entwicklung KI-Assistent"):
-            anker["lea"] = ((xa + xb) / 2, ly - 4.2 - len(zeilen) * 3.6 - 1)
+        if p["titel"] == "Lernen der Zukunft":
+            anker["lzk"] = (xb + 2.1, ly)
     xb = x(d(g1["faellig_am"]))                      # Level 1
     o.append(balken(xb, 36, H, 4.6, 1.2))
     o.append(text(xb, 14, f"Level 1 · {d(g1['faellig_am']).strftime('%d.%m.%Y')}", "lvl", "middle"))
     o.append(text(xb, 19, g1["titel"], "mtit", "middle"))
-    anker["m1"] = (xb, 44)
+    anker["m1"] = (xb, 9)
     xh = x(HEUTE)                                    # Heute-Linie wie im Dashboard: gestrichelt, oben die Marke „Heute“
     o.append(f'<line x1="{xh:.2f}" y1="30" x2="{xh:.2f}" y2="{TY - 3:.2f}" stroke="{SCHWARZ}" stroke-width="0.45" stroke-dasharray="1.4 1.4"/>')
     o.append(f'<rect x="{xh - 5.4:.2f}" y="24.2" width="10.8" height="4" rx="2" fill="{SCHWARZ}"/>' + text(xh, 27.1, "Heute", "heute", "middle"))
@@ -341,35 +347,31 @@ def plan_naechste():
 
 
 def blatt2():
+    """Zwei Punkte (Daniel, 11.11.2026): 1 LEA geht am 19.01. live · 2 parallel: was Lernen der Zukunft bedeutet."""
     plan, W, H, a = plan_naechste()
-    s, oy = 0.78, 46
+    s, oy = 0.78, 48
 
     def t(p):
         return (p[0] * s, oy + p[1] * s)
 
     g1 = gates[0]
     teile = [f'<g transform="translate(0 {oy}) scale({s})">{plan}</g>']
-    basis = oy + H * s + 7
-    kx, ky = t(a["heute"])                   # 1 – unter der Abteilungsbesprechung, Bezugslinie nach oben zur Raute
-    teile.append(leitlinie([(kx, basis), (kx, ky)]))
-    teile.append(notiz(kx - 3.6, basis - 3.4, 130, 1, "Heute: Die Strategie<br>wird konkretisiert",
-                       '<p class="no-b">Ist-Situation, angestrebte Vision und die strategischen Stoßrichtungen dorthin werden in '
-                       'einen klaren Zusammenhang gebracht. So können wir die Strategie als Ganzes kommunizieren.</p>'
-                       '<p class="no-b"><b>08./09.12.2026:</b> Strategieklausur.</p>'))
-    ux, uy = t(a["lea"])                     # 2 – über der Entwicklung LEA, Bezugslinie nach unten
-    y2 = 4
-    teile.append(leitlinie([(ux, y2 + 7), (ux, uy)]))
-    teile.append(notiz(ux - 3.6, y2, 120, 2, "Bis 15.01.2027: LEA und<br>Webseite fertigstellen",
-                       '<p class="no-b">Der KI-Assistent LEA wird entwickelt, die Webseite umgesetzt und live geschaltet.</p>'
-                       '<p class="no-b"><b>Parallel:</b> Lernen der Zukunft – Brainstorming zu Zukunftskompetenzen, zu den drei '
-                       'Ebenen und zur Rolle Trainer der Zukunft.</p>'))
-    mx, my = t(a["m1"])                      # 3 – rechts neben Level 1, hinter dem Ende des Plans
-    x3 = max(mx + 30, W * s + 10)
-    teile.append(leitlinie([(x3, my), (mx + 2.4, my)]))
-    teile.append(notiz(x3 - 3.6, my - 3.4, FW - x3 + 3.6, 3, f"Am {d(g1['faellig_am']).strftime('%d.%m.%Y')}:<br>{e(g1['titel'])}",
+    mx, my = t(a["m1"])                      # 1 – über Level 1, Bezugslinie senkrecht nach unten auf den Level-Titel
+    y1 = 2
+    teile.append(leitlinie([(mx, y1 + 7), (mx, oy + 9 * s)]))
+    teile.append(notiz(mx - 3.6, y1, min(150, FW - mx + 3.6), 1, f"Am {d(g1['faellig_am']).strftime('%d.%m.%Y')} geht LEA live",
                        absaetze(g1["beschreibung"])))
+    lx, ly = t(a["lzk"])                     # 2 – rechts neben dem Ende von Lernen der Zukunft, Bezugslinie waagerecht
+    x2 = W * s + 10
+    teile.append(leitlinie([(x2, ly), (lx + 1.2, ly)]))
+    teile.append(notiz(x2 - 3.6, ly - 3.4, FW - x2 + 3.6, 2, "Parallel: Was bedeutet<br>Lernen der Zukunft?",
+                       '<p class="no-b">Von November bis Ende Februar entsteht das Bild: Welche Zukunftskompetenzen braucht die SV, '
+                       'wie greifen die drei Ebenen ineinander, und welche Rolle hat der Trainer der Zukunft?</p>'
+                       '<p class="no-b"><b>Ab April 2027</b> bauen darauf das Konzept Kompetenzentwicklung sowie Tools, Formate '
+                       'und Medien auf.</p>'))
     return seite("Bis zur Jahresauftakttagung geht LEA live",
-                 "Bis Mitte Januar 2027 sind der KI-Assistent LEA und die Webseite fertig. Auf der Jahresauftakttagung 2027 geht LEA live.",
+                 "Am 19.01.2027 geht der KI-Assistent LEA auf der Jahresauftakttagung live. Parallel klären wir, was Lernen der "
+                 "Zukunft für die SV Akademie bedeutet.",
                  "".join(teile))
 
 
@@ -423,8 +425,9 @@ body {{ font-family: 'SV Text', Arial, sans-serif; color: {SCHWARZ}; -webkit-pri
 .no-t {{ margin: 0 0 2.6px; font: 400 5px/1.3 'SV Head', Arial, sans-serif; color: {SCHWARZ}; text-wrap: balance; }}
 .no-b {{ margin: 0 0 2px; font: 400 3.4px/5px 'SV Text', Arial, sans-serif; }}
 .no-b b {{ font-weight: 700; color: {SCHWARZ}; }}
-.no-l {{ margin: 0 0 2px; padding: 0 0 0 3.4px; }}
-.no-l li {{ padding: 0 0 1.4px; font: 400 3.4px/5px 'SV Text', Arial, sans-serif; }}
+.no-l {{ margin: 0 0 2px; padding: 0; list-style: none; }}
+.no-l li {{ position: relative; padding: 0 0 1.4px 3.4px; font: 400 3.4px/5px 'SV Text', Arial, sans-serif; }}
+.no-l li::before {{ content: "•"; position: absolute; left: 0; color: {SCHWARZ}; }}
 .fuss {{ display: flex; justify-content: space-between; margin-top: auto; font: 400 7pt/1 'SV Text', Arial, sans-serif; color: {GRAU1}; }}
 """
 
